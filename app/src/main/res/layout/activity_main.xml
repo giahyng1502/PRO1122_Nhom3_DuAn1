@@ -25,6 +25,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="50dp"
+            android:id="@+id/btnCart"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/yellow"
@@ -34,6 +35,7 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,18 +49,18 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="#313942"
-        app:itemIconTint="@color/custom_color_bottom_navigation"
-        app:itemTextColor="@color/custom_color_bottom_navigation"
-        app:menu="@menu/menu_bottom_navigation"
-        app:labelVisibilityMode="labeled"
-        app:itemIconSize="26dp"
-        app:elevation="0dp"
+        android:layout_alignParentBottom="true"
         android:elevation="0dp"
-        app:itemPaddingBottom="20dp"
+        app:backgroundTint="#313942"
+        app:elevation="0dp"
         app:itemActiveIndicatorStyle="@android:color/transparent"
-        app:itemTextAppearanceInactive="@style/BottomNavigationView"
+        app:itemIconSize="26dp"
+        app:itemIconTint="@color/custom_color_bottom_navigation"
+        app:itemPaddingBottom="20dp"
         app:itemTextAppearanceActive="@style/BottomNavigationView"
-        android:layout_alignParentBottom="true"/>
+        app:itemTextAppearanceInactive="@style/BottomNavigationView"
+        app:itemTextColor="@color/custom_color_bottom_navigation"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_bottom_navigation" />
 
 </RelativeLayout>
