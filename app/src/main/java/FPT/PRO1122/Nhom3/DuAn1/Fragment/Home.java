@@ -25,13 +25,14 @@ import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
+import FPT.PRO1122.Nhom3.DuAn1.model.MonAn;
 
 public class Home extends Fragment {
     private ViewPager2 viewPage2;
     private List<Integer> arrayImg;
     AdapterBanner adapterBanner;
     int index;
-
+    RecyclerView recyclerViewFood;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,11 @@ public class Home extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Khởi tạo các view
         viewPage2 = view.findViewById(R.id.viewPage2);
+        recyclerViewFood = view.findViewById(R.id.recyclerFood);
         setSlider();
+        MonAn monAn = new MonAn("1","Banh Mi Sai Gon Thom Ngon","Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
+        ,"20000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/b%C3%A1nh%20m%C3%AC%20s%C3%A0i%20g%C3%B2n.png?alt=media&token=382cb0af-d40b-400a-989b-37401e5490aa");
+        FirebaseDatabase.getInstance().getReference("foods").child("food").child("1").setValue(monAn);
 
     }
 

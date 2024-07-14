@@ -33,6 +33,10 @@ android {
 }
 
 dependencies {
+    // thu vien load anh
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
     implementation ("com.google.firebase:firebase-database:20.0.4")
     implementation(libs.appcompat)
     implementation(libs.material)
