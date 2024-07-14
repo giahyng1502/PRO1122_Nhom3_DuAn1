@@ -109,9 +109,36 @@
             android:singleLine="true"/>
 
     </androidx.cardview.widget.CardView>
-    <androidx.viewpager2.widget.ViewPager2
+       <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:id="@+id/viewPage2"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Best Seller"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryTxt"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerBestSeller"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Recomendation near you"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryTxt"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/recyclerFood"/>
 
 </LinearLayout>
