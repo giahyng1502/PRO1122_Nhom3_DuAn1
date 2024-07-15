@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
@@ -17,14 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
+import FPT.PRO1122.Nhom3.DuAn1.adapter.FoodAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAn;
 
 public class Home extends Fragment {
@@ -33,6 +38,9 @@ public class Home extends Fragment {
     AdapterBanner adapterBanner;
     int index;
     RecyclerView recyclerViewFood;
+    DatabaseReference mfood;
+    List<MonAn> monAnList;
+    FoodAdapter foodAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +56,53 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Khởi tạo các view
+        mfood = FirebaseDatabase.getInstance().getReference("foods");
         viewPage2 = view.findViewById(R.id.viewPage2);
         recyclerViewFood = view.findViewById(R.id.recyclerFood);
+        monAnList = new ArrayList<>();
         setSlider();
-        MonAn monAn = new MonAn("1","Banh Mi Sai Gon Thom Ngon","Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
-        ,"20000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/b%C3%A1nh%20m%C3%AC%20s%C3%A0i%20g%C3%B2n.png?alt=media&token=382cb0af-d40b-400a-989b-37401e5490aa");
-        FirebaseDatabase.getInstance().getReference("foods").child("food").child("1").setValue(monAn);
+        // lay data ve list
+        getDataFromFirebase();
+        // set reclerview
+        setReclerFood();
 
+//        MonAn monAn = new MonAn("4","Thit Bo Nhap Tu Nhan Ban"
+//                ,"Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
+//        ,"120000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/th%E1%BB%8Bt%20b%C3%B2.png?alt=media&token=4c367d17-0462-4833-bf15-9a72154697ef");
+//        mfood.child("4").setValue(monAn);
+//        MonAn monAn2 = new MonAn("5","Suon Xao Chua Ngot","Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
+//        ,"170000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/x%C6%B0%C6%A1ng.png?alt=media&token=7af3f311-eee3-445e-a363-4fcab1b93483");
+//        mfood.child("5").setValue(monAn2);
+//       MonAn monAn3 = new MonAn("6","Hamburger Beef","Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
+//        ,"450000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/hamberge.png?alt=media&token=48f08f02-833b-494e-81b1-a67a7b153c0d");
+//        mfood.child("6").setValue(monAn3);
+
+    }
+
+    private void setReclerFood() {
+        foodAdapter = new FoodAdapter(getContext(),monAnList);
+        StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerViewFood.setLayoutManager(linearLayoutManager);
+        recyclerViewFood.setAdapter(foodAdapter);
+    }
+
+    private void getDataFromFirebase() {
+        mfood.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                monAnList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    MonAn monAn = dataSnapshot.getValue(MonAn.class);
+                    monAnList.add(monAn);
+                }
+                foodAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), error+"fdfghh", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setSlider() {

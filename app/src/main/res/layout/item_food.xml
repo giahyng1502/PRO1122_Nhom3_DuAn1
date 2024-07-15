@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="160dp"
+    android:layout_width="170dp"
     android:layout_margin="5dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
-        app:cardCornerRadius="8dp"
-        android:layout_width="120dp"
-        android:layout_height="120dp">
+        app:cardCornerRadius="16dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp">
         <ImageView
             android:layout_width="match_parent"
             android:src="@drawable/fooood"
@@ -16,7 +17,7 @@
             android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:maxLines="1"
         android:id="@+id/tvNameFoodHome"
         android:ellipsize="end"
@@ -28,7 +29,7 @@
     <RelativeLayout
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:text="₫ "
@@ -50,16 +51,16 @@
             android:text="12000 VND"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:layout_width="18dp"
+            android:layout_width="20dp"
             android:layout_toLeftOf="@id/tvRateHome"
             android:src="@drawable/star"
             android:scaleType="centerCrop"
-            android:layout_height="wrap_content"/>
+            android:layout_height="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:text="4.5"
                 android:textSize="13sp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="15dp"
                 android:textStyle="bold"
                 android:id="@+id/tvRateHome"
                 android:textColor="@color/black_1"

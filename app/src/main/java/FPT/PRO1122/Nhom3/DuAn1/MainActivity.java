@@ -2,6 +2,9 @@ package FPT.PRO1122.Nhom3.DuAn1;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     BottomNavigationView bottomNavigationItemView;
     CardView btnCart;
+    LinearLayout layoutCart;
+    boolean isBottomMarginZero = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setBottonNavition() {
         // chuyen đến fragment giỏ hàng
-        btnCart.setOnClickListener(v->
+        btnCart.setOnClickListener(v ->
                 getSupportFragmentManager().beginTransaction().
-                        replace(R.id.frameLayout,new Home()).
-                        commit());
+                replace(R.id.frameLayout,new Myorder()).
+                commit());
+
+
         // vào fragment home ngay khi đăng nhập
         getSupportFragmentManager().beginTransaction().
                 replace(R.id.frameLayout,new Home()).
@@ -70,5 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private void anhXa() {
         bottomNavigationItemView = findViewById(R.id.bottomNavigationView);
         btnCart = findViewById(R.id.btnCart);
+        layoutCart = findViewById(R.id.layoutCart);
     }
+
 }
