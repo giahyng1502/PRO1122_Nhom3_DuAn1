@@ -141,7 +141,7 @@ public class Home extends Fragment {
         handler.post(runnable);
     }
     public void next () {
-        if (index < 2) {
+        if (index < arrayImg.size()-1) {
             index ++;
             viewPage2.setCurrentItem(index);
 //            Log.d("giahyng",index+"");

@@ -2,23 +2,14 @@ package FPT.PRO1122.Nhom3.DuAn1;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
-
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Myorder;
@@ -27,16 +18,19 @@ import FPT.PRO1122.Nhom3.DuAn1.Fragment.Profile;
 public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     BottomNavigationView bottomNavigationItemView;
-    CardView btnCart;
-    LinearLayout layoutCart;
-    boolean isBottomMarginZero = false;
+    FloatingActionButton btnCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         anhXa();
         setBottonNavition();
+        //
+        bottomNavigationItemView.setBackground(null);
+        //
+        bottomNavigationItemView.getMenu().getItem(2).isEnabled(
 
+        );
     }
 
     private void setBottonNavition() {
@@ -77,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private void anhXa() {
         bottomNavigationItemView = findViewById(R.id.bottomNavigationView);
         btnCart = findViewById(R.id.btnCart);
-        layoutCart = findViewById(R.id.layoutCart);
     }
 
 }

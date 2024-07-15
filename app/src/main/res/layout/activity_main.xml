@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,60 +10,42 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_above="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:id="@+id/layoutCart"
-        android:orientation="vertical"
-        android:background="@drawable/border"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:layout_alignParentBottom="true"
-        android:elevation="0.3dp"
-        android:gravity="center">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:id="@+id/btnCart"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/yellow"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:elevation="8dp"
-            app:cardCornerRadius="50dp">
-
-            <ImageView
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_cart" />
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomApp"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:elevation="0dp"
-        app:backgroundTint="#313942"
-        app:elevation="0dp"
-        app:itemActiveIndicatorStyle="@android:color/transparent"
-        app:itemIconSize="26dp"
-        app:itemIconTint="@color/custom_color_bottom_navigation"
-        app:itemPaddingBottom="20dp"
-        app:itemTextAppearanceActive="@style/BottomNavigationView"
-        app:itemTextAppearanceInactive="@style/BottomNavigationView"
-        app:itemTextColor="@color/custom_color_bottom_navigation"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_bottom_navigation" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/white"
+        app:hideOnScroll="true"
+        app:fabCradleRoundedCornerRadius="40dp"
+        app:fabCradleMargin="5dp">
 
-</RelativeLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:itemPaddingBottom="20dp"
+            app:itemIconTint="@color/custom_color_bottom_navigation"
+            app:itemTextAppearanceActive="@style/BottomNavigationView"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
+            app:itemTextColor="@color/custom_color_bottom_navigation"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu_bottom_navigation" />
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        android:src="@drawable/ic_cart"
+        android:id="@+id/btnCart"
+        app:layout_anchor="@id/bottomApp"
+        app:maxImageSize="30dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
