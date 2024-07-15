@@ -45,6 +45,7 @@
         android:backgroundTint="@color/yellow"
         android:src="@drawable/ic_cart"
         android:id="@+id/btnCart"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:layout_anchor="@id/bottomApp"
         app:maxImageSize="30dp" />
 
