@@ -92,15 +92,24 @@ public class LoginActivity extends AppCompatActivity {
         mCallbackManager = CallbackManager.Factory.create();
         signInFacebook();
 
+        bind.btnFB.setOnClickListener(v -> {
+            if (v.getId() == R.id.btnFB) {
+                bind.facebookBtn.performClick();
+            }
+        });
+
         bind.googleBtn.setOnClickListener(v -> {
+            // Đăng nhập bằng Google
             Intent intent = googleSignInClient.getSignInIntent();
             activityResultLauncher.launch(intent);
         });
 
         bind.signInBtn.setOnClickListener(v -> {
-            if (!validateEmail() || !validatePassword()) {
+            // Kiểm tra xem các trường nhập liệu có trống không
+            if (!validateUsername() || !validatePassword()) {
                 Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
+                // Nếu các trường nhập liệu không trống, kiểm tra người dùng có tồn tại trong Firebase hay không
                 checkUser();
             }
         });
@@ -111,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean validateEmail() {
+    // Hàm này dùng để kiểm tra xem username có trống không
+    private Boolean validateUsername() {
         String val = Objects.requireNonNull(bind.edtUsername.getText()).toString();
         if (val.isEmpty()) {
             bind.edtUsername.setError("Email is required");
@@ -122,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // Hàm này dùng để kiểm tra xem mật khẩu có trống không
     private Boolean validatePassword() {
         String val = Objects.requireNonNull(bind.edtPassword.getText()).toString();
         if (val.isEmpty()) {
@@ -133,32 +144,38 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+//  Hàm này dùng để kiểm tra xem người dùng có tồn tại trong Firebase hay không
     private void checkUser() {
         String username = Objects.requireNonNull(bind.edtUsername.getText()).toString().trim();
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        // Kiểm tra xem người dùng có tồn tại trong Firebase hay không
         Query checkUserDB = reference.orderByChild("username").equalTo(username);
 
         checkUserDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Nếu người dùng tồn tại, kiểm tra mật khẩu
                 if (snapshot.exists()) {
                     bind.edtUsername.setError(null);
-                    String passwordDB = snapshot.child("0975953696").child("password").getValue(String.class);
+                    String passwordDB = snapshot.child(username).child("password").getValue(String.class);
 
                     assert passwordDB != null;
+                    // Nếu mật khẩu chính xác, chuyển sang màn hình chính
                     if (passwordDB.equals(password)) {
                         bind.edtUsername.setError(null);
-                        String nameFromDB = snapshot.child("0975953696").child("username").getValue(String.class);
+                        String nameFromDB = snapshot.child(username).child("username").getValue(String.class);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("name", nameFromDB);
                         startActivity(intent);
                     } else {
+                        // Nếu mật khẩu không chính xác, thông báo và focus vào mật khẩu
                         bind.edtPassword.setError("Invalid Credentials");
                         bind.edtPassword.requestFocus();
                     }
                 } else {
+                    // Nếu người dùng không tồn tại, thông báo và focus vào người dùng
                     bind.edtUsername.setError("User does not exist");
                     bind.edtUsername.requestFocus();
                 }
@@ -166,6 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý trường hợp có lỗi xảy ra
                 Toast.makeText(LoginActivity.this, "Something went wrong" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

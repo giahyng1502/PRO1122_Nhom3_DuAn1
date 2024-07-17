@@ -8,8 +8,8 @@
     tools:context=".Activity.SplashActivity">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:contentDescription="@string/todo"
         android:src="@drawable/logo" />
 
