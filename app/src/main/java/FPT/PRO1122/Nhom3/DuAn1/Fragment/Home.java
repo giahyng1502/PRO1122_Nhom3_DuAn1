@@ -36,7 +36,7 @@ public class Home extends Fragment {
     private ViewPager2 viewPage2;
     private List<Integer> arrayImg;
     AdapterBanner adapterBanner;
-    int index;
+    int index;//kjfcdgjgssasdada
     RecyclerView recyclerViewFood;
     DatabaseReference mfood;
     List<MonAn> monAnList;
