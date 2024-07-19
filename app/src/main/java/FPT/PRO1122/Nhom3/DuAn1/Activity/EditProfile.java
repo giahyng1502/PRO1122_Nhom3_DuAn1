@@ -1,4 +1,4 @@
-package FPT.PRO1122.Nhom3.DuAn1;
+package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +10,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class OrderHistory extends AppCompatActivity {
+import FPT.PRO1122.Nhom3.DuAn1.R;
+
+public class EditProfile extends AppCompatActivity {
     ImageView btn_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_order_history);
+        setContentView(R.layout.activity_edit_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -24,7 +26,7 @@ public class OrderHistory extends AppCompatActivity {
         });
 
         //
-        btn_back=findViewById(R.id.btn_back_order);
+        btn_back=findViewById(R.id.btn_back_editprofile);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

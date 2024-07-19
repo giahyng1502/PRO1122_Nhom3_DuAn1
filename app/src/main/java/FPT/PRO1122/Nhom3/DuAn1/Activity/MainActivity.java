@@ -1,11 +1,11 @@
-package FPT.PRO1122.Nhom3.DuAn1;
+package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Myorder;
-import FPT.PRO1122.Nhom3.DuAn1.Fragment.Profile;
+import FPT.PRO1122.Nhom3.DuAn1.R;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 }else if (R.id.myOrder == item.getItemId()) {
                     fragment = new Myorder();
                 }else if (R.id.profile == item.getItemId()) {
-                    fragment = new Profile();
+                    startActivity(new Intent(MainActivity.this, Profile.class));
                 }
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction().

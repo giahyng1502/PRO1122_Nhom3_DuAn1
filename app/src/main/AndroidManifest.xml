@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <application
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,27 +15,27 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".EditProfile"
+            android:name=".Activity.Profile"
             android:exported="false" />
         <activity
-            android:name=".DeliveryAddress"
+            android:name=".Activity.EditProfile"
             android:exported="false" />
         <activity
-            android:name=".ChangePassword"
+            android:name=".Activity.DeliveryAddress"
             android:exported="false" />
         <activity
-            android:name=".OrderHistory"
+            android:name=".Activity.ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".Payment"
+            android:name=".Activity.OrderHistory"
             android:exported="false" />
         <activity
-            android:name=".Profile"
-            android:exported="true"/>
+            android:name=".Activity.Payment"
+            android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan|stateVisible"
-            android:exported="true">
+            android:name=".Activity.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
