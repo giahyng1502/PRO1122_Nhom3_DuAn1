@@ -20,12 +20,12 @@ public class SelectionActivity extends AppCompatActivity {
         setContentView(bind.getRoot());
 
         bind.getStartedBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(SelectionActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
         bind.tvRegisterHere.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RegisterActivity.class);
+            Intent intent = new Intent(SelectionActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="20dp"
         tools:ignore="UselessParent">
 
         <TextView
@@ -23,7 +23,7 @@
             android:fontFamily="@font/font_inter"
             android:text="@string/welcome_back"
             android:textColor="@color/blackBlue"
-            android:textSize="28sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <TextView
@@ -31,31 +31,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvWelcomeBack"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="50dp"
             android:fontFamily="@font/font_inter"
             android:text="@string/header_text"
-            android:textColor="@color/blackBlue"
-            android:textSize="14sp"
+            android:textColor="#B0B3BD"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilUsername"
+            android:id="@+id/tilPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvHeaderText"
             android:layout_marginBottom="15dp"
             android:gravity="center"
+            app:boxBackgroundMode="none"
             app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtUsername"
+                android:id="@+id/edtPhoneNumber"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:background="@drawable/custom_input"
-                android:drawableStart="@drawable/ic_username"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/font_inter"
-                android:hint="@string/enter_username"
+                android:hint="@string/enter_phonenumber"
+                android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -64,8 +65,9 @@
             android:id="@+id/tilPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tilUsername"
+            android:layout_below="@+id/tilPhoneNumber"
             android:gravity="center"
+            app:boxBackgroundMode="none"
             app:hintEnabled="false"
             app:passwordToggleDrawable="@drawable/custom_edittext_input"
             app:passwordToggleEnabled="true">
@@ -75,26 +77,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
-                android:drawableStart="@drawable/ic_lock"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/font_inter"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
+                android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <CheckBox
-            android:id="@+id/ckbRememberAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tilPassword"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/font_inter"
-            android:text="@string/remember_account"
-            android:textColor="#3F455A"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvForgotPassword"
@@ -114,8 +104,8 @@
             android:id="@+id/signInBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@+id/ckbRememberAccount"
-            android:layout_marginTop="8dp"
+            android:layout_below="@+id/tvForgotPassword"
+            android:layout_marginTop="15dp"
             android:background="@drawable/custom_button"
             android:elevation="12dp"
             android:fontFamily="@font/font_inter"
@@ -127,7 +117,7 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="110dp"
+            android:layout_width="125dp"
             android:layout_height="1.5dp"
             android:layout_below="@+id/signInBtn"
             android:layout_marginTop="35dp"
@@ -141,7 +131,7 @@
             android:layout_marginTop="23dp"
             android:layout_toEndOf="@+id/view"
             android:fontFamily="@font/font_inter"
-            android:paddingStart="14dp"
+            android:paddingStart="10dp"
             android:text="@string/or_signin_with"
             android:textColor="#676767"
             android:textSize="16sp"
@@ -149,7 +139,7 @@
             tools:ignore="RtlSymmetry" />
 
         <View
-            android:layout_width="110dp"
+            android:layout_width="125dp"
             android:layout_height="1.5dp"
             android:layout_below="@+id/signInBtn"
             android:layout_alignParentEnd="true"
@@ -195,11 +185,15 @@
                 android:background="@drawable/custom_button_facebook"
                 android:drawableStart="@drawable/ic_facebook"
                 android:drawablePadding="8dp"
+                android:elevation="12dp"
                 android:fontFamily="@font/font_inter"
                 android:text="@string/facebook"
                 android:textAllCaps="false"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textStyle="bold">
+
+            </androidx.appcompat.widget.AppCompatButton>
 
         </FrameLayout>
 

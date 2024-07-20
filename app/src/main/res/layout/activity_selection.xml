@@ -51,7 +51,7 @@
             android:elevation="12dp"
             android:fontFamily="@font/font_inter"
             android:text="@string/register_here"
-            android:textColor="@color/yellow"
+            android:textColor="@color/blackBlue"
             android:textSize="18sp"
             android:textStyle="bold" />
 

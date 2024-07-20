@@ -2,7 +2,6 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,21 +29,18 @@ public class RegisterActivity extends AppCompatActivity {
         bind = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(bind.getRoot());
 
-        bind.signUpBtn.setOnClickListener(v -> {
-            // Kiểm tra xem các trường nhập liệu có trống không
-            if (!validateUsername() || !validatePassword() || !validatePhoneNumber()) {
+        bind.continueBtn.setOnClickListener(v -> {
+//             Kiểm tra xem các trường nhập liệu có trống không
+            if (!validatePhoneNumber() || !validatePassword()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            } else {
-                // Kiểm tra xem checkbox đã được chọn chưa
-                boolean isAgree = bind.ckbAgree.isChecked();
-                if (isAgree) {
-                    // Nếu checkbox được chọn, kiểm tra xem số điện thoại đã tồn tại trong Firebase và thêm tài khoản vào Firebase
-                    checkIfPhoneNumberExists();
-                } else {
-                    // Nếu checkbox chưa được chọn, thông báo và focus vào checkbox
-                    Toast.makeText(RegisterActivity.this, "Please agree to all terms and conditions", Toast.LENGTH_SHORT).show();
-                }
+                return;
             }
+            if (!validateConfirmPassword()) {
+                // Nếu mật khẩu và mật khẩu xác nhận không khớp, thông báo và focus vào mật khẩu xác nhận
+                Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            checkIfPhoneNumberExists();
         });
 
         bind.tvSignIn.setOnClickListener(v -> {
@@ -55,24 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     // Hàm kiểm tra xem số điện thoại có trống không
     private Boolean validatePhoneNumber() {
-        String val = Objects.requireNonNull(bind.edtPhonenumber.getText()).toString();
+        String val = Objects.requireNonNull(bind.edtPhoneNumber.getText()).toString();
         if (val.isEmpty()) {
-            bind.edtPhonenumber.setError("Name is required");
+            bind.edtPhoneNumber.setError("Phone number is required");
             return false;
         } else {
-            bind.edtPhonenumber.setError(null);
-            return true;
-        }
-    }
-
-    // Hàm kiểm tra xem username có trống không
-    private Boolean validateUsername() {
-        String val = Objects.requireNonNull(bind.edtUsername.getText()).toString();
-        if (val.isEmpty()) {
-            bind.edtUsername.setError("Email is required");
-            return false;
-        } else {
-            bind.edtUsername.setError(null);
+            bind.edtPhoneNumber.setError(null);
             return true;
         }
     }
@@ -92,11 +76,26 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    //     Hàm kiểm tra xem số điện thoại đã tồn tại trong Firebase chưa
+    // Hàm kiểm tra xem mật khẩu và mật khẩu xác nhận có trùng nhau không
+    private Boolean validateConfirmPassword() {
+        String val = Objects.requireNonNull(bind.edtPassword.getText()).toString();
+        String valConfirm = Objects.requireNonNull(bind.edtConfirmPassword.getText()).toString();
+
+        // Kiểm tra xem mật khẩu và mật khẩu xác nhận có trùng nhau không
+        if (!val.equals(valConfirm)) {
+            bind.edtConfirmPassword.setError("Password does not match");
+            return false;
+        } else {
+            bind.edtConfirmPassword.setError(null);
+            return true;
+        }
+    }
+
+    // Hàm kiểm tra xem số điện thoại đã tồn tại trong Firebase chưa
     private void checkIfPhoneNumberExists() {
-        reference = FirebaseDatabase.getInstance().getReference("users");
-        String phoneNumber = Objects.requireNonNull(bind.edtPhonenumber.getText()).toString();
-        String username = Objects.requireNonNull(bind.edtUsername.getText()).toString();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users");
+        String phoneNumber = Objects.requireNonNull(bind.edtPhoneNumber.getText()).toString();
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString();
 
         // Kiểm tra xem số điện thoại đã tồn tại trong Firebase chưa
@@ -107,18 +106,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Nếu số điện thoại đã tồn tại, thông báo và focus vào số điện thoại
                 if (snapshot.exists()) {
-                    String phoneNumberDB = snapshot.child(username).child("phoneNumber").getValue(String.class);
+                    String phoneNumberDB = snapshot.child(phoneNumber).child("phoneNumber").getValue(String.class);
                     assert phoneNumberDB != null;
                     if (phoneNumberDB.equals(phoneNumber)) {
-                        bind.edtPhonenumber.setError("This phone number already exists");
-                        bind.edtPhonenumber.requestFocus();
+                        bind.edtPhoneNumber.setError("This phone number already exists");
+                        bind.edtPhoneNumber.requestFocus();
                     }
                 } else {
                     // Nếu số điện thoại mới, đăng ký người dùng vào Firebase
-                    User user = new User(phoneNumber, username, password);
-                    reference.child(username).setValue(user);
-                    Toast.makeText(RegisterActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    User user = new User(phoneNumber, password);
+                    reference.child(phoneNumber).setValue(user);
+                    Intent intent = new Intent(RegisterActivity.this, CreateProfileActivity.class);
+                    intent.putExtra("phoneNumber", phoneNumber);
                     startActivity(intent);
                 }
             }
