@@ -6,8 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
@@ -15,11 +25,20 @@ public class Profile extends AppCompatActivity {
     LinearLayout payment_layout,order_layout,changepass_layout,delivery_layout;
     Button btn_logout,btn_editprofile;
     ImageView ivbackProfile;
+    private GoogleSignInClient signInClient;
+    private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        FirebaseApp.initializeApp(this);
+        auth = FirebaseAuth.getInstance();
+        FacebookSdk.sdkInitialize(this);
+        signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
+
         anhxa();
 
         //payment
@@ -71,7 +90,7 @@ public class Profile extends AppCompatActivity {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                signOut();
             }
         });
 
@@ -87,4 +106,18 @@ public class Profile extends AppCompatActivity {
         btn_editprofile=findViewById(R.id.btn_editprofile);
         ivbackProfile= findViewById(R.id.ivbackProfile);
     }
+
+    public void signOut() {
+        FirebaseAuth.getInstance().addAuthStateListener(firebaseAuth -> {
+            if (firebaseAuth.getCurrentUser() == null) {
+                signInClient.signOut().addOnSuccessListener(unused -> {
+                    Toast.makeText(this, "Log out successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, LoginActivity.class));
+                });
+            }
+        });
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+    }
+
 }

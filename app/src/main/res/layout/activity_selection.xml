@@ -41,7 +41,7 @@
             android:fontFamily="@font/font_inter"
             android:text="@string/don_t_have_an_account"
             android:textColor="#3F455A"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvRegisterHere"
@@ -52,7 +52,7 @@
             android:fontFamily="@font/font_inter"
             android:text="@string/register_here"
             android:textColor="@color/blackBlue"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
     </LinearLayout>

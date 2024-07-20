@@ -1,7 +1,5 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
-import static android.content.Intent.getIntent;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -43,7 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import FPT.PRO1122.Nhom3.DuAn1.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.FoodAdapter;
@@ -205,9 +201,8 @@ public class Home extends Fragment {
     // Hàm lấy thông tin khi đăng nhập bằng tài khoản đăng kí
     public void getProfileUser() {
         Intent intent = requireActivity().getIntent();
-        String firstName = intent.getStringExtra("firstName");
         String lastName = intent.getStringExtra("lastName");
-        bind.tvNameUserHome.setText("Hello,\n" + firstName + " " + lastName + " \uD83C\uDF3F");
+        bind.tvNameUserHome.setText("Hello,\n" +""+ lastName + " \uD83C\uDF3F");
         Glide.with(this).load(R.drawable.avatar).into(bind.ivAvatarUserHome);
     }
 }

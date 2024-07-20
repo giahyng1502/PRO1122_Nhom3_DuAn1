@@ -2,6 +2,7 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -38,7 +39,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-import FPT.PRO1122.Nhom3.DuAn1.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityLoginBinding;
 
