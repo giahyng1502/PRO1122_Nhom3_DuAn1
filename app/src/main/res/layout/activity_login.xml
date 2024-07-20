@@ -31,11 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvWelcomeBack"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/font_inter"
             android:text="@string/header_text"
             android:textColor="#B0B3BD"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -112,20 +112,28 @@
             android:text="@string/sign_in"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linner1"
+    android:weightSum="3"
+    android:layout_below="@+id/signInBtn">
 
         <View
             android:id="@+id/view"
-            android:layout_width="125dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="1.5dp"
-            android:layout_below="@+id/signInBtn"
             android:layout_marginTop="35dp"
             android:background="#DDDDDD" />
 
         <TextView
             android:id="@+id/tvOrSigninWith"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_below="@+id/signInBtn"
             android:layout_marginTop="23dp"
@@ -134,40 +142,49 @@
             android:paddingStart="10dp"
             android:text="@string/or_signin_with"
             android:textColor="#676767"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             tools:ignore="RtlSymmetry" />
 
         <View
-            android:layout_width="125dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="1.5dp"
             android:layout_below="@+id/signInBtn"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="35dp"
             android:background="#DDDDDD" />
+</LinearLayout>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_below="@+id/linner1"
+            android:id="@+id/linner2"
+            android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/googleBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvOrSigninWith"
+            android:layout_weight="1"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_button_google"
             android:drawableStart="@drawable/ic_google"
-            android:drawablePadding="8dp"
             android:elevation="12dp"
             android:fontFamily="@font/font_inter"
             android:text="@string/google"
             android:textAllCaps="false"
             android:textColor="@color/blackBlue"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <FrameLayout
             android:id="@+id/flFB"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvOrSigninWith"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
             android:elevation="12dp">
@@ -184,23 +201,22 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button_facebook"
                 android:drawableStart="@drawable/ic_facebook"
-                android:drawablePadding="8dp"
                 android:elevation="12dp"
                 android:fontFamily="@font/font_inter"
                 android:text="@string/facebook"
                 android:textAllCaps="false"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textColor="@color/white"
                 android:textStyle="bold">
 
             </androidx.appcompat.widget.AppCompatButton>
 
         </FrameLayout>
-
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/flFB"
+            android:layout_below="@+id/linner2"
             android:layout_marginTop="100dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -212,7 +228,7 @@
                 android:fontFamily="@font/font_inter"
                 android:text="@string/don_t_have_an_account"
                 android:textColor="@color/blackBlue"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvSignUp"
@@ -223,7 +239,7 @@
                 android:fontFamily="@font/font_inter"
                 android:text="@string/sign_up"
                 android:textColor="@color/yellow"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

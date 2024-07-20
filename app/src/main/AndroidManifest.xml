@@ -27,12 +27,30 @@
             android:name=".Activity.SelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryAddress"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Payment"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OrderHistory"
             android:exported="false" />
         <activity
             android:name=".Activity.SplashActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan|stateVisible">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

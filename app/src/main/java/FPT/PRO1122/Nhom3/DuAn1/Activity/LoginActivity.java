@@ -1,7 +1,9 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -28,6 +30,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,46 +39,73 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Objects;
 
-import FPT.PRO1122.Nhom3.DuAn1.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityLoginBinding;
+import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding bind;
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth auth;
     private CallbackManager mCallbackManager;
+    private FirebaseDatabase database;
+
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if (result.getResultCode() == RESULT_OK) {
-                Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                try {
-                    GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
-                    AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
-                    auth.signInWithCredential(credential).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            auth = FirebaseAuth.getInstance();
-                            Toast.makeText(LoginActivity.this, "Signed in successfully!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
+            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                Intent data = result.getData();
+                handleSignInResult(GoogleSignIn.getSignedInAccountFromIntent(data).getResult());
             }
         }
     });
+
+    private void handleSignInResult(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        startActivity(new Intent(this, MainActivity.class));
+                        FirebaseUser user = auth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        Log.w("GoogleSignIn", "signInWithCredential:failure", task.getException());
+                        updateUI(null);
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            String name = user.getDisplayName();
+            String mail = user.getEmail();
+            String avatar = user.getPhotoUrl()+"";
+            String uid = user.getUid();
+            User user1 = new User(uid,name,mail,avatar);
+            user1.setAddress("");
+            user1.setPhoneNumber("");
+            user1.setPassword(uid);
+            saveDataToPreferences(uid);
+            database.getReference().child("users").child(user.getUid()).setValue(user1);
+        } else {
+            Log.d("SignIn", "User not signed in");
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(bind.getRoot());
-
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        if (getIntent() != null) {
+            String phoneNumber = getIntent().getStringExtra("phoneNumber");
+            bind.edtPhoneNumber.setText(phoneNumber);
+        }
         AccessToken token = AccessToken.getCurrentAccessToken();
         if (token != null && !token.isExpired()) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -165,11 +195,8 @@ public class LoginActivity extends AppCompatActivity {
                     // Nếu mật khẩu chính xác, chuyển sang màn hình chính
                     if (passwordDB.equals(password)) {
                         bind.edtPhoneNumber.setError(null);
-                        String firstNameFromDB = snapshot.child(phoneNumber).child("profile").child("firstName").getValue(String.class);
-                        String lastNameFromDB = snapshot.child(phoneNumber).child("profile").child("lastName").getValue(String.class);
+                        saveDataToPreferences(phoneNumber);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("firstName", firstNameFromDB);
-                        intent.putExtra("lastName", lastNameFromDB);
                         startActivity(intent);
                     } else {
                         // Nếu mật khẩu không chính xác, thông báo và focus vào mật khẩu
@@ -235,4 +262,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void saveDataToPreferences(String id) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserID", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("id", id);
+        editor.apply();
+    }
+
 }

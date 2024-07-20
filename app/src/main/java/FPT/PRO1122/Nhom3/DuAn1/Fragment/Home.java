@@ -1,17 +1,16 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
-import static android.content.Intent.getIntent;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -43,12 +42,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import FPT.PRO1122.Nhom3.DuAn1.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.FoodAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.FragmentHomeBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAn;
+import FPT.PRO1122.Nhom3.DuAn1.model.Food;
+import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
 public class Home extends Fragment {
@@ -58,7 +58,7 @@ public class Home extends Fragment {
     private List<Integer> arrayImg;
     int index;
     DatabaseReference mFood;
-    List<MonAn> monAnList;
+    List<Food> foodList;
     FoodAdapter foodAdapter;
 
     @Override
@@ -79,6 +79,7 @@ public class Home extends Fragment {
         FacebookSdk.sdkInitialize(requireActivity());
         FirebaseApp.initializeApp(requireActivity());
         auth = FirebaseAuth.getInstance();
+        getUserCurrent();
         if (signInClient == null) {
             signInClient = GoogleSignIn.getClient(requireActivity(), GoogleSignInOptions.DEFAULT_SIGN_IN);
         }
@@ -88,21 +89,20 @@ public class Home extends Fragment {
         } else {
             LoginManager.getInstance().logOut();
         }
-        getProfileUser();
-        getProfileGoogle();
 
         // Khởi tạo các view
         mFood = FirebaseDatabase.getInstance().getReference("foods");
-        monAnList = new ArrayList<>();
+        foodList = new ArrayList<>();
         setSlider();
         // set recyclerview
         setRecyclerFood();
         // lay data ve list
         getDataFromFirebase();
+
     }
 
     private void setRecyclerFood() {
-        foodAdapter = new FoodAdapter(requireActivity(), monAnList);
+        foodAdapter = new FoodAdapter(requireActivity(), foodList);
         StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         bind.recyclerFood.setLayoutManager(linearLayoutManager);
         bind.recyclerFood.setAdapter(foodAdapter);
@@ -112,10 +112,10 @@ public class Home extends Fragment {
         mFood.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                monAnList.clear();
+                foodList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MonAn monAn = dataSnapshot.getValue(MonAn.class);
-                    monAnList.add(monAn);
+                    Food food = dataSnapshot.getValue(Food.class);
+                    foodList.add(food);
                 }
                 foodAdapter.notifyDataSetChanged();
             }
@@ -195,20 +195,28 @@ public class Home extends Fragment {
     }
 
 //    // Hàm lấy thông tin khi đăng nhập bằng tài khoản Google
-    private void getProfileGoogle() {
-        if (auth.getCurrentUser() != null) {
-            Glide.with(requireActivity()).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(bind.ivAvatarUserHome);
-            bind.tvNameUserHome.setText("Hello,\n" + auth.getCurrentUser().getDisplayName() + " \uD83C\uDF3F");
-        }
-    }
 
     // Hàm lấy thông tin khi đăng nhập bằng tài khoản đăng kí
-    public void getProfileUser() {
-        Intent intent = requireActivity().getIntent();
-        String firstName = intent.getStringExtra("firstName");
-        String lastName = intent.getStringExtra("lastName");
-        bind.tvNameUserHome.setText("Hello,\n" + firstName + " " + lastName + " \uD83C\uDF3F");
-        Glide.with(this).load(R.drawable.avatar).into(bind.ivAvatarUserHome);
+    public void getProfileUser(User user) {
+        bind.tvNameUserHome.setText("Hello,\n" +""+ user.getName() + " \uD83C\uDF3F");
+        Glide.with(this).load(user.getImageAvatar()).error(R.drawable.avatar).into(bind.ivAvatarUserHome);
     }
+    private void getUserCurrent(){
+        FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    User user = snapshot.getValue(User.class);
+                    getProfileUser(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
 

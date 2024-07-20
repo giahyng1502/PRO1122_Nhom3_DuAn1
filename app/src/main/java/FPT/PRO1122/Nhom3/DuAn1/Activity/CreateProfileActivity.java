@@ -2,36 +2,20 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-
-import FPT.PRO1122.Nhom3.DuAn1.MainActivity;
-import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.SpinnerAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCreateProfileBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.Profile;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class CreateProfileActivity extends AppCompatActivity {
     private ActivityCreateProfileBinding bind;
-    private Profile profile;
-
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +23,6 @@ public class CreateProfileActivity extends AppCompatActivity {
         setContentView(bind.getRoot());
 
         bind.btnBack.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
-        SpinnerAdapter adapter = new SpinnerAdapter(this, getItems());
-        bind.spnGender.setAdapter(adapter);
 
         bind.createBtn.setOnClickListener(v -> {
             if (!validateFirstName() || !validateLastName() ||
@@ -53,13 +35,6 @@ public class CreateProfileActivity extends AppCompatActivity {
 
     }
 
-    private List<String[]> getItems() {
-        List<String[]> items = new ArrayList<>();
-        items.add(new String[]{"Gender"});
-        items.add(new String[]{"Male"});
-        items.add(new String[]{"Female"});
-        return items;
-    }
 
     // Hàm kiểm tra xem số first name có trống không
     private Boolean validateFirstName() {
@@ -116,13 +91,15 @@ public class CreateProfileActivity extends AppCompatActivity {
         String lastName = Objects.requireNonNull(bind.edtLastName.getText()).toString();
         String emailAddress = Objects.requireNonNull(bind.edtEmailAddress.getText()).toString();
         String address = Objects.requireNonNull(bind.edtAddress.getText()).toString();
-        String gender = getItems().get(bind.spnGender.getSelectedItemPosition())[0];
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
-        profile = new Profile(firstName, lastName, emailAddress, address, gender);
+        String password = getIntent().getStringExtra("password");
+        String id = reference.push().getKey();
+        user = new User(id,phoneNumber,password,firstName+" "+lastName, emailAddress, address,"");
         assert phoneNumber != null;
-        reference.child(phoneNumber).child("profile").setValue(profile);
-        Intent intent = new Intent(this, MainActivity.class);
+        reference.child(phoneNumber).setValue(user);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("phoneNumber",phoneNumber);
         startActivity(intent);
-        Toast.makeText(this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
     }
 }

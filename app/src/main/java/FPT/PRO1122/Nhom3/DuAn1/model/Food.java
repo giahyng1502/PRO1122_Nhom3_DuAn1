@@ -1,13 +1,13 @@
 package FPT.PRO1122.Nhom3.DuAn1.model;
 
-public class MonAn {
+public class Food {
     private String monAnID;
     private String tenMon;
     private String moTa;
     private String giaMon;
     private String imageMon;
 
-    public MonAn(String monAnID, String tenMon, String moTa, String giaMon, String imageMon) {
+    public Food(String monAnID, String tenMon, String moTa, String giaMon, String imageMon) {
         this.monAnID = monAnID;
         this.tenMon = tenMon;
         this.moTa = moTa;
@@ -15,7 +15,7 @@ public class MonAn {
         this.imageMon = imageMon;
     }
 
-    public MonAn() {
+    public Food() {
     }
 
     public String getMonAnID() {

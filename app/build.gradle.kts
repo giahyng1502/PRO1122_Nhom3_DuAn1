@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "FPT.PRO1122.Nhom3.DuAn1"
-        minSdk = 26
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
