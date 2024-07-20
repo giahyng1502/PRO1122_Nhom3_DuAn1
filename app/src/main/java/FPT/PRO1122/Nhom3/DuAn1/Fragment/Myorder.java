@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 
-public class Myorder extends Fragment {
+public class MyOrder extends Fragment {
 
 
     @Override

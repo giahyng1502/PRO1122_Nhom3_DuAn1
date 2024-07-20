@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="custom_text_searchview" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">#C1C1C1</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

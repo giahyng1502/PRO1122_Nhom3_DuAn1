@@ -1,9 +1,54 @@
 <resources>
-    <string name="app_name">MiFood</string>
+    <string name="app_name">Mi!Foodie</string>
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="my_order">My Order</string>
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todo">TODO</string>
+
+    <string name="facebook_app_id">1696500547788687</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">94b9e5e30f5212f74bb134d839630e7f4ecbd2bf1cd7998f7502550330081f68</string>
+
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register_here">Register here</string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="header_text">Let\'s log in to Mi!Foodie and order\nfood together!</string>
+    <string name="enter_phonenumber">Phone Number</string>
+    <string name="enter_password">Password</string>
+    <string name="remember_account">Remember Account</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or_signin_with">or signin with</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="continue_">Continue</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="create_a_profile">Create a profile</string>
+    <string name="header_text_signin">Looks like you don\'t have an account yet?\nLet\'s create an account to order food together!</string>
+    <string name="header_text_create_profile">Complete personal information to successfully create an account</string>
+    <string name="i_agree_to_all_the_terms_conditions">I agree to all the <u>Terms &amp; Conditions</u></string>
+    <string name="enter_confirm_password">Confirm Password</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="client_id">951257015027-g26tdd9fv9l6qnfqre2a4kaopo85eomp.apps.googleusercontent.com</string>
+    <string name="log_out">Log out</string>
+    <string name="name">name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="address">Address</string>
+    <string name="gender">Gender</string>
+    <string name="create">Create</string>
+    <string name="by_creating_you_agree_to_the_terms_of_services_privacy_policy">By creating, you agree to the\n <b>Terms of Services</b> &amp; <b>Privacy Policy</b></string>
+
+    <string-array name="gender">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

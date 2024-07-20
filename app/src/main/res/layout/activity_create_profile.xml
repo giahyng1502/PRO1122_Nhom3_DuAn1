@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".Activity.CreateProfileActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnBack"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#F7F7F7"
+        android:elevation="12dp"
+        app:cardCornerRadius="50dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#F7F7F7"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_back" />
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tvWelcomeBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/font_inter"
+            android:text="@string/create_a_profile"
+            android:textAlignment="center"
+            android:textColor="@color/blackBlue"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWelcomeBack"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/font_inter"
+            android:text="@string/header_text_create_profile"
+            android:textAlignment="center"
+            android:textColor="#B0B3BD"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvHeaderText"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtFirstName"
+                android:layout_width="177dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/font_inter"
+                android:hint="@string/first_name"
+                android:paddingVertical="10dp"
+                android:textColorHint="#CFCFCF" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvHeaderText"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtLastName"
+                android:layout_width="177dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/font_inter"
+                android:hint="@string/last_name"
+                android:paddingVertical="10dp"
+                android:textColorHint="#CFCFCF" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilLastName"
+            android:gravity="center"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/custom_input"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/font_inter"
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
+                android:paddingVertical="10dp"
+                android:textColorHint="#CFCFCF" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmailAddress"
+            android:gravity="center"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/custom_input"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/font_inter"
+                android:hint="@string/address"
+                android:paddingVertical="10dp"
+                android:textColorHint="#CFCFCF" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/tilAddress"
+            android:id="@+id/llDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_input"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spnGender"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:dropDownVerticalOffset="45dp"
+                android:paddingTop="8dp"
+                android:paddingHorizontal="10dp"
+                android:spinnerMode="dropdown"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/llDropdown"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/custom_button"
+            android:elevation="12dp"
+            android:fontFamily="@font/font_inter"
+            android:text="@string/create"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/createBtn"
+            android:fontFamily="@font/font_inter"
+            android:textColor="@color/blackBlue"
+            android:textAlignment="center"
+            android:layout_marginTop="30dp"
+            android:textSize="16sp"
+            android:text="@string/by_creating_you_agree_to_the_terms_of_services_privacy_policy"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -40,7 +40,7 @@ public class AdapterBanner extends RecyclerView.Adapter<AdapterBanner.ViewHolder
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivBanner;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

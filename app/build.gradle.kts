@@ -30,15 +30,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
     // thu vien load anh
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
-    implementation ("com.google.android.material:material:1.3.0-alpha03")
-    implementation ("com.google.firebase:firebase-database:20.0.4")
+    implementation(libs.material.v130alpha03)
+    implementation(libs.firebase.database.v2004)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -49,4 +53,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.auth)
+    implementation(libs.google.services)
+    implementation(libs.google.firebase.auth)
+    implementation(libs.com.google.firebase.firebase.auth)
+
+    // Facebook
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.android.facebook.android.sdk)
+    implementation(libs.facebook.login)
 }
