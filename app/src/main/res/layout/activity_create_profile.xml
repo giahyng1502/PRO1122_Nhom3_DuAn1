@@ -154,30 +154,11 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:layout_below="@+id/tilAddress"
-            android:id="@+id/llDropdown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_input"
-            android:orientation="vertical">
-
-            <Spinner
-                android:id="@+id/spnGender"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:dropDownVerticalOffset="45dp"
-                android:paddingTop="8dp"
-                android:paddingHorizontal="10dp"
-                android:spinnerMode="dropdown"/>
-
-        </LinearLayout>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/createBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@+id/llDropdown"
+            android:layout_below="@+id/tilAddress"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_button"
             android:elevation="12dp"

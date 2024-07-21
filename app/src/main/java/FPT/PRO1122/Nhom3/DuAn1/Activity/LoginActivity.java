@@ -165,8 +165,8 @@ public class LoginActivity extends AppCompatActivity {
                     // Nếu mật khẩu chính xác, chuyển sang màn hình chính
                     if (passwordDB.equals(password)) {
                         bind.edtPhoneNumber.setError(null);
-                        String firstNameFromDB = snapshot.child(phoneNumber).child("profile").child("firstName").getValue(String.class);
-                        String lastNameFromDB = snapshot.child(phoneNumber).child("profile").child("lastName").getValue(String.class);
+                        String firstNameFromDB = snapshot.child(phoneNumber).child("firstName").getValue(String.class);
+                        String lastNameFromDB = snapshot.child(phoneNumber).child("lastName").getValue(String.class);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("firstName", firstNameFromDB);
                         intent.putExtra("lastName", lastNameFromDB);

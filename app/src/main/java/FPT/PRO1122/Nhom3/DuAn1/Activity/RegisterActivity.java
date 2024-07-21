@@ -113,11 +113,9 @@ public class RegisterActivity extends AppCompatActivity {
                         bind.edtPhoneNumber.requestFocus();
                     }
                 } else {
-                    // Nếu số điện thoại mới, đăng ký người dùng vào Firebase
-                    User user = new User(phoneNumber, password);
-                    reference.child(phoneNumber).setValue(user);
                     Intent intent = new Intent(RegisterActivity.this, CreateProfileActivity.class);
                     intent.putExtra("phoneNumber", phoneNumber);
+                    intent.putExtra("password", password);
                     startActivity(intent);
                 }
             }

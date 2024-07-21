@@ -2,9 +2,6 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,20 +14,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.MainActivity;
-import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.SpinnerAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCreateProfileBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.Profile;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class CreateProfileActivity extends AppCompatActivity {
     private ActivityCreateProfileBinding bind;
-    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +30,6 @@ public class CreateProfileActivity extends AppCompatActivity {
         setContentView(bind.getRoot());
 
         bind.btnBack.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
-        SpinnerAdapter adapter = new SpinnerAdapter(this, getItems());
-        bind.spnGender.setAdapter(adapter);
 
         bind.createBtn.setOnClickListener(v -> {
             if (!validateFirstName() || !validateLastName() ||
@@ -51,14 +40,6 @@ public class CreateProfileActivity extends AppCompatActivity {
             createProfile();
         });
 
-    }
-
-    private List<String[]> getItems() {
-        List<String[]> items = new ArrayList<>();
-        items.add(new String[]{"Gender"});
-        items.add(new String[]{"Male"});
-        items.add(new String[]{"Female"});
-        return items;
     }
 
     // Hàm kiểm tra xem số first name có trống không
@@ -112,17 +93,32 @@ public class CreateProfileActivity extends AppCompatActivity {
     private void createProfile() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
+        String phoneNumber = getIntent().getStringExtra("phoneNumber");
+        String password = getIntent().getStringExtra("password");
         String firstName = Objects.requireNonNull(bind.edtFirstName.getText()).toString();
         String lastName = Objects.requireNonNull(bind.edtLastName.getText()).toString();
         String emailAddress = Objects.requireNonNull(bind.edtEmailAddress.getText()).toString();
         String address = Objects.requireNonNull(bind.edtAddress.getText()).toString();
-        String gender = getItems().get(bind.spnGender.getSelectedItemPosition())[0];
-        String phoneNumber = getIntent().getStringExtra("phoneNumber");
-        profile = new Profile(firstName, lastName, emailAddress, address, gender);
+        User user = new User(phoneNumber, password, firstName, lastName, emailAddress, address);
         assert phoneNumber != null;
-        reference.child(phoneNumber).child("profile").setValue(profile);
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        Toast.makeText(this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+        reference.child(phoneNumber).setValue(user);
+        Query phoneNumberFromDB = reference.orderByChild("phoneNumber").equalTo(phoneNumber);
+        phoneNumberFromDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String firstNameFromDB = snapshot.child(phoneNumber).child("firstName").getValue(String.class);
+                String lastNameFromDB = snapshot.child(phoneNumber).child("lastName").getValue(String.class);
+                Intent intent = new Intent(CreateProfileActivity.this, MainActivity.class);
+                intent.putExtra("firstName", firstNameFromDB);
+                intent.putExtra("lastName", lastNameFromDB);
+                startActivity(intent);
+                Toast.makeText(CreateProfileActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
