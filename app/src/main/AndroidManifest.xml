@@ -21,13 +21,31 @@
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Profile"
+            android:exported="false" />
+        <activity
             android:name=".Activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OrderHistory"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryAddress"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Payment"
             android:exported="false" />
         <activity
             android:name=".Activity.SplashActivity"
