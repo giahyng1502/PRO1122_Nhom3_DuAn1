@@ -25,6 +25,7 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
     ArrayList<MonAnByThien> items;
     Context context;
 
+
     public DoAnBanChayAdapter(ArrayList<MonAnByThien> items) {
         this.items = items;
     }
