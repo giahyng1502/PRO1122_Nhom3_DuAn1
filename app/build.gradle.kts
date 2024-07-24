@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -9,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "FPT.PRO1122.Nhom3.DuAn1"
-        minSdk = 28
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -38,11 +39,12 @@ android {
 
 dependencies {
     // thu vien load anh
-    implementation(libs.glide)
-    annotationProcessor(libs.compiler)
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation(libs.play.services.maps)
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
-    implementation(libs.material.v130alpha03)
-    implementation(libs.firebase.database.v2004)
+    implementation ("com.google.android.material:material:1.3.0-alpha03")
+    implementation ("com.google.firebase:firebase-database:20.0.4")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -53,7 +55,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
     implementation(libs.play.services.auth)
     implementation(libs.firebase.auth)
     implementation(libs.google.services)
@@ -64,4 +65,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.android.facebook.android.sdk)
     implementation(libs.facebook.login)
+
+    //
+    implementation("com.google.maps.android:android-maps-utils:2.3.0")
+    implementation("com.google.android.libraries.places:places:3.5.0")
+
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
 }
