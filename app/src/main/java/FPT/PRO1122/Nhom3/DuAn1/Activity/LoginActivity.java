@@ -82,27 +82,29 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            database.getReference("user").equalTo(user.getUid())
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!snapshot.exists()) {
+                        String name = user.getDisplayName();
+                        String mail = user.getEmail();
+                        String avatar = user.getPhotoUrl()+"";
+                        String uid = user.getUid();
+                        User user1 = new User(uid,name,mail,avatar);
+                        user1.setAddress("");
+                        user1.setPhoneNumber("");
+                        user1.setPassword(uid);
+                        saveDataToPreferences(uid);
+                        database.getReference("users").child(user.getUid()).setValue(user1);
+                    }
+                }
 
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            String name = user.getDisplayName();
-                            String mail = user.getEmail();
-                            String avatar = user.getPhotoUrl()+"";
-                            String uid = user.getUid();
-                            User user1 = new User(uid,name,mail,avatar);
-                            user1.setAddress("");
-                            user1.setPhoneNumber("");
-                            user1.setPassword(uid);
-                            saveDataToPreferences(uid);
-                            database.getReference().child("users").child(user.getUid()).setValue(user1);
-                        }
-                    });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
         } else {
             Log.d("SignIn", "User not signed in");
         }
@@ -186,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//  Hàm này dùng để kiểm tra xem người dùng có tồn tại trong Firebase hay không
+    //  Hàm này dùng để kiểm tra xem người dùng có tồn tại trong Firebase hay không
     private void checkUser() {
         String phoneNumber = Objects.requireNonNull(bind.edtPhoneNumber.getText()).toString().trim();
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString().trim();
