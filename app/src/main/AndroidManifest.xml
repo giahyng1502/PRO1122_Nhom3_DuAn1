@@ -2,23 +2,76 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET" />
+=======
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+<<<<<<< HEAD
         android:icon="@drawable/mifoodie"
         android:label="@string/app_name"
         android:roundIcon="@drawable/mifoodie"
+=======
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".Activity.ChiTietMonAn"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"
+=======
+            android:name=".Activity.CreateProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SelectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OrderHistory"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryAddress"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Payment"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SplashActivity"
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
             android:exported="true"
             android:windowSoftInputMode="adjustPan|stateVisible">
             <intent-filter>
@@ -27,6 +80,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
     </application>
+=======
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true"
+            android:icon="@drawable/logo"
+            android:roundIcon="@drawable/logo">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+    </application>
+    <queries>
+        <package android:name="com.facebook.katana" />
+        <package android:name="com.facebook.lite" />
+        <!-- Các ứng dụng khác nếu cần -->
+    </queries>
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
 
 </manifest>

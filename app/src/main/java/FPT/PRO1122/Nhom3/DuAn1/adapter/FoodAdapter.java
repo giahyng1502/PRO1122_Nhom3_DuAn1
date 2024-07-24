@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
+<<<<<<< HEAD
 import FPT.PRO1122.Nhom3.DuAn1.Model.MonAn;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
@@ -22,6 +23,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     List<MonAn> list;
 
     public FoodAdapter(Context context, List<MonAn> list) {
+=======
+import FPT.PRO1122.Nhom3.DuAn1.model.Food;
+
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
+    Context context;
+    List<Food> list;
+
+    public FoodAdapter(Context context, List<Food> list) {
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
         this.context = context;
         this.list = list;
     }
@@ -31,15 +41,25 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_food,parent,false);
         return new ViewHolder(view);
+<<<<<<< HEAD
 
+=======
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+<<<<<<< HEAD
         MonAn monAn = list.get(position);
         Glide.with(context).load(monAn.getImageMon()).into(holder.ivFood);
         holder.tvName.setText(monAn.getTenMon());
         holder.tvPrice.setText(monAn.getGiaMon());
+=======
+        Food food = list.get(position);
+        Glide.with(context).load(food.getImageMon()).into(holder.ivFood);
+        holder.tvName.setText(food.getTenMon());
+        holder.tvPrice.setText(food.getGiaMon());
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
         holder.tvRate.setText("5");
     }
 

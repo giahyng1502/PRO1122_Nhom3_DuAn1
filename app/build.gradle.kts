@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+<<<<<<< HEAD
+=======
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
 }
 
 android {
@@ -33,22 +37,32 @@ android {
 
     buildFeatures {
         viewBinding = true
+<<<<<<< HEAD
 
+=======
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
     }
 }
 
 dependencies {
     // thu vien load anh
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+<<<<<<< HEAD
+=======
+    implementation(libs.play.services.maps)
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation ("com.google.android.material:material:1.3.0-alpha03")
     implementation ("com.google.firebase:firebase-database:20.0.4")
+<<<<<<< HEAD
 
     // firebase . fast login availiable for android thien code 24072024
     implementation("com.google.firebase:firebase-auth:22.1.1")
     implementation("com.google.code.gson:gson:2.10.1")
 
+=======
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -59,5 +73,25 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+<<<<<<< HEAD
+=======
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.auth)
+    implementation(libs.google.services)
+    implementation(libs.google.firebase.auth)
+    implementation(libs.com.google.firebase.firebase.auth)
+
+    // Facebook
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.android.facebook.android.sdk)
+    implementation(libs.facebook.login)
+
+    //
+    implementation("com.google.maps.android:android-maps-utils:2.3.0")
+    implementation("com.google.android.libraries.places:places:3.5.0")
+
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
 
 }

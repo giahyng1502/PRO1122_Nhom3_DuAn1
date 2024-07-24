@@ -13,7 +13,32 @@
           "package_name": "FPT.PRO1122.Nhom3.DuAn1"
         }
       },
+<<<<<<< HEAD
       "oauth_client": [],
+=======
+      "oauth_client": [
+        {
+          "client_id": "951257015027-dp79f27jvusghk3ptrqrkmbrq45f23d4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "FPT.PRO1122.Nhom3.DuAn1",
+            "certificate_hash": "805c05754735ad160e78bdfa3f4c5256874f39d0"
+          }
+        },
+        {
+          "client_id": "951257015027-pngj8ngfo95ej22r6kqtb0vnlqfd9kas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "FPT.PRO1122.Nhom3.DuAn1",
+            "certificate_hash": "dfae10b450cd17e9b968b77e2beeaa2469fbdd08"
+          }
+        },
+        {
+          "client_id": "951257015027-g26tdd9fv9l6qnfqre2a4kaopo85eomp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
       "api_key": [
         {
           "current_key": "AIzaSyBp0tx--KbknMBTFOxKfm2VaI-aFjMZteo"
@@ -21,7 +46,16 @@
       ],
       "services": {
         "appinvite_service": {
+<<<<<<< HEAD
           "other_platform_oauth_client": []
+=======
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951257015027-g26tdd9fv9l6qnfqre2a4kaopo85eomp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
         }
       }
     }

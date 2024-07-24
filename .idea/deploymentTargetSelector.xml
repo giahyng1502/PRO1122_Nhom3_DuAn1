@@ -2,8 +2,21 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
+<<<<<<< HEAD
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
+=======
+      <SelectionState runConfigName="App">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2024-07-24T09:37:55.337992700Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="Default" identifier="serial=emulator-5554;connection=4a166846" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
+>>>>>>> c340bd93e9e032a8109f2b0566eeb37c36be2702
       </SelectionState>
     </selectionStates>
   </component>
