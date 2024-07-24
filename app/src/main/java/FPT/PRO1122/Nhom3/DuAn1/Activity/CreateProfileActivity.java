@@ -93,7 +93,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         String address = Objects.requireNonNull(bind.edtAddress.getText()).toString();
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
         String password = getIntent().getStringExtra("password");
-        String id = reference.push().getKey();
+        String id = phoneNumber;
         user = new User(id,phoneNumber,password,firstName+" "+lastName, emailAddress, address,"");
         assert phoneNumber != null;
         reference.child(phoneNumber).setValue(user);

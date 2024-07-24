@@ -8,9 +8,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo">TODO</string>
 
-    <string name="facebook_app_id">1696500547788687</string>
+    <string name="facebook_app_id">931956248688754</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">94b9e5e30f5212f74bb134d839630e7f4ecbd2bf1cd7998f7502550330081f68</string>
+    <string name="facebook_client_token">7d8510b20e1d6bda41f7bc9287d4c9a8</string>
 
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="register_here">Register here</string>

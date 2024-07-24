@@ -17,6 +17,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -80,16 +82,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            String name = user.getDisplayName();
-            String mail = user.getEmail();
-            String avatar = user.getPhotoUrl()+"";
-            String uid = user.getUid();
-            User user1 = new User(uid,name,mail,avatar);
-            user1.setAddress("");
-            user1.setPhoneNumber("");
-            user1.setPassword(uid);
-            saveDataToPreferences(uid);
-            database.getReference().child("users").child(user.getUid()).setValue(user1);
+            database.getReference("user").equalTo(user.getUid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            String name = user.getDisplayName();
+                            String mail = user.getEmail();
+                            String avatar = user.getPhotoUrl()+"";
+                            String uid = user.getUid();
+                            User user1 = new User(uid,name,mail,avatar);
+                            user1.setAddress("");
+                            user1.setPhoneNumber("");
+                            user1.setPassword(uid);
+                            saveDataToPreferences(uid);
+                            database.getReference().child("users").child(user.getUid()).setValue(user1);
+                        }
+                    });
+
         } else {
             Log.d("SignIn", "User not signed in");
         }
@@ -109,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
         AccessToken token = AccessToken.getCurrentAccessToken();
         if (token != null && !token.isExpired()) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
         }
         FirebaseApp.initializeApp(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

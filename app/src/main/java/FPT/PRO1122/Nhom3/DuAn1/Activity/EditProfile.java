@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +26,6 @@ import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityEditProfileBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class EditProfile extends AppCompatActivity {
-    ImageView btn_back;
     ActivityEditProfileBinding binding;
     User user;
     @Override
@@ -33,15 +33,11 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot() );
-
         //
-        binding.btnBackEditprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        binding.btnBackEditprofile.setOnClickListener(v -> startActivity(new Intent(EditProfile.this,Profile.class)));
+
         getData();
+
         binding.btnComfirm.setOnClickListener(v-> {
             String name = binding.edtFullName.getText().toString();
             String mail = binding.edtMail.getText().toString();
@@ -52,12 +48,14 @@ public class EditProfile extends AppCompatActivity {
             String avatar = user.getImageAvatar();
             User user1 = new User(MainActivity.id,phone,pass,name,mail,homtown,avatar);
 
-            FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id).setValue(user1)
+            FirebaseDatabase.getInstance().getReference("users")
+                    .child(MainActivity.id)
+                    .setValue(user1)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(EditProfile.this, "Update succesfully", Toast.LENGTH_SHORT).show();
-                            finish();
+                            startActivity(new Intent(EditProfile.this,Profile.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -67,11 +65,13 @@ public class EditProfile extends AppCompatActivity {
                     });
         });
         binding.btnCencel.setOnClickListener(v-> {
-            finish();
+            startActivity(new Intent(EditProfile.this,Profile.class));
         });
     }
     private void getData(){
-        FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(MainActivity.id)
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {

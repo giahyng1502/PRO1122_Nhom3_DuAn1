@@ -1,4 +1,4 @@
-package FPT.PRO1122.Nhom3.DuAn1;
+package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -7,19 +7,17 @@ import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
+
+import FPT.PRO1122.Nhom3.DuAn1.R;
 
 public class DeliveryAddress extends FragmentActivity implements OnMapReadyCallback {
     ImageView btn_back;
