@@ -1,8 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.model;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User {
     private String userId;
     private String phoneNumber;
     private String password;
@@ -23,14 +21,6 @@ public class User implements Serializable {
         this.address = address;
         ImageAvatar = imageAvatar;
     }
-
-    public User(String userId, String name, String email, String imageAvatar) {
-        this.name = name;
-        this.userId = userId;
-        this.email = email;
-        ImageAvatar = imageAvatar;
-    }
-
 
     public String getUserId() {
         return userId;

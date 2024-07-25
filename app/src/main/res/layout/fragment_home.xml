@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.Home">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="120dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:paddingHorizontal="10dp"
-            android:paddingTop="10dp"
             android:weightSum="9">
 
             <LinearLayout
@@ -26,34 +24,30 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:elevation="12dp"
-                    app:cardCornerRadius="50dp">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivAvatarUserHome"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/avatar" />
 
-                    <ImageView
-                        android:id="@+id/ivAvatarUserHome"
-                        android:layout_width="40dp"
-                        android:scaleType="centerCrop"
-                        android:layout_height="40dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/avatar" />
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/tvNameUserHome"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
-                    android:maxLines="2"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/font_inter"
-                    android:textColor="#50555C"
-                    android:layout_marginStart="5dp"
-                    android:textSize="12sp" />
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello,"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvNameUserHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hưng 🌿"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <RelativeLayout
@@ -68,17 +62,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="Current Location"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/font_inter"
-                    android:textColor="#5D5D5D"
                     android:textSize="12sp" />
 
                 <ImageView
                     android:id="@+id/tv2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
                     android:layout_below="@id/tv1"
-                    android:layout_marginStart="15dp"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/map" />
 
@@ -87,15 +78,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv1"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginLeft="3dp"
                     android:layout_marginTop="7dp"
                     android:layout_toEndOf="@+id/tv2"
-                    android:fontFamily="@font/font_inter"
-                    android:textColor="#5D5D5D"
-                    android:textStyle="bold"
-                    android:text="Hà Nội"
-                    android:textSize="14sp" />
-
+                    android:text="Ha Noi"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -105,43 +92,35 @@
                 android:gravity="end">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="#F4F4F4"
-                    app:cardCornerRadius="20dp"
-                    android:elevation="12dp">
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="#EFEDED"
+                    app:cardCornerRadius="20dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ring" />
-
                 </androidx.cardview.widget.CardView>
-
             </LinearLayout>
-
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="20dp"
-            android:elevation="12dp"
-            app:cardCornerRadius="50dp">
+            android:layout_margin="10dp"
+            android:elevation="2dp"
+            app:cardCornerRadius="20dp">
 
             <SearchView
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#F4F4F4"
-                android:searchIcon="@drawable/ic_search"
-                android:queryHint="What are you eat today?"
-                android:theme="@style/custom_text_searchview"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/transparent"
-                android:singleLine="true"/>
+                android:drawablePadding="10dp"
+                android:hint="What are you eat today?"
+                android:singleLine="true" />
 
         </androidx.cardview.widget.CardView>
 
@@ -153,22 +132,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Best Seller"
-            android:textColor="@color/primaryTxt"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerBestSeller"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Recomendation near you"
+            android:text="Món Ăn Bán Chạy Nhất "
             android:textColor="@color/primaryTxt"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -178,5 +142,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Menu Món Ăn"
+            android:textColor="@color/primaryTxt"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recMenuMonAn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

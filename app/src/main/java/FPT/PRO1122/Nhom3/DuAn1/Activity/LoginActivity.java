@@ -17,14 +17,11 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -41,7 +38,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
@@ -93,10 +89,10 @@ public class LoginActivity extends AppCompatActivity {
                         String mail = user.getEmail();
                         String avatar = user.getPhotoUrl()+"";
                         String uid = user.getUid();
-                        User user1 = new User(uid,name,mail,avatar);
-                        user1.setAddress("");
-                        user1.setPhoneNumber("");
-                        user1.setPassword(uid);
+                        User user1 = new User(uid,"","",name,mail,"",avatar);
+//                        user1.setAddress("");
+//                        user1.setPhoneNumber("");
+//                        user1.setPassword(uid);
                         saveDataToPreferences(uid);
                         database.getReference("users").child(user.getUid()).setValue(user1);
                     }

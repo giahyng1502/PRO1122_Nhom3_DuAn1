@@ -17,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityRegisterBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding bind;

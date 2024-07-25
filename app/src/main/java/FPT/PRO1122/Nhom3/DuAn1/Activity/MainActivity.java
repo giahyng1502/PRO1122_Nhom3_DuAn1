@@ -14,25 +14,19 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Myorder;
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     BottomNavigationView bottomNavigationItemView;
     FloatingActionButton btnCart;
     public static String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private void setBottonNavition() {
         // chuyen đến fragment giỏ hàng
         btnCart.setOnClickListener(v ->
-                getSupportFragmentManager().beginTransaction().
-                replace(R.id.frameLayout,new Myorder()).
-                commit());
+                startActivity(new Intent(MainActivity.this, CartActivity.class)));
 
 
         // vào fragment home ngay khi đăng nhập
