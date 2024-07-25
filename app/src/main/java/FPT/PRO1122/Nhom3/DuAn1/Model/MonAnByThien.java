@@ -1,6 +1,8 @@
 package FPT.PRO1122.Nhom3.DuAn1.Model;
 
-public class MonAnByThien {
+import java.io.Serializable;
+
+public class MonAnByThien implements Serializable {
     private int CategoryID;
     private String Description;
     private Boolean BestFood;

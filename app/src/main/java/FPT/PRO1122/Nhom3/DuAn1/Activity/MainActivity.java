@@ -1,7 +1,9 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -43,10 +45,17 @@ public class MainActivity extends BaseActivity {
 
     private void setBottonNavition() {
         // chuyen đến fragment giỏ hàng
-        btnCart.setOnClickListener(v ->
-                getSupportFragmentManager().beginTransaction().
-                replace(R.id.frameLayout,new Myorder()).
-                commit());
+//        btnCart.setOnClickListener(v ->
+//                getSupportFragmentManager().beginTransaction().
+//                replace(R.id.frameLayout,new Myorder()).
+//                commit());
+
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
+            }
+        });
 
 
         // vào fragment home ngay khi đăng nhập

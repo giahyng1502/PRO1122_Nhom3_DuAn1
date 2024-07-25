@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -26,10 +27,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import FPT.PRO1122.Nhom3.DuAn1.R;
+
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.FoodAdapter;
+import FPT.PRO1122.Nhom3.DuAn1.adapter.MenuMonAnAdapter;
+import FPT.PRO1122.Nhom3.DuAn1.Model.DanhMucMonAn;
+import FPT.PRO1122.Nhom3.DuAn1.R;
+
+
+
+
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityMainBinding;
 import FPT.PRO1122.Nhom3.DuAn1.Model.MonAn;
 import FPT.PRO1122.Nhom3.DuAn1.Model.MonAnByThien;
@@ -39,7 +48,6 @@ public class Home extends Fragment {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
 
-
     private ViewPager2 viewPage2;
     private List<Integer> arrayImg;
     AdapterBanner adapterBanner;
@@ -47,20 +55,23 @@ public class Home extends Fragment {
     RecyclerView recyclerViewFood, recMenuMonAn;
     DatabaseReference mfood;
     List<MonAn> monAnList;
-    FoodAdapter foodAdapter;
+//    FoodAdapter foodAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+
 
 //        getWindow().setStatusBarColor(getResources().getColor(R.color.white));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
 
@@ -75,9 +86,9 @@ public class Home extends Fragment {
         monAnList = new ArrayList<>();
         setSlider();
         // lay data ve list
-        getDataFromFirebase();
+//        getDataFromFirebase();
         // set reclerview
-        setReclerFood();
+//        setReclerFood();
         MonAnBanChayRecyclerview();
         MenuMonAn();
 
@@ -95,6 +106,30 @@ public class Home extends Fragment {
     }
 
     private void MenuMonAn() {
+        DatabaseReference myRef = database.getReference("Category");
+//        binding.progressBar.setVisibility(View.VISIBLE);
+        ArrayList<DanhMucMonAn> list = new ArrayList<>();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot issue : snapshot.getChildren()){
+                        list.add(issue.getValue(DanhMucMonAn.class));
+                    }
+                    if (list.size() > 0){
+                         recMenuMonAn.setLayoutManager(new GridLayoutManager(getContext(), 4));
+                        RecyclerView.Adapter adapter = new MenuMonAnAdapter(list);
+                         recMenuMonAn.setAdapter(adapter);
+                    }
+//                    binding.progressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void MonAnBanChayRecyclerview() {
@@ -124,31 +159,31 @@ public class Home extends Fragment {
             }
         });
     }
-    private void setReclerFood() {
-        foodAdapter = new FoodAdapter(getContext(),monAnList);
-        StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        recyclerViewFood.setLayoutManager(linearLayoutManager);
-        recyclerViewFood.setAdapter(foodAdapter);
-    }
+//    private void setReclerFood() {
+//        foodAdapter = new FoodAdapter(getContext(),monAnList);
+//        StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+//        recyclerViewFood.setLayoutManager(linearLayoutManager);
+//        recyclerViewFood.setAdapter(foodAdapter);
+//    }
 
-    private void getDataFromFirebase() {
-        mfood.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                monAnList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MonAn monAn = dataSnapshot.getValue(MonAn.class);
-                    monAnList.add(monAn);
-                }
-                foodAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), error+"fdfghh", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void getDataFromFirebase() {
+//        mfood.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                monAnList.clear();
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    MonAn monAn = dataSnapshot.getValue(MonAn.class);
+//                    monAnList.add(monAn);
+//                }
+//                foodAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(getContext(), error+"fdfghh", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void setSlider() {
         arrayImg = new ArrayList<>();

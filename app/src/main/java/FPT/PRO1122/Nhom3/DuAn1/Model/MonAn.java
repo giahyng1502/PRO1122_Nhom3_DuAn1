@@ -1,6 +1,8 @@
 package FPT.PRO1122.Nhom3.DuAn1.Model;
 
-public class MonAn {
+import java.io.Serializable;
+
+public class MonAn implements Serializable {
     private String monAnID;
     private String tenMon;
     private String moTa;

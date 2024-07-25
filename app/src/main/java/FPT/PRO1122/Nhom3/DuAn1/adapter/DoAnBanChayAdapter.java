@@ -51,7 +51,7 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChiTietMonAn.class);
-            intent.putExtra("object", String.valueOf(items.get(position)));
+            intent.putExtra("object", items.get(position));
             context.startActivity(intent);
         });
     }
