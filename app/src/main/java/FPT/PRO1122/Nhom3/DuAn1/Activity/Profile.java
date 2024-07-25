@@ -114,7 +114,7 @@ public class Profile extends AppCompatActivity {
                     User user = snapshot.getValue(User.class);
                     tvMail.setText(user.getEmail());
                     tvName.setText(user.getName());
-                    Glide.with(Profile.this).load(user.getImageAvatar()).error(R.drawable.ic_username).into(ivAvatar);
+                    Glide.with(Profile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(ivAvatar);
                 }
             }
 

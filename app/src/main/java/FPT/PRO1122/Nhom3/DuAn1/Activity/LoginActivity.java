@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(this, MainActivity.class));
                         FirebaseUser user = auth.getCurrentUser();
                         updateUI(user);
+                        saveDataToPreferences(user.getUid());
                     } else {
                         Log.w("GoogleSignIn", "signInWithCredential:failure", task.getException());
                         updateUI(null);
@@ -82,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                    .getReference("users").child(user.getUid());
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

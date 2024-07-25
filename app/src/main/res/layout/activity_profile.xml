@@ -58,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/ivProfileAvatar"
                 android:src="@drawable/img_profile"
+                android:scaleType="centerCrop"
                 android:backgroundTint="@null" />
         </androidx.cardview.widget.CardView>
             <TextView

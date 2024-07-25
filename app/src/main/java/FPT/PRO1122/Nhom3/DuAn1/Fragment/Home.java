@@ -199,7 +199,7 @@ public class Home extends Fragment {
     // Hàm lấy thông tin khi đăng nhập bằng tài khoản đăng kí
     public void getProfileUser(User user) {
         bind.tvNameUserHome.setText("Hello,\n" +""+ user.getName() + " \uD83C\uDF3F");
-        Glide.with(this).load(user.getImageAvatar()).error(R.drawable.avatar).into(bind.ivAvatarUserHome);
+        Glide.with(this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(bind.ivAvatarUserHome);
     }
     private void getUserCurrent(){
         FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id).addValueEventListener(new ValueEventListener() {

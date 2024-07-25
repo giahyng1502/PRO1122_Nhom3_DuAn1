@@ -1,93 +1,207 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.os.Environment;
+import android.provider.Settings;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityEditProfileBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class EditProfile extends AppCompatActivity {
+    // Sử dụng View Binding để truy cập các view
     ActivityEditProfileBinding binding;
     User user;
+    StorageReference storageReference;
+    Uri userImageUri;
+
+    private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
+
+    // Sử dụng ActivityResultLauncher để xử lý kết quả từ trình chọn ảnh
+    private final ActivityResultLauncher<Intent> activityResultLauncher
+            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    userImageUri = result.getData().getData();
+                    if (userImageUri != null) {
+                        binding.ivCurrentUsr.setImageURI(userImageUri);
+                    }
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot() );
-        //
-        binding.btnBackEditprofile.setOnClickListener(v -> startActivity(new Intent(EditProfile.this,Profile.class)));
+        setContentView(binding.getRoot());
 
+        // Nút quay lại màn hình hồ sơ
+        binding.btnBackEditprofile.setOnClickListener(v -> startActivity(new Intent(EditProfile.this, Profile.class)));
+
+        // Thiết lập Firebase Storage
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference("Image User");
+
+        // Lấy dữ liệu người dùng từ Firebase Realtime Database
         getData();
 
-        binding.btnComfirm.setOnClickListener(v-> {
-            String name = binding.edtFullName.getText().toString();
-            String mail = binding.edtMail.getText().toString();
-            String phone = binding.edtPhoneNumber.getText().toString();
-            String homtown = binding.edtHomeTown.getText().toString();
-            String pass = user.getPassword();
-            // can fix avatar
-            String avatar = user.getImageAvatar();
-            User user1 = new User(MainActivity.id,phone,pass,name,mail,homtown,avatar);
+        // Khi nhấn vào ảnh người dùng, kiểm tra quyền và mở trình chọn ảnh
+        binding.ivCurrentUsr.setOnClickListener(v -> checkPermissionAndOpenImagePicker());
 
-            FirebaseDatabase.getInstance().getReference("users")
-                    .child(MainActivity.id)
-                    .setValue(user1)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(EditProfile.this, "Update succesfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(EditProfile.this,Profile.class));
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditProfile.this, "Update Fail", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        });
-        binding.btnCencel.setOnClickListener(v-> {
-            startActivity(new Intent(EditProfile.this,Profile.class));
-        });
+        // Khi nhấn vào nút xác nhận, tải hình ảnh lên Firebase
+        binding.btnComfirm.setOnClickListener(v -> upLoadImageToFireBase());
     }
-    private void getData(){
+
+    // Kiểm tra quyền và mở trình chọn ảnh
+    private void checkPermissionAndOpenImagePicker() {
+        // Nếu phiên bản Android nhỏ hơn M, không cần kiểm tra quyền
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            openImage();
+            return;
+        }
+
+        // Nếu phiên bản Android là Android 11 trở lên
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+                openImage();
+            } else {
+                // Yêu cầu quyền truy cập tất cả các tệp
+                new AlertDialog.Builder(this)
+                        .setTitle("Permission Needed")
+                        .setMessage("This permission is needed to access your gallery to select images.")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            try {
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:" + getPackageName()));
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                        .create()
+                        .show();
+            }
+        } else {
+            // Kiểm tra quyền truy cập bộ nhớ ngoài đối với các phiên bản Android khác
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                openImage();
+            } else {
+                // Nếu quyền chưa được cấp, yêu cầu quyền từ người dùng
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Permission Needed")
+                            .setMessage("This permission is needed to access your gallery to select images.")
+                            .setPositiveButton("OK", (dialog, which) -> ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION))
+                            .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                            .create()
+                            .show();
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_STORAGE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openImage();
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Mở trình chọn ảnh để người dùng chọn hình ảnh từ thư viện
+    private void openImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        activityResultLauncher.launch(intent);
+    }
+
+    // Tải hình ảnh lên Firebase Storage
+    private void upLoadImageToFireBase() {
+        String imageId = user.getName()+user.getUserId();
+        if (userImageUri == null) {
+            // Nếu không có hình ảnh mới, sử dụng hình ảnh cũ
+            updateProfile(user.getImageAvatar());
+        } else {
+            // Tải lên hình ảnh mới và cập nhật đường dẫn hình ảnh trên Firebase
+            storageReference.child(imageId).putFile(userImageUri).addOnSuccessListener(taskSnapshot -> storageReference.child(imageId).getDownloadUrl().addOnSuccessListener(uri -> {
+                String imageLink = uri.toString();
+                updateProfile(imageLink);
+            }).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Failed to get download URL", Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Failed to upload image", Toast.LENGTH_SHORT).show());
+        }
+    }
+
+    // Cập nhật thông tin hồ sơ người dùng
+    private void updateProfile(String imageLink) {
+        String name = binding.edtFullName.getText().toString();
+        String mail = binding.edtMail.getText().toString();
+        String phone = binding.edtPhoneNumber.getText().toString();
+        String homtown = binding.edtHomeTown.getText().toString();
+        String pass = user.getPassword();
+        String avatar = imageLink;
+        User user1 = new User(MainActivity.id, phone, pass, name, mail, homtown, avatar);
+
+        // Lưu thông tin cập nhật vào Firebase Realtime Database
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(MainActivity.id)
+                .setValue(user1)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(EditProfile.this, "Update successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(EditProfile.this, Profile.class));
+                }).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Update Fail", Toast.LENGTH_SHORT).show());
+    }
+
+    // Lấy dữ liệu người dùng từ Firebase Realtime Database
+    private void getData() {
         FirebaseDatabase.getInstance().getReference("users")
                 .child(MainActivity.id)
                 .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    user = snapshot.getValue(User.class);
-                    binding.edtFullName.setText(user.getName());
-                    binding.edtMail.setText(user.getEmail());
-                    Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.ic_username).into(binding.ivCurrentUsr);
-                    binding.edtPhoneNumber.setText(user.getPhoneNumber());
-                    binding.edtHomeTown.setText(user.getAddress());
-                }
-            }
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            user = snapshot.getValue(User.class);
+                            // Hiển thị dữ liệu người dùng trên giao diện
+                            binding.edtFullName.setText(user.getName());
+                            binding.edtMail.setText(user.getEmail());
+                            Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivCurrentUsr);
+                            binding.edtPhoneNumber.setText(user.getPhoneNumber());
+                            binding.edtHomeTown.setText(user.getAddress());
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(EditProfile.this, "Failed to load user data", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

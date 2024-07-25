@@ -35,6 +35,7 @@
                     <ImageView
                         android:id="@+id/ivAvatarUserHome"
                         android:layout_width="40dp"
+                        android:scaleType="centerCrop"
                         android:layout_height="40dp"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/avatar" />

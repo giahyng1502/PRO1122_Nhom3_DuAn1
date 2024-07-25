@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        id = getIDCurrentAccout();
         anhXa();
         setBottonNavition();
         //
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //
         bottomNavigationItemView.getMenu().getItem(2).isEnabled();
         //
-        id = getIDCurrentAccout();
+
     }
     public String getIDCurrentAccout() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserID", MODE_PRIVATE);
