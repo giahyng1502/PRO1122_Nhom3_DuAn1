@@ -48,6 +48,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
         holder.minusBtnInCart.setOnClickListener(v -> {
             quanLyGioHang.minusNumberItem(list, position, () -> changeNumberItemsListener.change());
+//            holder.numTxtInCart.setText();
         });
 
         holder.plusBtnInCart.setOnClickListener(v -> {

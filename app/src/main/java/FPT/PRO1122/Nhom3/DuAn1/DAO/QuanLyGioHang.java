@@ -9,7 +9,7 @@ import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 
 
 
-public class QuanLyGioHang {
+public class QuanLyGioHang implements ChangeNumberItemsListener{
     private Context context;
     private TinyDB tinyDB;
 
@@ -63,5 +63,10 @@ public class QuanLyGioHang {
         listItem.get(position).setNumberInCart(listItem.get(position).getNumberInCart()+1);
         tinyDB.putListObject("CartList",listItem);
         changeNumberItemsListener.change();
+    }
+
+    @Override
+    public void change() {
+
     }
 }

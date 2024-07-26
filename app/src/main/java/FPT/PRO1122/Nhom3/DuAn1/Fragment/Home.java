@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +14,11 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
 
@@ -36,20 +41,22 @@ import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityMainBinding;
 
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class Home extends Fragment {
     private ActivityMainBinding binding;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
 
+    ImageView avatar;
+    TextView tvNameUserHome;
     private ViewPager2 viewPage2;
     private List<Integer> arrayImg;
     AdapterBanner adapterBanner;
     int index;
     RecyclerView recyclerViewFood, recMenuMonAn;
     DatabaseReference mfood;
-//    List<MonAn> monAnList;
-    //    FoodAdapter foodAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,9 +84,10 @@ public class Home extends Fragment {
         viewPage2 = view.findViewById(R.id.viewPage2);
         recyclerViewFood = view.findViewById(R.id.recyclerFood);
         recMenuMonAn = view.findViewById(R.id.recMenuMonAn);
-//        monAnList = new ArrayList<>();
+        avatar = view.findViewById(R.id.ivAvatarUserHome);
+        tvNameUserHome = view.findViewById(R.id.tvNameUserHome);
+        setInforCurrentUser();
         setSlider();
-
         MonAnBanChayRecyclerview();
         MenuMonAn();
 
@@ -139,31 +147,28 @@ public class Home extends Fragment {
             }
         });
     }
-//    private void setReclerFood() {
-//        foodAdapter = new FoodAdapter(getContext(),monAnList);
-//        StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-//        recyclerViewFood.setLayoutManager(linearLayoutManager);
-//        recyclerViewFood.setAdapter(foodAdapter);
-//    }
 
-//    private void getDataFromFirebase() {
-//        mfood.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                monAnList.clear();
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    MonAn monAn = dataSnapshot.getValue(MonAn.class);
-//                    monAnList.add(monAn);
-//                }
-//                foodAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(getContext(), error+"fdfghh", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void setInforCurrentUser() {
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(MainActivity.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            User user = snapshot.getValue(User.class);
+                            Glide.with(getContext()).load(user.getImageAvatar())
+                                    .error(R.drawable.none_avatar)
+                                    .into(avatar);
+
+                            tvNameUserHome.setText(user.getName() + " \uD83C\uDF3F");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
 
     private void setSlider() {
         arrayImg = new ArrayList<>();

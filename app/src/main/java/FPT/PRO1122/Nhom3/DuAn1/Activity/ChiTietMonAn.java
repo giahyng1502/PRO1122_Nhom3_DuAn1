@@ -2,14 +2,20 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
 import FPT.PRO1122.Nhom3.DuAn1.R;
@@ -30,9 +36,40 @@ public class ChiTietMonAn extends AppCompatActivity {
         binding = ActivityChiTietMonAnBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-
+        binding.numTxt.setText(num+"");
         getIntentExtra();
         setVariable();
+        // add data favorite Food
+        favoriteFood();
+    }
+    private void favoriteFood () {
+        binding.favBtn.setOnClickListener(new View.OnClickListener() {
+            private boolean isFavorite = false;
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("Foods")
+                    .child(object.getId()+"").child("BestFood");
+            @Override
+            public void onClick(View v) {
+                if (isFavorite) {
+                    databaseReference.setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            binding.favBtn.setImageResource(R.drawable.favorite);
+                        }
+                    });
+                    // đổi lại thành trái tim trắng
+                } else {
+                    databaseReference.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            binding.favBtn.setImageResource(R.drawable.favorite_select);
+                        }
+                    });
+                     // đổi thành trái tim đỏ
+                }
+                isFavorite = !isFavorite; // cập nhật trạng thái
+            }
+        });
     }
 
     private void setVariable() {
@@ -55,7 +92,13 @@ public class ChiTietMonAn extends AppCompatActivity {
             binding.totalTxt.setText((num * object.getPrice()) + " VND");
         });
         binding.minusBtn.setOnClickListener(v -> {
-            num = num - 1;
+
+            if (num <= 1) {
+               return;
+            } else {
+                num = num - 1;
+                binding.minusBtn.setEnabled(true);
+            }
             binding.numTxt.setText(num + "");
             binding.totalTxt.setText((num * object.getPrice()) + " VND");
         });
