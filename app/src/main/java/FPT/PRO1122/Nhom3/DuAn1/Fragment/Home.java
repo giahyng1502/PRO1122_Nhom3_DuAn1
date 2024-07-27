@@ -66,8 +66,6 @@ public class Home extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -79,6 +77,9 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Khởi tạo các view
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
         mfood = FirebaseDatabase.getInstance().getReference("foods");
         viewPage2 = view.findViewById(R.id.viewPage2);
         recyclerViewFood = view.findViewById(R.id.recyclerFood);
@@ -156,7 +157,7 @@ public class Home extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             User user = snapshot.getValue(User.class);
-                            Glide.with(getContext()).load(user.getImageAvatar())
+                            Glide.with(getActivity()).load(user.getImageAvatar())
                                     .error(R.drawable.none_avatar)
                                     .into(avatar);
 

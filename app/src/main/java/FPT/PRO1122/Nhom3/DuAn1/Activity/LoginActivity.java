@@ -66,7 +66,11 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(this, MainActivity.class));
+                        Intent intent = new Intent(this, MainActivity.class);
+                        // user exit to homephone
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
                         FirebaseUser user = auth.getCurrentUser();
                         updateUI(user);
                         saveDataToPreferences(user.getUid());
@@ -90,9 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                         String avatar = user.getPhotoUrl()+"";
                         String uid = user.getUid();
                         User user1 = new User(uid,"","",name,mail,"",avatar);
-//                        user1.setAddress("");
-//                        user1.setPhoneNumber("");
-//                        user1.setPassword(uid);
                         saveDataToPreferences(uid);
                         database.getReference("users").child(user.getUid()).setValue(user1);
                     }
@@ -210,6 +211,9 @@ public class LoginActivity extends AppCompatActivity {
                         saveDataToPreferences(phoneNumber);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
                     } else {
                         // Nếu mật khẩu không chính xác, thông báo và focus vào mật khẩu
                         bind.edtPassword.setError("Invalid Credentials");
@@ -266,6 +270,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            finish();
                             Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",

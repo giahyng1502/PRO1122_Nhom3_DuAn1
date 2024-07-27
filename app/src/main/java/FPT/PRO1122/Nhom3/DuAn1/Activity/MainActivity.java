@@ -3,6 +3,7 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -26,6 +27,36 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationItemView;
     FloatingActionButton btnCart;
     public static String id;
+
+    private boolean doubleBackToExitPressedOnce = false;
+    private Handler handler = new Handler();
+    private Runnable resetDoubleBackFlag = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            // neu true thi thoat
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Nhấn lần nữa để thoát khỏi ứng dung", Toast.LENGTH_SHORT).show();
+
+        handler.postDelayed(resetDoubleBackFlag, 2000); // Đặt lại cờ sau 2 giây
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(resetDoubleBackFlag); // Khi Activity bị hủy, xóa callback để tránh rò rỉ bộ nhớ.
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

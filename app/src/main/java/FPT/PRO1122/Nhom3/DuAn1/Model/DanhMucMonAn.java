@@ -1,7 +1,9 @@
 package FPT.PRO1122.Nhom3.DuAn1.model;
 
-public class DanhMucMonAn {
-    private int id;
+import java.io.Serializable;
+
+public class DanhMucMonAn implements Serializable {
+    private int Id;
     private String ImagePath;
     private String Name;
 
@@ -14,11 +16,11 @@ public class DanhMucMonAn {
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public String getImagePath() {
