@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -36,8 +37,7 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MenuMonAnAdapter.ViewHolder holder, int p) {
-        int position = holder.getAbsoluteAdapterPosition();
+    public void onBindViewHolder(@NonNull MenuMonAnAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.catNameTxt.setText(items.get(position).getName());
         switch (position){
             case 0:{
@@ -85,9 +85,9 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DanhMucMonAn danhMucMonAn = items.get(position);
                 Intent intent = new Intent(context, ListMonAn.class);
-                intent.putExtra("CategoryId", items.get(position).getId());
-                intent.putExtra("b/", items.get(position).getName());
+                intent.putExtra("Category",danhMucMonAn);
                 context.startActivity(intent);
             }
         });
@@ -96,7 +96,7 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
 
     @Override
     public int getItemCount() {
-       return items.size();
+        return items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

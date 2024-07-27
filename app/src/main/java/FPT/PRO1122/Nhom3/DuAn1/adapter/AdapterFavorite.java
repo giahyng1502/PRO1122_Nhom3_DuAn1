@@ -21,25 +21,24 @@ import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 
-public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.ViewHolder> {
+public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHolder> {
+
     ArrayList<MonAnByThien> items;
     Context context;
 
-
-    public DoAnBanChayAdapter(ArrayList<MonAnByThien> items) {
+    public AdapterFavorite(ArrayList<MonAnByThien> items, Context context) {
         this.items = items;
+        this.context = context;
     }
 
-    @NonNull
     @Override
-    public DoAnBanChayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
-        View inflate = LayoutInflater.from(context).inflate(R.layout.viewholder_best_deal, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflate = LayoutInflater.from(context).inflate(R.layout.viewholder_list_mon_an, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DoAnBanChayAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tittleTxt.setText(items.get(position).getTitle());
         holder.priceTxt.setText(items.get(position).getPrice() + "VND");
         holder.timeTxt.setText(items.get(position).getTimeValue() + "phút");
@@ -54,9 +53,6 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
             intent.putExtra("object", items.get(position));
             context.startActivity(intent);
         });
-        holder.plusBtn.setOnClickListener(v -> {
-
-        });
     }
 
     @Override
@@ -70,13 +66,14 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tittleTxt = itemView.findViewById(R.id.titleTxt);
-            timeTxt = itemView.findViewById(R.id.timeTxt);
-            starTxt = itemView.findViewById(R.id.starTxt);
-            priceTxt = itemView.findViewById(R.id.priceTxt);
-            foodsImage = itemView.findViewById(R.id.foodsImage);
+            tittleTxt = itemView.findViewById(R.id.titleListMonTxt);
+            timeTxt = itemView.findViewById(R.id.timeListMonTxt);
+            starTxt = itemView.findViewById(R.id.starListMonTxt);
+            priceTxt = itemView.findViewById(R.id.priceListMonTxt);
+            foodsImage = itemView.findViewById(R.id.foodsListMonImage);
             plusBtn = itemView.findViewById(R.id.plusBtn);
 
         }
     }
+
 }

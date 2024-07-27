@@ -1,6 +1,5 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
-import android.media.Image;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,7 +89,6 @@ public class Home extends Fragment {
         setSlider();
         MonAnBanChayRecyclerview();
         MenuMonAn();
-
     }
 
     private void MenuMonAn() {
@@ -102,9 +100,11 @@ public class Home extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for (DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(DanhMucMonAn.class));
+                        DanhMucMonAn danhMucMonAn = issue.getValue(DanhMucMonAn.class);
+                        list.add(danhMucMonAn);
+
                     }
-                    if (list.size() > 0){
+                    if (!list.isEmpty()){
                         recMenuMonAn.setLayoutManager(new GridLayoutManager(getContext(), 4));
                         RecyclerView.Adapter adapter = new MenuMonAnAdapter(list);
                         recMenuMonAn.setAdapter(adapter);
@@ -129,6 +129,7 @@ public class Home extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+                    list.clear();
                     for (DataSnapshot issue : snapshot.getChildren()){
                         list.add(issue.getValue(MonAnByThien.class));
                     }
@@ -213,4 +214,5 @@ public class Home extends Fragment {
             index = -1;
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -32,6 +33,8 @@ public class CartActivity extends BaseActivity {
         setVariable();
         caculataCart();
         initList();
+        binding.backBtn.setOnClickListener(v-> startActivity(new Intent(
+                CartActivity.this,MainActivity.class)));
     }
 
     private void initList() {

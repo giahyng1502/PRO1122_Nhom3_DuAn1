@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?android:selectableItemBackground"
-                android:src="@drawable/ic_arrow_back"
+                android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -33,13 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
-                android:textSize="25sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_bias="0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -94,7 +94,7 @@
             android:text="Full Name:"/>
 
         <EditText
-            android:text="Ngô Trung Kien"
+
             android:id="@+id/edtFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:text="Mail:"/>
 
         <EditText
-            android:text="Ngô Trung Kien"
+
             android:id="@+id/edtMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
             android:text="Phone:"/>
 
         <EditText
-            android:text="0123456789"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edtPhoneNumber"
@@ -136,7 +136,6 @@
             android:text="Address:"/>
 
         <EditText
-            android:text="Ha Noi"
             android:layout_width="match_parent"
             android:id="@+id/edtHomeTown"
             android:layout_height="wrap_content"

@@ -42,35 +42,56 @@ public class ChiTietMonAn extends AppCompatActivity {
         // add data favorite Food
         favoriteFood();
     }
-    private void favoriteFood () {
+    private void favoriteFood() {
+        // Đảm bảo rằng object không bị null
+        if (object == null) {
+            return;
+        }
+
+        // Khởi tạo DatabaseReference
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                .getReference("Favorite").child(MainActivity.id)
+                .child(object.getId() + "");
+
+        // Thiết lập OnClickListener cho nút yêu thích
         binding.favBtn.setOnClickListener(new View.OnClickListener() {
-            private boolean isFavorite = false;
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                    .getReference("Foods")
-                    .child(object.getId()+"").child("BestFood");
             @Override
             public void onClick(View v) {
-                if (isFavorite) {
-                    databaseReference.setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                if (object.getBestFood()) {
+                    // Nếu món ăn là món yêu thích -> bỏ yêu thích
+                    object.setBestFood(false);
+                    databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            // Đặt lại hình trái tim màu đỏ
                             binding.favBtn.setImageResource(R.drawable.favorite);
                         }
-                    });
-                    // đổi lại thành trái tim trắng
-                } else {
-                    databaseReference.setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    }).addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onSuccess(Void unused) {
-                            binding.favBtn.setImageResource(R.drawable.favorite_select);
+                        public void onFailure(@NonNull Exception e) {
+                            // Xử lý lỗi nếu cần
                         }
                     });
-                     // đổi thành trái tim đỏ
+                } else {
+                    // Nếu món ăn chưa được yêu thích -> yêu thích
+                    object.setBestFood(true);
+                    databaseReference.setValue(object).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            // Đặt lại hình trái tim màu trắng đầy
+                            binding.favBtn.setImageResource(R.drawable.favorite_select);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Xử lý lỗi nếu cần
+                        }
+                    });
                 }
-                isFavorite = !isFavorite; // cập nhật trạng thái
             }
         });
     }
+
 
     private void setVariable() {
         quanLyGioHang = new QuanLyGioHang(this);
@@ -86,6 +107,13 @@ public class ChiTietMonAn extends AppCompatActivity {
         binding.timeTxt.setText(object.getTimeValue() + " phút");
         binding.totalTxt.setText(num + object.getPrice()+" VND");
 
+        //set status favorite
+        if (object.getBestFood()) {
+            binding.favBtn.setImageResource(R.drawable.favorite_select);
+        } else {
+            binding.favBtn.setImageResource(R.drawable.favorite);
+        }
+
         binding.plusBtn.setOnClickListener(v -> {
             num = num + 1;
             binding.numTxt.setText(num + "");
@@ -97,7 +125,6 @@ public class ChiTietMonAn extends AppCompatActivity {
                return;
             } else {
                 num = num - 1;
-                binding.minusBtn.setEnabled(true);
             }
             binding.numTxt.setText(num + "");
             binding.totalTxt.setText((num * object.getPrice()) + " VND");
