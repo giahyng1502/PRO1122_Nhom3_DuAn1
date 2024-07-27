@@ -143,23 +143,28 @@ public class ChiTietMonAn extends AppCompatActivity {
     }
 
     private void getFavoriteUser(String userID,int foodID) {
-        FirebaseDatabase.getInstance().getReference("Favorite")
-                .child(userID).child(foodID+"")
-                .orderByChild("bestFood")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            binding.favBtn.setImageResource(R.drawable.favorite_select);
-                        } else {
-                            binding.favBtn.setImageResource(R.drawable.favorite);
+        try {
+            FirebaseDatabase.getInstance().getReference("Favorite")
+                    .child(userID).child(foodID+"")
+                    .orderByChild("bestFood")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                binding.favBtn.setImageResource(R.drawable.favorite_select);
+                            } else {
+                                binding.favBtn.setImageResource(R.drawable.favorite);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+        }catch (Exception e) {
+            Toast.makeText(this, "Error" + e, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void getIntentExtra() {

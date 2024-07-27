@@ -152,7 +152,7 @@ public class Home extends Fragment {
 
     private void setInforCurrentUser() {
         FirebaseDatabase.getInstance().getReference("users")
-                .child(MainActivity.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                .child(MainActivity.id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
