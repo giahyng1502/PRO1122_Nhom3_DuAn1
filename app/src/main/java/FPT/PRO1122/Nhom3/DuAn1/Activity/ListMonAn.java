@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFavorite;
 import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
-import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityListMonAnBinding;
 
 public class ListMonAn extends AppCompatActivity {
@@ -55,7 +53,7 @@ public class ListMonAn extends AppCompatActivity {
         Query query;
             query = myRef.orderByChild("CategoryId").equalTo(danhMucMonAn.getId());
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){

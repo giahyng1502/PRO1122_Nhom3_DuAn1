@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Nhấn lần nữa để thoát khỏi ứng dung", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Press back again to exit the application", Toast.LENGTH_SHORT).show();
 
         handler.postDelayed(resetDoubleBackFlag, 2000); // Đặt lại cờ sau 2 giây
     }

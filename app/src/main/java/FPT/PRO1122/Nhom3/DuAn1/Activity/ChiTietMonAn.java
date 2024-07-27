@@ -14,8 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
 import FPT.PRO1122.Nhom3.DuAn1.R;
@@ -93,6 +96,7 @@ public class ChiTietMonAn extends AppCompatActivity {
     }
 
 
+
     private void setVariable() {
         quanLyGioHang = new QuanLyGioHang(this);
 
@@ -108,16 +112,16 @@ public class ChiTietMonAn extends AppCompatActivity {
         binding.totalTxt.setText(num + object.getPrice()+" VND");
 
         //set status favorite
-        if (object.getBestFood()) {
-            binding.favBtn.setImageResource(R.drawable.favorite_select);
-        } else {
-            binding.favBtn.setImageResource(R.drawable.favorite);
-        }
+        getFavoriteUser(MainActivity.id, object.getId());
+
 
         binding.plusBtn.setOnClickListener(v -> {
             num = num + 1;
             binding.numTxt.setText(num + "");
-            binding.totalTxt.setText((num * object.getPrice()) + " VND");
+
+            double total = (num* object.getPrice());
+            String totalString = String.format("%.2f",total) + "VND";
+            binding.totalTxt.setText(totalString);
         });
         binding.minusBtn.setOnClickListener(v -> {
 
@@ -136,6 +140,26 @@ public class ChiTietMonAn extends AppCompatActivity {
                 quanLyGioHang.insertFood(object);
             }
         });
+    }
+
+    private void getFavoriteUser(String userID,int foodID) {
+        FirebaseDatabase.getInstance().getReference("Favorite")
+                .child(userID).child(foodID+"")
+                .orderByChild("bestFood")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            binding.favBtn.setImageResource(R.drawable.favorite_select);
+                        } else {
+                            binding.favBtn.setImageResource(R.drawable.favorite);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
     }
 
     private void getIntentExtra() {

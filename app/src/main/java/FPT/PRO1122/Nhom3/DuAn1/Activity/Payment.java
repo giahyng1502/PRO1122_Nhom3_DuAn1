@@ -11,23 +11,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
+import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityPaymentBinding;
 
 public class Payment extends AppCompatActivity {
-    ImageView btn_back;
+    private ActivityPaymentBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_payment);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(binding.getRoot());
 
-        //
-        btn_back=findViewById(R.id.btn_back_payment);
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        binding.btnBackPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

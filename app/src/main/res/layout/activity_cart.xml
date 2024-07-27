@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/red_button_background"
-                android:text="PLACE ORDER"
+                android:text="CHECK OUT"
                 android:layout_marginBottom="50dp"
                 android:textColor="@color/white"
                 android:textSize="18sp" />

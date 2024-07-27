@@ -194,17 +194,22 @@
                 android:orientation="vertical">
                 <RadioButton
                     android:layout_width="match_parent"
+                    android:id="@+id/rdioMasterCard"
                     android:layout_height="75dp" />
                 <RadioButton
+                    android:id="@+id/rdioPaypal"
                     android:layout_width="match_parent"
                     android:layout_height="75dp" />
                 <RadioButton
+                    android:id="@+id/rdioZaloPay"
                     android:layout_width="match_parent"
                     android:layout_height="75dp" />
                 <RadioButton
+                    android:id="@+id/rdioMomo"
                     android:layout_width="match_parent"
                     android:layout_height="75dp" />
                 <RadioButton
+                    android:id="@+id/rdioTienMat"
                     android:layout_width="match_parent"
                     android:layout_height="75dp" />
 
@@ -218,7 +223,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="Place Order"
-        android:backgroundTint="#FFA500"
+        android:id="@+id/btnPaceOrder"
+        app:background="@drawable/red_button_background"
+        app:backgroundTint="@color/red"
         android:textColor="#FFFFFF"
         android:layout_margin="20dp" />
 
