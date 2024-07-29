@@ -120,25 +120,41 @@ public class UserManagement extends Fragment {
         bindingDialog.btnSubMitUserManagement.setOnClickListener(v-> {
             String userid = bindingDialog.edtIDNumberUserManagement.getText().toString();
             String pass = bindingDialog.edtPassUserManagement.getText().toString();
-            if (userid.isEmpty() && pass.isEmpty()) {
-                Toast.makeText(requireContext(), "Not be empty", Toast.LENGTH_SHORT).show();
-            }
+            if (userid.isEmpty() )
+                bindingDialog.edtIDNumberUserManagement.setError("User name cann't empty");
+            else if (pass.isEmpty())
+                bindingDialog.edtPassUserManagement.setError("User name cann't empty");
             else {
-                User user = new User(userid,"",pass,"","","","");
                 FirebaseDatabase.getInstance()
                         .getReference("users")
-                        .child(userid).setValue(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .child(userid).orderByChild("userId")
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                bottomSheetDialog.dismiss();
-                                Toast.makeText(requireContext(), "Add User Successfuly", Toast.LENGTH_SHORT).show();
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!snapshot.exists()) {
+                                    User user = new User(userid, "", pass, "", "", "", "");
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("users")
+                                            .child(userid).setValue(user)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    bottomSheetDialog.dismiss();
+                                                    Toast.makeText(requireContext(), "Add User Successfuly", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(requireContext(), "Fail" + e, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                } else
+                                    Toast.makeText(requireContext(), "Account already exists", Toast.LENGTH_SHORT).show();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(requireContext(), "Error" + error, Toast.LENGTH_SHORT).show();
                             }
                         });
             }
