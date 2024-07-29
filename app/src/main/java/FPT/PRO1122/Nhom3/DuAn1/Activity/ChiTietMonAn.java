@@ -146,7 +146,6 @@ public class ChiTietMonAn extends AppCompatActivity {
         try {
             FirebaseDatabase.getInstance().getReference("Favorite")
                     .child(userID).child(foodID+"")
-                    .orderByChild("bestFood")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

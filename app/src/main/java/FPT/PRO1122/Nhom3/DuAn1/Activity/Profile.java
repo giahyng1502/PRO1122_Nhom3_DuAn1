@@ -29,7 +29,7 @@ import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class Profile extends AppCompatActivity {
-    LinearLayout payment_layout,order_layout,changepass_layout,delivery_layout;
+    LinearLayout payment_layout,order_layout,changepass_layout,delivery_layout,admin_layout;
     Button btn_logout,btn_editprofile;
     ImageView ivbackProfile,ivAvatar;
     TextView tvName,tvMail;
@@ -73,6 +73,13 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile.this, DeliveryAddress.class);
+                startActivity(intent);
+            }
+        });
+        admin_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this, AdminActivity.class);
                 startActivity(intent);
             }
         });
@@ -135,6 +142,7 @@ public class Profile extends AppCompatActivity {
         tvMail = findViewById(R.id.tvMailProFile);
         tvName = findViewById(R.id.tvNameProFile);
         ivAvatar = findViewById(R.id.ivProfileAvatar);
+        admin_layout = findViewById(R.id.admin_layout);
     }
 
     public void signOut() {

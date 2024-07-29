@@ -8,7 +8,15 @@ public class User {
     private String email;
     private String address;
     private String ImageAvatar;
+    private int role;
 
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
     public User() {
     }
 
@@ -20,6 +28,7 @@ public class User {
         this.email = email;
         this.address = address;
         ImageAvatar = imageAvatar;
+        this.role = 1;
     }
 
     public String getUserId() {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,12 +157,16 @@ public class Home extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            User user = snapshot.getValue(User.class);
-                            Glide.with(getActivity()).load(user.getImageAvatar())
-                                    .error(R.drawable.none_avatar)
-                                    .into(avatar);
+                            try {
+                                User user = snapshot.getValue(User.class);
+                                Glide.with(requireContext()).load(user.getImageAvatar())
+                                        .error(R.drawable.none_avatar)
+                                        .into(avatar);
 
-                            tvNameUserHome.setText(user.getName() + " \uD83C\uDF3F");
+                                tvNameUserHome.setText(user.getName() + " \uD83C\uDF3F");
+                            }catch (Exception e) {
+                                Log.d("home 168",e+"");
+                            }
                         }
                     }
 

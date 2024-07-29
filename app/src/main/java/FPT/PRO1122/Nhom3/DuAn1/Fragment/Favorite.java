@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,8 +80,12 @@ public class Favorite extends Fragment {
                     for (DataSnapshot issue : snapshot.getChildren()){
                         list.add(issue.getValue(MonAnByThien.class));
                     }
-                    if (list.size() > 0){
-                        setBestFoodToView();
+                    if (!list.isEmpty()){
+                        try {
+                            setBestFoodToView();
+                        } catch (Exception e) {
+                            Log.d("giahyng",e+"");
+                        }
                         adtFavorite.notifyDataSetChanged();
                     }
 //                    binding.progressBarCategories.setVisibility(View.GONE);

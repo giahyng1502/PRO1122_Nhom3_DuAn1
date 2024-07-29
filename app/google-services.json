@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "951257015027-o28ejdgqt02b3vb42299e3brf6i50i2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "FPT.PRO1122.Nhom3.DuAn1",
+            "certificate_hash": "c738fcadccb481baaa1b621bbfda69363e58794a"
+          }
+        },
+        {
           "client_id": "951257015027-pngj8ngfo95ej22r6kqtb0vnlqfd9kas.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
