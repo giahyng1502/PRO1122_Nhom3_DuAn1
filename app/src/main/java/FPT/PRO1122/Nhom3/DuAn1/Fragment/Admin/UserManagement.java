@@ -120,23 +120,29 @@ public class UserManagement extends Fragment {
         bindingDialog.btnSubMitUserManagement.setOnClickListener(v-> {
             String userid = bindingDialog.edtIDNumberUserManagement.getText().toString();
             String pass = bindingDialog.edtPassUserManagement.getText().toString();
-            User user = new User(userid,"",pass,"","","","");
-            FirebaseDatabase.getInstance()
-                    .getReference("users")
-                    .child(userid).setValue(user)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            bottomSheetDialog.dismiss();
-                            Toast.makeText(requireContext(), "Add User Successfuly", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
+            if (userid.isEmpty() && pass.isEmpty()) {
+                Toast.makeText(requireContext(), "Not be empty", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                User user = new User(userid,"",pass,"","","","");
+                FirebaseDatabase.getInstance()
+                        .getReference("users")
+                        .child(userid).setValue(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                bottomSheetDialog.dismiss();
+                                Toast.makeText(requireContext(), "Add User Successfuly", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
+                            }
+                        });
+            }
+
         });
 
         bottomSheetDialog.show();

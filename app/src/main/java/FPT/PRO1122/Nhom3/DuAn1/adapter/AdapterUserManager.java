@@ -123,6 +123,9 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
 
         binding.btnCancelUserManagement.setOnClickListener(v -> dialog.dismiss());
         binding.btnSubMitUserManagement.setOnClickListener(v -> {
+            if (binding.edtPasswordUserManagement.getText().toString().isEmpty())
+                binding.edtPasswordUserManagement.setError("Not be empty");
+            else
                 putAvatarUser(userImageUri, user);
         });
         dialog.show();

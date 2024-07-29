@@ -41,7 +41,7 @@
             android:background="@drawable/custom_input"
             android:drawablePadding="10dp"
             android:fontFamily="@font/font_inter"
-            android:hint="Phone Number"
+            android:hint="User Name"
             android:paddingVertical="10dp"
             android:textColorHint="#CFCFCF" />
 
@@ -72,7 +72,7 @@
             android:background="@drawable/custom_input"
             android:drawablePadding="10dp"
             android:fontFamily="@font/font_inter"
-            android:hint="Email"
+            android:hint="PassWord"
             android:paddingVertical="10dp"
             android:textColorHint="#CFCFCF" />
 
