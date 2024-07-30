@@ -28,6 +28,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
@@ -126,8 +128,7 @@ public class Home extends Fragment {
         DatabaseReference myRef = database.getReference("Foods");
 //        binding.progressBarCategories.setVisibility(View.VISIBLE);
         ArrayList<MonAnByThien> list = new ArrayList<>();
-        Query query = myRef.orderByChild("BestFood").equalTo(true);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -136,8 +137,13 @@ public class Home extends Fragment {
                         list.add(issue.getValue(MonAnByThien.class));
                     }
                     if (list.size() > 0){
-                        recyclerViewFood.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-                        RecyclerView.Adapter adapter = new DoAnBanChayAdapter(list);
+                        //sap xep
+                        Collections.sort(list, (item1, item2) -> Double.compare(item2.getStar(), item1.getStar()));
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),1,LinearLayoutManager.HORIZONTAL,false);
+                        recyclerViewFood.setLayoutManager(gridLayoutManager);
+                        // top 5
+                        List<MonAnByThien> top5Items = list.subList(0, Math.min(5, list.size()));
+                        RecyclerView.Adapter adapter = new DoAnBanChayAdapter(top5Items);
                         recyclerViewFood.setAdapter(adapter);
                     }
 //                    binding.progressBarCategories.setVisibility(View.GONE);

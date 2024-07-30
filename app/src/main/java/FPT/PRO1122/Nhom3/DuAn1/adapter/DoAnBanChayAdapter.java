@@ -16,17 +16,18 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 
 public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.ViewHolder> {
-    ArrayList<MonAnByThien> items;
+    List<MonAnByThien> items;
     Context context;
 
 
-    public DoAnBanChayAdapter(ArrayList<MonAnByThien> items) {
+    public DoAnBanChayAdapter(List<MonAnByThien> items) {
         this.items = items;
     }
 
