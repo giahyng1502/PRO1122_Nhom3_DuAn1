@@ -7,9 +7,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
+import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityChiTietMonAnBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
@@ -30,6 +28,7 @@ public class ChiTietMonAn extends AppCompatActivity {
     private MonAnByThien object;
     private  int num = 1;
     private QuanLyGioHang quanLyGioHang;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +39,13 @@ public class ChiTietMonAn extends AppCompatActivity {
         setContentView(binding.getRoot());
         getWindow().setStatusBarColor(getResources().getColor(R.color.black));
         binding.numTxt.setText(num+"");
+
         getIntentExtra();
         setVariable();
         // add data favorite Food
         favoriteFood();
     }
+
     private void favoriteFood() {
         // Đảm bảo rằng object không bị null
         if (object == null) {
@@ -95,10 +96,30 @@ public class ChiTietMonAn extends AppCompatActivity {
         });
     }
 
+    private void getFavoriteUser(String userID,int foodID) {
+        FirebaseDatabase.getInstance().getReference("Favorite")
+                .child(userID).child(foodID+"")
+                .orderByChild("bestFood")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            binding.favBtn.setImageResource(R.drawable.favorite_select);
+                        } else {
+                            binding.favBtn.setImageResource(R.drawable.favorite);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+    }
+
 
 
     private void setVariable() {
-        quanLyGioHang = new QuanLyGioHang(this);
+        quanLyGioHang = new QuanLyGioHang(this, MainActivity.id);
 
         binding.backBtn.setOnClickListener(v -> finish());
 
@@ -126,45 +147,68 @@ public class ChiTietMonAn extends AppCompatActivity {
         binding.minusBtn.setOnClickListener(v -> {
 
             if (num <= 1) {
-               return;
+                return;
             } else {
                 num = num - 1;
             }
             binding.numTxt.setText(num + "");
             binding.totalTxt.setText((num * object.getPrice()) + " VND");
         });
+
+        // Khởi tạo DatabaseReference
+
         binding.AddToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 object.setNumberInCart(num);
-                quanLyGioHang.insertFood(object);
+                addToCart(MainActivity.id, object);
+                Toast.makeText(ChiTietMonAn.this, "" + MainActivity.id , Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void getFavoriteUser(String userID,int foodID) {
-        try {
-            FirebaseDatabase.getInstance().getReference("Favorite")
-                    .child(userID).child(foodID+"")
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                binding.favBtn.setImageResource(R.drawable.favorite_select);
-                            } else {
-                                binding.favBtn.setImageResource(R.drawable.favorite);
-                            }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
+
+    private void addToCart(String userId, MonAnByThien object) {
+        // Khởi tạo FirebaseDatabase
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        // Tham chiếu đến nút 'Carts' trong Realtime Database
+        DatabaseReference cartRef = database.getReference("Carts").child(userId);
+
+        // Tạo một key duy nhất cho mỗi món ăn trong giỏ hàng
+        String itemId = String.valueOf(object.getId());
+
+        // Tính toán tổng tiền
+        double total = object.getPrice() * object.getNumberInCart();
+
+        // Tạo đối tượng GioHang để lưu vào Realtime Database
+        GioHang cartItem = new GioHang();
+        cartItem.setTitle(object.getTitle());
+
+        cartItem.setId(object.getId()+"");
+        cartItem.setPrice(object.getPrice());
+        cartItem.setQuantity(object.getNumberInCart());
+        cartItem.setTotal(total);
+        cartItem.setImagePath(object.getImagePath()); // Nếu cần lưu ImagePath
+
+        // Thêm món ăn vào giỏ hàng với key duy nhất
+        if (itemId != null) {
+            cartRef.child(itemId).setValue(cartItem)
+                    .addOnSuccessListener(aVoid -> {
+                        // Xử lý khi thêm thành công
+                        Toast.makeText(ChiTietMonAn.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        // Xử lý khi có lỗi
+                        Toast.makeText(ChiTietMonAn.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
-        }catch (Exception e) {
-            Toast.makeText(this, "Error" + e, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ChiTietMonAn.this, "Lỗi: Không thể tạo key cho món ăn", Toast.LENGTH_SHORT).show();
         }
-
     }
+
+
 
     private void getIntentExtra() {
         object = (MonAnByThien) getIntent().getSerializableExtra("object");

@@ -3,7 +3,7 @@ package FPT.PRO1122.Nhom3.DuAn1.model;
 import java.io.Serializable;
 
 public class MonAnByThien implements Serializable {
-    private int CategoryID;
+    private int CategoryId;
     private String Description;
     private Boolean BestFood;
     private int Id;
@@ -26,11 +26,11 @@ public class MonAnByThien implements Serializable {
     }
 
     public int getCategoryID() {
-        return CategoryID;
+        return CategoryId;
     }
 
     public void setCategoryID(int categoryID) {
-        CategoryID = categoryID;
+        CategoryId = categoryID;
     }
 
     public String getDescription() {

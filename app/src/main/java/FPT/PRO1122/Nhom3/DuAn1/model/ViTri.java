@@ -1,4 +1,4 @@
-package FPT.PRO1122.Nhom3.DuAn1.Model;
+package FPT.PRO1122.Nhom3.DuAn1.model;
 
 public class ViTri {
     private int Id;

@@ -3,70 +3,78 @@ package FPT.PRO1122.Nhom3.DuAn1.DAO;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 
 
 
 public class QuanLyGioHang implements ChangeNumberItemsListener{
     private Context context;
-    private TinyDB tinyDB;
+    private DatabaseReference cartRef;
+    private String userId;
 
-    public QuanLyGioHang(Context context) {
+    public QuanLyGioHang(Context context, String userId) {
         this.context = context;
-        this.tinyDB=new TinyDB(context);
+        this.userId = userId;
+        this.cartRef = FirebaseDatabase.getInstance().getReference("Carts").child(userId);
     }
 
-    public void insertFood(MonAnByThien item) {
-        ArrayList<MonAnByThien> listpop = getListCart();
-        boolean existAlready = false;
-        int n = 0;
-        for (int i = 0; i < listpop.size(); i++) {
-            if (listpop.get(i).getTitle().equals(item.getTitle())) {
-                existAlready = true;
-                n = i;
-                break;
+
+    public void addFoodToCart(MonAnByThien item) {
+        String itemId = String.valueOf(item.getId());  // Assuming 'item.getId()' returns a unique ID for each item
+        double total = item.getPrice() * item.getNumberInCart();
+
+        Map<String, Object> cartItem = new HashMap<>();
+        cartItem.put("Title", item.getTitle());
+        cartItem.put("Price", item.getPrice());
+        cartItem.put("Quantity", item.getNumberInCart());
+        cartItem.put("Total", total);
+
+        cartRef.child(itemId).setValue(cartItem)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(context, "Added to your Cart", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+    public void getListCart(final CartCallback callback) {
+        cartRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ArrayList<GioHang> list = new ArrayList<>();
+                for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                    GioHang item = snapshot.getValue(GioHang.class);
+                    if (item != null) {
+                        list.add(item);
+                    }
+                }
+                callback.onSuccess(list);
+            } else {
+                callback.onFailure(task.getException());
             }
-        }
-        if(existAlready){
-            listpop.get(n).setNumberInCart(item.getNumberInCart());
-        }else{
-            listpop.add(item);
-        }
-        tinyDB.putListObject("CartList",listpop);
-        Toast.makeText(context, "Added to your Cart", Toast.LENGTH_SHORT).show();
+        });
     }
 
-    public ArrayList<MonAnByThien> getListCart() {
-        return tinyDB.getListObject("CartList");
-    }
-
-    public Double getTotalFee(){
-        ArrayList<MonAnByThien> listItem=getListCart();
-        double fee=0;
-        for (int i = 0; i < listItem.size(); i++) {
-            fee=fee+(listItem.get(i).getPrice()*listItem.get(i).getNumberInCart());
-        }
-        return fee;
-    }
-    public void minusNumberItem(ArrayList<MonAnByThien> listItem,int position,ChangeNumberItemsListener changeNumberItemsListener){
-        if(listItem.get(position).getNumberInCart()==1){
-            listItem.remove(position);
-        }else{
-            listItem.get(position).setNumberInCart(listItem.get(position).getNumberInCart()-1);
-        }
-        tinyDB.putListObject("CartList",listItem);
-        changeNumberItemsListener.change();
-    }
-    public  void plusNumberItem(ArrayList<MonAnByThien> listItem,int position,ChangeNumberItemsListener changeNumberItemsListener){
-        listItem.get(position).setNumberInCart(listItem.get(position).getNumberInCart()+1);
-        tinyDB.putListObject("CartList",listItem);
-        changeNumberItemsListener.change();
-    }
 
     @Override
     public void change() {
-
+        // Implement any logic needed when cart changes
     }
+
+    public interface CartCallback {
+        void onSuccess(ArrayList<GioHang> list);
+        void onFailure(Exception e);
+    }
+
+
 }

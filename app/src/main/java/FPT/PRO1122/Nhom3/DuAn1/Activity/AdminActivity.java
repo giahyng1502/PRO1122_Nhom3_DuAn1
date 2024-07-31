@@ -40,7 +40,7 @@ public class AdminActivity extends AppCompatActivity {
 
         //
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment,new UserManagement()).commit();
+                .replace(R.id.nav_host_fragment,new FoodManagement()).commit();
 
         binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
