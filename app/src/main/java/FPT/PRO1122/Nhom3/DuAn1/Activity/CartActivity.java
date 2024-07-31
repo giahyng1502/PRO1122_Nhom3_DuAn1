@@ -74,18 +74,17 @@ public class CartActivity extends BaseActivity {
     }
 
     private void caculateCart() {
-        double percentTax = 0.08;
+        double percentTax = 0.02;
         double delivery = 10000;
-        double totalFee = 0;
 
-//        tax = Math.round((quanLyGioHang.getTotalFee() * percentTax) * 100) / 100;
-//        double total = Math.round((quanLyGioHang.getTotalFee() + tax + delivery) * 100) / 100;
-//        double itemTotal = Math.round(quanLyGioHang.getTotalFee() * 100) / 100;
-//
-//        binding.totalFeeTxt.setText(itemTotal + " VND");
-//        binding.taxTxt.setText(tax + " VND");
-//        binding.deliveryFeeTxt.setText(delivery + " VND");
-//        binding.totalTxt.setText(total + " VND");
+        tax = Math.round((quanLyGioHang.getTotalFee() * percentTax) * 100) / 100;
+        double total = Math.round((quanLyGioHang.getTotalFee() + tax + delivery) * 100) / 100;
+        double itemTotal = Math.round(quanLyGioHang.getTotalFee() * 100) / 100;
+
+        binding.totalFeeTxt.setText(itemTotal + " VND");
+        binding.taxTxt.setText(tax + " VND");
+        binding.deliveryFeeTxt.setText(delivery + " VND");
+        binding.totalTxt.setText(total + " VND");
     }
 
     private void setVariable() {

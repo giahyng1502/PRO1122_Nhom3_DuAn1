@@ -3,23 +3,31 @@ package FPT.PRO1122.Nhom3.DuAn1.DAO;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 
 
 
+
 public class QuanLyGioHang implements ChangeNumberItemsListener{
+    FirebaseDatabase database;
     private Context context;
     private DatabaseReference cartRef;
     private String userId;
+    private ArrayList<MonAnByThien> listItem = new ArrayList<>();
 
     public QuanLyGioHang(Context context, String userId) {
         this.context = context;
@@ -64,6 +72,38 @@ public class QuanLyGioHang implements ChangeNumberItemsListener{
             }
         });
     }
+
+    public ArrayList<MonAnByThien> getListCart() {
+        DatabaseReference databaseReference = database.getReference("Carts").child(MainActivity.id);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    listItem.clear();
+                    for (DataSnapshot issue : snapshot.getChildren()){
+                        MonAnByThien monAnByThien = issue.getValue(MonAnByThien.class);
+                        listItem.add(monAnByThien);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return listItem;
+    }
+
+    public Double getTotalFee(){
+        ArrayList<MonAnByThien> listItem= getListCart();
+        double fee=0;
+//        for (int i = 0; i < listItem.size(); i++) {
+//            fee=fee+(listItem.get(i).getPrice()*listItem.get(i).getNumberInCart());
+//        }
+        return fee;
+    }
+
 
 
     @Override
