@@ -57,7 +57,7 @@ public class GioHang {
     }
 
     public double getTotal() {
-        return Price * Quantity;
+        return Total;
     }
 
     public void setTotal(double total) {

@@ -27,7 +27,7 @@ public class QuanLyGioHang implements ChangeNumberItemsListener{
     private Context context;
     private DatabaseReference cartRef;
     private String userId;
-    private ArrayList<MonAnByThien> listItem = new ArrayList<>();
+    private ArrayList<GioHang> listItem = new ArrayList<>();
 
     public QuanLyGioHang(Context context, String userId) {
         this.context = context;
@@ -73,35 +73,33 @@ public class QuanLyGioHang implements ChangeNumberItemsListener{
         });
     }
 
-    public ArrayList<MonAnByThien> getListCart() {
-        DatabaseReference databaseReference = database.getReference("Carts").child(MainActivity.id);
+    public Double getTotalFee(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Carts").child(MainActivity.id);
+        final double[] totalAmount = {0}; // Sử dụng mảng để lưu tổng số tiền, vì biến trong hàm không thể thay đổi giá trị của biến bên ngoài
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    listItem.clear();
-                    for (DataSnapshot issue : snapshot.getChildren()){
-                        MonAnByThien monAnByThien = issue.getValue(MonAnByThien.class);
-                        listItem.add(monAnByThien);
+                    listItem.clear(); // Giả sử listItem là một ArrayList<GiỏHàng> hoặc tương tự
+                    totalAmount[0] = 0; // Reset tổng số tiền
+
+                    for (DataSnapshot issue : snapshot.getChildren()) {
+                        GioHang gioHang = issue.getValue(GioHang.class);
+                        listItem.add(gioHang);
+                        totalAmount[0] += gioHang.getTotal(); // Tính tổng số tiền
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Xử lý lỗi nếu cần
             }
         });
-        return listItem;
-    }
 
-    public Double getTotalFee(){
-        ArrayList<MonAnByThien> listItem= getListCart();
-        double fee=0;
-//        for (int i = 0; i < listItem.size(); i++) {
-//            fee=fee+(listItem.get(i).getPrice()*listItem.get(i).getNumberInCart());
-//        }
-        return fee;
+        // Trả về tổng số tiền sau khi tính toán xong
+        return totalAmount[0];
     }
 
 
