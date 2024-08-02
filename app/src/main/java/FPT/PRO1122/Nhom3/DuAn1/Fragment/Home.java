@@ -4,105 +4,183 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import FPT.PRO1122.Nhom3.DuAn1.R;
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.FoodAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAn;
+import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
+
+import FPT.PRO1122.Nhom3.DuAn1.adapter.MenuMonAnAdapter;
+import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
+import FPT.PRO1122.Nhom3.DuAn1.R;
+
+import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityMainBinding;
+
+import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class Home extends Fragment {
+    private ActivityMainBinding binding;
+    FirebaseDatabase database;
+    FirebaseAuth mAuth;
+
+    ImageView avatar;
+    TextView tvNameUserHome;
     private ViewPager2 viewPage2;
     private List<Integer> arrayImg;
     AdapterBanner adapterBanner;
-    int index;//kjfcdgjgssasdada
-    RecyclerView recyclerViewFood;
+    int index;
+    RecyclerView recyclerViewFood, recMenuMonAn;
     DatabaseReference mfood;
-    List<MonAn> monAnList;
-    FoodAdapter foodAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+//        getWindow().setStatusBarColor(getResources().getColor(R.color.white));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Khởi tạo các view
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
         mfood = FirebaseDatabase.getInstance().getReference("foods");
         viewPage2 = view.findViewById(R.id.viewPage2);
         recyclerViewFood = view.findViewById(R.id.recyclerFood);
-        monAnList = new ArrayList<>();
+        recMenuMonAn = view.findViewById(R.id.recMenuMonAn);
+        avatar = view.findViewById(R.id.ivAvatarUserHome);
+        tvNameUserHome = view.findViewById(R.id.tvNameUserHome);
+        setInforCurrentUser();
         setSlider();
-        // lay data ve list
-        getDataFromFirebase();
-        // set reclerview
-        setReclerFood();
-        // abasbdgit
-//        MonAn monAn = new MonAn("4","Thit Bo Nhap Tu Nhan Ban"
-//                ,"Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
-//        ,"120000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/th%E1%BB%8Bt%20b%C3%B2.png?alt=media&token=4c367d17-0462-4833-bf15-9a72154697ef");
-//        mfood.child("4").setValue(monAn);
-//        MonAn monAn2 = new MonAn("5","Suon Xao Chua Ngot","Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
-//        ,"170000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/x%C6%B0%C6%A1ng.png?alt=media&token=7af3f311-eee3-445e-a363-4fcab1b93483");
-//        mfood.child("5").setValue(monAn2);
-//       MonAn monAn3 = new MonAn("6","Hamburger Beef","Bánh mì Sài Gòn chỉ đơn giản là bánh mì nóng giòn vẫn thường được dùng để kẹp thịt nguội, chả lụa, pate hoặc dùng kèm với các món mặn như bò kho, ragu..."
-//        ,"450000","https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/hamberge.png?alt=media&token=48f08f02-833b-494e-81b1-a67a7b153c0d");
-//        mfood.child("6").setValue(monAn3);
-
+        MonAnBanChayRecyclerview();
+        MenuMonAn();
     }
 
-    private void setReclerFood() {
-        foodAdapter = new FoodAdapter(getContext(),monAnList);
-        StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        recyclerViewFood.setLayoutManager(linearLayoutManager);
-        recyclerViewFood.setAdapter(foodAdapter);
-    }
-
-    private void getDataFromFirebase() {
-        mfood.addValueEventListener(new ValueEventListener() {
+    private void MenuMonAn() {
+        DatabaseReference myRef = database.getReference("Category");
+//        binding.progressBar.setVisibility(View.VISIBLE);
+        ArrayList<DanhMucMonAn> list = new ArrayList<>();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                monAnList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MonAn monAn = dataSnapshot.getValue(MonAn.class);
-                    monAnList.add(monAn);
+                if (snapshot.exists()){
+                    for (DataSnapshot issue : snapshot.getChildren()){
+                        DanhMucMonAn danhMucMonAn = issue.getValue(DanhMucMonAn.class);
+                        list.add(danhMucMonAn);
+
+                    }
+                    if (!list.isEmpty()){
+                        recMenuMonAn.setLayoutManager(new GridLayoutManager(getContext(), 4));
+                        RecyclerView.Adapter adapter = new MenuMonAnAdapter(list);
+                        recMenuMonAn.setAdapter(adapter);
+                    }
+//                    binding.progressBar.setVisibility(View.GONE);
                 }
-                foodAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), error+"fdfghh", Toast.LENGTH_SHORT).show();
+
             }
         });
+    }
+
+    private void MonAnBanChayRecyclerview() {
+        DatabaseReference myRef = database.getReference("Foods");
+//        binding.progressBarCategories.setVisibility(View.VISIBLE);
+        ArrayList<MonAnByThien> list = new ArrayList<>();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    list.clear();
+                    for (DataSnapshot issue : snapshot.getChildren()){
+                        list.add(issue.getValue(MonAnByThien.class));
+                    }
+                    if (list.size() > 0){
+                        //sap xep
+                        Collections.sort(list, (item1, item2) -> Double.compare(item2.getStar(), item1.getStar()));
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),1,LinearLayoutManager.HORIZONTAL,false);
+                        recyclerViewFood.setLayoutManager(gridLayoutManager);
+                        // top 5
+                        List<MonAnByThien> top5Items = list.subList(0, Math.min(5, list.size()));
+                        RecyclerView.Adapter adapter = new DoAnBanChayAdapter(top5Items);
+                        recyclerViewFood.setAdapter(adapter);
+                    }
+//                    binding.progressBarCategories.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setInforCurrentUser() {
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(MainActivity.id).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            try {
+                                User user = snapshot.getValue(User.class);
+                                Glide.with(requireContext()).load(user.getImageAvatar())
+                                        .error(R.drawable.none_avatar)
+                                        .into(avatar);
+
+                                tvNameUserHome.setText(user.getName() + " \uD83C\uDF3F");
+                            }catch (Exception e) {
+                                Log.d("home 168",e+"");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void setSlider() {
@@ -144,10 +222,9 @@ public class Home extends Fragment {
         if (index < arrayImg.size()-1) {
             index ++;
             viewPage2.setCurrentItem(index);
-//            Log.d("giahyng",index+"");
         } else {
             index = -1;
         }
     }
-}
 
+}

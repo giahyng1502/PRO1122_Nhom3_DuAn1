@@ -5,9 +5,28 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/white</item>
+
+        <item name="bottomSheetDialogTheme">@style/AppButtonSheetDiaLogTheme</item>
         <item name="android:windowLightStatusBar">true</item> <!-- Để biểu tượng màu tối -->
+    </style>
+    <style name="textStyle" parent="Widget.AppCompat.TextView" >
+        <item name="android:textColor">@color/blue_grey</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="textStyleBold" parent="Widget.AppCompat.TextView" >
+        <item name="android:textColor">@color/blue_grey</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppmodeStyle" parent="Widget.Design.BottomSheet.Modal" >
+        <item name="android:background">@drawable/bottom_sheet_background</item>
+    </style>
+    <style name="AppButtonSheetDiaLogTheme" parent="Theme.Design.BottomSheetDialog" >
+        <item name="android:background">@drawable/bottom_sheet_background</item>
+        <item name="bottomSheetStyle">@style/AppmodeStyle</item>
     </style>
 </resources>

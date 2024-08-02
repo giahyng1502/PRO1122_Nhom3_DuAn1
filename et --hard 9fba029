@@ -1,0 +1,45 @@
+[33mcc3e5a2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m9fba029[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: commit: Update funtion add , update , delete for UserManagement
+[33mcc3e5a2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{2}: commit: Fix error ChiTietMonAn
+[33m1890a2d[m HEAD@{3}: commit: merge branch duong : fix paypal
+[33m17f66f2[m HEAD@{4}: merge refs/remotes/origin/duong: Merge made by the 'ort' strategy.
+[33mb9f0f61[m HEAD@{5}: merge refs/remotes/origin/duong: updating HEAD
+[33mb9f0f61[m HEAD@{6}: merge refs/remotes/origin/duong: updating HEAD
+[33mb9f0f61[m HEAD@{7}: commit: Fix memory leak by removing Handler callbacks in onDestroy
+[33me1dccc9[m HEAD@{8}: commit: fix danhmucMonAn + listMonAn and update FavoriteFood
+[33m2c9e2e2[m HEAD@{9}: commit: fix ChiTietMonAn and set up favorite
+[33m2260bc1[m HEAD@{10}: commit (merge): merge brand thien
+[33m7d311b0[m HEAD@{11}: commit: fix DeliveryAddress map and get current location
+[33mc405765[m HEAD@{12}: commit: upload photo from phone to Firebase Storage
+[33m3873609[m HEAD@{13}: reset: moving to HEAD~1
+[33m3930a18[m HEAD@{14}: commit: upload photo from phone to Firebase Storage
+[33m3873609[m HEAD@{15}: reset: moving to HEAD~1
+[33m250e66f[m HEAD@{16}: commit: Upload photos from phone to Firebase
+[33m3873609[m HEAD@{17}: commit: fix Login with google
+[33m6bb2617[m HEAD@{18}: reset: moving to 6bb26173b31bec91e0049631195ba57bc0cebc75
+[33m527388c[m HEAD@{19}: reset: moving to HEAD~1
+[33m6bb2617[m HEAD@{20}: reset: moving to HEAD~1
+[33m4d54fe6[m HEAD@{21}: reset: moving to HEAD~1
+[33mc340bd9[m HEAD@{22}: reset: moving to HEAD~1
+[33m8551ac0[m HEAD@{23}: reset: moving to HEAD~1
+[33m235ce70[m HEAD@{24}: rebase (finish): returning to refs/heads/main
+[33m235ce70[m HEAD@{25}: rebase (continue): fix LoginActivity with google
+[33m8551ac0[m HEAD@{26}: rebase (start): checkout origin/main
+[33mcbab994[m HEAD@{27}: commit: fix LoginActivity with google
+[33m6bb2617[m HEAD@{28}: reset: moving to 6bb26173b31bec91e0049631195ba57bc0cebc75
+[33m8551ac0[m HEAD@{29}: merge origin/main: Fast-forward
+[33m6bb2617[m HEAD@{30}: reset: moving to 6bb26173b31bec91e0049631195ba57bc0cebc75
+[33m8551ac0[m HEAD@{31}: merge origin/main: Fast-forward
+[33m4d54fe6[m HEAD@{32}: reset: moving to 4d54fe65cd5101df3b59edb2960d0ce6762bb4a7
+[33mc340bd9[m HEAD@{33}: merge origin/main: Fast-forward
+[33m4d54fe6[m HEAD@{34}: commit: fix checkID exits login with google
+[33m6bb2617[m HEAD@{35}: commit: update ChangePassword and Meger branch duong
+[33m527388c[m HEAD@{36}: commit (merge): Merge remote-tracking branch 'refs/remotes/origin/duong'
+[33m6b8c5eb[m HEAD@{37}: commit: update activity in AndroidManifest.xml
+[33m4f9e3a6[m HEAD@{38}: commit (merge): Merge remote-tracking branch 'origin/main'
+[33m228dbb0[m HEAD@{39}: commit (amend): update login and setup profile,edtprofile
+[33m9ccc72c[m HEAD@{40}: commit: meger branch "hieu" : Login + resig
+[33m026ec13[m HEAD@{41}: merge refs/remotes/origin/hieu: Fast-forward
+[33m6df0af4[m HEAD@{42}: commit: meger branch "duong" - custom profileLayout
+[33m1fbc6be[m HEAD@{43}: merge refs/remotes/origin/duong: Fast-forward
+[33m4a84134[m HEAD@{44}: clone: from https://github.com/giahyng1502/PRO1122_Nhom3_DuAn1.git

@@ -1,44 +1,89 @@
-package FPT.PRO1122.Nhom3.DuAn1;
+package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+
+
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Myorder;
-import FPT.PRO1122.Nhom3.DuAn1.Fragment.Profile;
+import FPT.PRO1122.Nhom3.DuAn1.R;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     BottomNavigationView bottomNavigationItemView;
     FloatingActionButton btnCart;
+    public static String id;
+
+    private boolean doubleBackToExitPressedOnce = false;
+    private Handler handler = new Handler();
+    private Runnable resetDoubleBackFlag = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            // neu true thi thoat
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit the application", Toast.LENGTH_SHORT).show();
+
+        handler.postDelayed(resetDoubleBackFlag, 2000); // Đặt lại cờ sau 2 giây
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(resetDoubleBackFlag); // Khi Activity bị hủy, xóa callback để tránh rò rỉ bộ nhớ.
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        id = getIDCurrentAccout();
         anhXa();
         setBottonNavition();
         //
         bottomNavigationItemView.setBackground(null);
         //
-        bottomNavigationItemView.getMenu().getItem(2).isEnabled(
+        bottomNavigationItemView.getMenu().getItem(2).isEnabled();
+        //
 
-        );
     }
+    public String getIDCurrentAccout() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserID", MODE_PRIVATE);
+        return sharedPreferences.getString("id", "");
+    }
+
+
+
 
     private void setBottonNavition() {
         // chuyen đến fragment giỏ hàng
         btnCart.setOnClickListener(v ->
-                getSupportFragmentManager().beginTransaction().
-                replace(R.id.frameLayout,new Myorder()).
-                commit());
+                startActivity(new Intent(MainActivity.this, CartActivity.class)));
 
 
         // vào fragment home ngay khi đăng nhập
@@ -56,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 }else if (R.id.myOrder == item.getItemId()) {
                     fragment = new Myorder();
                 }else if (R.id.profile == item.getItemId()) {
-                    fragment = new Profile();
+                    startActivity(new Intent(MainActivity.this, Profile.class));
                 }
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction().
