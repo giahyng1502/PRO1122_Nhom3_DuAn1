@@ -1,0 +1,166 @@
+[
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/item_banner.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_banner.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/bottom_sheet_layout.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/bottom_sheet_layout.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/item_food_admin.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_food_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/viewholder_list_mon_an.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_list_mon_an.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/viewholder_list_food.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_list_food.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_change_password.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_change_password.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_chi_tiet_mon_an.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_chi_tiet_mon_an.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_order_management.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_order_management.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/item_user_admin.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_user_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/viewholder_best_deal.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_best_deal.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/item_paysuccess.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_paysuccess.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_favorite.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_favorite.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_edit_profile.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_edit_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_myorder.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_myorder.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/viewholder_item_cart.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_item_cart.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_splash.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/nav_header_main.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/nav_header_main.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_profile.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_food_manager.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_food_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_list_mon_an.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_list_mon_an.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_pay_success.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_pay_success.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_main.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_order_history.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_order_history.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_profile.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_register.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_register.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_create_profile.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_create_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_banner_manager.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_banner_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_selection.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_selection.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_delivery_address.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_delivery_address.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/dialog_add_user_management.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/dialog_add_user_management.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/dialog_update_user.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/dialog_update_user.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_revenua_manager.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_revenua_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_home.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_vorcher_manager.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_vorcher_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_admin.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/view_holder_categories.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/view_holder_categories.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/fragment_user_management.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_user_management.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_cart.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_cart.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_payment.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_payment.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/item_food.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_food.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/activity_login.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_login.xml"
+    }
+]

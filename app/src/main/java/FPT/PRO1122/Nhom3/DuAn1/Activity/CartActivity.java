@@ -42,6 +42,8 @@ public class CartActivity extends BaseActivity {
         initList();
         binding.backBtn.setOnClickListener(v-> startActivity(new Intent(
                 CartActivity.this,MainActivity.class)));
+        binding.button3.setOnClickListener(v-> startActivity(new Intent(
+                CartActivity.this,ActivityPaySuccess.class)));
     }
 
     private void initList() {

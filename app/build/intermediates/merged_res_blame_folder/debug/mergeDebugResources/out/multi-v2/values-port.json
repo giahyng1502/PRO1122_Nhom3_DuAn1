@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-47:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\807a13a0b10ecc2a91fc2a429302de98\\transformed\\appcompat-1.7.0\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\f02675bc3f9958f63eb52c78de740cca\\transformed\\car-ui-lib-2.6.0\\res\\values-port\\values.xml",
+                    "from": {
+                        "startLines": "4,7,8",
+                        "startColumns": "0,0,0",
+                        "startOffsets": "212,423,488",
+                        "endColumns": "59,64,62",
+                        "endOffsets": "271,487,550"
+                    },
+                    "to": {
+                        "startLines": "3,4,5",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "111,175,244",
+                        "endColumns": "63,68,66",
+                        "endOffsets": "170,239,306"
+                    }
+                }
+            ]
+        }
+    ]
+}

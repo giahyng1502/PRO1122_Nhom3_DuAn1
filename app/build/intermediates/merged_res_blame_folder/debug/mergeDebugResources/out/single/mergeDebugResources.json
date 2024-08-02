@@ -1,0 +1,650 @@
+[
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_payment.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_payment.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_settings.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/settings.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_delete.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/delete.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cart.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cart.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_twitter.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/twitter.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_visible.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_visible.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_item_food.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_food.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/xml_backup_rules.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_button_google.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_button_google.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_2.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_2.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_banner_manager.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_banner_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_main.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_nav_header_main.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/nav_header_main.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/font_font_inter.ttf.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/font/font_inter.ttf"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_3_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_3_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_user.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_user.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_myorder.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_myorder.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_vorcher_manager.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_vorcher_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_item_banner.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_banner.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_order.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_order.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_invisible.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_invisible.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_payment_methods.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_payment_methods.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_map.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/map.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_revenua_manager.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_revenua_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_2_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_2_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_img_cash.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/img_cash.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_item_paysuccess.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_paysuccess.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_1.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_1.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_pay_success.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_pay_success.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_banner5.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/banner5.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_phone.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_phone.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_camera.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/camera.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_lock.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_lock.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_search.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_search.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_8.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_8.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_admin.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_basket.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/basket.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_viewholder_list_food.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_list_food.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_search.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_search.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_edit_profile.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_edit_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_avatar.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/avatar.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_create_profile.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_create_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_wallet.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_wallet.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_5_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_5_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_username.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_username.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_mifoodie.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/mifoodie.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_circle_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/circle_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_dialog_update_user.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/dialog_update_user.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_bottom_sheet_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/bottom_sheet_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_cardview_usermanagement.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_cardview_usermanagement.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_viewholder_list_mon_an.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_list_mon_an.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_splash.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_location.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/location.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_list_mon_an.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_list_mon_an.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_add.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/add.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_bottom_sheet_layout.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/bottom_sheet_layout.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_input.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_input.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_border.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/border.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_change_password.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_change_password.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_favorite_select.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/favorite_select.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_favorite.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_favorite.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_viewholder_best_deal.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_best_deal.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_selection.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_selection.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_button.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_button.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_arrow.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/arrow.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_background_menuitem.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/background_menuitem.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_favorite.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/favorite.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_dialog_add_user_management.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/dialog_add_user_management.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_background.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/background.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_img_paypal.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/img_paypal.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_editext_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/editext_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_grey_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/grey_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_profile.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_fooood.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/fooood.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_success.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/success.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_edittext_input.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_edittext_input.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_4_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_4_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_3.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_3.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_edittext.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_edittext.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_home.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_home.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_login.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_login.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_search_icon.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/search_icon.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_8_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_8_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_back.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_back.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_6.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_6.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_time.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/time.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_red_button_bg.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/red_button_bg.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_google.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_google.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/anim_anim_up_down.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/anim/anim_up_down.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_banner3.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/banner3.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_profile.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_dropdown.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_dropdown.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_arrow_right.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_arrow_right.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_favorite.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_favorite.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_favorite_white.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/favorite_white.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_up.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_up.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_red_button_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/red_button_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_5.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_5.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_6_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_6_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_star.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/star.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_cart.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_cart.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_viewholder_item_cart.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/viewholder_item_cart.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_button_editprofile.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_button_editprofile.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_banner2.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/banner2.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/menu_menu_navigaton_admin.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/menu/menu_navigaton_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_plus_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/plus_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/color_custom_color_bottom_navigation.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/color/custom_color_bottom_navigation.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_google.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/google.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/xml_data_extraction_rules.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_dollar.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/dollar.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_location.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_location.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_baseline_star_rate_24.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/baseline_star_rate_24.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_banner4.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/banner4.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_img_zalo.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/img_zalo.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_img_profile.jpg.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/img_profile.jpg"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_order_history.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_order_history.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_launcher_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_4.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_4.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_item_user_admin.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_user_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_banner1.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/banner1.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_button_logout.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_button_logout.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_img_mastercard.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/img_mastercard.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_order_management.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_order_management.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_btn_selection_activity.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_btn_selection_activity.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_cart.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_cart.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_home1.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_home1.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_logout.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/logout.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_delivery_address.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_delivery_address.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_btn_7.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/btn_7.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_1_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_1_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_img_momo.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/img_momo.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_logo.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/logo.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_button_facebook.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_button_facebook.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_facebook.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/facebook.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_history.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_history.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ring.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ring.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_food_manager.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_food_manager.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_cat_7_background.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/cat_7_background.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_view_holder_categories.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/view_holder_categories.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_register.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_register.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_user_management.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_user_management.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_custom_spinner_dropdown.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/custom_spinner_dropdown.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_activity_chi_tiet_mon_an.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/activity_chi_tiet_mon_an.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_fragment_home.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/menu_menu_bottom_navigation.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/menu/menu_bottom_navigation.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/layout_item_food_admin.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_food_admin.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_changepassword.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_changepassword.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_ic_facebook.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/ic_facebook.png"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-49:/drawable_none_avatar.png.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/drawable/none_avatar.png"
+    }
+]

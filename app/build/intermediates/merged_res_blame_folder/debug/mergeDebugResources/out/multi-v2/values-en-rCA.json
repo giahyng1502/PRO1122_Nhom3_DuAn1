@@ -1,0 +1,111 @@
+{
+    "logs": [
+        {
+            "outputFile": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-47:/values-en-rCA/values-en-rCA.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\077657d6a6050b21c37c42b45b0ec6a7\\transformed\\credentials-1.2.0-rc01\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,167",
+                        "endColumns": "111,113",
+                        "endOffsets": "162,276"
+                    },
+                    "to": {
+                        "startLines": "29,30",
+                        "startColumns": "4,4",
+                        "startOffsets": "2762,2874",
+                        "endColumns": "111,113",
+                        "endOffsets": "2869,2983"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\5232bec2fd7adf706f83ffcb826a136b\\transformed\\preference-1.1.1\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "105,192,361,441",
+                        "endColumns": "86,168,79,75",
+                        "endOffsets": "187,356,436,512"
+                    },
+                    "to": {
+                        "startLines": "51,57,58,59",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "5057,5633,5802,5882",
+                        "endColumns": "86,168,79,75",
+                        "endOffsets": "5139,5797,5877,5953"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\f02675bc3f9958f63eb52c78de740cca\\transformed\\car-ui-lib-2.6.0\\res\\values-en-rCA\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "216,310,396,481,603,702,797,916,1013,1116,1215,1318",
+                        "endColumns": "93,85,84,121,98,94,118,96,102,98,102,102",
+                        "endOffsets": "309,395,480,602,701,796,915,1012,1115,1214,1317,1420"
+                    },
+                    "to": {
+                        "startLines": "38,39,40,41,42,43,44,45,46,47,48,49",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3706,3804,3894,3983,4109,4212,4311,4434,4535,4642,4745,4852",
+                        "endColumns": "97,89,88,125,102,98,122,100,106,102,106,106",
+                        "endOffsets": "3799,3889,3978,4104,4207,4306,4429,4530,4637,4740,4847,4954"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\02b2099cd0e7ddb33de276612af02b8e\\transformed\\core-1.13.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,352,451,555,657,773",
+                        "endColumns": "95,101,98,98,103,101,115,100",
+                        "endOffsets": "146,248,347,446,550,652,768,869"
+                    },
+                    "to": {
+                        "startLines": "31,32,33,34,35,36,37,56",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "2988,3084,3186,3285,3384,3488,3590,5532",
+                        "endColumns": "95,101,98,98,103,101,115,100",
+                        "endOffsets": "3079,3181,3280,3379,3483,3585,3701,5628"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\568dff0145f4f7c744b45ac327eae4d7\\transformed\\browser-1.4.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,250,359",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,245,354,453"
+                    },
+                    "to": {
+                        "startLines": "50,52,53,54",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "4959,5144,5241,5350",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "5052,5236,5345,5444"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kien\\.gradle\\caches\\transforms-4\\807a13a0b10ecc2a91fc2a429302de98\\transformed\\appcompat-1.7.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,794,869,960,1053,1148,1242,1342,1435,1530,1624,1715,1806,1888,1991,2094,2193,2298,2402,2506,2662,2762",
+                        "endColumns": "103,99,107,83,99,114,77,74,90,92,94,93,99,92,94,93,90,90,81,102,102,98,104,103,103,155,99,82",
+                        "endOffsets": "204,304,412,496,596,711,789,864,955,1048,1143,1237,1337,1430,1525,1619,1710,1801,1883,1986,2089,2188,2293,2397,2501,2657,2757,2840"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,55",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,794,869,960,1053,1148,1242,1342,1435,1530,1624,1715,1806,1888,1991,2094,2193,2298,2402,2506,2662,5449",
+                        "endColumns": "103,99,107,83,99,114,77,74,90,92,94,93,99,92,94,93,90,90,81,102,102,98,104,103,103,155,99,82",
+                        "endOffsets": "204,304,412,496,596,711,789,864,955,1048,1143,1237,1337,1430,1525,1619,1710,1801,1883,1986,2089,2188,2293,2397,2501,2657,2757,5527"
+                    }
+                }
+            ]
+        }
+    ]
+}
