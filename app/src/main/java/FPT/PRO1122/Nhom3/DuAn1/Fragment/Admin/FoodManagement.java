@@ -14,7 +14,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -43,6 +47,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFoodManagement;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterSpinner;
@@ -95,14 +101,128 @@ public class FoodManagement extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+        if (MainActivity.role == 0) {
+            binding.backtoHome.setVisibility(View.GONE);
+        }
+        binding.backtoHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Home targetFragment = new Home();
+
+                // Sử dụng FragmentManager và FragmentTransaction để chuyển đổi
+                FragmentManager fragmentManager = getParentFragmentManager(); // Hoặc getActivity().getSupportFragmentManager() nếu dùng trong Activity
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Thay thế Fragment hiện tại bằng Fragment đích
+                fragmentTransaction.replace(R.id.frameLayout, targetFragment);
+
+                // Thêm vào back stack để có thể quay lại Fragment trước đó
+                fragmentTransaction.addToBackStack(null);
+
+                // Hoàn thành giao dịch
+                fragmentTransaction.commit();
+            }
+        });
         getFoodFromFireBase();
         deleteFood();
         AddFood();
+        searchView();
+        binding.searchPrice.setOnClickListener(v -> showTextViewDialog());
     }
 
+    private void searchView() {
+        binding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SearchData(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                SearchData(newText);
+                return true;
+            }
+        });
+    }
+    private void SearchData(String query) {
+        ArrayList<MonAnByThien> listSearch = new ArrayList<>();
+        for (MonAnByThien monAnByThien : list) {
+            if (monAnByThien.getTitle().toLowerCase().contains(query)
+            ) {
+                listSearch.add(monAnByThien);
+            }
+        }
+        adapterFoodManagement.listFillter(listSearch);
+    }
     private void AddFood() {
         binding.btnAdd.setOnClickListener(v -> {
             showdialogAdd();
+        });
+    }
+    private void showTextViewDialog() {
+        final String[] textViewOptions = {"0 - 50k", "50k - 100k", "100k ->"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Tìm kiếm theo giá tiền")
+                .setItems(textViewOptions, (dialog, which) -> {
+                    String selectedOption = textViewOptions[which];
+                    double minPrice = 0, maxPrice = Double.MAX_VALUE;
+
+                    switch (selectedOption) {
+                        case "0 - 50k":
+                            maxPrice = 50000;
+                            break;
+                        case "50k - 100k":
+                            minPrice = 50001;
+                            maxPrice = 100000;
+                            break;
+                        case "100k ->":
+                            minPrice = 100001;
+                            break;
+                    }
+
+                    searchByPrice(minPrice, maxPrice);
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void searchByPrice(double minPrice, double maxPrice) {
+        ArrayList<MonAnByThien> monAnByThiens = new ArrayList<>();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        MonAnByThien monAn = snapshot.getValue(MonAnByThien.class);
+
+                        // Kiểm tra nếu monAn không phải null và có giá nằm trong khoảng
+                        if (monAn != null ) {
+                            double price = monAn.getPrice();
+                            if (price >= minPrice && price <= maxPrice) {
+                                monAnByThiens.add(monAn);
+                            }
+                        }
+                    }
+                    // Chỉ cập nhật adapter nếu danh sách không rỗng
+                    if (!monAnByThiens.isEmpty()) {
+                        adapterFoodManagement.listFillter(monAnByThiens);
+                    } else {
+                        // Xử lý trường hợp không tìm thấy món ăn nào phù hợp
+                        Toast.makeText(requireContext(), "Không tìm thấy món ăn nào trong khoảng giá này.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xử lý khi có lỗi
+                Toast.makeText(requireContext(), "Lỗi khi truy vấn dữ liệu.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

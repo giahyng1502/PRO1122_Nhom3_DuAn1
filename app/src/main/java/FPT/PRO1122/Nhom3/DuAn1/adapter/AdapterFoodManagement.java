@@ -218,6 +218,11 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
         return list.size();
     }
 
+    public void listFillter(ArrayList<MonAnByThien> listSearch) {
+        this.list = listSearch;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle,tvPrice,tvDecr,tvRate,tvCatagory;
         ImageView ivFoodAvatar;

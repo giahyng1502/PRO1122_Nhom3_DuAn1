@@ -37,7 +37,6 @@ public class CartActivity extends BaseActivity {
 
         quanLyGioHang = new QuanLyGioHang(this, MainActivity.id);
 
-        setVariable();
         caculateCart();
         initList();
         binding.backBtn.setOnClickListener(v-> startActivity(new Intent(
@@ -86,9 +85,5 @@ public class CartActivity extends BaseActivity {
 //        binding.taxTxt.setText(tax + " VND");
 //        binding.deliveryFeeTxt.setText(delivery + " VND");
 //        binding.totalTxt.setText(total + " VND");
-    }
-
-    private void setVariable() {
-        binding.backBtn.setOnClickListener(view -> finish());
     }
 }

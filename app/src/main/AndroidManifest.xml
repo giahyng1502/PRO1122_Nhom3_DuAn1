@@ -50,6 +50,9 @@
             android:name=".Activity.CreateProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.FoodManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
         <activity

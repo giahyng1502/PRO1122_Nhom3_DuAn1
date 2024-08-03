@@ -34,7 +34,6 @@ public class ChiTietMonAn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_chi_tiet_mon_an);
         binding = ActivityChiTietMonAnBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getWindow().setStatusBarColor(getResources().getColor(R.color.black));
@@ -162,7 +161,6 @@ public class ChiTietMonAn extends AppCompatActivity {
             public void onClick(View v) {
                 object.setNumberInCart(num);
                 addToCart(MainActivity.id, object);
-                Toast.makeText(ChiTietMonAn.this, "" + MainActivity.id , Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -278,6 +278,7 @@
             android:layout_height="70dp"
             android:orientation="horizontal"
             android:padding="8dp"
+            android:visibility="gone"
             android:background="@drawable/background_menuitem"
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical"
@@ -286,7 +287,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_changepassword"
+                android:src="@drawable/admin"
                 android:layout_marginEnd="16dp" />
 
             <LinearLayout

@@ -42,7 +42,6 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getData();
-
         FirebaseApp.initializeApp(this);
         auth = FirebaseAuth.getInstance();
         FacebookSdk.sdkInitialize(this);
@@ -76,13 +75,17 @@ public class Profile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        admin_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, AdminActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (MainActivity.role == 0) {
+            admin_layout.setVisibility(View.VISIBLE);
+            admin_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Profile.this, AdminActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
 
         //changepass
         changepass_layout.setOnClickListener(new View.OnClickListener() {

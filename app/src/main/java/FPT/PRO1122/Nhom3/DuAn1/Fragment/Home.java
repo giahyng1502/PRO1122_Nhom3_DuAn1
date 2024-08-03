@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,15 +26,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin.FoodManagement;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
 
@@ -58,6 +59,7 @@ public class Home extends Fragment {
     int index = -1;
     RecyclerView recyclerViewFood, recMenuMonAn;
     DatabaseReference mfood;
+    ImageView searchView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,10 +91,29 @@ public class Home extends Fragment {
         recMenuMonAn = view.findViewById(R.id.recMenuMonAn);
         avatar = view.findViewById(R.id.ivAvatarUserHome);
         tvNameUserHome = view.findViewById(R.id.tvNameUserHome);
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setOnClickListener(e -> goToTargetFragment());
         getBanner();
         setInforCurrentUser();
         MonAnBanChayRecyclerview();
         MenuMonAn();
+    }
+    private void goToTargetFragment() {
+        // Tạo instance của Fragment đích
+        FoodManagement targetFragment = new FoodManagement();
+
+        // Sử dụng FragmentManager và FragmentTransaction để chuyển đổi
+        FragmentManager fragmentManager = getParentFragmentManager(); // Hoặc getActivity().getSupportFragmentManager() nếu dùng trong Activity
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Thay thế Fragment hiện tại bằng Fragment đích
+        fragmentTransaction.replace(R.id.frameLayout, targetFragment);
+
+        // Thêm vào back stack để có thể quay lại Fragment trước đó
+        fragmentTransaction.addToBackStack(null);
+
+        // Hoàn thành giao dịch
+        fragmentTransaction.commit();
     }
 
     private void getBanner() {

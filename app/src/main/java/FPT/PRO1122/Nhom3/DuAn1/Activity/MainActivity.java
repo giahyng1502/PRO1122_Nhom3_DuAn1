@@ -15,6 +15,10 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationItemView;
     FloatingActionButton btnCart;
     public static String id;
+    public static int role = 1;
 
     private boolean doubleBackToExitPressedOnce = false;
     private Handler handler = new Handler();
@@ -63,12 +68,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         id = getIDCurrentAccout();
+        getUserCurrent();
         anhXa();
         setBottonNavition();
         //
         bottomNavigationItemView.setBackground(null);
         //
-        bottomNavigationItemView.getMenu().getItem(2).isEnabled();
+//        bottomNavigationItemView.getMenu().getItem(2).isEnabled();
         //
 
     }
@@ -77,8 +83,25 @@ public class MainActivity extends AppCompatActivity {
         return sharedPreferences.getString("id", "");
     }
 
+    private void getUserCurrent() {
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(id).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            getRole(snapshot.child("role").getValue(Integer.class));
+                        }
+                    }
 
-
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(MainActivity.this, "get role fail "+error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void getRole(int role) {
+        this.role = role;
+    }
 
     private void setBottonNavition() {
         // chuyen đến fragment giỏ hàng
