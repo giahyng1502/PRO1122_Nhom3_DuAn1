@@ -49,13 +49,13 @@ public class Home extends Fragment {
     private ActivityMainBinding binding;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
-
+    List<String> banners;
     ImageView avatar;
     TextView tvNameUserHome;
     private ViewPager2 viewPage2;
     private List<Integer> arrayImg;
     AdapterBanner adapterBanner;
-    int index;
+    int index = -1;
     RecyclerView recyclerViewFood, recMenuMonAn;
     DatabaseReference mfood;
 
@@ -89,10 +89,34 @@ public class Home extends Fragment {
         recMenuMonAn = view.findViewById(R.id.recMenuMonAn);
         avatar = view.findViewById(R.id.ivAvatarUserHome);
         tvNameUserHome = view.findViewById(R.id.tvNameUserHome);
+        getBanner();
         setInforCurrentUser();
-        setSlider();
         MonAnBanChayRecyclerview();
         MenuMonAn();
+    }
+
+    private void getBanner() {
+        banners = new ArrayList<>();
+        database.getReference("Banner").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    banners.clear();
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        banners.add(snapshot1.getValue(String.class));
+
+                    }
+                    if (!banners.isEmpty()) {
+                        setSlider();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(requireContext(), "error"+error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void MenuMonAn() {
@@ -184,19 +208,14 @@ public class Home extends Fragment {
     }
 
     private void setSlider() {
-        arrayImg = new ArrayList<>();
-        arrayImg.add(R.drawable.banner1);
-        arrayImg.add(R.drawable.banner2);
-        arrayImg.add(R.drawable.banner3);
-        arrayImg.add(R.drawable.banner4);
-        arrayImg.add(R.drawable.banner5);
-        adapterBanner = new AdapterBanner(getContext(),arrayImg);
+
+        adapterBanner = new AdapterBanner(getContext(),banners);
 
         viewPage2.setAdapter(adapterBanner);
 
         viewPage2.setClipToPadding(false);
         viewPage2.setClipChildren(false);
-        viewPage2.setOffscreenPageLimit(5);
+        viewPage2.setOffscreenPageLimit(3);
         viewPage2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
         // tạo hiệu ứng khi vuốt
         viewPage2.setPageTransformer(new ViewPager2.PageTransformer() {
@@ -213,13 +232,13 @@ public class Home extends Fragment {
             @Override
             public void run() {
                 next();
-                handler.postDelayed(this,3000);
+                handler.postDelayed(this,5000);
             }
         };
         handler.post(runnable);
     }
     public void next () {
-        if (index < arrayImg.size()-1) {
+        if (index < 3) {
             index ++;
             viewPage2.setCurrentItem(index);
         } else {

@@ -1,0 +1,234 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:elevation="8dp"
+    android:background="@drawable/bottom_sheet_background"
+    android:padding="15dp">
+
+    <!-- TextView tiêu đề -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Food"
+        android:id="@+id/titleDialog"
+        android:textSize="24dp"
+        android:textColor="@color/blackBlue"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Nội dung cuộn bên trong ScrollView -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="14dp"
+                android:id="@+id/tvFoodID"
+                android:textColor="@color/blackBlue"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:cardCornerRadius="75dp"
+                    android:id="@+id/cardView"
+                    android:layout_centerHorizontal="true">
+
+                    <!-- Hình ảnh chính của người dùng -->
+                    <ImageView
+                        android:id="@+id/ivFood"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@null"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/none_avatar" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Biểu tượng máy ảnh chồng lên hình ảnh người dùng -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="34dp"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="25dp"
+                    android:layout_margin="10dp"
+                    android:layout_alignBottom="@id/cardView"
+                    android:layout_alignEnd="@id/cardView"
+                    android:layout_height="34dp">
+                    <ImageView
+                        android:id="@+id/ivCameraIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:background="#E6E5E5"
+                        android:src="@drawable/camera"
+                        android:padding="8dp" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Food Name : "
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/font_inter"
+                android:textColor="@color/blackBlue"
+                android:layout_marginHorizontal="5dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tvFoodName"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/custom_input"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/font_inter"
+                    android:hint="Food Name"
+                    android:paddingVertical="10dp"
+                    android:textColorHint="#CFCFCF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Price : "
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/font_inter"
+                android:textColor="@color/blackBlue"
+                android:layout_marginHorizontal="5dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPrice"
+                    android:layout_width="match_parent"
+                    android:inputType="number"
+                    android:layout_height="60dp"
+                    android:background="@drawable/custom_input"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/font_inter"
+                    android:hint="Price"
+                    android:paddingVertical="10dp"
+                    android:textColorHint="#CFCFCF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Category : "
+                android:fontFamily="@font/font_inter"
+                android:textColor="@color/blackBlue"
+                android:layout_marginHorizontal="5dp"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spnCategory"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:fontFamily="@font/font_inter"
+                android:textColorHint="#CFCFCF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Describe : "
+                android:fontFamily="@font/font_inter"
+                android:textColor="@color/blackBlue"
+                android:layout_marginHorizontal="5dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtDescribe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:maxHeight="300dp"
+                    android:maxLines="4"
+                    android:background="@drawable/custom_input"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/font_inter"
+                    android:hint="Describe"
+                    android:layout_marginBottom="20dp"
+                    android:paddingVertical="10dp"
+                    android:textColorHint="#CFCFCF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCancelUserManagement"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="60dp"
+                    android:background="@drawable/custom_button"
+                    android:elevation="12dp"
+                    android:backgroundTint="#DDC1C1C1"
+                    android:fontFamily="@font/font_inter"
+                    android:text="Cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSubMitUserManagement"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/custom_button"
+                    android:elevation="12dp"
+                    android:fontFamily="@font/font_inter"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

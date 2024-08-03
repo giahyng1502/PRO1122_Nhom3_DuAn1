@@ -20,17 +20,12 @@ public class MonAnByThien implements Serializable {
     public MonAnByThien() {
     }
 
-    @Override
-    public String toString() {
-        return  Title;
-    }
-
-    public int getCategoryID() {
+    public int getCategoryId() {
         return CategoryId;
     }
 
-    public void setCategoryID(int categoryID) {
-        CategoryId = categoryID;
+    public void setCategoryId(int categoryId) {
+        CategoryId = categoryId;
     }
 
     public String getDescription() {

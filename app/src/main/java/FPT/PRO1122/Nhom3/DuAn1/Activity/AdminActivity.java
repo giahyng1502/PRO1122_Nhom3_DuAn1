@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin.BannerManagement;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin.FoodManagement;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin.OrderManagement;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin.RevenuaManager;
@@ -59,7 +60,10 @@ public class AdminActivity extends AppCompatActivity {
                     fragment = new VorcherManagement();
                 } else if (itemId == R.id.nav_order_management) {
                     fragment = new OrderManagement();
-                }else if (itemId == R.id.nav_BackHome) {
+                } else if (itemId == R.id.nav_banner_management) {
+                fragment = new BannerManagement();
+            }
+                else if (itemId == R.id.nav_BackHome) {
                     startActivity(new Intent(AdminActivity.this, MainActivity.class));
                 }
                 // Thay thế Fragment hiện tại bằng Fragment mới

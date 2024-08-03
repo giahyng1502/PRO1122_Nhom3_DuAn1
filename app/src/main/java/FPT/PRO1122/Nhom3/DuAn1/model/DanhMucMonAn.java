@@ -7,20 +7,16 @@ public class DanhMucMonAn implements Serializable {
     private String ImagePath;
     private String Name;
 
-    public DanhMucMonAn() {
-    }
 
-    @Override
-    public String toString() {
-        return  Name;
+    public DanhMucMonAn() {
     }
 
     public int getId() {
         return Id;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getImagePath() {

@@ -9,15 +9,17 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 public class AdapterBanner extends RecyclerView.Adapter<AdapterBanner.ViewHolder> {
-    List<Integer> list;
+    List<String> list;
     Context context;
 
-    public AdapterBanner( Context context,List<Integer> list) {
+    public AdapterBanner( Context context,List<String> list) {
         this.list = list;
         this.context = context;
     }
@@ -31,8 +33,8 @@ public class AdapterBanner extends RecyclerView.Adapter<AdapterBanner.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int src = list.get(position);
-        holder.ivBanner.setImageResource(src);
+        String src = list.get(position);
+        Glide.with(context).load(src).into(holder.ivBanner);
     }
 
     @Override

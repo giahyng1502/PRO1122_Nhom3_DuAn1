@@ -96,9 +96,9 @@ public class ChiTietMonAn extends AppCompatActivity {
         });
     }
 
-    private void getFavoriteUser(String userID,int foodID) {
+    private void getFavoriteUser(String userID,String foodID) {
         FirebaseDatabase.getInstance().getReference("Favorite")
-                .child(userID).child(foodID+"")
+                .child(userID).child(foodID)
                 .orderByChild("bestFood")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -133,7 +133,7 @@ public class ChiTietMonAn extends AppCompatActivity {
         binding.totalTxt.setText(num + object.getPrice()+" VND");
 
         //set status favorite
-        getFavoriteUser(MainActivity.id, object.getId());
+        getFavoriteUser(MainActivity.id, object.getId()+"");
 
 
         binding.plusBtn.setOnClickListener(v -> {
