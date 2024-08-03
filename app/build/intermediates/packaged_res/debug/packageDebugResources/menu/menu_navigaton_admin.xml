@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_order_management"
+            android:title="Quản Lý Đơn Hàng" />
+        <item
+            android:id="@+id/nav_user_management"
+            android:title="Quản lý User" />
+        <item
+            android:id="@+id/nav_food_management"
+            android:title="Quản lý Món Ăn" />
+        <item
+            android:id="@+id/nav_revenue_management"
+            android:title="Quản lý Doanh Thu" />
+        <item
+            android:id="@+id/nav_voucher_management"
+            android:title="Quản lý Voucher" />
+        <item
+            android:id="@+id/nav_banner_management"
+            android:title="Thay đổi Banner" />
+        <item
+            android:id="@+id/nav_BackHome"
+            android:title="Quay về Home" />
+</menu>

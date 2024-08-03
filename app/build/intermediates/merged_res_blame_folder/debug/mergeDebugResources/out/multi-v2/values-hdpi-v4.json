@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Thien Hoang\\.gradle\\caches\\transforms-4\\513f031a8b4ed38a0b4821dedf9314dd\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        }
+    ]
+}

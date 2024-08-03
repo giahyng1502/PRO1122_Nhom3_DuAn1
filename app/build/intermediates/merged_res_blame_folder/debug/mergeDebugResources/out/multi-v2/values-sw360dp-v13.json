@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/values-sw360dp-v13/values-sw360dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Thien Hoang\\.gradle\\caches\\transforms-4\\1fd020bdbd5634d411390eb2e734012e\\transformed\\preference-1.1.1\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "71",
+                        "endOffsets": "122"
+                    }
+                }
+            ]
+        }
+    ]
+}
