@@ -29,10 +29,10 @@ public final class ActivityCartBinding implements ViewBinding {
   public final ImageView backBtn;
 
   @NonNull
-  public final AppCompatButton button2;
+  public final AppCompatButton btnCheckOut;
 
   @NonNull
-  public final AppCompatButton button3;
+  public final AppCompatButton button2;
 
   @NonNull
   public final RecyclerView cartRec;
@@ -83,7 +83,7 @@ public final class ActivityCartBinding implements ViewBinding {
   public final View view4;
 
   private ActivityCartBinding(@NonNull ConstraintLayout rootView, @NonNull ImageView backBtn,
-      @NonNull AppCompatButton button2, @NonNull AppCompatButton button3,
+      @NonNull AppCompatButton btnCheckOut, @NonNull AppCompatButton button2,
       @NonNull RecyclerView cartRec, @NonNull TextView deliveryFeeTxt,
       @NonNull EditText editTextText, @NonNull TextView emptyTxt,
       @NonNull LinearLayout linearLayout, @NonNull ConstraintLayout main,
@@ -93,8 +93,8 @@ public final class ActivityCartBinding implements ViewBinding {
       @NonNull TextView totalTxt, @NonNull View view4) {
     this.rootView = rootView;
     this.backBtn = backBtn;
+    this.btnCheckOut = btnCheckOut;
     this.button2 = button2;
-    this.button3 = button3;
     this.cartRec = cartRec;
     this.deliveryFeeTxt = deliveryFeeTxt;
     this.editTextText = editTextText;
@@ -146,15 +146,15 @@ public final class ActivityCartBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.button2;
-      AppCompatButton button2 = ViewBindings.findChildViewById(rootView, id);
-      if (button2 == null) {
+      id = R.id.btnCheckOut;
+      AppCompatButton btnCheckOut = ViewBindings.findChildViewById(rootView, id);
+      if (btnCheckOut == null) {
         break missingId;
       }
 
-      id = R.id.button3;
-      AppCompatButton button3 = ViewBindings.findChildViewById(rootView, id);
-      if (button3 == null) {
+      id = R.id.button2;
+      AppCompatButton button2 = ViewBindings.findChildViewById(rootView, id);
+      if (button2 == null) {
         break missingId;
       }
 
@@ -250,7 +250,7 @@ public final class ActivityCartBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityCartBinding((ConstraintLayout) rootView, backBtn, button2, button3,
+      return new ActivityCartBinding((ConstraintLayout) rootView, backBtn, btnCheckOut, button2,
           cartRec, deliveryFeeTxt, editTextText, emptyTxt, linearLayout, main, scrollviewCart,
           taxTxt, textView17, textView19, textView21, textView22, textView26, totalFeeTxt, totalTxt,
           view4);

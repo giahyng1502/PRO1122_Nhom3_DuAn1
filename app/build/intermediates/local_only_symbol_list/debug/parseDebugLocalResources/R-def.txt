@@ -127,6 +127,7 @@ id btnCancel
 id btnCancelUserManagement
 id btnCart
 id btnChangePass
+id btnCheckOut
 id btnComfirm
 id btnConfirm
 id btnFB
@@ -140,7 +141,6 @@ id btn_back_payment
 id btn_editprofile
 id btn_logout
 id button2
-id button3
 id cardView
 id cartRec
 id catNameTxt

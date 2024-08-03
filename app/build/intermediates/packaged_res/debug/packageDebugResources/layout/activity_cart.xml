@@ -208,7 +208,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/btnCheckOut"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

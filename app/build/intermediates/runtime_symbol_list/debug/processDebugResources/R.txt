@@ -4303,6 +4303,7 @@ int id btnCancel 0x7f0a0081
 int id btnCancelUserManagement 0x7f0a0082
 int id btnCart 0x7f0a0083
 int id btnChangePass 0x7f0a0084
+int id btnCheckOut 0x7f0a0389
 int id btnComfirm 0x7f0a0085
 int id btnConfirm 0x7f0a0086
 int id btnFB 0x7f0a0087
@@ -4317,7 +4318,6 @@ int id btn_editprofile 0x7f0a008f
 int id btn_logout 0x7f0a0090
 int id button 0x7f0a0091
 int id button2 0x7f0a0092
-int id button3 0x7f0a0093
 int id buttonPanel 0x7f0a0094
 int id cache_measures 0x7f0a0095
 int id callMeasure 0x7f0a0096

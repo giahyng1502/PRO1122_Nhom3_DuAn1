@@ -4304,6 +4304,7 @@ id btnCancel
 id btnCancelUserManagement
 id btnCart
 id btnChangePass
+id btnCheckOut
 id btnComfirm
 id btnConfirm
 id btnFB
@@ -4318,7 +4319,6 @@ id btn_editprofile
 id btn_logout
 id button
 id button2
-id button3
 id buttonPanel
 id cache_measures
 id callMeasure
