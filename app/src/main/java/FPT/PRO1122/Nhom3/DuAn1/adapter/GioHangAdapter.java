@@ -42,8 +42,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         this.changeNumberItemsListener = changeNumberItemsListener;
         quanLyGioHang = new QuanLyGioHang(context, MainActivity.id);
         this.list = list;
-        this.changeNumberItemsListener = changeNumberItemsListener;
-
     }
 
     @NonNull
@@ -167,11 +165,11 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             notifyDataSetChanged();
 
         });
-
         Glide.with(holder.itemView.getContext())
                 .load(list.get(position).getImagePath())
                 .transform(new CenterCrop(), new RoundedCorners(30))
                 .into(holder.pic);
+
     }
 
     @Override

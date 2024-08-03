@@ -28,6 +28,7 @@ public class CartActivity extends BaseActivity {
     private QuanLyGioHang quanLyGioHang;
     private  double tax;
     Context context;
+    double tongTienDonHang;
 
     private ArrayList<GioHang> cartList = new ArrayList<>();
 
@@ -51,7 +52,9 @@ public class CartActivity extends BaseActivity {
         binding.DatHangbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatHang_BottomSheetFragment bottomSheet = new DatHang_BottomSheetFragment();
+                Bundle bundle = new Bundle();
+                ThanhToan_BottomSheetFragment bottomSheet = new ThanhToan_BottomSheetFragment();
+                bottomSheet.setArguments(bundle);
                 bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
             }
         });
@@ -94,29 +97,30 @@ public class CartActivity extends BaseActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                double totalItemPrice = 0.0; // Khởi tạo biến lưu tổng giá sản phẩm
+                double tongGiaMonAn = 0.0; // Khởi tạo biến lưu tổng giá sản phẩm
 
                 if (snapshot.exists()) {
                     for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                         GioHang gioHang = itemSnapshot.getValue(GioHang.class);
                         if (gioHang != null) {
                             // Cộng dồn giá sản phẩm (giả sử getPrice() và getQuantity() là các phương thức của GioHang)
-                            totalItemPrice += gioHang.getPrice() * gioHang.getQuantity();
+                            tongGiaMonAn += gioHang.getPrice() * gioHang.getQuantity();
                         }
                     }
                 }
 
                 // Tính thuế
-                double tax = Math.round((totalItemPrice * percentTax) * 100) / 100;
+                double tax = Math.round((tongGiaMonAn * percentTax) * 100) / 100;
 
                 // Tính tổng số tiền cần trả (giá sản phẩm + thuế + phí vận chuyển)
-                double totalAmount = Math.round((totalItemPrice + tax + deliveryFee) * 100) / 100;
+                double totalAmount = Math.round((tongGiaMonAn + tax + deliveryFee) * 100) / 100;
 
                 // Cập nhật giao diện
-                binding.totalFeeTxt.setText(totalItemPrice + " VND");
+                binding.totalFeeTxt.setText(tongGiaMonAn + " VND");
                 binding.taxTxt.setText(tax + " VND");
                 binding.deliveryFeeTxt.setText(deliveryFee + " VND");
                 binding.totalTxt.setText(totalAmount + " VND");
+
             }
 
             @Override
@@ -129,4 +133,5 @@ public class CartActivity extends BaseActivity {
     private void setVariable() {
         binding.backBtn.setOnClickListener(view -> finish());
     }
+
 }

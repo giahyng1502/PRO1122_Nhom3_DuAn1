@@ -17,7 +17,7 @@ android:padding="16dp">
 
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/list"
+        android:id="@+id/rcThanhToan"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:clipToPadding="false"
@@ -26,18 +26,29 @@ android:padding="16dp">
         tools:context=".Fragment.GioHangListDialogFragment"
         />
     <TextView
+        android:id="@+id/tongTientxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thông tin giao hàng:  "
+        android:text="Tổng tiền:  "
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên Người Nhận: "
         android:layout_marginRight="8dp"
         android:textColor="@color/blue_grey"
         android:textSize="16sp"
         />
+
     <EditText
         android:textAlignment="center"
         android:background="@drawable/editext_background"
         android:padding="12dp"
-        android:layout_margin="12dp"
         android:id="@+id/tenEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,12 +58,18 @@ android:padding="16dp">
         android:textColor="@color/blue_grey"
         android:textColorHint="@color/blue_grey"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số Điện Thoại:  "
+        android:layout_marginRight="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        />
     <EditText
         android:textAlignment="center"
         android:background="@drawable/editext_background"
         android:padding="12dp"
-        android:layout_margin="12dp"
         android:id="@+id/soDienThoaiEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,13 +79,19 @@ android:padding="16dp">
         android:textColor="@color/blue_grey"
         android:textColorHint="@color/blue_grey"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Địa chỉ giao hàng:  "
+        android:layout_marginRight="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        />
     <EditText
         android:textAlignment="center"
         android:background="@drawable/editext_background"
         android:padding="12dp"
-        android:layout_margin="12dp"
-        android:id="@+id/userEdt"
+        android:id="@+id/diaChiGiaoHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
