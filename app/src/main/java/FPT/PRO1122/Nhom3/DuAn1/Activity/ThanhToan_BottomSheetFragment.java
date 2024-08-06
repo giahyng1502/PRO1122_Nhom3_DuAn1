@@ -1,6 +1,7 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +23,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.CheckOutAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.GioHangAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
+import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import com.google.common.util.concurrent.AtomicDouble;
 
 public class ThanhToan_BottomSheetFragment extends BottomSheetDialogFragment {
     TextView tongTientxt;
@@ -84,7 +91,69 @@ public class ThanhToan_BottomSheetFragment extends BottomSheetDialogFragment {
         datHangBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("Carts").child(MainActivity.id);
 
+                cartRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<GioHang> productList = new ArrayList<>();
+                        AtomicDouble totalAmount = new AtomicDouble(0.0);;
+
+                        if (snapshot.exists()){
+                            for (DataSnapshot itemSnapshot : snapshot.getChildren()){
+                                GioHang gioHang = itemSnapshot.getValue(GioHang.class);
+                                if (gioHang != null) {
+                                    getMonAnById(gioHang.getId(), new OnMonAnRetrievedListener() {
+                                        @Override
+                                        public void onMonAnRetrieved(GioHang gioHang) {
+                                            productList.add(gioHang);
+                                            totalAmount.addAndGet(gioHang.getPrice() * gioHang.getQuantity());
+
+                                            if (productList.size() == snapshot.getChildrenCount()){
+                                                OrderHistory orderHistory = new OrderHistory();
+                                                orderHistory.setOrderId(FirebaseDatabase.getInstance().getReference("Orders").push().getKey());
+                                                orderHistory.setUser(ten.getText().toString());
+                                                orderHistory.setAddress(diaChi.getText().toString());
+                                                orderHistory.setPhone(sdt.getText().toString());
+                                                orderHistory.setProductList(productList);
+                                                orderHistory.setTotalAmount(totalAmount.get());
+                                                orderHistory.setOrderDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
+                                                orderHistory.setStatus(0);
+
+                                                DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("Orders").child(MainActivity.id).push();
+                                                orderRef.setValue(orderHistory).addOnCompleteListener(task -> {
+                                                    if (task.isSuccessful()){
+                                                        cartRef.removeValue().addOnCompleteListener(cartRestTask -> {
+                                                            if (cartRestTask.isSuccessful()) {
+                                                                dismiss();
+                                                                Intent intent = new Intent(getContext(), MyOrder.class);
+                                                                startActivity(intent);
+                                                                Toast.makeText(getContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
+                                                            } else {
+                                                                Toast.makeText(getContext(), "Lỗi khi xóa giỏ hàng", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onError(Exception e) {
+                                            Toast.makeText(getContext(), "Lỗi khi lấy thông tin món ăn", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getContext(), "Đã xảy ra lỗi khi đặt hàng", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -158,6 +227,36 @@ public class ThanhToan_BottomSheetFragment extends BottomSheetDialogFragment {
 
             }
         });
+    }
+
+    private void getMonAnById(String monAnId, OnMonAnRetrievedListener listener) {
+        DatabaseReference monAnRef = FirebaseDatabase.getInstance().getReference("Foods"); // Đường dẫn đến node chứa món ăn
+
+        monAnRef.child(monAnId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    GioHang gioHang = snapshot.getValue(GioHang.class);
+                    if (gioHang != null) {
+                        listener.onMonAnRetrieved(gioHang);
+                    } else {
+                        listener.onError(new Exception("Không tìm thấy món ăn"));
+                    }
+                } else {
+                    listener.onError(new Exception("Không tìm thấy món ăn"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onError(error.toException());
+            }
+        });
+    }
+
+    public interface OnMonAnRetrievedListener {
+        void onMonAnRetrieved(GioHang gioHang);
+        void onError(Exception e);
     }
 
 }

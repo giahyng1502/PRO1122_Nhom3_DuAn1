@@ -344,12 +344,12 @@ ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:70:9-72:40
 		ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:72:13-37
 	android:name
 		ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:71:13-52
-activity#FPT.PRO1122.Nhom3.DuAn1.Activity.OrderHistory
+activity#FPT.PRO1122.Nhom3.DuAn1.Activity.MyOrder
 ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:73:9-75:40
 	android:exported
 		ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:75:13-37
 	android:name
-		ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:74:13-50
+		ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:74:13-45
 activity#FPT.PRO1122.Nhom3.DuAn1.Activity.DeliveryAddress
 ADDED from E:\PRO1122ver3\app\src\main\AndroidManifest.xml:76:9-78:40
 	android:exported

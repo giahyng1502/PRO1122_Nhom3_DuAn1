@@ -56,6 +56,10 @@
         "source": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-52:\\layout\\activity_payment.xml"
     },
     {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-50:/layout_viewholder_orderhistory.xml.flat",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-52:/layout/viewholder_orderhistory.xml"
+    },
+    {
         "merged": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-debug-50:\\mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-52:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
@@ -440,6 +444,10 @@
         "source": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-52:\\drawable\\border.xml"
     },
     {
+        "merged": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-debug-50:\\layout_viewholder_orderhistory.xml.flat",
+        "source": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-52:\\layout\\viewholder_orderhistory.xml"
+    },
+    {
         "merged": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-debug-50:\\drawable_cat_7_background.xml.flat",
         "source": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-52:\\drawable\\cat_7_background.xml"
     },
@@ -606,10 +614,6 @@
     {
         "merged": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-debug-50:\\drawable_img_cash.png.flat",
         "source": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-52:\\drawable\\img_cash.png"
-    },
-    {
-        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-debug-50:/layout_fragment_item_list_dialog_list_dialog.xml.flat",
-        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-52:/layout/fragment_item_list_dialog_list_dialog.xml"
     },
     {
         "merged": "C:\\Users\\Thien Hoang\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-debug-50:\\drawable_custom_input.xml.flat",

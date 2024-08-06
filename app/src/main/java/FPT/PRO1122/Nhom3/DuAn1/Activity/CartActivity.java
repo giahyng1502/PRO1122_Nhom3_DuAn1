@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.GioHangAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCartBinding;
+import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 
 public class CartActivity extends BaseActivity {
     private ActivityCartBinding binding;
@@ -129,6 +131,8 @@ public class CartActivity extends BaseActivity {
             }
         });
     }
+
+
 
     private void setVariable() {
         binding.backBtn.setOnClickListener(view -> finish());

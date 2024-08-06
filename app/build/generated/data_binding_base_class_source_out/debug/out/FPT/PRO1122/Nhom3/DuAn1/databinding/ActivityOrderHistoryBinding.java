@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import java.lang.NullPointerException;
@@ -25,11 +27,20 @@ public final class ActivityOrderHistoryBinding implements ViewBinding {
   @NonNull
   public final LinearLayout main;
 
+  @NonNull
+  public final RecyclerView recyclerViewOrderHistory;
+
+  @NonNull
+  public final TextView textView;
+
   private ActivityOrderHistoryBinding(@NonNull LinearLayout rootView,
-      @NonNull ImageView btnBackOrder, @NonNull LinearLayout main) {
+      @NonNull ImageView btnBackOrder, @NonNull LinearLayout main,
+      @NonNull RecyclerView recyclerViewOrderHistory, @NonNull TextView textView) {
     this.rootView = rootView;
     this.btnBackOrder = btnBackOrder;
     this.main = main;
+    this.recyclerViewOrderHistory = recyclerViewOrderHistory;
+    this.textView = textView;
   }
 
   @Override
@@ -67,7 +78,20 @@ public final class ActivityOrderHistoryBinding implements ViewBinding {
 
       LinearLayout main = (LinearLayout) rootView;
 
-      return new ActivityOrderHistoryBinding((LinearLayout) rootView, btnBackOrder, main);
+      id = R.id.recyclerViewOrderHistory;
+      RecyclerView recyclerViewOrderHistory = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewOrderHistory == null) {
+        break missingId;
+      }
+
+      id = R.id.textView;
+      TextView textView = ViewBindings.findChildViewById(rootView, id);
+      if (textView == null) {
+        break missingId;
+      }
+
+      return new ActivityOrderHistoryBinding((LinearLayout) rootView, btnBackOrder, main,
+          recyclerViewOrderHistory, textView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

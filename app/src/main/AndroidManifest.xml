@@ -71,7 +71,7 @@
             android:name=".Activity.ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".Activity.OrderHistory"
+            android:name=".Activity.MyOrder"
             android:exported="false" />
         <activity
             android:name=".Activity.DeliveryAddress"

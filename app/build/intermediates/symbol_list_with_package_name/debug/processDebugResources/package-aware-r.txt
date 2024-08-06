@@ -4257,6 +4257,7 @@ id action_widget_container
 id actions
 id activity_chooser_view_content
 id add
+id addressTxt
 id adjust_height
 id adjust_width
 id admin_layout
@@ -4627,6 +4628,7 @@ id is_pooling_container_tag
 id italic
 id itemUser
 id item_touch_helper_previous_elevation
+id ivAvatarFood
 id ivAvatarUserHome
 id ivAvatarUserManagement
 id ivCameraIcon
@@ -4723,6 +4725,7 @@ id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
 id myOrder
+id nameTxt
 id nav_BackHome
 id nav_banner_management
 id nav_food_management
@@ -4773,6 +4776,7 @@ id open_search_view_search_prefix
 id open_search_view_status_bar_spacer
 id open_search_view_toolbar
 id open_search_view_toolbar_container
+id orderDateTxt
 id orderhistory_layout
 id outline
 id outward
@@ -4790,6 +4794,7 @@ id pathRelative
 id payment_layout
 id peekHeight
 id percent
+id phoneTxt
 id pic
 id picCheckout
 id picFood
@@ -4824,6 +4829,7 @@ id priceListFoodTxt
 id priceListMonTxt
 id priceTxt
 id primarySwitch
+id productListTxt
 id profile
 id progressBarFoods
 id progress_bar
@@ -4845,6 +4851,7 @@ id rdoUser
 id recMenuMonAn
 id rectangles
 id recyclerFood
+id recyclerViewOrderHistory
 id recycler_view
 id recycler_view_Favorite
 id report_drawn
@@ -4929,6 +4936,7 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id statusTxt
 id status_bar_latest_event_content
 id stop
 id stretch
@@ -4960,14 +4968,20 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id textView124
 id textView16
 id textView17
 id textView18
 id textView19
+id textView2
 id textView21
 id textView22
 id textView26
+id textView3
+id textView4
+id textView5
+id textView6
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -5004,6 +5018,7 @@ id tongTientxt
 id toolbar
 id top
 id topPanel
+id totalAmountTxt
 id totalFeeTxt
 id totalPriceTxtInCart
 id totalPriceTxtInCheckout
@@ -5021,19 +5036,24 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvAccoutID
+id tvCategoryTitle
 id tvForgotPassword
 id tvHeaderText
 id tvMailProFile
 id tvMessage
+id tvMota
 id tvNameFoodHome
 id tvNameProFile
 id tvNameUserHome
 id tvOrSigninWith
+id tvPriceFood
 id tvPriceHome
+id tvRate
 id tvRateHome
 id tvRegisterHere
 id tvSignIn
 id tvSignUp
+id tvTitleFood
 id tvUserManagemenUserID
 id tvUserManagementAddress
 id tvUserManagementEmail
@@ -5435,6 +5455,7 @@ layout viewholder_best_deal
 layout viewholder_item_cart
 layout viewholder_list_food
 layout viewholder_list_mon_an
+layout viewholder_orderhistory
 layout viewholder_thanhtoan_rec
 menu menu_bottom_navigation
 menu menu_navigaton_admin

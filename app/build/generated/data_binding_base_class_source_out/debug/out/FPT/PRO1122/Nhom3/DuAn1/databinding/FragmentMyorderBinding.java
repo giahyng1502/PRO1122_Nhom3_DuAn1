@@ -6,18 +6,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentMyorderBinding implements ViewBinding {
   @NonNull
   private final FrameLayout rootView;
 
-  private FragmentMyorderBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final ImageView btnBackOrder;
+
+  @NonNull
+  public final RecyclerView recyclerViewOrderHistory;
+
+  @NonNull
+  public final TextView textView;
+
+  private FragmentMyorderBinding(@NonNull FrameLayout rootView, @NonNull ImageView btnBackOrder,
+      @NonNull RecyclerView recyclerViewOrderHistory, @NonNull TextView textView) {
     this.rootView = rootView;
+    this.btnBackOrder = btnBackOrder;
+    this.recyclerViewOrderHistory = recyclerViewOrderHistory;
+    this.textView = textView;
   }
 
   @Override
@@ -43,10 +61,32 @@ public final class FragmentMyorderBinding implements ViewBinding {
 
   @NonNull
   public static FragmentMyorderBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btn_back_order;
+      ImageView btnBackOrder = ViewBindings.findChildViewById(rootView, id);
+      if (btnBackOrder == null) {
+        break missingId;
+      }
 
-    return new FragmentMyorderBinding((FrameLayout) rootView);
+      id = R.id.recyclerViewOrderHistory;
+      RecyclerView recyclerViewOrderHistory = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewOrderHistory == null) {
+        break missingId;
+      }
+
+      id = R.id.textView;
+      TextView textView = ViewBindings.findChildViewById(rootView, id);
+      if (textView == null) {
+        break missingId;
+      }
+
+      return new FragmentMyorderBinding((FrameLayout) rootView, btnBackOrder,
+          recyclerViewOrderHistory, textView);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

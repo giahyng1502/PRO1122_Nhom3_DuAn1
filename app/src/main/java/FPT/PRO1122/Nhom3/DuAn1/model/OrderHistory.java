@@ -4,28 +4,19 @@ import java.util.List;
 
 public class OrderHistory {
     private String orderId;
-    private String userId;
-    private List<MonAnByThien> productList; // Product là lớp đại diện cho một sản phẩm
+    private String user;
+    private List<GioHang> productList; // GioHang là lớp đại diện cho một sản phẩm
     private double totalAmount;
+    private String phone;
+    private String address;
     private String orderDate;
     private int status;
 
-    // Constructor không tham số
     public OrderHistory() {
-        // Firebase cần một constructor không tham số
+        // Required empty constructor
     }
 
-    // Constructor với tất cả các thuộc tính
-    public OrderHistory(String orderId, String userId, List<MonAnByThien> productList, double totalAmount, String orderDate, int status) {
-        this.orderId = orderId;
-        this.userId = userId;
-        this.productList = productList;
-        this.totalAmount = totalAmount;
-        this.orderDate = orderDate;
-        this.status = status;
-    }
-
-    // Getters và Setters
+    // Getters and setters
     public String getOrderId() {
         return orderId;
     }
@@ -34,19 +25,35 @@ public class OrderHistory {
         this.orderId = orderId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public List<MonAnByThien> getProductList() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public List<GioHang> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<MonAnByThien> productList) {
+    public void setProductList(List<GioHang> productList) {
         this.productList = productList;
     }
 
@@ -67,10 +74,14 @@ public class OrderHistory {
     }
 
     public int getStatus() {
+
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
     }
+
+
+
 }

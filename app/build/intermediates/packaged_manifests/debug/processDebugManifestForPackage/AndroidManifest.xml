@@ -106,7 +106,7 @@
             android:name="FPT.PRO1122.Nhom3.DuAn1.Activity.ChangePassword"
             android:exported="false" />
         <activity
-            android:name="FPT.PRO1122.Nhom3.DuAn1.Activity.OrderHistory"
+            android:name="FPT.PRO1122.Nhom3.DuAn1.Activity.MyOrder"
             android:exported="false" />
         <activity
             android:name="FPT.PRO1122.Nhom3.DuAn1.Activity.DeliveryAddress"
