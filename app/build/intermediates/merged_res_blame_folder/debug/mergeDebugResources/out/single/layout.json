@@ -1,0 +1,170 @@
+[
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\item_banner.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\item_banner.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_change_password.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_change_password.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_chi_tiet_mon_an.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_chi_tiet_mon_an.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\dialog_add_user_management.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\dialog_add_user_management.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\item_food.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\item_food.xml"
+    },
+    {
+        "merged": "FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:/layout/item_paysuccess.xml",
+        "source": "FPT.PRO1122.Nhom3.DuAn1.app-main-51:/layout/item_paysuccess.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_splash.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_splash.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_cart.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_order_history.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_order_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_revenua_manager.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_revenua_manager.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_admin.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_profile.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_banner_manager.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_banner_manager.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_vorcher_manager.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_vorcher_manager.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_myorder.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_myorder.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_delivery_address.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_delivery_address.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_user_management.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_user_management.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_order_management.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_order_management.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\item_food_admin.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\item_food_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_selection.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_selection.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\dialog_update_user.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\dialog_update_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\viewholder_item_cart.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\viewholder_item_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_payment.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_payment.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_pay_success.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_pay_success.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\nav_header_main.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_list_mon_an.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_list_mon_an.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_create_profile.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_create_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_edit_profile.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_edit_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_register.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\viewholder_best_deal.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\viewholder_best_deal.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\view_holder_categories.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\view_holder_categories.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\viewholder_list_mon_an.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\viewholder_list_mon_an.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_favorite.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_favorite.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\item_paysuccess.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\item_paysuccess.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\item_user_admin.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\item_user_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\fragment_food_manager.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\fragment_food_manager.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\activity_profile.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\activity_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\bottom_sheet_layout.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\bottom_sheet_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-mergeDebugResources-48:\\layout\\viewholder_list_food.xml",
+        "source": "C:\\Users\\Kien\\.gradle\\daemon\\8.7\\FPT.PRO1122.Nhom3.DuAn1.app-main-51:\\layout\\viewholder_list_food.xml"
+    }
+]

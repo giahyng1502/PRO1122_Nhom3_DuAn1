@@ -1,8 +1,8 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,9 +24,7 @@ public class CartActivity extends BaseActivity {
     private ActivityCartBinding binding;
     private RecyclerView.Adapter adapter;
     private QuanLyGioHang quanLyGioHang;
-    private  double tax;
-    Context context;
-
+    private double tax;
     private ArrayList<GioHang> cartList = new ArrayList<>();
 
     @Override
@@ -39,8 +37,18 @@ public class CartActivity extends BaseActivity {
 
         caculateCart();
         initList();
-        binding.backBtn.setOnClickListener(v-> startActivity(new Intent(
-                CartActivity.this,MainActivity.class)));
+        binding.backBtn.setOnClickListener(v -> startActivity(new Intent(
+                CartActivity.this, MainActivity.class)));
+
+        binding.btnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(CartActivity.this, ActivityPaySuccess.class);
+                it.putExtra("listFoods", cartList);
+                startActivity(it);
+            }
+        });
+
     }
 
     private void initList() {
@@ -57,8 +65,9 @@ public class CartActivity extends BaseActivity {
                     if (!cartList.isEmpty()) {
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL, false);
                         binding.cartRec.setLayoutManager(linearLayoutManager);
-                        adapter = new GioHangAdapter(cartList, context, () -> caculateCart());
+                        adapter = new GioHangAdapter(cartList, CartActivity.this, () -> caculateCart());
                         binding.cartRec.setAdapter(adapter);
+
                     }
 
                 }

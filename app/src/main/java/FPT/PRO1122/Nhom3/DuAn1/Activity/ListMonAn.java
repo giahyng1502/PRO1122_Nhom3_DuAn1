@@ -40,7 +40,6 @@ public class ListMonAn extends AppCompatActivity {
         initList();
         setVariable();
     }
-
     private void setVariable() {
     }
 
