@@ -82,7 +82,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/grey_background"
                     android:ems="10"
-                    android:hint="Enter Your Voucher Code "
+                    android:hint="Nhập Mã Giảm Giá(nếu có):"
                     android:inputType="text"
                     android:textAlignment="center"
                     android:textColor="@color/blue_grey"
@@ -96,7 +96,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:background="@drawable/red_button_bg"
-                    android:text="Apply Coupon"
+                    android:text="Áp dụng"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Order Summary"
+                android:text="Thông tin đặt hàng:"
                 android:textColor="@color/blue_grey"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -122,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Sub Total"
+                    android:text="Tạm tính:"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Delivery"
+                    android:text="Phí giao hàng:"
                     app:layout_constraintStart_toStartOf="@+id/textView19"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
                 <TextView
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Total Tax"
+                    android:text="Thuế VAT (nếu có):"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView21"/>
                 <TextView
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Total "
+                    android:text="Tổng cộng: "
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view4" />
                 <TextView
@@ -208,13 +208,13 @@
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/DatHangbtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/red_button_background"
-                android:text="CHECK OUT"
+                android:text="Thanh Toán"
                 android:layout_marginBottom="50dp"
                 android:textColor="@color/white"
                 android:textSize="18sp" />

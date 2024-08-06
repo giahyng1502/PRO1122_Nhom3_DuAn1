@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (R.id.favorite == item.getItemId()) {
                     fragment = new Favorite();
                 }else if (R.id.myOrder == item.getItemId()) {
-                    fragment = new Myorder();
+                    startActivity(new Intent(MainActivity.this, MyOrder.class));
                 }else if (R.id.profile == item.getItemId()) {
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 }
@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().
                             replace(R.id.frameLayout,fragment).
                             commit();
+
                 }
                 return true;
             }

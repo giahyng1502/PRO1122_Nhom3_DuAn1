@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chi Tiết Đơn Hàng: "
+        android:layout_marginRight="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcThanhToan"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        />
+    <TextView
+        android:id="@+id/tvTax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thuế : "
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/tvdeliveryFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phí Vận Chuyển : "
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/tongTientxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tổng tiền :  "
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên Người Nhận: "
+        android:layout_marginRight="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:textAlignment="center"
+        android:background="@drawable/editext_background"
+        android:padding="12dp"
+        android:id="@+id/tenEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Tên người nhận:"
+        android:textColor="@color/blue_grey"
+        android:textColorHint="@color/blue_grey"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số Điện Thoại:  "
+        android:layout_marginRight="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        />
+    <EditText
+        android:textAlignment="center"
+        android:background="@drawable/editext_background"
+        android:padding="12dp"
+        android:id="@+id/soDienThoaiEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Số Điện Thoại"
+        android:textColor="@color/blue_grey"
+        android:textColorHint="@color/blue_grey"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Địa chỉ giao hàng:  "
+        android:layout_marginRight="8dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="16sp"
+        />
+    <EditText
+        android:textAlignment="center"
+        android:background="@drawable/editext_background"
+        android:padding="12dp"
+        android:id="@+id/diaChiGiaoHang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Địa Chỉ: "
+        android:textColor="@color/blue_grey"
+        android:textColorHint="@color/blue_grey"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đặt Hàng"
+        android:id="@+id/datHangBtn"
+        android:background="@drawable/red_button_background"
+        android:layout_margin="5dp"
+        style="@style/Widget.AppCompat.Button"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>
