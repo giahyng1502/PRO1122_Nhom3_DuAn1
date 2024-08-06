@@ -12,7 +12,16 @@ public class OrderHistory {
     private String orderDate;
     private int status;
     private double tax;
+    private String userID;
     private double deliveryFee;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
     public double getTax() {
         return tax;
@@ -92,7 +101,6 @@ public class OrderHistory {
     }
 
     public int getStatus() {
-
         return status;
     }
 

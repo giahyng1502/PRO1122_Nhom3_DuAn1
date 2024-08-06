@@ -1,17 +1,25 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
@@ -44,11 +52,148 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.addressTxt.setText(order.getAddress());
         holder.statusTxt.setText(getStatusString(order.getStatus()));
 
-        StringBuilder productListBuilder = new StringBuilder("Product List: ");
-        for (GioHang product : order.getProductList()) {
-            productListBuilder.append(product.getTitle()).append(" x ").append(product.getQuantity()).append("), ").append("\n");;
+        StringBuilder productListBuilder = new StringBuilder();
+        int size = order.getProductList().size();
+
+        for (int i = 0; i < size; i++) {
+            GioHang product = order.getProductList().get(i);
+            productListBuilder.append(product.getTitle())
+                    .append(" x ")
+                    .append(product.getQuantity());
+
+            // Kiểm tra nếu không phải phần tử cuối cùng thì thêm dấu ", "
+            if (i < size - 1) {
+                productListBuilder.append(", ");
+            } else {
+                // Phần tử cuối cùng thì thêm dấu "."
+                productListBuilder.append(".");
+            }
         }
         holder.productListTxt.setText(productListBuilder.toString());
+        if (order.getStatus() == 3) {
+            holder.btnHuy.setVisibility(View.VISIBLE);
+            holder.btnHuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    huyDonHang(order,holder);
+                }
+            });
+        }
+        if (MainActivity.role == 0) {
+            //admin
+            if (order.getStatus() == 3) {
+                holder.btnXacNhan.setVisibility(View.VISIBLE);
+                holder.btnXacNhan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        xacNhanDonHang(order,holder);
+                    }
+                });
+
+            }
+            if (order.getStatus() == 2) {
+                holder.btnDangGiao.setVisibility(View.VISIBLE);
+
+                holder.btnDangGiao.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        giaoDonHang(order,holder);
+                    }
+                });
+            }
+            if (order.getStatus() == 1) {
+                holder.btnThanhCong.setVisibility(View.VISIBLE);
+                holder.btnThanhCong.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hoanThanhDonHang(order,holder);
+                    }
+                });
+            }
+        }
+    }
+
+    private void xacNhanDonHang(OrderHistory order,ViewHolder holder) {
+        order.setStatus(2);
+        FirebaseDatabase.getInstance().getReference("Orders")
+                .child(order.getUserID()).child(order.getOrderId())
+                .setValue(order)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        holder.btnXacNhan.setVisibility(View.GONE);
+                        holder.btnHuy.setVisibility(View.GONE);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+    private void huyDonHang(OrderHistory order,ViewHolder holder) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Xác Nhận");
+        builder.setMessage("Bạn có chắc chắn muốn huỷ đơn hàng này không ?");
+        builder.setPositiveButton("Có",(dialog, which) -> {
+            FirebaseDatabase.getInstance().getReference("Orders")
+                    .child(order.getUserID()).child(order.getOrderId())
+                    .removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "Huỷ thành công đơn hàng", Toast.LENGTH_SHORT).show();
+                            notifyDataSetChanged();
+                            dialog.dismiss();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        });
+        builder.setNegativeButton("Không",(dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.show();
+    }
+    private void giaoDonHang(OrderHistory order,ViewHolder holder) {
+        order.setStatus(1);
+        FirebaseDatabase.getInstance().getReference("Orders")
+                .child(order.getUserID()).child(order.getOrderId())
+                .setValue(order)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        holder.btnDangGiao.setVisibility(View.GONE);
+                        Toast.makeText(context, "Đơn hàng đang được vận chuyển", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+    private void hoanThanhDonHang(OrderHistory order,ViewHolder holder) {
+        order.setStatus(0);
+        FirebaseDatabase.getInstance().getReference("Orders")
+                .child(order.getUserID()).child(order.getOrderId())
+                .setValue(order)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        holder.btnThanhCong.setVisibility(View.GONE);
+                        notifyDataSetChanged();
+                        Toast.makeText(context, "Đơn hàng đã hoàn thành", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
 
     @Override
@@ -57,6 +202,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        Button btnXacNhan,btnHuy,btnDangGiao,btnThanhCong;
         TextView orderIdTxt, orderDateTxt, nameTxt, phoneTxt, addressTxt, productListTxt, statusTxt, totalAmountTxt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +213,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             addressTxt = itemView.findViewById(R.id.addressTxt);
             productListTxt = itemView.findViewById(R.id.productListTxt);
             statusTxt = itemView.findViewById(R.id.statusTxt);
+            btnXacNhan = itemView.findViewById(R.id.btnXacNhan);
+            btnHuy = itemView.findViewById(R.id.btnHuy);
+            btnDangGiao = itemView.findViewById(R.id.btnDangGiao);
+            btnThanhCong = itemView.findViewById(R.id.btnHoanThanh);
 
 
         }
@@ -74,13 +224,13 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     private String getStatusString(int status) {
         switch (status) {
-            case 0:
-                return "Đang chờ";
-            case 1:
-                return "Đã xác nhận";
-            case 2:
-                return "Đang giao";
             case 3:
+                return "Chờ Xác Nhận";
+            case 2:
+                return "Đang Chuẩn Bị";
+            case 1:
+                return "Đang giao";
+            case 0:
                 return "Hoàn thành";
             default:
                 return "Không xác định";

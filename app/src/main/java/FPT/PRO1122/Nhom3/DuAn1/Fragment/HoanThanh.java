@@ -21,15 +21,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.OrderHistoryAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
 
-
-public class Myorder extends Fragment {
+public class HoanThanh extends Fragment {
     private OrderHistoryAdapter adapter;
-    private ArrayList<OrderHistory> orderHistoryList = new ArrayList<>();
+    private ArrayList<OrderHistory> orderHistoryList;
     private DatabaseReference ordersRef;
     private RecyclerView recyclerViewOrderHistory;
 
@@ -42,44 +40,47 @@ public class Myorder extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_myorder, container, false);
+        return inflater.inflate(R.layout.fragment_hoan_thanh, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerViewOrderHistory = view.findViewById(R.id.recyclerViewOrderHistory);
+        recyclerViewOrderHistory = view.findViewById(R.id.recycler_viewHoanThanh);
+        orderHistoryList = new ArrayList<>();
         setupRecyclerView();
-    }
-    private void setupRecyclerView() {
-        recyclerViewOrderHistory.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new OrderHistoryAdapter(requireContext(), orderHistoryList);
-        recyclerViewOrderHistory.setAdapter(adapter);
-
-        // Khởi tạo tham chiếu đến cơ sở dữ liệu và tải dữ liệu
-        ordersRef = FirebaseDatabase.getInstance().getReference("Orders").child(MainActivity.id);
         loadOrderHistory();
     }
 
+    private void setupRecyclerView() {
+        recyclerViewOrderHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        adapter = new OrderHistoryAdapter(requireActivity(), orderHistoryList);
+        recyclerViewOrderHistory.setAdapter(adapter);
+    }
+
     private void loadOrderHistory() {
+        ordersRef = FirebaseDatabase.getInstance().getReference("Orders");
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 orderHistoryList.clear();
-                for (DataSnapshot orderSnapshot : snapshot.getChildren()) {
-                    OrderHistory orderHistory = orderSnapshot.getValue(OrderHistory.class);
-                    if (orderHistory != null) {
-                        if (orderHistory.getStatus() != 0) {
-                            orderHistoryList.add(orderHistory);
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    // Duyệt qua từng đơn hàng
+                    for (DataSnapshot orderSnapshot : userSnapshot.getChildren()) {
+                        // Chuyển đổi thành đối tượng OrderHistory
+                        OrderHistory order = orderSnapshot.getValue(OrderHistory.class);
+                        if (order != null && order.getStatus() == 0) {
+                            orderHistoryList.add(order);
                         }
                     }
                 }
                 adapter.notifyDataSetChanged();
+                
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(requireContext(), "Lỗi khi tải đơn hàng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "Lỗi khi tải đơn hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }

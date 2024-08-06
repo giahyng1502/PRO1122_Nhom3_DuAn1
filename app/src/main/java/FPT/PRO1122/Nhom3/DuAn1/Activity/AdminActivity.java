@@ -57,7 +57,7 @@ public class AdminActivity extends AppCompatActivity {
 
         // Thiết lập Fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment, new FoodManagement())
+                .replace(R.id.nav_host_fragment, new OrderManagement())
                 .commit();
 
         // Thiết lập DrawerLayout

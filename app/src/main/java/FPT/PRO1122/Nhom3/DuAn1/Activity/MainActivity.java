@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationItemView;
     FloatingActionButton btnCart;
     public static String id;
+    public static int idFrament = R.id.home;
     public static int role = 1;
 
     private boolean doubleBackToExitPressedOnce = false;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         //
 //        bottomNavigationItemView.getMenu().getItem(2).isEnabled();
         //
+        bottomNavigationItemView.setSelectedItemId(idFrament);
 
     }
     public String getIDCurrentAccout() {
@@ -110,9 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         // vào fragment home ngay khi đăng nhập
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.frameLayout,new Home()).
-                commit();
+//            getSupportFragmentManager().beginTransaction().
+//                    replace(R.id.frameLayout,new Home()).
+//                    commit();
+
         // khi click sẽ mở fragment tương ứng
         bottomNavigationItemView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (R.id.favorite == item.getItemId()) {
                     fragment = new Favorite();
                 }else if (R.id.myOrder == item.getItemId()) {
-                    startActivity(new Intent(MainActivity.this, MyOrder.class));
+                    fragment = new Myorder();
                 }else if (R.id.profile == item.getItemId()) {
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 }
@@ -141,5 +144,4 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationItemView = findViewById(R.id.bottomNavigationView);
         btnCart = findViewById(R.id.btnCart);
     }
-
 }

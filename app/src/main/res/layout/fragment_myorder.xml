@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MyOrder"
+    android:padding="15dp"
+    tools:context=".Activity.MyOrderHistory"
     android:orientation="vertical">
 
     <!-- Hàng chứa Nút Back và Tiêu đề -->
@@ -13,18 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
         android:gravity="center_vertical">
-
-        <!-- Nút Back -->
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_back" />
-
         <!-- Tiêu đề -->
         <TextView
             android:id="@+id/textView"
@@ -45,9 +35,8 @@
         android:id="@+id/recyclerViewOrderHistory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="60dp"
         android:layout_weight="1" />
 
 </LinearLayout>

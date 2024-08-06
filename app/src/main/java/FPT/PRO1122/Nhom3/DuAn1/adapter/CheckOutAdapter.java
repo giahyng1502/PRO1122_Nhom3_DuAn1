@@ -30,12 +30,15 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
     private QuanLyGioHang quanLyGioHang;
 
     ChangeNumberItemsListener changeNumberItemsListener;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Carts");
 
     public CheckOutAdapter(ArrayList<GioHang> list, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
         this.list = list;
         quanLyGioHang = new QuanLyGioHang(context, MainActivity.id);
         this.changeNumberItemsListener = changeNumberItemsListener;
+    }
+
+    public CheckOutAdapter(ArrayList<GioHang> list) {
+        this.list = list;
     }
 
     @NonNull

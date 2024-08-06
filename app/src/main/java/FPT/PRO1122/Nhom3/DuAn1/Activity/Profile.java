@@ -63,7 +63,7 @@ public class Profile extends AppCompatActivity {
         order_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, OrderHistory.class);
+                Intent intent = new Intent(Profile.this, MyOrderHistory.class);
                 startActivity(intent);
             }
         });
