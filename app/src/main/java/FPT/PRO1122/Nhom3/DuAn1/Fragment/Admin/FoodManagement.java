@@ -124,8 +124,14 @@ public class FoodManagement extends Fragment {
             }
         });
         getFoodFromFireBase();
-        deleteFood();
-        AddFood();
+        if(MainActivity.role == 0) {
+            // Admin = 0
+            deleteFood();
+            AddFood();
+        } else {
+            binding.btnAdd.setVisibility(View.GONE);
+        }
+
         searchView();
         binding.searchPrice.setOnClickListener(v -> showTextViewDialog());
     }
@@ -266,6 +272,22 @@ public class FoodManagement extends Fragment {
             int categoryId = danhMucMonAns.get(dialogAddFoodBinding.spnCategory.getSelectedItemPosition()).getId();
             MonAnByThien monAnByThien = new MonAnByThien();
             int timestamp = (int) System.currentTimeMillis();
+            if (name.isEmpty()) {
+                Toast.makeText(requireContext(), "Food Name not empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (price.isEmpty()) {
+                Toast.makeText(requireContext(), "Price not empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (describe.isEmpty()) {
+                Toast.makeText(requireContext(), "Describe not empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (categoryId == -1) {
+                Toast.makeText(requireContext(), "CategoryId not empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
             monAnByThien.setId(timestamp);
             monAnByThien.setPrice(Double.parseDouble(price));
             monAnByThien.setCategoryId(categoryId);

@@ -30,6 +30,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
+import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
+import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.DialogAddFoodBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
@@ -84,13 +86,21 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                                 });
 
         Glide.with(context).load(food.getImagePath()).into(holder.ivFoodAvatar);
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                showdialogAdd(food);
-                return true;
-            }
+        if(MainActivity.role == 0) {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    showdialogAdd(food);
+                    return true;
+                }
+            });
+        }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ChiTietMonAn.class);
+            intent.putExtra("object", list.get(position));
+            context.startActivity(intent);
         });
+
     }
 
     private void showdialogAdd(MonAnByThien food) {

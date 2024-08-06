@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -160,6 +162,7 @@ public class UserManagement extends Fragment {
             }
 
         });
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         bottomSheetDialog.show();
 
@@ -198,7 +201,6 @@ public class UserManagement extends Fragment {
             // Xóa user khỏi danh sách và cập nhật giao diện
             adapterUserManager.notifyItemRemoved(pos);
         });
-
         bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.getWindow().setStatusBarColor(Color.BLACK);
         bottomSheetDialog.show();
@@ -243,7 +245,9 @@ public class UserManagement extends Fragment {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         User user;
                         user = data.getValue(User.class);
-                        list.add(user);
+                        if (!user.getUserId().equals(MainActivity.id)) {
+                            list.add(user);
+                        }
                     }
                     if (!list.isEmpty()) {
                         initLayout();
@@ -265,8 +269,6 @@ public class UserManagement extends Fragment {
         binding.recyclerView.setAdapter(adapterUserManager);
 
     }
-
-
 
     @Override
     public void onDestroy() {
