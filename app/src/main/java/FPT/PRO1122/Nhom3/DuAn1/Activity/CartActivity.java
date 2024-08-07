@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -176,7 +177,8 @@ public class CartActivity extends BaseActivity {
         RecyclerView rcThanhToan;
         Button datHangBtn;
         RecyclerView.Adapter adapter;
-
+        CheckBox chkSetuser;
+        
         tongTientxt = bottomSheetDialog.findViewById(R.id.tongTientxt);
         tvThue = bottomSheetDialog.findViewById(R.id.tvTax);
         tvPhiVanChuyen = bottomSheetDialog.findViewById(R.id.tvdeliveryFee);
@@ -185,7 +187,8 @@ public class CartActivity extends BaseActivity {
         diaChi = bottomSheetDialog.findViewById(R.id.diaChiGiaoHang);
         rcThanhToan = bottomSheetDialog.findViewById(R.id.rcThanhToan);
         datHangBtn = bottomSheetDialog.findViewById(R.id.datHangBtn);
-
+        chkSetuser = bottomSheetDialog.findViewById(R.id.chkSetuserName);
+        
         adapter = new CheckOutAdapter((ArrayList<GioHang>) orderHistory.getProductList());
         rcThanhToan.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rcThanhToan.setAdapter(adapter);
@@ -231,6 +234,33 @@ public class CartActivity extends BaseActivity {
                 return;
             }
             else {
+                if (chkSetuser.isChecked()) {
+                    DatabaseReference refUser = FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id);
+
+                    refUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                User user = snapshot.getValue(User.class);
+                                if (user != null) {
+                                    // You can modify user details as needed
+                                    user.setName(name);
+                                    user.setPhoneNumber(phone);
+                                    user.setAddress(address);
+                                    refUser.setValue(user);
+                                    }
+                            } else {
+                                Toast.makeText(CartActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(CartActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                
                 orderHistory.setUser(name);
                 orderHistory.setPhone(phone);
                 orderHistory.setAddress(address);

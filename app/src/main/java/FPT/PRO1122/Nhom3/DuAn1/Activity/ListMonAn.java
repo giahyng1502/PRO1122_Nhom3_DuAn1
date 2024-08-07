@@ -62,7 +62,7 @@ public class ListMonAn extends AppCompatActivity {
                     }
                     if (list.size()>0){
                         binding.foodListView.setLayoutManager(new GridLayoutManager(ListMonAn.this, 1));
-                        adapterFoodListView = new AdapterFavorite(list,ListMonAn.this);
+                        adapterFoodListView = new AdapterFavorite(list);
                         binding.foodListView.setAdapter(adapterFoodListView);
                     }
                     binding.progressBarFoods.setVisibility(View.GONE);

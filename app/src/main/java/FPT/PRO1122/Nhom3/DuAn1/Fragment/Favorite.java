@@ -62,7 +62,7 @@ public class Favorite extends Fragment {
     }
 
     private void setBestFoodToView() {
-        adtFavorite = new AdapterFavorite(list,requireActivity());
+        adtFavorite = new AdapterFavorite(list);
         StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(1
                 , StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);

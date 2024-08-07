@@ -26,7 +26,6 @@ public class ChiTietMonAn extends AppCompatActivity {
     ActivityChiTietMonAnBinding binding;
     private MonAnByThien object;
     private  int num = 1;
-    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

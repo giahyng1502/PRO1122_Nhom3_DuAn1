@@ -75,7 +75,7 @@
                 app:srcCompat="@drawable/star" />
 
             <TextView
-                android:id="@+id/plusBtn"
+                android:id="@+id/btnAddCart"
                 android:layout_width="44dp"
                 android:layout_height="39dp"
                 android:background="@drawable/plus_background"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="Time"
                 app:layout_constraintBottom_toBottomOf="@+id/starListMonTxt"
-                app:layout_constraintEnd_toStartOf="@+id/plusBtn"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddCart"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="@+id/starListMonTxt" />
 
