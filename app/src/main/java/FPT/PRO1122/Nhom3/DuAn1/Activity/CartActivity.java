@@ -43,7 +43,7 @@ public class CartActivity extends BaseActivity {
 
 
     private ArrayList<GioHang> cartList = new ArrayList<>();
-    private double deliveryFee;
+    private double deliveryFee = 10000;
     private double totalAmount;
 
     @Override
@@ -58,6 +58,18 @@ public class CartActivity extends BaseActivity {
         DatHang();
         binding.backBtn.setOnClickListener(v-> startActivity(new Intent(
                 CartActivity.this,MainActivity.class)));
+        binding.btnVorcher.setOnClickListener(v-> {
+            String vorcher = binding.tvVorcher.getText().toString();
+            if (vorcher.equalsIgnoreCase("freeship")){
+                setDeliveryFee(0);
+                tinhTongGioHang();
+                Toast.makeText(this, "Sử dụng mã giảm giá thành công", Toast.LENGTH_SHORT).show();
+            }else {
+                setDeliveryFee(10000);
+                tinhTongGioHang();
+                Toast.makeText(this, "Mã giảm giá không tồn tại", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -113,7 +125,6 @@ public class CartActivity extends BaseActivity {
 
     private void tinhTongGioHang() {
         double percentTax = 0.02;
-        double deliveryFee = 10000;
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Carts").child(MainActivity.id);
         myRef.addValueEventListener(new ValueEventListener() {
@@ -133,17 +144,17 @@ public class CartActivity extends BaseActivity {
                 }
 
                 // Tính thuế
-                double tax = Math.round((tongGiaMonAn * percentTax) * 100) / 100;
-                getTax(tax);
+                double tax = tongGiaMonAn * percentTax;
+                setTax(tax);
                 // Tính tổng số tiền cần trả (giá sản phẩm + thuế + phí vận chuyển)
-                double totalAmount = Math.round((tongGiaMonAn + tax + deliveryFee) * 100) / 100;
-                getTotalAmount(totalAmount);
-                getDeliveryFee(deliveryFee);
+                double totalAmount = tongGiaMonAn + getTax() + getDeliveryFee();
+                setTotalAmount(totalAmount);
+
                 // Cập nhật giao diện
-                binding.totalFeeTxt.setText(tongGiaMonAn + " VND");
-                binding.taxTxt.setText(tax + " VND");
-                binding.deliveryFeeTxt.setText(deliveryFee + " VND");
-                binding.totalTxt.setText(totalAmount + " VND");
+                binding.totalFeeTxt.setText(tongGiaMonAn+ " VND");
+                binding.taxTxt.setText(getTax() + " VND");
+                binding.deliveryFeeTxt.setText(getDeliveryFee() + " VND");
+                binding.totalTxt.setText(getTotalAmount() + " VND");
 
             }
 
@@ -153,18 +164,29 @@ public class CartActivity extends BaseActivity {
             }
         });
     }
-    private void getDeliveryFee(double deliveryFee) {
+    private void setDeliveryFee(double deliveryFee) {
         this.deliveryFee = deliveryFee;
     }
 
-    private void getTotalAmount(double totalAmount) {
+    private void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    private void getTax(double tax) {
+    private void setTax(double tax) {
         this.tax = tax;
     }
 
+    public double getTax() {
+        return tax;
+    }
+
+    public double getDeliveryFee() {
+        return deliveryFee;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
 
     private void setVariable() {
         binding.backBtn.setOnClickListener(view -> finish());

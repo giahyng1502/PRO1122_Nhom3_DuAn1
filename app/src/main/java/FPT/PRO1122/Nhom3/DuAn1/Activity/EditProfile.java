@@ -167,9 +167,13 @@ public class EditProfile extends AppCompatActivity {
         String phone = binding.edtPhoneNumber.getText().toString();
         String homtown = binding.edtHomeTown.getText().toString();
         String pass = user.getPassword();
+        if (name.isEmpty() || mail.isEmpty()||phone.isEmpty()||homtown.isEmpty()) {
+            Toast.makeText(this, "Not empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String avatar = imageLink;
         User user1 = new User(MainActivity.id, phone, pass, name, mail, homtown, avatar);
-
+        user1.setRole(user.getRole());
         // Lưu thông tin cập nhật vào Firebase Realtime Database
         FirebaseDatabase.getInstance().getReference("users")
                 .child(MainActivity.id)

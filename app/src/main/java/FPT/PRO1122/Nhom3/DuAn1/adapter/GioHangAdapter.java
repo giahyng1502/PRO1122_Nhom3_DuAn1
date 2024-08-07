@@ -46,40 +46,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         return new ViewHolder(inflate);
     }
 
-
-    private void updateItemInCart(String itemId, int newQuantity) {
-        // Lấy giá của món ăn
-        databaseReference.child(itemId).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Double price = task.getResult().getValue(Double.class);
-                if (price != null) {
-                    // Tính toán tổng tiền mới
-                    double newTotal = price * newQuantity;
-
-                    // Tạo bản đồ chứa các cập nhật
-                    Map<String, Object> updates = new HashMap<>();
-                    updates.put("quantity", newQuantity);
-                    updates.put("total", newTotal);
-
-                    // Cập nhật dữ liệu trong database
-                    databaseReference.child(MainActivity.id).child(itemId).updateChildren(updates)
-                            .addOnCompleteListener(updateTask -> {
-                                if (updateTask.isSuccessful()) {
-                                    Log.d("Update", "Item updated successfully");
-                                    notifyDataSetChanged();
-                                } else {
-                                    Log.e("Update", "Failed to update item", updateTask.getException());
-                                }
-                            });
-                } else {
-                    Log.e("Update", "Price is null");
-                }
-            } else {
-                Log.e("Update", "Failed to get price", task.getException());
-            }
-        });
-    }
-
     @Override
     public void onBindViewHolder(@NonNull GioHangAdapter.ViewHolder holder, int position) {
         holder.titleTxtInCart.setText(list.get(position).getTitle());
