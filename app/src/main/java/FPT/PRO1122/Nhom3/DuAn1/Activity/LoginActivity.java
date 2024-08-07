@@ -93,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                         String mail = user.getEmail();
                         String avatar = user.getPhotoUrl()+"";
                         String uid = user.getUid();
-                        User user1 = new User(uid,"","123",name,mail,"",avatar);
+                        User user1 = new User(uid,"","123",name,mail,"");
+                        user1.setImageAvatar(avatar);
                         saveDataToPreferences(uid);
                         database.getReference("users").child(user.getUid()).setValue(user1);
                     }

@@ -18,7 +18,7 @@
             android:title="Thay đổi Banner" />
         <item
             android:id="@+id/nav_revenue_management"
-            android:icon="@drawable/slide"
+            android:icon="@drawable/revenue"
             android:title="Quản Lý Doanh Thu" />
         <item
             android:id="@+id/nav_BackHome"

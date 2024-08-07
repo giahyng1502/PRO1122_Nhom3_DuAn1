@@ -134,7 +134,7 @@ public class UserManagement extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (!snapshot.exists()) {
-                                    User user = new User(userid, "", pass, "", "", "", "");
+                                    User user = new User(userid, "", pass, "", "", "");
                                     FirebaseDatabase.getInstance()
                                             .getReference("users")
                                             .child(userid).setValue(user)

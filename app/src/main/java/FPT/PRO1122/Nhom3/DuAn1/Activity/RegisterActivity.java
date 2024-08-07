@@ -98,19 +98,15 @@ public class RegisterActivity extends AppCompatActivity {
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString();
 
         // Kiểm tra xem số điện thoại đã tồn tại trong Firebase chưa
-        Query checkPhoneNumberDB = reference.orderByChild("phoneNumber").equalTo(phoneNumber);
+        Query checkPhoneNumberDB = reference.orderByChild("userId").equalTo(phoneNumber);
 
         checkPhoneNumberDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Nếu số điện thoại đã tồn tại, thông báo và focus vào số điện thoại
                 if (snapshot.exists()) {
-                    String phoneNumberDB = snapshot.child(phoneNumber).child("phoneNumber").getValue(String.class);
-                    assert phoneNumberDB != null;
-                    if (phoneNumberDB.equals(phoneNumber)) {
                         bind.edtPhoneNumber.setError("This phone number already exists");
                         bind.edtPhoneNumber.requestFocus();
-                    }
                 } else {
 
                     Intent intent = new Intent(RegisterActivity.this, CreateProfileActivity.class);
