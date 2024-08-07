@@ -102,8 +102,10 @@ public class RevenueManager extends Fragment {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     for (DataSnapshot orderSnapshot : userSnapshot.getChildren()) {
                         OrderHistory order = orderSnapshot.getValue(OrderHistory.class);
-                        if (order != null && isWithinDateRange(order.getOrderDate(), startDate, endDate)) {
-                            totalRevenue += order.getTotalAmount();
+                        if (order.getStatus() == 0) {
+                            if (order != null && isWithinDateRange(order.getOrderDate(), startDate, endDate)) {
+                                totalRevenue += order.getTotalAmount();
+                            }
                         }
                     }
                 }

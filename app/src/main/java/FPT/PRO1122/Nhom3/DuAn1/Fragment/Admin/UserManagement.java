@@ -189,7 +189,6 @@ public class UserManagement extends Fragment {
                     .child(user.getUserId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            list.remove(pos);
                             Toast.makeText(requireContext(), "Delete Successfully", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
