@@ -78,6 +78,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                     huyDonHang(order,holder);
                 }
             });
+        } else {
+            holder.btnHuy.setVisibility(View.GONE);
+
         }
         if (MainActivity.role == 0) {
             //admin
@@ -92,6 +95,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
             }
             if (order.getStatus() == 2) {
+
                 holder.btnDangGiao.setVisibility(View.VISIBLE);
 
                 holder.btnDangGiao.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +171,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                     @Override
                     public void onSuccess(Void unused) {
                         holder.btnDangGiao.setVisibility(View.GONE);
+                        holder.btnHuy.setVisibility(View.GONE);
                         Toast.makeText(context, "Đơn hàng đang được vận chuyển", Toast.LENGTH_SHORT).show();
                         notifyDataSetChanged();
                     }

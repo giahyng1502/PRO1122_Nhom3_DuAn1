@@ -1,9 +1,7 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,27 +24,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
+
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.CheckOutAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.OrderHistoryAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.GioHangAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCartBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
 import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class CartActivity extends BaseActivity {
     private ActivityCartBinding binding;
     private RecyclerView.Adapter adapter;
-    private QuanLyGioHang quanLyGioHang;
     private  double tax;
-    Context context;
-    double tongTienDonHang;
+
 
     private ArrayList<GioHang> cartList = new ArrayList<>();
     private double deliveryFee;
@@ -57,8 +50,6 @@ public class CartActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        quanLyGioHang = new QuanLyGioHang(this, MainActivity.id);
 
         setVariable();
         initList();
@@ -71,6 +62,10 @@ public class CartActivity extends BaseActivity {
 
     private void DatHang() {
         binding.DatHangbtn.setOnClickListener(v -> {
+            if (cartList.isEmpty()) {
+                Toast.makeText(CartActivity.this, "Bạn không có đơn hàng nào", Toast.LENGTH_SHORT).show();
+                return;
+            }
             OrderHistory orderHistory = new OrderHistory();
             int timestamp = (int) System.currentTimeMillis();
             orderHistory.setOrderId("HD"+timestamp);
@@ -100,7 +95,7 @@ public class CartActivity extends BaseActivity {
                     if (!cartList.isEmpty()) {
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL, false);
                         binding.cartRec.setLayoutManager(linearLayoutManager);
-                        adapter = new GioHangAdapter(cartList, context, () -> tinhTongGioHang());
+                        adapter = new GioHangAdapter(cartList);
                         binding.cartRec.setAdapter(adapter);
                     }
 

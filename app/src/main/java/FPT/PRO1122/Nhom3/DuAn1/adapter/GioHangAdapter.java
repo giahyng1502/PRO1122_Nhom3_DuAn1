@@ -23,26 +23,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
-import FPT.PRO1122.Nhom3.DuAn1.DAO.ChangeNumberItemsListener;
-import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder>{
 
-    ArrayList<GioHang> list = new ArrayList<>();
-    private QuanLyGioHang quanLyGioHang;
-    ChangeNumberItemsListener changeNumberItemsListener;
+    ArrayList<GioHang> list;
     int num;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Carts");
 
 
-    public GioHangAdapter(ArrayList<GioHang> list, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
-        this.changeNumberItemsListener = changeNumberItemsListener;
-        quanLyGioHang = new QuanLyGioHang(context, MainActivity.id);
+    public GioHangAdapter(ArrayList<GioHang> list) {
         this.list = list;
-        this.changeNumberItemsListener = changeNumberItemsListener;
 
     }
 

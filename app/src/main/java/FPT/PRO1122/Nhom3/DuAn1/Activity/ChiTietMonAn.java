@@ -17,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityChiTietMonAnBinding;
@@ -27,7 +26,6 @@ public class ChiTietMonAn extends AppCompatActivity {
     ActivityChiTietMonAnBinding binding;
     private MonAnByThien object;
     private  int num = 1;
-    private QuanLyGioHang quanLyGioHang;
     private String userId;
 
     @Override
@@ -118,7 +116,6 @@ public class ChiTietMonAn extends AppCompatActivity {
 
 
     private void setVariable() {
-        quanLyGioHang = new QuanLyGioHang(this, MainActivity.id);
 
         binding.backBtn.setOnClickListener(v -> finish());
 
@@ -180,31 +177,61 @@ public class ChiTietMonAn extends AppCompatActivity {
         // Tính toán tổng tiền
         double total = object.getPrice() * object.getNumberInCart();
 
-        // Tạo đối tượng GioHang để lưu vào Realtime Database
-        GioHang cartItem = new GioHang();
-        cartItem.setTitle(object.getTitle());
+        // Sử dụng addListenerForSingleValueEvent để đọc dữ liệu một lần
+        cartRef.child(itemId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Nếu món ăn đã tồn tại trong giỏ hàng, cập nhật số lượng
+                    GioHang existingCartItem = dataSnapshot.getValue(GioHang.class);
+                    if (existingCartItem != null) {
+                        int currentQuantity = existingCartItem.getQuantity();
+                        int newQuantity = currentQuantity + object.getNumberInCart();
+                        double newTotal = existingCartItem.getPrice() * newQuantity;
 
-        cartItem.setId(object.getId()+"");
-        cartItem.setPrice(object.getPrice());
-        cartItem.setQuantity(object.getNumberInCart());
-        cartItem.setTotal(total);
-        cartItem.setImagePath(object.getImagePath()); // Nếu cần lưu ImagePath
+                        // Cập nhật số lượng và tổng tiền
+                        cartRef.child(itemId).child("quantity").setValue(newQuantity);
+                        cartRef.child(itemId).child("total").setValue(newTotal)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Xử lý khi cập nhật thành công
+                                    Toast.makeText(ChiTietMonAn.this, "Đã cập nhật giỏ hàng", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Xử lý khi có lỗi
+                                    Toast.makeText(ChiTietMonAn.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    }
+                } else {
+                    // Nếu món ăn chưa tồn tại trong giỏ hàng, thêm mới
+                    GioHang cartItem = new GioHang();
+                    cartItem.setTitle(object.getTitle());
+                    cartItem.setId(object.getId() + "");
+                    cartItem.setPrice(object.getPrice());
+                    cartItem.setQuantity(1);
+                    cartItem.setTotal(total);
+                    cartItem.setImagePath(object.getImagePath()); // Nếu cần lưu ImagePath
 
-        // Thêm món ăn vào giỏ hàng với key duy nhất
-        if (itemId != null) {
-            cartRef.child(itemId).setValue(cartItem)
-                    .addOnSuccessListener(aVoid -> {
-                        // Xử lý khi thêm thành công
-                        Toast.makeText(ChiTietMonAn.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        // Xử lý khi có lỗi
-                        Toast.makeText(ChiTietMonAn.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-        } else {
-            Toast.makeText(ChiTietMonAn.this, "Lỗi: Không thể tạo key cho món ăn", Toast.LENGTH_SHORT).show();
-        }
+                    cartRef.child(itemId).setValue(cartItem)
+                            .addOnSuccessListener(aVoid -> {
+                                // Xử lý khi thêm thành công
+                                Toast.makeText(ChiTietMonAn.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(e -> {
+                                // Xử lý khi có lỗi
+                                Toast.makeText(ChiTietMonAn.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Xử lý khi có lỗi truy vấn dữ liệu
+                Toast.makeText(ChiTietMonAn.this, "Lỗi: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
 
 

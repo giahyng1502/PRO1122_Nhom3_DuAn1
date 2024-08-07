@@ -13,29 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
-import FPT.PRO1122.Nhom3.DuAn1.DAO.ChangeNumberItemsListener;
-import FPT.PRO1122.Nhom3.DuAn1.DAO.QuanLyGioHang;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
 
 public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHolder>{
 
     ArrayList<GioHang> list = new ArrayList<>();
-    private QuanLyGioHang quanLyGioHang;
-
-    ChangeNumberItemsListener changeNumberItemsListener;
-
-    public CheckOutAdapter(ArrayList<GioHang> list, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
-        this.list = list;
-        quanLyGioHang = new QuanLyGioHang(context, MainActivity.id);
-        this.changeNumberItemsListener = changeNumberItemsListener;
-    }
 
     public CheckOutAdapter(ArrayList<GioHang> list) {
         this.list = list;

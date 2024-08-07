@@ -67,6 +67,7 @@ public class Favorite extends Fragment {
                 , StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adtFavorite);
+        adtFavorite.notifyDataSetChanged();
     }
 
     private void getBestFood() {
@@ -76,29 +77,25 @@ public class Favorite extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(MonAnByThien.class));
-                    }
-                    if (!list.isEmpty()){
-                        try {
-                            setBestFoodToView();
-                        } catch (Exception e) {
-                            Log.d("giahyng",e+"");
+                list.clear(); // Clear the list before adding new data
+                if (snapshot.exists()) {
+                    for (DataSnapshot issue : snapshot.getChildren()) {
+                        MonAnByThien monAn = issue.getValue(MonAnByThien.class);
+                        if (monAn != null) {
+                            list.add(monAn);
                         }
-                        adtFavorite.notifyDataSetChanged();
                     }
-//                    binding.progressBarCategories.setVisibility(View.GONE);
                 }
+                // Always notify the adapter about data changes
+                adtFavorite.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(requireContext(), "fail"+error, Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
+
 
 }
