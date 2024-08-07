@@ -12,11 +12,14 @@
             android:id="@+id/nav_food_management"
             android:icon="@drawable/food_adm"
             android:title="Quản lý Món Ăn" />
-
         <item
             android:id="@+id/nav_banner_management"
             android:icon="@drawable/slide"
             android:title="Thay đổi Banner" />
+        <item
+            android:id="@+id/nav_revenue_management"
+            android:icon="@drawable/slide"
+            android:title="Quản Lý Doanh Thu" />
         <item
             android:id="@+id/nav_BackHome"
             android:icon="@drawable/back_adm"

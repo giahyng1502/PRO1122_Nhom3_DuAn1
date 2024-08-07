@@ -51,4 +51,13 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
+        <string-array name="revenue_filter_options">
+            <item>Daily</item>
+            <item>Weekly</item>
+            <item>Monthly</item>
+            <item>Custom</item>
+        </string-array>
+
 </resources>
+
