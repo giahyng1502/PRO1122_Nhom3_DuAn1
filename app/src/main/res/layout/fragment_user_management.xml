@@ -18,7 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         android:backgroundTint="#66000000"
-        android:src="@drawable/add"
+        android:src="@drawable/car_ui_icon_add"
         android:layout_height="wrap_content"/>
     <LinearLayout
         android:orientation="vertical"

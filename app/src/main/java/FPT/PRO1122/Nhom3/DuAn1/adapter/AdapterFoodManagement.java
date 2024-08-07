@@ -117,9 +117,8 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
         dialogAddFoodBinding.tvFoodName.setText(food.getTitle());
         dialogAddFoodBinding.tvFoodID.setText(food.getId()+"");
 
-        if (foodUri == null)
             Glide.with(context).load(food.getImagePath()).into(dialogAddFoodBinding.ivFood);
-        else dialogAddFoodBinding.ivFood.setImageURI(foodUri);
+            
         FirebaseDatabase.getInstance()
                 .getReference("Category")
                 .addValueEventListener(new ValueEventListener() {
@@ -231,6 +230,12 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     public void listFillter(ArrayList<MonAnByThien> listSearch) {
         this.list = listSearch;
         notifyDataSetChanged();
+    }
+    public void setImageUri(Uri imageUri) {
+        this.foodUri = imageUri;
+        if (imageUri != null) {
+            dialogAddFoodBinding.ivFood.setImageURI(imageUri);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

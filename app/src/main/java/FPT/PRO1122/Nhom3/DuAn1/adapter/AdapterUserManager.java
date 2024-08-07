@@ -110,10 +110,8 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
         } else {
             binding.rdoAdmin.setChecked(true);
         }
+            Glide.with(context).load(user.getImageAvatar()).into(binding.ivUser);
 
-        if (userImageUri == null) {
-            Glide.with(context).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivUser);
-        }
 
         binding.ivCameraIcon.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
@@ -166,7 +164,8 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
         String pass = binding.edtPasswordUserManagement.getText().toString();
         int role = binding.rdoUser.isChecked() ? 1 : 0;
         String avatar = imageLink;
-        User user1 = new User(user.getUserId(), phone, pass, name, mail, homtown, avatar);
+        User user1 = new User(user.getUserId(), phone, pass, name, mail, homtown);
+        user1.setImageAvatar(avatar);
         user1.setRole(role);
 
         // Lưu thông tin cập nhật vào Firebase Realtime Database
@@ -182,7 +181,7 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
 
     public void setImageUri(Uri imageUri) {
         this.userImageUri = imageUri;
-        if (userImageUri!= null) {
+        if (userImageUri != null) {
             binding.ivUser.setImageURI(userImageUri);
         }
     }

@@ -23,7 +23,7 @@
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
-    <string name="or_signin_with">or signin with</string>
+    <string name="or_signin_with">or signIn with</string>
     <string name="google">Google</string>
     <string name="facebook">Facebook</string>
     <string name="continue_">Continue</string>

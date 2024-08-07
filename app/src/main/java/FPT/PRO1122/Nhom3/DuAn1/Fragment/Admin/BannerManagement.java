@@ -92,17 +92,17 @@ public class BannerManagement extends Fragment {
                                     .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
-                                            uploadBanner(uri,"banner1");
+                                            uploadBanner(uri, "banner1");
                                         }
                                     });
                         }
                     });
-
+        }
             if (uriBanner2!=null) {
                 FirebaseStorage.getInstance()
                         .getReference("Image Banner")
                         .child("2")
-                        .putFile(uriBanner1)
+                        .putFile(uriBanner2)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -123,7 +123,7 @@ public class BannerManagement extends Fragment {
                 FirebaseStorage.getInstance()
                         .getReference("Image Banner")
                         .child("3")
-                        .putFile(uriBanner1)
+                        .putFile(uriBanner3)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -140,7 +140,6 @@ public class BannerManagement extends Fragment {
                             }
                         });
             }
-        }
         });
     }
 

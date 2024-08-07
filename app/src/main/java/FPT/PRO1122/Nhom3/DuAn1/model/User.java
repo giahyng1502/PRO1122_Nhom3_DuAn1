@@ -20,14 +20,14 @@ public class User {
     public User() {
     }
 
-    public User(String userId, String phoneNumber, String password, String name, String email, String address, String imageAvatar) {
+    public User(String userId, String phoneNumber, String password, String name, String email, String address) {
         this.userId = userId;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.name = name;
         this.email = email;
         this.address = address;
-        ImageAvatar = imageAvatar;
+        this.ImageAvatar = "https://firebasestorage.googleapis.com/v0/b/duan1-2e5d9.appspot.com/o/Image%20User%2Fnone_avatar.png?alt=media&token=6a7cc6f3-88d3-45a7-b550-adc18850970b";
         this.role = 1;
     }
 

@@ -94,7 +94,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
         String password = getIntent().getStringExtra("password");
         String id = phoneNumber;
-        user = new User(id,phoneNumber,password,firstName+" "+lastName, emailAddress, address,"");
+        user = new User(id,phoneNumber,password,firstName+" "+lastName, emailAddress, address);
         assert phoneNumber != null;
         reference.child(phoneNumber).setValue(user);
         Intent intent = new Intent(this, LoginActivity.class);

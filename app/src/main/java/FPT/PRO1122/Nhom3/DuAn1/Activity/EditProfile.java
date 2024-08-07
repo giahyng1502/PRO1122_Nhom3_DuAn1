@@ -172,7 +172,8 @@ public class EditProfile extends AppCompatActivity {
             return;
         }
         String avatar = imageLink;
-        User user1 = new User(MainActivity.id, phone, pass, name, mail, homtown, avatar);
+        User user1 = new User(MainActivity.id, phone, pass, name, mail, homtown);
+        user1.setImageAvatar(avatar);
         user1.setRole(user.getRole());
         // Lưu thông tin cập nhật vào Firebase Realtime Database
         FirebaseDatabase.getInstance().getReference("users")
@@ -196,7 +197,9 @@ public class EditProfile extends AppCompatActivity {
                             // Hiển thị dữ liệu người dùng trên giao diện
                             binding.edtFullName.setText(user.getName());
                             binding.edtMail.setText(user.getEmail());
-                            Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivCurrentUsr);
+                            if (userImageUri == null) {
+                                Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivCurrentUsr);
+                            }
                             binding.edtPhoneNumber.setText(user.getPhoneNumber());
                             binding.edtHomeTown.setText(user.getAddress());
                         }
