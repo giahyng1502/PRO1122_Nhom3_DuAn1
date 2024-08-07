@@ -194,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         // Kiểm tra xem người dùng có tồn tại trong Firebase hay không
-        Query checkUserDB = reference.orderByChild("phoneNumber").equalTo(phoneNumber);
+        Query checkUserDB = reference.orderByChild("userId").equalTo(phoneNumber);
 
         checkUserDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

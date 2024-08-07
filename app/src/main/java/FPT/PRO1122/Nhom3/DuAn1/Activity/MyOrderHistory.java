@@ -68,7 +68,7 @@ public class MyOrderHistory extends AppCompatActivity {
                 for (DataSnapshot orderSnapshot : snapshot.getChildren()) {
                     OrderHistory orderHistory = orderSnapshot.getValue(OrderHistory.class);
                     if (orderHistory != null) {
-                        if (orderHistory.getStatus() == 3) {
+                        if (orderHistory.getStatus() == 0) {
                             orderHistoryList.add(orderHistory);
                         }
                     }
