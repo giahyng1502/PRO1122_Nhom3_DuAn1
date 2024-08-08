@@ -72,7 +72,7 @@ public class FoodManagement extends Fragment {
     ActivityResultLauncher<Intent>activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if (result.getResultCode() == RESULT_OK && result.getData() != null) {
             foodUri = result.getData().getData();
-            adapterFoodManagement.setImageUri(foodUri);
+            dialogAddFoodBinding.ivFood.setImageURI(foodUri);
         }
     });
     public ActivityResultLauncher<Intent> activityResultLauncherUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
