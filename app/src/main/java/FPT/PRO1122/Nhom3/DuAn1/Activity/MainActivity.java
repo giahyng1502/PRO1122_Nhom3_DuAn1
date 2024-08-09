@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity {
         //
 //        bottomNavigationItemView.getMenu().getItem(2).isEnabled();
         //
-        bottomNavigationItemView.setSelectedItemId(idFrament);
+        if (idFrament == R.id.home) {
+            bottomNavigationItemView.setSelectedItemId(idFrament);
+        } else {
+            bottomNavigationItemView.setSelectedItemId(idFrament);
+            idFrament = R.id.home;
+        }
 
     }
     public String getIDCurrentAccout() {
