@@ -197,9 +197,7 @@ public class EditProfile extends AppCompatActivity {
                             // Hiển thị dữ liệu người dùng trên giao diện
                             binding.edtFullName.setText(user.getName());
                             binding.edtMail.setText(user.getEmail());
-                            if (userImageUri == null) {
                                 Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivCurrentUsr);
-                            }
                             binding.edtPhoneNumber.setText(user.getPhoneNumber());
                             binding.edtHomeTown.setText(user.getAddress());
                         }
