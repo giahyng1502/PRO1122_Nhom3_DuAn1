@@ -23,11 +23,11 @@ import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.OrderHistoryAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
 public class HoanThanh extends Fragment {
     private OrderHistoryAdapter adapter;
-    private ArrayList<OrderHistory> orderHistoryList;
+    private ArrayList<Order> orderList;
     private DatabaseReference ordersRef;
     private RecyclerView recyclerViewOrderHistory;
 
@@ -47,14 +47,14 @@ public class HoanThanh extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerViewOrderHistory = view.findViewById(R.id.recycler_viewHoanThanh);
-        orderHistoryList = new ArrayList<>();
+        orderList = new ArrayList<>();
         setupRecyclerView();
         loadOrderHistory();
     }
 
     private void setupRecyclerView() {
         recyclerViewOrderHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        adapter = new OrderHistoryAdapter(requireActivity(), orderHistoryList);
+        adapter = new OrderHistoryAdapter(requireActivity(), orderList);
         recyclerViewOrderHistory.setAdapter(adapter);
     }
 
@@ -63,14 +63,14 @@ public class HoanThanh extends Fragment {
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                orderHistoryList.clear();
+                orderList.clear();
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     // Duyệt qua từng đơn hàng
                     for (DataSnapshot orderSnapshot : userSnapshot.getChildren()) {
                         // Chuyển đổi thành đối tượng OrderHistory
-                        OrderHistory order = orderSnapshot.getValue(OrderHistory.class);
+                        Order order = orderSnapshot.getValue(Order.class);
                         if (order != null && order.getStatus() == 0) {
-                            orderHistoryList.add(order);
+                            orderList.add(order);
                         }
                     }
                 }

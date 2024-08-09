@@ -38,12 +38,12 @@ import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
 
 import FPT.PRO1122.Nhom3.DuAn1.adapter.MenuMonAnAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityMainBinding;
 
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class Home extends Fragment {
@@ -143,14 +143,14 @@ public class Home extends Fragment {
     private void MenuMonAn() {
         DatabaseReference myRef = database.getReference("Category");
 //        binding.progressBar.setVisibility(View.VISIBLE);
-        ArrayList<DanhMucMonAn> list = new ArrayList<>();
+        ArrayList<Catagory> list = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for (DataSnapshot issue : snapshot.getChildren()){
-                        DanhMucMonAn danhMucMonAn = issue.getValue(DanhMucMonAn.class);
-                        list.add(danhMucMonAn);
+                        Catagory catagory = issue.getValue(Catagory.class);
+                        list.add(catagory);
 
                     }
                     if (!list.isEmpty()){
@@ -172,14 +172,14 @@ public class Home extends Fragment {
     private void MonAnBanChayRecyclerview() {
         DatabaseReference myRef = database.getReference("Foods");
 //        binding.progressBarCategories.setVisibility(View.VISIBLE);
-        ArrayList<MonAnByThien> list = new ArrayList<>();
+        ArrayList<Foods> list = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     list.clear();
                     for (DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(MonAnByThien.class));
+                        list.add(issue.getValue(Foods.class));
                     }
                     if (list.size() > 0){
                         //sap xep
@@ -187,7 +187,7 @@ public class Home extends Fragment {
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),1,LinearLayoutManager.HORIZONTAL,false);
                         recyclerViewFood.setLayoutManager(gridLayoutManager);
                         // top 5
-                        List<MonAnByThien> top5Items = list.subList(0, Math.min(5, list.size()));
+                        List<Foods> top5Items = list.subList(0, Math.min(5, list.size()));
                         RecyclerView.Adapter adapter = new DoAnBanChayAdapter(top5Items);
                         recyclerViewFood.setAdapter(adapter);
                     }

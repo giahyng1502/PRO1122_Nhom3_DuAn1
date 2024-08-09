@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ListMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 
 public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.ViewHolder> {
-    ArrayList<DanhMucMonAn> items;
+    ArrayList<Catagory> items;
     Context context;
 
-    public MenuMonAnAdapter(ArrayList<DanhMucMonAn> items) {
+    public MenuMonAnAdapter(ArrayList<Catagory> items) {
         this.items = items;
     }
 
@@ -85,9 +85,9 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DanhMucMonAn danhMucMonAn = items.get(position);
+                Catagory catagory = items.get(position);
                 Intent intent = new Intent(context, ListMonAn.class);
-                intent.putExtra("Category",danhMucMonAn);
+                intent.putExtra("Category", catagory);
                 context.startActivity(intent);
             }
         });

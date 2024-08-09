@@ -1,7 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +22,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
-import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder>{
 
-    ArrayList<GioHang> list;
+    ArrayList<Cart> list;
     int num;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Carts");
 
 
-    public GioHangAdapter(ArrayList<GioHang> list) {
+    public GioHangAdapter(ArrayList<Cart> list) {
         this.list = list;
 
     }
@@ -53,7 +52,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         holder.numTxtInCart.setText(list.get(position).getQuantity() + "");
         holder.totalPriceTxtInCart.setText(list.get(position).getTotal() + " VND");
 
-        GioHang item = list.get(position);
+        Cart item = list.get(position);
 
         holder.minusBtnInCart.setOnClickListener(v -> {
             num = item.getQuantity();
@@ -61,7 +60,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                 num--;
                 item.setQuantity(num);
                 holder.numTxtInCart.setText(String.valueOf(num));
-                String itemId = String.valueOf(item.getId());
+                String itemId = String.valueOf(item.getCartId());
                 int newQuantity = num;
                 double price = item.getPrice();
                 double newTotal = newQuantity * price;
@@ -82,7 +81,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                         });
             } else {
                 // Nếu số lượng là 1, xóa sản phẩm khỏi giỏ hàng
-                String itemId = String.valueOf(item.getId());
+                String itemId = String.valueOf(item.getCartId());
                 databaseReference.child(MainActivity.id).child(itemId).removeValue()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
@@ -104,7 +103,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             item.setQuantity(num);
             holder.numTxtInCart.setText(String.valueOf(num));
 
-            String itemId = String.valueOf(item.getId());
+            String itemId = String.valueOf(item.getCartId());
             int newQuantity = num;
             double price = item.getPrice();
             double newTotal = newQuantity * price;

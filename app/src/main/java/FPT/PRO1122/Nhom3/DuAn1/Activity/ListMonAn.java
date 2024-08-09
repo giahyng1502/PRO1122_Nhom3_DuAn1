@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,14 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFavorite;
-import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityListMonAnBinding;
 
 public class ListMonAn extends AppCompatActivity {
     ActivityListMonAnBinding binding;
     private RecyclerView.Adapter adapterFoodListView;
-    DanhMucMonAn danhMucMonAn;
+    Catagory catagory;
     private FirebaseDatabase database;
 
     @Override
@@ -48,17 +47,17 @@ public class ListMonAn extends AppCompatActivity {
     private void initList() {
         DatabaseReference myRef = database.getReference("Foods");
         binding.progressBarFoods.setVisibility(View.VISIBLE);
-        ArrayList<MonAnByThien> list = new ArrayList<>();
+        ArrayList<Foods> list = new ArrayList<>();
 
         Query query;
-            query = myRef.orderByChild("CategoryId").equalTo(danhMucMonAn.getId());
+            query = myRef.orderByChild("CategoryId").equalTo(catagory.getId());
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for (DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(MonAnByThien.class));
+                        list.add(issue.getValue(Foods.class));
                     }
                     if (list.size()>0){
                         binding.foodListView.setLayoutManager(new GridLayoutManager(ListMonAn.this, 1));
@@ -78,9 +77,9 @@ public class ListMonAn extends AppCompatActivity {
 
     private void getIntentExtra() {
         Intent intent = getIntent();
-        danhMucMonAn = (DanhMucMonAn) intent.getSerializableExtra("Category");
+        catagory = (Catagory) intent.getSerializableExtra("Category");
 
-        binding.titleCategoryTxt.setText(danhMucMonAn.getName());
+        binding.titleCategoryTxt.setText(catagory.getName());
 
         binding.backBtn.setOnClickListener(v -> startActivity(new Intent(ListMonAn.this, MainActivity.class)));
     }

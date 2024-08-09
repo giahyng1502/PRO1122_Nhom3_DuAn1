@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,13 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.MyOrderPagerAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.OrderHistoryAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
 public class MyOrderHistory extends AppCompatActivity {
     private OrderHistoryAdapter adapter;
-    private ArrayList<OrderHistory> orderHistoryList = new ArrayList<>();
+    private ArrayList<Order> orderList = new ArrayList<>();
     private DatabaseReference ordersRef;
     private RecyclerView recyclerViewOrderHistory;
     @SuppressLint("MissingInflatedId")
@@ -52,7 +48,7 @@ public class MyOrderHistory extends AppCompatActivity {
     }
     private void setupRecyclerView() {
         recyclerViewOrderHistory.setLayoutManager(new LinearLayoutManager(MyOrderHistory.this));
-        adapter = new OrderHistoryAdapter(MyOrderHistory.this, orderHistoryList);
+        adapter = new OrderHistoryAdapter(MyOrderHistory.this, orderList);
         recyclerViewOrderHistory.setAdapter(adapter);
 
         // Khởi tạo tham chiếu đến cơ sở dữ liệu và tải dữ liệu
@@ -64,12 +60,12 @@ public class MyOrderHistory extends AppCompatActivity {
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                orderHistoryList.clear();
+                orderList.clear();
                 for (DataSnapshot orderSnapshot : snapshot.getChildren()) {
-                    OrderHistory orderHistory = orderSnapshot.getValue(OrderHistory.class);
-                    if (orderHistory != null) {
-                        if (orderHistory.getStatus() == 0) {
-                            orderHistoryList.add(orderHistory);
+                    Order order = orderSnapshot.getValue(Order.class);
+                    if (order != null) {
+                        if (order.getStatus() == 0) {
+                            orderList.add(order);
                         }
                     }
                 }

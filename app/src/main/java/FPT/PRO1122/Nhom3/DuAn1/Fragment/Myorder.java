@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.OrderHistoryAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
 
 public class Myorder extends Fragment {
     private OrderHistoryAdapter adapter;
-    private ArrayList<OrderHistory> orderHistoryList = new ArrayList<>();
+    private ArrayList<Order> orderList = new ArrayList<>();
     private DatabaseReference ordersRef;
     private RecyclerView recyclerViewOrderHistory;
 
@@ -53,7 +53,7 @@ public class Myorder extends Fragment {
     }
     private void setupRecyclerView() {
         recyclerViewOrderHistory.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new OrderHistoryAdapter(requireContext(), orderHistoryList);
+        adapter = new OrderHistoryAdapter(requireContext(), orderList);
         recyclerViewOrderHistory.setAdapter(adapter);
 
         // Khởi tạo tham chiếu đến cơ sở dữ liệu và tải dữ liệu
@@ -65,12 +65,12 @@ public class Myorder extends Fragment {
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                orderHistoryList.clear();
+                orderList.clear();
                 for (DataSnapshot orderSnapshot : snapshot.getChildren()) {
-                    OrderHistory orderHistory = orderSnapshot.getValue(OrderHistory.class);
-                    if (orderHistory != null) {
-                        if (orderHistory.getStatus() != 0) {
-                            orderHistoryList.add(orderHistory);
+                    Order order = orderSnapshot.getValue(Order.class);
+                    if (order != null) {
+                        if (order.getStatus() != 0) {
+                            orderList.add(order);
                         }
                     }
                 }

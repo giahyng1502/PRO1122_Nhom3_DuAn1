@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,7 +26,7 @@ import java.util.GregorianCalendar;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.NumberToWordsConverter;
-import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
 public class RevenueManager extends Fragment {
     Button btnCheck;
@@ -101,7 +100,7 @@ public class RevenueManager extends Fragment {
                 double totalRevenue = 0.0;
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     for (DataSnapshot orderSnapshot : userSnapshot.getChildren()) {
-                        OrderHistory order = orderSnapshot.getValue(OrderHistory.class);
+                        Order order = orderSnapshot.getValue(Order.class);
                         if (order.getStatus() == 0) {
                             if (order != null && isWithinDateRange(order.getOrderDate(), startDate, endDate)) {
                                 totalRevenue += order.getTotalAmount();

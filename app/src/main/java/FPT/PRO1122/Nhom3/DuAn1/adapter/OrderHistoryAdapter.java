@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,15 +20,14 @@ import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
-import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
+import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder> {
-    private ArrayList<OrderHistory> orderList;
+    private ArrayList<Order> orderList;
     private Context context;
 
-    public OrderHistoryAdapter(Context context, ArrayList<OrderHistory> orderList) {
+    public OrderHistoryAdapter(Context context, ArrayList<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
     }
@@ -44,7 +42,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapter.ViewHolder holder, int position) {
-        OrderHistory order = orderList.get(position);
+        Order order = orderList.get(position);
         holder.orderDateTxt.setText(order.getOrderDate());
         holder.nameTxt.setText(order.getUser());
         holder.totalAmountTxt.setText(order.getTotalAmount() + " VND");
@@ -53,10 +51,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.statusTxt.setText(getStatusString(order.getStatus()));
 
         StringBuilder productListBuilder = new StringBuilder();
-        int size = order.getProductList().size();
+        int size = order.getOrderDetails().size();
 
         for (int i = 0; i < size; i++) {
-            GioHang product = order.getProductList().get(i);
+            Cart product = order.getOrderDetails().get(i);
             productListBuilder.append(product.getTitle())
                     .append(" x ")
                     .append(product.getQuantity());
@@ -117,7 +115,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         }
     }
 
-    private void xacNhanDonHang(OrderHistory order,ViewHolder holder) {
+    private void xacNhanDonHang(Order order, ViewHolder holder) {
         order.setStatus(2);
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(order.getUserID()).child(order.getOrderId())
@@ -135,7 +133,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                     }
                 });
     }
-    private void huyDonHang(OrderHistory order,ViewHolder holder) {
+    private void huyDonHang(Order order, ViewHolder holder) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Xác Nhận");
         builder.setMessage("Bạn có chắc chắn muốn huỷ đơn hàng này không ?");
@@ -162,7 +160,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         });
         builder.show();
     }
-    private void giaoDonHang(OrderHistory order,ViewHolder holder) {
+    private void giaoDonHang(Order order, ViewHolder holder) {
         order.setStatus(1);
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(order.getUserID()).child(order.getOrderId())
@@ -182,7 +180,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                     }
                 });
     }
-    private void hoanThanhDonHang(OrderHistory order,ViewHolder holder) {
+    private void hoanThanhDonHang(Order order, ViewHolder holder) {
         order.setStatus(0);
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(order.getUserID()).child(order.getOrderId())

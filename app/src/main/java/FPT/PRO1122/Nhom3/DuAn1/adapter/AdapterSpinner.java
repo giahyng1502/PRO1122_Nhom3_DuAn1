@@ -5,7 +5,6 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
@@ -15,14 +14,14 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 
 public class AdapterSpinner implements SpinnerAdapter {
 
     private Context context;
-    private List<DanhMucMonAn> items;
+    private List<Catagory> items;
 
-    public AdapterSpinner(@NonNull Context context, @NonNull List<DanhMucMonAn> items) {
+    public AdapterSpinner(@NonNull Context context, @NonNull List<Catagory> items) {
         this.context = context;
         this.items = items;
     }

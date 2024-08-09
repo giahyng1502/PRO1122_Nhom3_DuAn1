@@ -34,18 +34,18 @@ import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.DialogAddFoodBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
 public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManagement.ViewHolder> {
     Context context;
-    List<MonAnByThien> list;
+    List<Foods> list;
     private Dialog dialog;
     private DialogAddFoodBinding dialogAddFoodBinding;
     public Uri foodUri;
     ActivityResultLauncher<Intent> activityResultLauncherUpdate;
 
-    public AdapterFoodManagement(Context context, List<MonAnByThien> list, ActivityResultLauncher<Intent> activityResultLauncherUpdate) {
+    public AdapterFoodManagement(Context context, List<Foods> list, ActivityResultLauncher<Intent> activityResultLauncherUpdate) {
         this.context = context;
         this.list = list;
         this.activityResultLauncherUpdate = activityResultLauncherUpdate;
@@ -61,7 +61,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MonAnByThien food = list.get(position);
+        Foods food = list.get(position);
         holder.tvTitle.setText(food.getTitle());
         holder.tvDecr.setText(food.getDescription());
         holder.tvRate.setText(food.getStar()+"");
@@ -103,8 +103,8 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
     }
 
-    private void showdialogAdd(MonAnByThien food) {
-        List<DanhMucMonAn> danhMucMonAns = new ArrayList<>();
+    private void showdialogAdd(Foods food) {
+        List<Catagory> catagories = new ArrayList<>();
         dialog = new Dialog(context);
         dialogAddFoodBinding = DialogAddFoodBinding.inflate(LayoutInflater.from(context));
         dialog.setContentView(dialogAddFoodBinding.getRoot());
@@ -126,14 +126,14 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                danhMucMonAns.add(dataSnapshot.getValue(DanhMucMonAn.class));
+                                catagories.add(dataSnapshot.getValue(Catagory.class));
                             }
                         }
-                        if (!danhMucMonAns.isEmpty()) {
-                            AdapterSpinner adapter = new AdapterSpinner(context, danhMucMonAns);
+                        if (!catagories.isEmpty()) {
+                            AdapterSpinner adapter = new AdapterSpinner(context, catagories);
                             dialogAddFoodBinding.spnCategory.setAdapter(adapter);
-                            for (int i = 0 ; i < danhMucMonAns.size(); i++) {
-                                if (danhMucMonAns.get(i).getId() == food.getCategoryId()) {
+                            for (int i = 0; i < catagories.size(); i++) {
+                                if (catagories.get(i).getId() == food.getCategoryId()) {
                                     dialogAddFoodBinding.spnCategory.setSelection(i);
                                     break;
                                 }
@@ -156,39 +156,39 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
             String price = dialogAddFoodBinding.edtPrice.getText().toString();
             String describe = dialogAddFoodBinding.edtDescribe.getText().toString();
 
-            int categoryId = danhMucMonAns.get(dialogAddFoodBinding.spnCategory.getSelectedItemPosition()).getId();
-            MonAnByThien monAnByThien = new MonAnByThien();
+            int categoryId = catagories.get(dialogAddFoodBinding.spnCategory.getSelectedItemPosition()).getId();
+            Foods foods = new Foods();
 
-            monAnByThien.setId(food.getId());
-            monAnByThien.setPrice(Double.parseDouble(price));
-            monAnByThien.setCategoryId(categoryId);
-            monAnByThien.setTitle(name);
-            monAnByThien.setDescription(describe);
+            foods.setId(food.getId());
+            foods.setPrice(Double.parseDouble(price));
+            foods.setCategoryId(categoryId);
+            foods.setTitle(name);
+            foods.setDescription(describe);
             if (foodUri == null) {
-                monAnByThien.setImagePath(food.getImagePath());
-                uploadFood(monAnByThien);
+                foods.setImagePath(food.getImagePath());
+                uploadFood(foods);
             } else {
-                putFoodAvatar(monAnByThien);
+                putFoodAvatar(foods);
             }
         });
 
         dialog.show();
     }
 
-    private void putFoodAvatar(MonAnByThien monAnByThien) {
+    private void putFoodAvatar(Foods foods) {
 
-            FirebaseStorage.getInstance().getReference("Image Food").child(monAnByThien.getId()+"")
+            FirebaseStorage.getInstance().getReference("Image Food").child(foods.getId()+"")
                     .putFile(foodUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             FirebaseStorage.getInstance().getReference("Image Food")
-                                    .child(monAnByThien.getId()+"")
+                                    .child(foods.getId()+"")
                                     .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             String imageFood = uri.toString();
-                                            monAnByThien.setImagePath(imageFood);
-                                            uploadFood(monAnByThien);
+                                            foods.setImagePath(imageFood);
+                                            uploadFood(foods);
                                         }
                                     });
                         }
@@ -200,9 +200,9 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                     });
     }
 
-    private void uploadFood(MonAnByThien monAnByThien) {
-        FirebaseDatabase.getInstance().getReference("Foods").child(monAnByThien.getId()+"")
-                .setValue(monAnByThien).addOnSuccessListener(new OnSuccessListener<Void>() {
+    private void uploadFood(Foods foods) {
+        FirebaseDatabase.getInstance().getReference("Foods").child(foods.getId()+"")
+                .setValue(foods).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         dialog.dismiss();
@@ -227,7 +227,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
         return list.size();
     }
 
-    public void listFillter(ArrayList<MonAnByThien> listSearch) {
+    public void listFillter(ArrayList<Foods> listSearch) {
         this.list = listSearch;
         notifyDataSetChanged();
     }

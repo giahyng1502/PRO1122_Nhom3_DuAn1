@@ -17,15 +17,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityChiTietMonAnBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
 public class ChiTietMonAn extends AppCompatActivity {
     ActivityChiTietMonAnBinding binding;
-    private MonAnByThien object;
+    private Foods object;
     private  int num = 1;
+    private long total = 0;
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +52,15 @@ public class ChiTietMonAn extends AppCompatActivity {
 
         // Khởi tạo DatabaseReference
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                .getReference("Favorite").child(MainActivity.id)
-                .child(object.getId() + "");
+                .getReference("Favorite").child(MainActivity.id).child(object.getId()+"");
 
         // Thiết lập OnClickListener cho nút yêu thích
         binding.favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (object.getBestFood()) {
+                if (isFavorite) {
                     // Nếu món ăn là món yêu thích -> bỏ yêu thích
-                    object.setBestFood(false);
+                    setFavorite(false);
                     databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -74,7 +75,7 @@ public class ChiTietMonAn extends AppCompatActivity {
                     });
                 } else {
                     // Nếu món ăn chưa được yêu thích -> yêu thích
-                    object.setBestFood(true);
+                    setFavorite(true);
                     databaseReference.setValue(object).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -95,12 +96,12 @@ public class ChiTietMonAn extends AppCompatActivity {
     private void getFavoriteUser(String userID,String foodID) {
         FirebaseDatabase.getInstance().getReference("Favorite")
                 .child(userID).child(foodID)
-                .orderByChild("bestFood")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             binding.favBtn.setImageResource(R.drawable.favorite_select);
+                            setFavorite(true);
                         } else {
                             binding.favBtn.setImageResource(R.drawable.favorite);
                         }
@@ -112,31 +113,31 @@ public class ChiTietMonAn extends AppCompatActivity {
                 });
     }
 
-
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 
     private void setVariable() {
 
         binding.backBtn.setOnClickListener(v -> finish());
 
         Glide.with(ChiTietMonAn.this).load(object.getImagePath()).into(binding.pic);
-
+        long price = (long) object.getPrice();
         binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText(object.getPrice() + " VND");
+        binding.priceTxt.setText(price + " VND");
         binding.rateTxt.setText("" + object.getStar());
         binding.descriptionTxt.setText(object.getDescription());
-        binding.timeTxt.setText(object.getTimeValue() + " phút");
-        binding.totalTxt.setText(num + object.getPrice()+" VND");
+        binding.totalTxt.setText(price+" VND");
 
         //set status favorite
         getFavoriteUser(MainActivity.id, object.getId()+"");
-
 
         binding.plusBtn.setOnClickListener(v -> {
             num = num + 1;
             binding.numTxt.setText(num + "");
 
-            double total = (num* object.getPrice());
-            String totalString = String.format("%.2f",total) + "VND";
+            total = (long) (num* object.getPrice());
+            String totalString = total + " VND";
             binding.totalTxt.setText(totalString);
         });
         binding.minusBtn.setOnClickListener(v -> {
@@ -147,7 +148,8 @@ public class ChiTietMonAn extends AppCompatActivity {
                 num = num - 1;
             }
             binding.numTxt.setText(num + "");
-            binding.totalTxt.setText((num * object.getPrice()) + " VND");
+            total = (long) (num*object.getPrice());
+            binding.totalTxt.setText(total+"");
         });
 
         // Khởi tạo DatabaseReference
@@ -155,42 +157,44 @@ public class ChiTietMonAn extends AppCompatActivity {
         binding.AddToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                object.setNumberInCart(num);
-                addToCart(MainActivity.id, object);
+                Cart cartItem = new Cart();
+                cartItem.setTitle(object.getTitle());
+                cartItem.setCartId(object.getId()+"");
+                cartItem.setPrice(object.getPrice());
+                cartItem.setTotal(total);
+                cartItem.setImagePath(object.getImagePath());
+                cartItem.setQuantity(num);
+                cartItem.setFoodID(object.getId());
+                addToCart(cartItem);
             }
         });
     }
 
 
 
-    private void addToCart(String userId, MonAnByThien object) {
+    private void addToCart(Cart cart) {
         // Khởi tạo FirebaseDatabase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         // Tham chiếu đến nút 'Carts' trong Realtime Database
-        DatabaseReference cartRef = database.getReference("Carts").child(userId);
-
-        // Tạo một key duy nhất cho mỗi món ăn trong giỏ hàng
-        String itemId = String.valueOf(object.getId());
-
-        // Tính toán tổng tiền
-        double total = object.getPrice() * object.getNumberInCart();
+        DatabaseReference cartRef = database.getReference("Carts").child(MainActivity.id);
 
         // Sử dụng addListenerForSingleValueEvent để đọc dữ liệu một lần
-        cartRef.child(itemId).addListenerForSingleValueEvent(new ValueEventListener() {
+        cartRef.child(cart.getCartId())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     // Nếu món ăn đã tồn tại trong giỏ hàng, cập nhật số lượng
-                    GioHang existingCartItem = dataSnapshot.getValue(GioHang.class);
+                    Cart existingCartItem = dataSnapshot.getValue(Cart.class);
                     if (existingCartItem != null) {
                         int currentQuantity = existingCartItem.getQuantity();
-                        int newQuantity = currentQuantity + object.getNumberInCart();
+                        int newQuantity = currentQuantity + cart.getQuantity();
                         double newTotal = existingCartItem.getPrice() * newQuantity;
 
                         // Cập nhật số lượng và tổng tiền
-                        cartRef.child(itemId).child("quantity").setValue(newQuantity);
-                        cartRef.child(itemId).child("total").setValue(newTotal)
+                        cartRef.child(cart.getCartId()).child("quantity").setValue(newQuantity);
+                        cartRef.child(cart.getCartId()).child("total").setValue(newTotal)
                                 .addOnSuccessListener(aVoid -> {
                                     // Xử lý khi cập nhật thành công
                                     Toast.makeText(ChiTietMonAn.this, "Đã cập nhật giỏ hàng", Toast.LENGTH_SHORT).show();
@@ -202,15 +206,7 @@ public class ChiTietMonAn extends AppCompatActivity {
                     }
                 } else {
                     // Nếu món ăn chưa tồn tại trong giỏ hàng, thêm mới
-                    GioHang cartItem = new GioHang();
-                    cartItem.setTitle(object.getTitle());
-                    cartItem.setId(object.getId() + "");
-                    cartItem.setPrice(object.getPrice());
-                    cartItem.setQuantity(1);
-                    cartItem.setTotal(total);
-                    cartItem.setImagePath(object.getImagePath()); // Nếu cần lưu ImagePath
-
-                    cartRef.child(itemId).setValue(cartItem)
+                    cartRef.child(cart.getCartId()).setValue(cart)
                             .addOnSuccessListener(aVoid -> {
                                 // Xử lý khi thêm thành công
                                 Toast.makeText(ChiTietMonAn.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
@@ -235,6 +231,6 @@ public class ChiTietMonAn extends AppCompatActivity {
 
 
     private void getIntentExtra() {
-        object = (MonAnByThien) getIntent().getSerializableExtra("object");
+        object = (Foods) getIntent().getSerializableExtra("object");
     }
 }

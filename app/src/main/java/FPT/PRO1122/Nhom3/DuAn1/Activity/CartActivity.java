@@ -30,10 +30,10 @@ import java.util.Locale;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.CheckOutAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.GioHangAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCartBinding;
-import FPT.PRO1122.Nhom3.DuAn1.model.OrderHistory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class CartActivity extends BaseActivity {
@@ -42,7 +42,7 @@ public class CartActivity extends BaseActivity {
     private  double tax;
 
 
-    private ArrayList<GioHang> cartList = new ArrayList<>();
+    private ArrayList<Cart> cartList = new ArrayList<>();
     private double deliveryFee = 10000;
     private double totalAmount;
 
@@ -79,17 +79,17 @@ public class CartActivity extends BaseActivity {
                 Toast.makeText(CartActivity.this, "Bạn không có đơn hàng nào", Toast.LENGTH_SHORT).show();
                 return;
             }
-            OrderHistory orderHistory = new OrderHistory();
+            Order order = new Order();
             int timestamp = (int) System.currentTimeMillis();
-            orderHistory.setOrderId("HD"+timestamp);
-            orderHistory.setTax(tax);
-            orderHistory.setDeliveryFee(deliveryFee);
-            orderHistory.setUserID(MainActivity.id);
-            orderHistory.setProductList(cartList);
+            order.setOrderId("HD"+timestamp);
+            order.setTax(tax);
+            order.setDeliveryFee(deliveryFee);
+            order.setUserID(MainActivity.id);
+            order.setOrderDetails(cartList);
 
-            orderHistory.setTotalAmount(totalAmount);
-            orderHistory.setStatus(3);
-            showPayMethod(orderHistory);
+            order.setTotalAmount(totalAmount);
+            order.setStatus(3);
+            showPayMethod(order);
         });
     }
 
@@ -102,8 +102,8 @@ public class CartActivity extends BaseActivity {
                 if (snapshot.exists()) {
                     cartList.clear();
                     for (DataSnapshot issue : snapshot.getChildren()) {
-                        GioHang gioHang = issue.getValue(GioHang.class);
-                        cartList.add(gioHang);
+                        Cart cart = issue.getValue(Cart.class);
+                        cartList.add(cart);
                     }
                     if (!cartList.isEmpty()) {
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -134,11 +134,11 @@ public class CartActivity extends BaseActivity {
 
                 if (snapshot.exists()) {
                     for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                        GioHang gioHang = itemSnapshot.getValue(GioHang.class);
+                        Cart cart = itemSnapshot.getValue(Cart.class);
 
-                        if (gioHang != null) {
+                        if (cart != null) {
                             // Cộng dồn giá sản phẩm (giả sử getPrice() và getQuantity() là các phương thức của GioHang)
-                            tongGiaMonAn += gioHang.getTotal();
+                            tongGiaMonAn += cart.getTotal();
                         }
                     }
                 }
@@ -191,7 +191,7 @@ public class CartActivity extends BaseActivity {
     private void setVariable() {
         binding.backBtn.setOnClickListener(view -> finish());
     }
-    void showPayMethod(OrderHistory orderHistory) {
+    void showPayMethod(Order order) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.fragment_item_list_dialog_list_dialog);
         TextView tongTientxt,tvPhiVanChuyen,tvThue;
@@ -211,13 +211,13 @@ public class CartActivity extends BaseActivity {
         datHangBtn = bottomSheetDialog.findViewById(R.id.datHangBtn);
         chkSetuser = bottomSheetDialog.findViewById(R.id.chkSetuserName);
         
-        adapter = new CheckOutAdapter((ArrayList<GioHang>) orderHistory.getProductList());
+        adapter = new CheckOutAdapter((ArrayList<Cart>) order.getOrderDetails());
         rcThanhToan.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rcThanhToan.setAdapter(adapter);
 
-        tvPhiVanChuyen.setText("Phí Vận Chuyển : " + orderHistory.getDeliveryFee() + " VND");
-        tvThue.setText("Thuế : " + orderHistory.getTax() + " VND");
-        tongTientxt.setText("Tổng tiền: " + orderHistory.getTotalAmount() + " VND");
+        tvPhiVanChuyen.setText("Phí Vận Chuyển : " + order.getDeliveryFee() + " VND");
+        tvThue.setText("Thuế : " + order.getTax() + " VND");
+        tongTientxt.setText("Tổng tiền: " + order.getTotalAmount() + " VND");
 
         FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id)
                         .addValueEventListener(new ValueEventListener() {
@@ -283,22 +283,22 @@ public class CartActivity extends BaseActivity {
                     });
                 }
                 
-                orderHistory.setUser(name);
-                orderHistory.setPhone(phone);
-                orderHistory.setAddress(address);
-                orderHistory.setOrderDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
+                order.setUser(name);
+                order.setPhone(phone);
+                order.setAddress(address);
+                order.setOrderDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
 
                 FirebaseDatabase.getInstance()
                         .getReference("Orders")
-                        .child(orderHistory.getUserID()+"")
-                        .child(orderHistory.getOrderId())
-                        .setValue(orderHistory)
+                        .child(order.getUserID()+"")
+                        .child(order.getOrderId())
+                        .setValue(order)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 FirebaseDatabase.getInstance()
                                         .getReference("Carts")
-                                        .child(orderHistory.getUserID())
+                                        .child(order.getUserID())
                                         .removeValue()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

@@ -1,17 +1,13 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,23 +17,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFavorite;
-import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
 
 public class Favorite extends Fragment {
     RecyclerView recyclerView;
     AdapterFavorite adtFavorite;
-    ArrayList<MonAnByThien> list;
+    ArrayList<Foods> list;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +73,7 @@ public class Favorite extends Fragment {
                 list.clear(); // Clear the list before adding new data
                 if (snapshot.exists()) {
                     for (DataSnapshot issue : snapshot.getChildren()) {
-                        MonAnByThien monAn = issue.getValue(MonAnByThien.class);
+                        Foods monAn = issue.getValue(Foods.class);
                         if (monAn != null) {
                             list.add(monAn);
                         }

@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -25,11 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.SimpleAdapter;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,14 +50,13 @@ import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterSpinner;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.DialogAddFoodBinding;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.FragmentFoodManagerBinding;
 import FPT.PRO1122.Nhom3.DuAn1.implement.SwipeToDeleteCallback;
-import FPT.PRO1122.Nhom3.DuAn1.model.DanhMucMonAn;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
-import FPT.PRO1122.Nhom3.DuAn1.model.User;
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
 
 public class FoodManagement extends Fragment {
     FragmentFoodManagerBinding binding;
-    List<MonAnByThien> list;
+    List<Foods> list;
     DatabaseReference databaseReference;
     AdapterFoodManagement adapterFoodManagement;
     DialogAddFoodBinding dialogAddFoodBinding;
@@ -154,11 +148,11 @@ public class FoodManagement extends Fragment {
         });
     }
     private void SearchData(String query) {
-        ArrayList<MonAnByThien> listSearch = new ArrayList<>();
-        for (MonAnByThien monAnByThien : list) {
-            if (monAnByThien.getTitle().toLowerCase().contains(query)
+        ArrayList<Foods> listSearch = new ArrayList<>();
+        for (Foods foods : list) {
+            if (foods.getTitle().toLowerCase().contains(query)
             ) {
-                listSearch.add(monAnByThien);
+                listSearch.add(foods);
             }
         }
         adapterFoodManagement.listFillter(listSearch);
@@ -197,7 +191,7 @@ public class FoodManagement extends Fragment {
     }
 
     private void searchByPrice(double minPrice, double maxPrice) {
-        ArrayList<MonAnByThien> monAnByThiens = new ArrayList<>();
+        ArrayList<Foods> foods = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -205,19 +199,19 @@ public class FoodManagement extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        MonAnByThien monAn = snapshot.getValue(MonAnByThien.class);
+                        Foods monAn = snapshot.getValue(Foods.class);
 
                         // Kiểm tra nếu monAn không phải null và có giá nằm trong khoảng
                         if (monAn != null ) {
                             double price = monAn.getPrice();
                             if (price >= minPrice && price <= maxPrice) {
-                                monAnByThiens.add(monAn);
+                                foods.add(monAn);
                             }
                         }
                     }
                     // Chỉ cập nhật adapter nếu danh sách không rỗng
-                    if (!monAnByThiens.isEmpty()) {
-                        adapterFoodManagement.listFillter(monAnByThiens);
+                    if (!foods.isEmpty()) {
+                        adapterFoodManagement.listFillter(foods);
                     } else {
                         // Xử lý trường hợp không tìm thấy món ăn nào phù hợp
                         Toast.makeText(requireContext(), "Không tìm thấy món ăn nào trong khoảng giá này.", Toast.LENGTH_SHORT).show();
@@ -234,7 +228,7 @@ public class FoodManagement extends Fragment {
     }
 
     private void showdialogAdd() {
-        List<DanhMucMonAn> danhMucMonAns = new ArrayList<>();
+        List<Catagory> catagories = new ArrayList<>();
         dialog = new Dialog(requireContext());
         dialogAddFoodBinding = DialogAddFoodBinding.inflate(LayoutInflater.from(requireContext()));
         dialog.setContentView(dialogAddFoodBinding.getRoot());
@@ -249,11 +243,11 @@ public class FoodManagement extends Fragment {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.exists()){
                                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                               danhMucMonAns.add(dataSnapshot.getValue(DanhMucMonAn.class));
+                                               catagories.add(dataSnapshot.getValue(Catagory.class));
                                            }
                                         }
-                                        if (!danhMucMonAns.isEmpty()) {
-                                            AdapterSpinner adapter = new AdapterSpinner(requireContext(), danhMucMonAns);
+                                        if (!catagories.isEmpty()) {
+                                            AdapterSpinner adapter = new AdapterSpinner(requireContext(), catagories);
                                             dialogAddFoodBinding.spnCategory.setAdapter(adapter);
                                         }
                                     }
@@ -270,8 +264,8 @@ public class FoodManagement extends Fragment {
             String price = dialogAddFoodBinding.edtPrice.getText().toString();
             String describe = dialogAddFoodBinding.edtDescribe.getText().toString();
 
-            int categoryId = danhMucMonAns.get(dialogAddFoodBinding.spnCategory.getSelectedItemPosition()).getId();
-            MonAnByThien monAnByThien = new MonAnByThien();
+            int categoryId = catagories.get(dialogAddFoodBinding.spnCategory.getSelectedItemPosition()).getId();
+            Foods foods = new Foods();
             int timestamp = (int) System.currentTimeMillis();
             if (name.isEmpty()) {
                 Toast.makeText(requireContext(), "Food Name not empty", Toast.LENGTH_SHORT).show();
@@ -289,34 +283,34 @@ public class FoodManagement extends Fragment {
                 Toast.makeText(requireContext(), "CategoryId not empty", Toast.LENGTH_SHORT).show();
                 return;
             }
-            monAnByThien.setId(timestamp);
-            monAnByThien.setPrice(Double.parseDouble(price));
-            monAnByThien.setCategoryId(categoryId);
-            monAnByThien.setTitle(name);
-            monAnByThien.setDescription(describe);
+            foods.setId(timestamp);
+            foods.setPrice(Double.parseDouble(price));
+            foods.setCategoryId(categoryId);
+            foods.setTitle(name);
+            foods.setDescription(describe);
             
-            putFoodAvatar(monAnByThien);
+            putFoodAvatar(foods);
         });
 
         dialog.show();
     }
 
-    private void putFoodAvatar(MonAnByThien monAnByThien) {
+    private void putFoodAvatar(Foods foods) {
         if (foodUri == null) {
             Toast.makeText(requireContext(), "You must upload a picture of the dish.", Toast.LENGTH_SHORT).show();
         } else {
-            FirebaseStorage.getInstance().getReference("Image Food").child(monAnByThien.getId()+"")
+            FirebaseStorage.getInstance().getReference("Image Food").child(foods.getId()+"")
                     .putFile(foodUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             FirebaseStorage.getInstance().getReference("Image Food")
-                                    .child(monAnByThien.getId()+"")
+                                    .child(foods.getId()+"")
                                     .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             String imageFood = uri.toString();
-                                            monAnByThien.setImagePath(imageFood);
-                                            uploadFood(monAnByThien);
+                                            foods.setImagePath(imageFood);
+                                            uploadFood(foods);
                                         }
                                     });
                         }
@@ -329,9 +323,9 @@ public class FoodManagement extends Fragment {
         }
     }
 
-    private void uploadFood(MonAnByThien monAnByThien) {
-        FirebaseDatabase.getInstance().getReference("Foods").child(monAnByThien.getId()+"")
-                .setValue(monAnByThien).addOnSuccessListener(new OnSuccessListener<Void>() {
+    private void uploadFood(Foods foods) {
+        FirebaseDatabase.getInstance().getReference("Foods").child(foods.getId()+"")
+                .setValue(foods).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         dialog.dismiss();
@@ -379,10 +373,10 @@ public class FoodManagement extends Fragment {
         btnConfirm.setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
 
-            MonAnByThien monAnByThien = list.get(pos);
+            Foods foods = list.get(pos);
             // Xóa user khỏi Firebase Database
             FirebaseDatabase.getInstance().getReference("Foods")
-                    .child(monAnByThien.getId()+"").removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    .child(foods.getId()+"").removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(requireContext(), "Delete Successfully", Toast.LENGTH_SHORT).show();
@@ -410,7 +404,7 @@ public class FoodManagement extends Fragment {
                 if (snapshot.exists()) {
                     list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        list.add(dataSnapshot.getValue(MonAnByThien.class));
+                        list.add(dataSnapshot.getValue(Foods.class));
                     }
                     if (!list.isEmpty()) {
                         initReclerView();

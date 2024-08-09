@@ -21,21 +21,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
-import FPT.PRO1122.Nhom3.DuAn1.model.MonAnByThien;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
+import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
 public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHolder> {
-    List<MonAnByThien> items;
+    List<Foods> items;
     Context context;
 
 
-    public AdapterFavorite(List<MonAnByThien> items) {
+    public AdapterFavorite(List<Foods> items) {
         this.items = items;
     }
 
@@ -51,7 +50,6 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
     public void onBindViewHolder(@NonNull AdapterFavorite.ViewHolder holder, int position) {
         holder.tittleTxt.setText(items.get(position).getTitle());
         holder.priceTxt.setText(items.get(position).getPrice() + "VND");
-        holder.timeTxt.setText(items.get(position).getTimeValue() + "phút");
         holder.starTxt.setText("" + items.get(position).getStar());
 
         Glide.with(context).load(items.get(position).getImagePath())
@@ -64,75 +62,71 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
             context.startActivity(intent);
         });
         holder.btnAddCart.setOnClickListener(v -> {
-            addToCart(MainActivity.id,items.get(position));
+            Foods object = items.get(position);
+            Cart cartItem = new Cart();
+            cartItem.setTitle(object.getTitle());
+            cartItem.setCartId(object.getId()+"");
+            cartItem.setPrice(object.getPrice());
+            cartItem.setTotal(object.getPrice());
+            cartItem.setImagePath(object.getImagePath());
+            cartItem.setQuantity(1);
+            cartItem.setFoodID(object.getId());
+            addToCart(cartItem);
         });
     }
-    private void addToCart(String userId, MonAnByThien object) {
+    private void addToCart(Cart cart) {
         // Khởi tạo FirebaseDatabase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         // Tham chiếu đến nút 'Carts' trong Realtime Database
-        DatabaseReference cartRef = database.getReference("Carts").child(userId);
-
-        // Tạo một key duy nhất cho mỗi món ăn trong giỏ hàng
-        String itemId = String.valueOf(object.getId());
-
-        // Tính toán tổng tiền
-        double total = object.getPrice() * object.getNumberInCart();
+        DatabaseReference cartRef = database.getReference("Carts").child(MainActivity.id);
 
         // Sử dụng addListenerForSingleValueEvent để đọc dữ liệu một lần
-        cartRef.child(itemId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // Nếu món ăn đã tồn tại trong giỏ hàng, cập nhật số lượng
-                    GioHang existingCartItem = dataSnapshot.getValue(GioHang.class);
-                    if (existingCartItem != null) {
-                        int currentQuantity = existingCartItem.getQuantity();
-                        int newQuantity = currentQuantity + 1;
-                        double newTotal = existingCartItem.getPrice() * newQuantity;
+        cartRef.child(cart.getCartId())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // Nếu món ăn đã tồn tại trong giỏ hàng, cập nhật số lượng
+                            Cart existingCartItem = dataSnapshot.getValue(Cart.class);
+                            if (existingCartItem != null) {
+                                int currentQuantity = existingCartItem.getQuantity();
+                                int newQuantity = currentQuantity + cart.getQuantity();
+                                double newTotal = existingCartItem.getPrice() * newQuantity;
 
-                        // Cập nhật số lượng và tổng tiền
-                        cartRef.child(itemId).child("quantity").setValue(newQuantity);
-                        cartRef.child(itemId).child("total").setValue(newTotal)
-                                .addOnSuccessListener(aVoid -> {
-                                    // Xử lý khi cập nhật thành công
-                                    Toast.makeText(context, "Đã cập nhật giỏ hàng", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    // Xử lý khi có lỗi
-                                    Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                });
+                                // Cập nhật số lượng và tổng tiền
+                                cartRef.child(cart.getCartId()).child("quantity").setValue(newQuantity);
+                                cartRef.child(cart.getCartId()).child("total").setValue(newTotal)
+                                        .addOnSuccessListener(aVoid -> {
+                                            // Xử lý khi cập nhật thành công
+                                            Toast.makeText(context, "Đã cập nhật giỏ hàng", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            // Xử lý khi có lỗi
+                                            Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                        } else {
+                            // Nếu món ăn chưa tồn tại trong giỏ hàng, thêm mới
+                            cartRef.child(cart.getCartId()).setValue(cart)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Xử lý khi thêm thành công
+                                        Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        // Xử lý khi có lỗi
+                                        Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        }
                     }
-                } else {
-                    // Nếu món ăn chưa tồn tại trong giỏ hàng, thêm mới
-                    GioHang cartItem = new GioHang();
-                    cartItem.setTitle(object.getTitle());
-                    cartItem.setId(object.getId() + "");
-                    cartItem.setPrice(object.getPrice());
-                    cartItem.setQuantity(1);
-                    cartItem.setTotal(total);
-                    cartItem.setImagePath(object.getImagePath()); // Nếu cần lưu ImagePath
-
-                    cartRef.child(itemId).setValue(cartItem)
-                            .addOnSuccessListener(aVoid -> {
-                                // Xử lý khi thêm thành công
-                                Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                // Xử lý khi có lỗi
-                                Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-                }
-            }
 
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý khi có lỗi truy vấn dữ liệu
-                Toast.makeText(context, "Lỗi: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Xử lý khi có lỗi truy vấn dữ liệu
+                        Toast.makeText(context, "Lỗi: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

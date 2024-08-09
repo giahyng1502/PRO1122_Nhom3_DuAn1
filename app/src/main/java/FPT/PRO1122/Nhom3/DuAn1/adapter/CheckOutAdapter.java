@@ -1,6 +1,5 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,13 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
-import FPT.PRO1122.Nhom3.DuAn1.model.GioHang;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 
 public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHolder>{
 
-    ArrayList<GioHang> list = new ArrayList<>();
+    ArrayList<Cart> list = new ArrayList<>();
 
-    public CheckOutAdapter(ArrayList<GioHang> list) {
+    public CheckOutAdapter(ArrayList<Cart> list) {
         this.list = list;
     }
 
