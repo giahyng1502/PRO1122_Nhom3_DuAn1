@@ -38,11 +38,11 @@ import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
 
 import FPT.PRO1122.Nhom3.DuAn1.adapter.MenuMonAnAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityMainBinding;
 
+import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 

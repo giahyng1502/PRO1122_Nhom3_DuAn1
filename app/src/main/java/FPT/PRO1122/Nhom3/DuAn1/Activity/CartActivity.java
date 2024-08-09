@@ -30,9 +30,9 @@ import java.util.Locale;
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.CheckOutAdapter;
-import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.GioHangAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCartBinding;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
