@@ -17,9 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityChiTietMonAnBinding;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
 public class ChiTietMonAn extends AppCompatActivity {
@@ -149,7 +149,7 @@ public class ChiTietMonAn extends AppCompatActivity {
             }
             binding.numTxt.setText(num + "");
             total = (long) (num*object.getPrice());
-            binding.totalTxt.setText(total+"");
+            binding.totalTxt.setText(total+" VND");
         });
 
         // Khởi tạo DatabaseReference

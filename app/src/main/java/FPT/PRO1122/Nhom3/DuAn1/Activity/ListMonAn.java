@@ -19,9 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFavorite;
+import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityListMonAnBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
-import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityListMonAnBinding;
 
 public class ListMonAn extends AppCompatActivity {
     ActivityListMonAnBinding binding;

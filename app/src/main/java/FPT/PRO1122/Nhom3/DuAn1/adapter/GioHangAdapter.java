@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
-import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.R;
+import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder>{
@@ -79,14 +79,13 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                             }
                             notifyDataSetChanged();
                         });
-            } else {
+            } if (num <= 1){
                 // Nếu số lượng là 1, xóa sản phẩm khỏi giỏ hàng
                 String itemId = String.valueOf(item.getCartId());
                 databaseReference.child(MainActivity.id).child(itemId).removeValue()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 Log.d("Delete", "Item removed successfully");
-                                list.clear();
                                 notifyDataSetChanged();
                                 // Gọi phương thức để làm mới RecyclerView
                             } else {
@@ -94,6 +93,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                             }
                         });
                 notifyDataSetChanged();
+                if (list.size() == 1) {
+                    list.clear();
+                }
             }
         });
 
