@@ -40,6 +40,7 @@ public class ChiTietMonAn extends AppCompatActivity {
 
         getIntentExtra();
         setVariable();
+
         // add data favorite Food
         favoriteFood();
     }

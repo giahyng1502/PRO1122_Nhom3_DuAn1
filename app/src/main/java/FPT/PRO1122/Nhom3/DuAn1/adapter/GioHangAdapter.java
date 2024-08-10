@@ -79,23 +79,23 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                             }
                             notifyDataSetChanged();
                         });
-            } if (num <= 1){
+            } else  {
                 // Nếu số lượng là 1, xóa sản phẩm khỏi giỏ hàng
                 String itemId = String.valueOf(item.getCartId());
                 databaseReference.child(MainActivity.id).child(itemId).removeValue()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Log.d("Delete", "Item removed successfully");
+                                if (list.size() == 1) {
+                                    list.clear();
+                                }
                                 notifyDataSetChanged();
+                                Log.d("Delete", "Item removed successfully");
                                 // Gọi phương thức để làm mới RecyclerView
                             } else {
                                 Log.e("Delete", "Failed to remove item", task.getException());
+
                             }
                         });
-                notifyDataSetChanged();
-                if (list.size() == 1) {
-                    list.clear();
-                }
             }
         });
 
