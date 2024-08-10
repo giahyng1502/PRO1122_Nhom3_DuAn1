@@ -17,7 +17,7 @@
         android:textColor="@color/blackBlue"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:text="Banner Management"
+        android:text="@string/banner_management"
         android:textSize="22sp"/>
     <TextView
         android:layout_width="match_parent"
@@ -176,9 +176,14 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:layout_marginHorizontal="50dp"
         android:id="@+id/btnComfirm"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
         android:background="@drawable/custom_button_editprofile"
         android:textColor="#FFFFFF"
         app:backgroundTint="@null"/>

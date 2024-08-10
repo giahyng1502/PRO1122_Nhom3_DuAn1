@@ -6,27 +6,32 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".Fragment.Favorite">
+
     <TextView
         android:layout_width="match_parent"
-        android:text="Favorite Foods"
-        android:textColor="@color/blackBlue"
-        android:textStyle="bold"
-        android:textSize="20dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_height="wrap_content"/>
+        android:text="@string/favorite_foods"
+        android:textColor="@color/blackBlue"
+        android:textSize="22sp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="70dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/recycler_view_Favorite" />
-    </LinearLayout>
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Favorite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="70dp" />
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

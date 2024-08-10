@@ -12,9 +12,12 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Order History"
+        android:text="@string/order_history"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textColor="@color/blackBlue"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_marginTop="30dp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <!-- TabLayout for the tabs -->

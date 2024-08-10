@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:text="Food Name : "
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/blackBlue"
                 android:layout_marginHorizontal="5dp"
                 android:layout_height="wrap_content"/>
@@ -102,7 +102,7 @@
                     android:layout_height="60dp"
                     android:background="@drawable/custom_input"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/font_inter"
+                    android:fontFamily="@font/roboto_regular"
                     android:hint="Food Name"
                     android:paddingVertical="10dp"
                     android:textColorHint="#CFCFCF" />
@@ -113,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:text="Price : "
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/blackBlue"
                 android:layout_marginHorizontal="5dp"
                 android:layout_height="wrap_content"/>
@@ -133,7 +133,7 @@
                     android:layout_height="60dp"
                     android:background="@drawable/custom_input"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/font_inter"
+                    android:fontFamily="@font/roboto_regular"
                     android:hint="Price"
                     android:paddingVertical="10dp"
                     android:textColorHint="#CFCFCF" />
@@ -143,7 +143,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="Category : "
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/blackBlue"
                 android:layout_marginHorizontal="5dp"
                 android:layout_height="wrap_content"/>
@@ -154,13 +154,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:textColorHint="#CFCFCF" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:text="Describe : "
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/blackBlue"
                 android:layout_marginHorizontal="5dp"
                 android:layout_height="wrap_content"/>
@@ -182,7 +182,7 @@
                     android:maxLines="4"
                     android:background="@drawable/custom_input"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/font_inter"
+                    android:fontFamily="@font/roboto_regular"
                     android:hint="Describe"
                     android:layout_marginBottom="20dp"
                     android:paddingVertical="10dp"
@@ -206,7 +206,7 @@
                     android:background="@drawable/custom_button"
                     android:elevation="12dp"
                     android:backgroundTint="#DDC1C1C1"
-                    android:fontFamily="@font/font_inter"
+                    android:fontFamily="@font/roboto_bold"
                     android:text="Cancel"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -220,7 +220,7 @@
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/custom_button"
                     android:elevation="12dp"
-                    android:fontFamily="@font/font_inter"
+                    android:fontFamily="@font/roboto_bold"
                     android:text="Submit"
                     android:textAllCaps="false"
                     android:textColor="@color/white"

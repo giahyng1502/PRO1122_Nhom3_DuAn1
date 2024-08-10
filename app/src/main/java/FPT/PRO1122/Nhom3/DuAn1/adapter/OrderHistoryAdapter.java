@@ -16,7 +16,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
@@ -24,8 +26,8 @@ import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder> {
-    private ArrayList<Order> orderList;
-    private Context context;
+    private final ArrayList<Order> orderList;
+    private final Context context;
 
     public OrderHistoryAdapter(Context context, ArrayList<Order> orderList) {
         this.context = context;
@@ -42,10 +44,15 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapter.ViewHolder holder, int position) {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         Order order = orderList.get(position);
         holder.orderDateTxt.setText(order.getOrderDate());
         holder.nameTxt.setText(order.getUser());
-        holder.totalAmountTxt.setText(order.getTotalAmount() + " VND");
+        double totalAmountFormated = order.getTotalAmount();
+        String formattedTotalAmount = vietnameseCurrencyFormat.format(totalAmountFormated);
+        holder.totalAmountTxt.setText(formattedTotalAmount);
         holder.phoneTxt.setText(order.getPhone());
         holder.addressTxt.setText(order.getAddress());
         holder.statusTxt.setText(getStatusString(order.getStatus()));
@@ -220,8 +227,6 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             btnHuy = itemView.findViewById(R.id.btnHuy);
             btnDangGiao = itemView.findViewById(R.id.btnDangGiao);
             btnThanhCong = itemView.findViewById(R.id.btnHoanThanh);
-
-
         }
     }
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="310dp"
     android:layout_margin="8dp"
@@ -38,8 +37,8 @@
                 android:layout_marginTop="16dp"
                 android:maxWidth="180dp"
                 android:maxHeight="25dp"
-                android:text="Tittle"
-
+                android:text="@string/title"
+                android:fontFamily="@font/roboto_bold"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +49,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="48.000 VNDd"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/price"
                 app:layout_constraintBottom_toBottomOf="@+id/titleListMonTxt"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -60,7 +62,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="5"
-                android:textColor="@color/blue_grey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/blackBlue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/titleListMonTxt" />
 
@@ -68,11 +73,22 @@
                 android:id="@+id/imageView6"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="3dp"
                 app:layout_constraintBottom_toBottomOf="@+id/starListMonTxt"
                 app:layout_constraintStart_toEndOf="@+id/starListMonTxt"
                 app:layout_constraintTop_toTopOf="@+id/starListMonTxt"
                 app:srcCompat="@drawable/star" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dot"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/starListMonTxt"
+                app:layout_constraintHorizontal_bias="0.90"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintVertical_bias="1.0"/>
 
             <TextView
                 android:id="@+id/btnAddCart"
@@ -82,7 +98,7 @@
                 android:gravity="center"
                 android:text="+"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -91,11 +107,16 @@
                 android:id="@+id/timeListMonTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Time"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/time"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/starListMonTxt"
                 app:layout_constraintEnd_toStartOf="@+id/btnAddCart"
+                app:layout_constraintHorizontal_bias="0.063"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="@+id/starListMonTxt" />
+                app:layout_constraintTop_toTopOf="@+id/starListMonTxt"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -105,8 +126,9 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/timeListMonTxt"
-                app:srcCompat="@drawable/time"
+                app:srcCompat="@drawable/ic_delivery"
                 app:tint="@color/red" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

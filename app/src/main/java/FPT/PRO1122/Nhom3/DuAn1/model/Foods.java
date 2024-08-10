@@ -56,7 +56,6 @@ public class Foods implements Serializable {
         ImagePath = imagePath;
     }
 
-
     public double getStar() {
         return Star;
     }

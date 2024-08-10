@@ -5,29 +5,31 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".Activity.MyOrderHistory"
-    android:orientation="vertical">
+    tools:context=".Activity.MyOrderHistory">
 
     <!-- Hàng chứa Nút Back và Tiêu đề -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_marginTop="30dp">
         <!-- Tiêu đề -->
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="My Order"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:layout_marginRight="20dp"
-            android:textStyle="bold"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="@string/my_orders"
+            android:textAlignment="center"
+            android:textColor="@color/blackBlue"
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!-- RecyclerView -->

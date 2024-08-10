@@ -59,7 +59,7 @@ public class ListMonAn extends AppCompatActivity {
                     for (DataSnapshot issue : snapshot.getChildren()){
                         list.add(issue.getValue(Foods.class));
                     }
-                    if (list.size()>0){
+                    if (!list.isEmpty()){
                         binding.foodListView.setLayoutManager(new GridLayoutManager(ListMonAn.this, 1));
                         adapterFoodListView = new AdapterFavorite(list);
                         binding.foodListView.setAdapter(adapterFoodListView);
@@ -79,6 +79,7 @@ public class ListMonAn extends AppCompatActivity {
         Intent intent = getIntent();
         catagory = (Catagory) intent.getSerializableExtra("Category");
 
+        assert catagory != null;
         binding.titleCategoryTxt.setText(catagory.getName());
 
         binding.backBtn.setOnClickListener(v -> startActivity(new Intent(ListMonAn.this, MainActivity.class)));

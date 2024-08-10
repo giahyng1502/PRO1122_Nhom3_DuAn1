@@ -25,6 +25,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +38,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Title"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/title"
                 android:textColor="@color/blue_grey"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Time"
+                android:text="@string/time"
                 app:layout_constraintStart_toStartOf="@+id/titleFoodListViewTxt"
                 app:layout_constraintTop_toBottomOf="@+id/titleFoodListViewTxt" />
 
@@ -62,7 +64,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/timeListViewTxt"
                 app:layout_constraintStart_toEndOf="@+id/timeListViewTxt"
                 app:layout_constraintTop_toTopOf="@+id/timeListViewTxt"
-                app:srcCompat="@drawable/time" />
+                app:srcCompat="@drawable/ic_delivery"
+                app:tint="@color/red"/>
 
             <TextView
                 android:id="@+id/priceListFoodTxt"
@@ -70,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="0 VND"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/price"
                 android:textColor="@color/red"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -81,8 +85,8 @@
 
             <ImageView
                 android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/priceListFoodTxt"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +97,12 @@
                 android:id="@+id/rateTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="4.8"
+                android:layout_marginEnd="2dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/star"
+                android:textColor="@color/blackBlue"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintEnd_toStartOf="@+id/imageView9"
                 app:layout_constraintTop_toTopOf="@+id/imageView9" />

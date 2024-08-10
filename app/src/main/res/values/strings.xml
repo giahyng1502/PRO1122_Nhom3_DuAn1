@@ -1,63 +1,100 @@
 <resources>
-    <string name="app_name">M! Foodie</string>
-    <string name="home">Home</string>
-    <string name="favorite">Favorite</string>
-    <string name="my_order">My Order</string>
-    <string name="profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="todo">TODO</string>
-
-    <string name="facebook_app_id">931956248688754</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">7d8510b20e1d6bda41f7bc9287d4c9a8</string>
-
-    <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="register_here">Register here</string>
-    <string name="get_started">Get Started</string>
-    <string name="welcome_back">Welcome Back</string>
-    <string name="header_text">Let\'s log in to Mi!Foodie and order\nfood together!</string>
-    <string name="enter_phonenumber">Phone Number</string>
-    <string name="enter_password">Password</string>
-    <string name="remember_account">Remember Account</string>
-    <string name="forgot_password"><u>Forgot Password?</u></string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="or_signin_with">or signIn with</string>
-    <string name="google">Google</string>
-    <string name="facebook">Facebook</string>
-    <string name="continue_">Continue</string>
-    <string name="create_an_account">Create an account</string>
-    <string name="create_a_profile">Create a profile</string>
-    <string name="header_text_signin">Looks like you don\'t have an account yet?\nLet\'s create an account to order food together!</string>
-    <string name="header_text_create_profile">Complete personal information to successfully create an account</string>
-    <string name="i_agree_to_all_the_terms_conditions">I agree to all the <u>Terms &amp; Conditions</u></string>
-    <string name="enter_confirm_password">Confirm Password</string>
-    <string name="enter_phone_number">Enter Phone Number</string>
-    <string name="already_have_an_account">Already have an account?</string>
+    <string name="app_name">Mi!Foodie</string>
+    <string name="todo">todo</string>
+    <string name="home">Trang chủ</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="my_order">Đơn hàng</string>
+    <string name="profile">Hồ sơ</string>
+    <string name="don_t_have_an_account">Bạn chưa có tài khoản?</string>
+    <string name="register_here">Đăng ký</string>
+    <string name="get_started">Bắt đầu</string>
+    <string name="welcome_back">Chào mừng trở lại</string>
+    <string name="header_text">Hãy đăng nhập vào Mi!Foodie và cùng nhau\ngọi đồ ăn nhé!</string>
+    <string name="enter_phonenumber">Số điện thoại</string>
+    <string name="enter_password">Mật khẩu</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="or_signin_with">hoặc với</string>
+    <string name="google">Tiếp tục với Google</string>
+    <string name="continue_">Tiếp tục</string>
+    <string name="create_an_account">Tạo một tài khoản</string>
+    <string name="create_a_profile">Tạo hồ sơ</string>
+    <string name="header_text_signin">Có vẻ như bạn chưa có tài khoản?\nHãy cùng nhau tạo một tài khoản để đặt đồ ăn nhé!</string>
+    <string name="header_text_create_profile">Điền đầy đủ thông tin cá nhân để tạo\ntài khoản thành công</string>
+    <string name="enter_confirm_password">Xác nhận mật khẩu</string>
+    <string name="enter_phone_number">Nhập số điện thoại</string>
+    <string name="already_have_an_account">Đã có tài khoản?</string>
     <string name="client_id">951257015027-g26tdd9fv9l6qnfqre2a4kaopo85eomp.apps.googleusercontent.com</string>
-    <string name="log_out">Log out</string>
-    <string name="name">name</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
-    <string name="email_address">Email Address</string>
-    <string name="address">Address</string>
-    <string name="gender">Gender</string>
-    <string name="create">Create</string>
-    <string name="by_creating_you_agree_to_the_terms_of_services_privacy_policy">By creating, you agree to the\n <b>Terms of Services</b> &amp; <b>Privacy Policy</b></string>
+    <string name="log_out">Đăng xuất</string>
+    <string name="name">tên</string>
+    <string name="first_name">Tên</string>
+    <string name="last_name">Họ</string>
+    <string name="email_address">Địa chỉ email</string>
+    <string name="address">Địa chỉ</string>
+    <string name="create">Tạo tài khoản</string>
+    <string name="by_creating_you_agree_to_the_terms_of_services_privacy_policy">Bằng cách tạo tài khoản, bạn đồng ý với\n <b>Điều khoản dịch vụ</b> &amp; <b>Chính sách quyền riêng tư</b></string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="your_cart_is_empty">Giỏ hàng của bạn chưa có gì cả\nđi chọn món ăn thôi nào!!</string>
+    <string name="input_voucher">Nhập mã giảm giá (nếu có)</string>
+    <string name="apply">Áp dụng</string>
+    <string name="order_information">Thông tin đặt hàng</string>
+    <string name="total_price">tổng giá</string>
+    <string name="number">0</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="title">Tiêu đề</string>
+    <string name="price">"giá "</string>
+    <string name="please_wait">Vui lòng chờ...</string>
+    <string name="time">15 - 20p</string>
+    <string name="star">5</string>
+    <string name="quantity">0</string>
+    <string name="x">x</string>
+    <string name="hello">Xin chào,</string>
+    <string name="the_top_5_most_delicious_dishes">Top 5 Món Ăn Ngon Nhất</string>
+    <string name="menu">Thể loại</string>
+    <string name="edit_profile">Chỉnh sửa hồ sơ</string>
+    <string name="payment_methods">Phương thức thanh toán</string>
+    <string name="pay_your_bill">Thanh toán hóa đơn của bạn</string>
+    <string name="order_history">Lịch sử đặt hàng</string>
+    <string name="orders_information">Thông tin đơn hàng</string>
+    <string name="delivery_address">Địa chỉ giao hàng</string>
+    <string name="your_delivery_location">Địa điểm giao hàng của bạn</string>
+    <string name="change_password">Thay đổi mật khẩu</string>
+    <string name="your_change_password">Mật khẩu thay đổi của bạn</string>
+    <string name="choose_payment_methods">Chọn phương thức thanh toán</string>
+    <string name="direct_payment">Thanh toán trực tiếp</string>
+    <string name="place_order">Đặt hàng</string>
+    <string name="description">Mô tả</string>
+    <string name="add_to_card">Thêm vào giỏ</string>
+    <string name="old_password">Mật khẩu hiện tại</string>
+    <string name="input_old_password">Nhập mật khẩu hiện tại</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="input_new_password">Nhập mật khẩu mới</string>
+    <string name="re_enter_password">Nhập lại mật khẩu</string>
+    <string name="full_name">Tên đầy đủ</string>
+    <string name="input_your_first_name">Nhập tên đầy đủ của bạn</string>
+    <string name="input_your_email_address">Nhập địa chỉ email của bạn</string>
+    <string name="input_your_phone_number">Nhập số điện thoại của bạn</string>
+    <string name="input_your_hometown">Nhập địa chỉ của bạn</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="this_account_will_be_permanently_deleted_from_this_application">Tài khoản này sẽ bị xóa vĩnh viễn khỏi ứng dụng này</string>
+    <string name="delete">XÓA BỎ</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="banner_management">Quản lý banner</string>
+    <string name="favorite_foods">Món ăn yêu thích</string>
+    <string name="food_management">Quản lý thực phẩm</string>
+    <string name="my_orders">Đơn hàng của tôi</string>
+    <string name="renvenue_management">Quản lý doanh thu</string>
+    <string name="check">Kiểm tra</string>
+    <string name="user_management">Quản lý người dùng</string>
+    <string name="what_are_you_eat_today">Hôm nay bạn ăn gì?</string>
 
-    <string-array name="gender">
-        <item>Gender</item>
-        <item>Male</item>
-        <item>Female</item>
+    <string-array name="revenue_filter_options">
+        <item>Hằng ngày</item>
+        <item>Hằng tuần</item>
+        <item>Hằng tháng</item>
+        <item>Tuỳ chỉnh</item>
     </string-array>
-
-        <string-array name="revenue_filter_options">
-            <item>Daily</item>
-            <item>Weekly</item>
-            <item>Monthly</item>
-            <item>Custom</item>
-        </string-array>
 
 </resources>
 

@@ -35,11 +35,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="20.000 VND"
+            android:text="@string/price"
             android:textColor="@color/red"
             android:textSize="18sp"
             android:textStyle="bold"
-
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,8 +83,6 @@
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toTopOf="@+id/textView6" />
 
-
-
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
@@ -93,7 +91,8 @@
             android:text="Thời Gian Đặt Món:"
             android:textColor="@color/blackBlue"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/layout1"
@@ -181,7 +180,7 @@
             android:visibility="gone"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/blackBlue"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:text="Xác Nhận Đơn Hàng"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -196,7 +195,7 @@
             android:visibility="gone"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/red"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:text="Huỷ Đơn Hàng"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -211,7 +210,7 @@
             android:layout_marginTop="8dp"
             android:visibility="gone"
             android:backgroundTint="#3C7EEF"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:text="Giao Đơn Hàng"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -225,7 +224,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/yellow"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:text="Hoàn Thành Đơn Hàng"
             android:textAllCaps="false"
             android:visibility="gone"

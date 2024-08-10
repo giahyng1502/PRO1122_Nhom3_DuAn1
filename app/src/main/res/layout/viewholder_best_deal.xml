@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="240dp"
     android:layout_height="295dp"
     android:layout_margin="8dp"
-    app:cardCornerRadius="15dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +13,7 @@
 
         <ImageView
             android:id="@+id/foodsImage"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="206dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,14 +33,14 @@
                 android:id="@+id/titleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:maxWidth="100dp"
                 android:maxHeight="25dp"
-                android:text="Tittle"
-
+                android:text="@string/title"
+                android:fontFamily="@font/roboto_bold"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +51,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="48.000 VNDd"
+                android:text="@string/price"
+                android:textSize="16sp"
+                android:textColor="#E6864E"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"
                 app:layout_constraintBottom_toBottomOf="@+id/titleTxt"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -61,8 +64,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="5"
-                android:textColor="@color/blue_grey"
+                android:text="@string/star"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/blackBlue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/titleTxt" />
 
@@ -70,21 +75,31 @@
                 android:id="@+id/imageView6"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/starTxt"
                 app:layout_constraintStart_toEndOf="@+id/starTxt"
                 app:layout_constraintTop_toTopOf="@+id/starTxt"
                 app:srcCompat="@drawable/star" />
 
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="2dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/starTxt"
+                android:src="@drawable/dot"/>
+
             <TextView
                 android:id="@+id/btnAddCart"
                 android:layout_width="44dp"
-                android:layout_height="39dp"
+                android:layout_height="40dp"
                 android:background="@drawable/plus_background"
                 android:gravity="center"
-                android:text="+"
+                android:text="@string/plus"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -93,23 +108,26 @@
                 android:id="@+id/timeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Time"
+                android:text="@string/time"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_marginStart="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/starTxt"
-                app:layout_constraintEnd_toStartOf="@+id/plusBtn"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintStart_toEndOf="@+id/dot"
                 app:layout_constraintTop_toTopOf="@+id/starTxt" />
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/timeTxt"
-                app:srcCompat="@drawable/time"
+                app:srcCompat="@drawable/ic_delivery"
                 app:tint="@color/red" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

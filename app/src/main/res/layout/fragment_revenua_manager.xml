@@ -22,7 +22,7 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:text="Renvenue Management"
+            android:text="@string/renvenue_management"
             android:textStyle="bold"
             android:textColor="@color/blackBlue"
             android:textSize="24sp"
@@ -44,7 +44,7 @@
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
                 android:focusable="false"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Từ Ngày"
                 android:inputType="none"
                 android:clickable="false"
@@ -74,7 +74,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Từ Ngày"
                 android:focusable="false"
                 android:inputType="none"
@@ -88,9 +88,11 @@
     <Button
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
-        android:text="CHECK"
+        android:text="@string/check"
         android:background="@drawable/custom_button_editprofile"
         app:backgroundTint="@null"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         android:id="@+id/btnCheckDoanhThu"
         android:layout_height="wrap_content"/>
 
@@ -117,7 +119,7 @@
             android:layout_height="60dp"
             android:background="@drawable/custom_input"
             android:drawablePadding="10dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:hint="Doanh Thu"
             android:focusable="false"
             android:inputType="none"

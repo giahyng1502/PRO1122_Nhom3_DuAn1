@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:text="Phone Number"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="@color/blackBlue"
             android:layout_marginHorizontal="5dp"
             android:layout_height="wrap_content"/>
@@ -101,7 +101,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Phone Number"
                 android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF" />
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:text="Email"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="@color/blackBlue"
             android:layout_marginHorizontal="5dp"
             android:layout_height="wrap_content"/>
@@ -132,7 +132,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Email"
                 android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF" />
@@ -142,7 +142,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:text="Password"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="@color/blackBlue"
             android:layout_marginHorizontal="5dp"
             android:layout_height="wrap_content"/>
@@ -161,7 +161,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Password"
                 android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF"/>
@@ -171,7 +171,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:text="Full Name"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="@color/blackBlue"
             android:layout_marginHorizontal="5dp"
             android:layout_height="wrap_content"/>
@@ -190,7 +190,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Full Name"
                 android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF" />
@@ -200,7 +200,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:text="Address"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="@color/blackBlue"
             android:layout_marginHorizontal="5dp"
             android:layout_height="wrap_content"/>
@@ -219,7 +219,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="Address"
                 android:paddingVertical="10dp"
                 android:textColorHint="#CFCFCF" />
@@ -238,11 +238,11 @@
                 android:textSize="16sp"
                 android:id="@+id/rdoUser"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:text="User"/>
             <RadioButton
                 android:layout_width="wrap_content"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:id="@+id/rdoAdmin"
@@ -264,7 +264,7 @@
                 android:background="@drawable/custom_button"
                 android:elevation="12dp"
                 android:backgroundTint="#DDC1C1C1"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_bold"
                 android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -278,7 +278,7 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/custom_button"
                 android:elevation="12dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_bold"
                 android:text="Submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

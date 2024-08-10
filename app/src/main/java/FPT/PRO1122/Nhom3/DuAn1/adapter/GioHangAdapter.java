@@ -1,6 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
-
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,17 +28,14 @@ import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 
-
-public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder>{
-
+@SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
+public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder> {
     ArrayList<Cart> list;
     int num;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Carts");
 
-
     public GioHangAdapter(ArrayList<Cart> list) {
         this.list = list;
-
     }
 
     @NonNull
@@ -47,15 +47,23 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull GioHangAdapter.ViewHolder holder, int position) {
-        holder.titleTxtInCart.setText(list.get(position).getTitle());
-        holder.priceItemTxtInCart.setText(list.get(position).getPrice() + " VND");
-        holder.numTxtInCart.setText(list.get(position).getQuantity() + "");
-        holder.totalPriceTxtInCart.setText(list.get(position).getTotal() + " VND");
-
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         Cart item = list.get(position);
+
+        holder.titleTxtInCart.setText(item.getTitle());
+        double priceFormated = item.getPrice();
+        String formattedNumber = vietnameseCurrencyFormat.format(priceFormated);
+        holder.priceItemTxtInCart.setText(formattedNumber);
+        holder.numTxtInCart.setText(item.getQuantity() + "");
+        double totalPriceFormated = item.getTotal();
+        String totalPriceFormatted = vietnameseCurrencyFormat.format(totalPriceFormated);
+        holder.totalPriceTxtInCart.setText(totalPriceFormatted);
 
         holder.minusBtnInCart.setOnClickListener(v -> {
             num = item.getQuantity();
+
             if (num > 1) { // Đảm bảo số lượng không giảm xuống dưới 1
                 num--;
                 item.setQuantity(num);
@@ -73,29 +81,27 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                             if (task.isSuccessful()) {
                                 // Cập nhật thành công
                                 Log.d("Update", "Quantity updated successfully");
+                                notifyDataSetChanged();
                             } else {
                                 // Cập nhật không thành công
                                 Log.e("Update", "Failed to update quantity", task.getException());
                             }
-                            notifyDataSetChanged();
                         });
-            } if (num <= 1){
+            } else {
                 // Nếu số lượng là 1, xóa sản phẩm khỏi giỏ hàng
                 String itemId = String.valueOf(item.getCartId());
                 databaseReference.child(MainActivity.id).child(itemId).removeValue()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Log.d("Delete", "Item removed successfully");
+                                if (list.size() == 1) {
+                                    list.clear();
+                                }
                                 notifyDataSetChanged();
-                                // Gọi phương thức để làm mới RecyclerView
+                                Log.d("Delete", "Item removed successfully");
                             } else {
                                 Log.e("Delete", "Failed to remove item", task.getException());
                             }
                         });
-                notifyDataSetChanged();
-                if (list.size() == 1) {
-                    list.clear();
-                }
             }
         });
 
@@ -125,23 +131,24 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                         }
                     });
             notifyDataSetChanged();
-
         });
 
         Glide.with(holder.itemView.getContext())
-                .load(list.get(position).getImagePath())
+                .load(item.getImagePath())
                 .transform(new CenterCrop(), new RoundedCorners(30))
                 .into(holder.pic);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list != null) return list.size();
+        return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTxtInCart, priceItemTxtInCart, totalPriceTxtInCart, minusBtnInCart, numTxtInCart, plusBtnInCart ;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView titleTxtInCart, priceItemTxtInCart, totalPriceTxtInCart, minusBtnInCart, numTxtInCart, plusBtnInCart;
         ImageView pic;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTxtInCart = itemView.findViewById(R.id.titleTxtInCart);

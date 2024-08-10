@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:text="User Name"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/font_inter"
+        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/blackBlue"
         android:layout_marginHorizontal="5dp"
         android:layout_height="wrap_content"/>
@@ -40,7 +40,7 @@
             android:layout_height="60dp"
             android:background="@drawable/custom_input"
             android:drawablePadding="10dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:hint="User Name"
             android:paddingVertical="10dp"
             android:textColorHint="#CFCFCF" />
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:text="PassWord"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/font_inter"
+        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/blackBlue"
         android:layout_marginHorizontal="5dp"
         android:layout_height="wrap_content"/>
@@ -71,7 +71,7 @@
             android:layout_height="60dp"
             android:background="@drawable/custom_input"
             android:drawablePadding="10dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
             android:hint="PassWord"
             android:paddingVertical="10dp"
             android:textColorHint="#CFCFCF" />
@@ -91,7 +91,7 @@
             android:background="@drawable/custom_button"
             android:elevation="12dp"
             android:backgroundTint="#DDC1C1C1"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_bold"
             android:text="Cancel"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -105,7 +105,7 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/custom_button"
             android:elevation="12dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_bold"
             android:text="Submit"
             android:textAllCaps="false"
             android:textColor="@color/white"

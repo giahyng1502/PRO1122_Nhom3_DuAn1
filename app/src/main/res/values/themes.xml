@@ -11,21 +11,33 @@
         <item name="bottomSheetDialogTheme">@style/AppButtonSheetDiaLogTheme</item>
         <item name="android:windowLightStatusBar">true</item> <!-- Để biểu tượng màu tối -->
     </style>
-    <style name="textStyle" parent="Widget.AppCompat.TextView" >
+
+    <style name="AppTheme1" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="textStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/blue_grey</item>
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="textStyleBold" parent="Widget.AppCompat.TextView" >
+    <style name="textStyleBold" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/blue_grey</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="AppmodeStyle" parent="Widget.Design.BottomSheet.Modal" >
+    <style name="AppmodeStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
-    <style name="AppButtonSheetDiaLogTheme" parent="Theme.Design.BottomSheetDialog" >
+
+    <style name="AppButtonSheetDiaLogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="android:background">@drawable/bottom_sheet_background</item>
         <item name="bottomSheetStyle">@style/AppmodeStyle</item>
     </style>

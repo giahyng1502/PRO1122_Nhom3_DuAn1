@@ -1,7 +1,9 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,11 +19,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Currency;
+
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityChiTietMonAnBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
+@SuppressLint("SetTextI18n")
 public class ChiTietMonAn extends AppCompatActivity {
     ActivityChiTietMonAnBinding binding;
     private Foods object;
@@ -37,6 +43,7 @@ public class ChiTietMonAn extends AppCompatActivity {
         setContentView(binding.getRoot());
         getWindow().setStatusBarColor(getResources().getColor(R.color.black));
         binding.numTxt.setText(num+"");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         getIntentExtra();
         setVariable();
@@ -118,16 +125,19 @@ public class ChiTietMonAn extends AppCompatActivity {
     }
 
     private void setVariable() {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
 
         binding.backBtn.setOnClickListener(v -> finish());
 
         Glide.with(ChiTietMonAn.this).load(object.getImagePath()).into(binding.pic);
         long price = (long) object.getPrice();
         binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText(price + " VND");
         binding.rateTxt.setText("" + object.getStar());
+        String formattedPrice = vietnameseCurrencyFormat.format(price);
         binding.descriptionTxt.setText(object.getDescription());
-        binding.totalTxt.setText(price+" VND");
+        binding.totalTxt.setText(formattedPrice);
 
         //set status favorite
         getFavoriteUser(MainActivity.id, object.getId()+"");
@@ -137,7 +147,7 @@ public class ChiTietMonAn extends AppCompatActivity {
             binding.numTxt.setText(num + "");
 
             total = (long) (num* object.getPrice());
-            String totalString = total + " VND";
+            String totalString = vietnameseCurrencyFormat.format(total);
             binding.totalTxt.setText(totalString);
         });
         binding.minusBtn.setOnClickListener(v -> {
@@ -149,7 +159,8 @@ public class ChiTietMonAn extends AppCompatActivity {
             }
             binding.numTxt.setText(num + "");
             total = (long) (num*object.getPrice());
-            binding.totalTxt.setText(total+" VND");
+            String totalString = vietnameseCurrencyFormat.format(total);
+            binding.totalTxt.setText(totalString);
         });
 
         // Khởi tạo DatabaseReference

@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -44,7 +42,6 @@ public class Profile extends AppCompatActivity {
         getData();
         FirebaseApp.initializeApp(this);
         auth = FirebaseAuth.getInstance();
-        FacebookSdk.sdkInitialize(this);
         signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
 
         anhxa();
@@ -129,7 +126,7 @@ public class Profile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(Profile.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -158,7 +155,5 @@ public class Profile extends AppCompatActivity {
             }
         });
         FirebaseAuth.getInstance().signOut();
-        LoginManager.getInstance().logOut();
     }
-
 }

@@ -15,9 +15,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chi Tiết Đơn Hàng: "
-            android:layout_marginRight="8dp"
-            android:textColor="@color/blue_grey"
+            android:text="Chi Tiết Đơn Hàng"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/blackBlue"
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -29,10 +30,11 @@
             android:id="@+id/tvTax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thuế : "
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/blue_grey"
+            android:text="Thuế: "
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/blackBlue"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -40,10 +42,11 @@
             android:id="@+id/tvdeliveryFee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phí Vận Chuyển : "
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/blue_grey"
+            android:text="Phí Vận Chuyển: "
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/blackBlue"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -51,19 +54,21 @@
             android:id="@+id/tongTientxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tổng tiền :  "
-            android:layout_marginRight="8dp"
+            android:text="Tổng tiền:  "
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/blue_grey"
+            android:textColor="@color/blackBlue"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tên Người Nhận: "
-            android:layout_marginRight="8dp"
-            android:textColor="@color/blue_grey"
+            android:text="Tên Người Nhận "
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/blackBlue"
+            android:fontFamily="@font/roboto_regular"
             android:textSize="16sp" />
 
         <EditText
@@ -75,16 +80,17 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:hint="Tên người nhận:"
+            android:hint="Tên người nhận"
             android:textColor="@color/blue_grey"
             android:textColorHint="@color/gray" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Số Điện Thoại:  "
-            android:layout_marginRight="8dp"
-            android:textColor="@color/blue_grey"
+            android:text="@string/enter_phonenumber"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/blackBlue"
+            android:fontFamily="@font/roboto_regular"
             android:textSize="16sp" />
 
         <EditText
@@ -96,16 +102,17 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:hint="Số Điện Thoại"
+            android:hint="@string/enter_phonenumber"
             android:textColor="@color/blue_grey"
             android:textColorHint="@color/gray" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Địa chỉ giao hàng:  "
-            android:layout_marginRight="8dp"
-            android:textColor="@color/blue_grey"
+            android:text="Địa chỉ giao hàng"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/blackBlue"
             android:textSize="16sp" />
 
         <EditText
@@ -117,7 +124,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:hint="Địa Chỉ: "
+            android:hint="@string/address"
             android:textColor="@color/blue_grey"
             android:textColorHint="@color/gray" />
 
@@ -125,16 +132,18 @@
             android:id="@+id/chkSetuserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="#000000"
+            android:buttonTint="@color/black_1"
             android:text="Áp dụng cho tất cả các đơn hàng khác"
-            android:textColor="@color/black" />
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black_1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đặt Hàng"
             android:id="@+id/datHangBtn"
-            android:background="@drawable/red_button_background"
+            android:layout_marginHorizontal="2dp"
+            android:background="@drawable/custom_button"
             android:layout_marginTop="20dp"
             style="@style/Widget.AppCompat.Button"
             android:textSize="16sp"
@@ -142,4 +151,5 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>

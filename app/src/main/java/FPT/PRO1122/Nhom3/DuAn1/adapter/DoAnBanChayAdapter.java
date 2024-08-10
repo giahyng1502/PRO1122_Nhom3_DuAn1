@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
@@ -29,6 +32,7 @@ import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
+@SuppressLint("SetTextI18n")
 public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.ViewHolder> {
     List<Foods> items;
     Context context;
@@ -48,8 +52,13 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull DoAnBanChayAdapter.ViewHolder holder, int position) {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         holder.tittleTxt.setText(items.get(position).getTitle());
-        holder.priceTxt.setText(items.get(position).getPrice() + "VND");
+        double priceFormated = items.get(position).getPrice();
+        String formattedPrice = vietnameseCurrencyFormat.format(priceFormated);
+        holder.priceTxt.setText(formattedPrice);
         holder.starTxt.setText("" + items.get(position).getStar());
 
         Glide.with(context).load(items.get(position).getImagePath())
@@ -133,7 +142,7 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tittleTxt, priceTxt, starTxt, timeTxt,btnAddCart;
         ImageView foodsImage;
 
@@ -145,7 +154,6 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
             priceTxt = itemView.findViewById(R.id.priceTxt);
             foodsImage = itemView.findViewById(R.id.foodsImage);
             btnAddCart = itemView.findViewById(R.id.btnAddCart);
-
         }
     }
 }

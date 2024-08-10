@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -22,10 +23,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 
 import FPT.PRO1122.Nhom3.DuAn1.R;
@@ -36,13 +40,14 @@ import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
+@SuppressLint("SetTextI18n")
 public class CartActivity extends BaseActivity {
     private ActivityCartBinding binding;
     private RecyclerView.Adapter adapter;
     private  double tax;
 
 
-    private ArrayList<Cart> cartList = new ArrayList<>();
+    private final ArrayList<Cart> cartList = new ArrayList<>();
     private double deliveryFee = 10000;
     private double totalAmount;
 
@@ -55,12 +60,14 @@ public class CartActivity extends BaseActivity {
         setVariable();
         initList();
         tinhTongGioHang();
-        DatHang();
+        datHang();
+
         binding.backBtn.setOnClickListener(v-> startActivity(new Intent(
                 CartActivity.this,MainActivity.class)));
-        binding.btnVorcher.setOnClickListener(v-> {
-            String vorcher = binding.tvVorcher.getText().toString();
-            if (vorcher.equalsIgnoreCase("freeship")){
+
+        binding.btnVoucher.setOnClickListener(v-> {
+            String voucher = binding.tvVoucher.getText().toString();
+            if (voucher.equalsIgnoreCase("freeship")){
                 setDeliveryFee(0);
                 tinhTongGioHang();
                 Toast.makeText(this, "Sử dụng mã giảm giá thành công", Toast.LENGTH_SHORT).show();
@@ -72,9 +79,8 @@ public class CartActivity extends BaseActivity {
         });
     }
 
-
-    private void DatHang() {
-        binding.DatHangbtn.setOnClickListener(v -> {
+    private void datHang() {
+        binding.datHangBtn.setOnClickListener(v -> {
             if (cartList.isEmpty()) {
                 Toast.makeText(CartActivity.this, "Bạn không có đơn hàng nào", Toast.LENGTH_SHORT).show();
                 return;
@@ -111,26 +117,28 @@ public class CartActivity extends BaseActivity {
                         adapter = new GioHangAdapter(cartList);
                         binding.cartRec.setAdapter(adapter);
                     }
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(CartActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private void tinhTongGioHang() {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         double percentTax = 0.02;
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Carts").child(MainActivity.id);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                double tongGiaMonAn = 0.0; // Khởi tạo biến lưu tổng giá sản phẩm
+                double tongGiaMonAn = 0; // Khởi tạo biến lưu tổng giá sản phẩm
 
                 if (snapshot.exists()) {
                     for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
@@ -151,10 +159,18 @@ public class CartActivity extends BaseActivity {
                 setTotalAmount(totalAmount);
 
                 // Cập nhật giao diện
-                binding.totalFeeTxt.setText(tongGiaMonAn+ " VND");
-                binding.taxTxt.setText(getTax() + " VND");
-                binding.deliveryFeeTxt.setText(getDeliveryFee() + " VND");
-                binding.totalTxt.setText(getTotalAmount() + " VND");
+                double totalFormated = tongGiaMonAn;
+                String formattedTotal = vietnameseCurrencyFormat.format(totalFormated);
+                double taxFormated = getTax();
+                String formattedTax = vietnameseCurrencyFormat.format(taxFormated);
+                double deliveryFeeFormated = getDeliveryFee();
+                String formattedDeliveryFee = vietnameseCurrencyFormat.format(deliveryFeeFormated);
+                double totalAmountFormated = getTotalAmount();
+                String formattedTotalAmount = vietnameseCurrencyFormat.format(totalAmountFormated);
+                binding.totalFeeTxt.setText(formattedTotal);
+                binding.taxTxt.setText(formattedTax);
+                binding.deliveryFeeTxt.setText(formattedDeliveryFee);
+                binding.totalTxt.setText(formattedTotalAmount);
 
             }
 
@@ -210,14 +226,28 @@ public class CartActivity extends BaseActivity {
         rcThanhToan = bottomSheetDialog.findViewById(R.id.rcThanhToan);
         datHangBtn = bottomSheetDialog.findViewById(R.id.datHangBtn);
         chkSetuser = bottomSheetDialog.findViewById(R.id.chkSetuserName);
+
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         
         adapter = new CheckOutAdapter((ArrayList<Cart>) order.getOrderDetails());
+        assert rcThanhToan != null;
         rcThanhToan.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rcThanhToan.setAdapter(adapter);
 
-        tvPhiVanChuyen.setText("Phí Vận Chuyển : " + order.getDeliveryFee() + " VND");
-        tvThue.setText("Thuế : " + order.getTax() + " VND");
-        tongTientxt.setText("Tổng tiền: " + order.getTotalAmount() + " VND");
+        assert tvPhiVanChuyen != null;
+        double deliveryFeeFormated = order.getDeliveryFee();
+        String formattedDeliveryFee = vietnameseCurrencyFormat.format(deliveryFeeFormated);
+        tvPhiVanChuyen.setText("Phí Vận Chuyển: " + formattedDeliveryFee);
+        assert tvThue != null;
+        double taxFormated = order.getTax();
+        String formattedTax = vietnameseCurrencyFormat.format(taxFormated);
+        tvThue.setText("Thuế: " + formattedTax);
+        assert tongTientxt != null;
+        double totalAmountFormated = order.getTotalAmount();
+        String formattedTotalAmount = vietnameseCurrencyFormat.format(totalAmountFormated);
+        tongTientxt.setText("Tổng tiền:  " + formattedTotalAmount);
 
         FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id)
                         .addValueEventListener(new ValueEventListener() {
@@ -226,12 +256,14 @@ public class CartActivity extends BaseActivity {
                                 if (snapshot.exists()) {
                                     User user = snapshot.getValue(User.class);
                                     if (user != null) {
+                                        assert ten != null;
                                         ten.setText(user.getName());
+                                        assert sdt != null;
                                         sdt.setText(user.getPhoneNumber());
+                                        assert diaChi != null;
                                         diaChi.setText(user.getAddress());
                                     }
                                 }
-
                             }
 
                             @Override
@@ -239,9 +271,14 @@ public class CartActivity extends BaseActivity {
                                 Toast.makeText(CartActivity.this, "fail"+error, Toast.LENGTH_SHORT).show();
                             }
                         });
+
+        assert datHangBtn != null;
         datHangBtn.setOnClickListener(v-> {
+            assert ten != null;
             String name = ten.getText().toString().trim();
+            assert sdt != null;
             String phone = sdt.getText().toString().trim();
+            assert diaChi != null;
             String address = diaChi.getText().toString().trim();
             if (name.isEmpty()) {
                 ten.setError("Name not empty");
@@ -256,6 +293,7 @@ public class CartActivity extends BaseActivity {
                 return;
             }
             else {
+                assert chkSetuser != null;
                 if (chkSetuser.isChecked()) {
                     DatabaseReference refUser = FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id);
 
@@ -324,7 +362,7 @@ public class CartActivity extends BaseActivity {
                         });
             }
         });
-        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         bottomSheetDialog.show();
     }
 }

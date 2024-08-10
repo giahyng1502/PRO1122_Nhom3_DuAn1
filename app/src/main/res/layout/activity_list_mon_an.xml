@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
-    android:paddingHorizontal="15dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
     tools:context=".Activity.ListMonAn">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,7 +18,7 @@
             android:id="@+id/titleCategoryTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tittle"
+            android:text="@string/title"
             android:textColor="@color/blue_grey"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -49,11 +51,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/foodListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
             <ProgressBar
                 android:id="@+id/progressBarFoods"

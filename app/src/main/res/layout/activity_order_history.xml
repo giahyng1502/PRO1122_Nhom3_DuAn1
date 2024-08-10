@@ -27,9 +27,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Order History"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:text="@string/order_history"
+                android:textColor="@color/blackBlue"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.Toolbar>

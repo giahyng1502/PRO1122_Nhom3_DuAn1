@@ -17,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:backgroundTint="@color/white"
-        app:fabCradleMargin="5dp"
+        android:backgroundTint="#363738"
+        app:fabCradleMargin="8dp"
         app:fabCradleRoundedCornerRadius="40dp"
         app:hideOnScroll="false">
 
@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginEnd="16dp"
+            app:elevation="0dp"
             android:background="@android:color/transparent"
             app:itemIconTint="@color/custom_color_bottom_navigation"
             app:itemPaddingBottom="20dp"
@@ -45,7 +46,9 @@
         android:backgroundTint="@color/yellow"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_cart"
+        app:tint="@color/white"
         app:borderWidth="0dp"
+        app:backgroundTint="@color/yellow"
         app:layout_anchor="@id/bottomApp"
         app:maxImageSize="30dp" />
 

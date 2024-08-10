@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,7 +77,6 @@ public class Home extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
-    // ababc
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -125,7 +125,6 @@ public class Home extends Fragment {
                     banners.clear();
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         banners.add(snapshot1.getValue(String.class));
-
                     }
                     if (!banners.isEmpty()) {
                         setSlider();
@@ -135,14 +134,13 @@ public class Home extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(requireContext(), "error"+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "error"+error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void MenuMonAn() {
         DatabaseReference myRef = database.getReference("Category");
-//        binding.progressBar.setVisibility(View.VISIBLE);
         ArrayList<Catagory> list = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -158,20 +156,18 @@ public class Home extends Fragment {
                         RecyclerView.Adapter adapter = new MenuMonAnAdapter(list);
                         recMenuMonAn.setAdapter(adapter);
                     }
-//                    binding.progressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(requireContext(), "error"+error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void MonAnBanChayRecyclerview() {
         DatabaseReference myRef = database.getReference("Foods");
-//        binding.progressBarCategories.setVisibility(View.VISIBLE);
         ArrayList<Foods> list = new ArrayList<>();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -181,9 +177,9 @@ public class Home extends Fragment {
                     for (DataSnapshot issue : snapshot.getChildren()){
                         list.add(issue.getValue(Foods.class));
                     }
-                    if (list.size() > 0){
+                    if (!list.isEmpty()){
                         //sap xep
-                        Collections.sort(list, (item1, item2) -> Double.compare(item2.getStar(), item1.getStar()));
+                        list.sort((item1, item2) -> Double.compare(item2.getStar(), item1.getStar()));
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),1,LinearLayoutManager.HORIZONTAL,false);
                         recyclerViewFood.setLayoutManager(gridLayoutManager);
                         // top 5
@@ -191,13 +187,12 @@ public class Home extends Fragment {
                         RecyclerView.Adapter adapter = new DoAnBanChayAdapter(top5Items);
                         recyclerViewFood.setAdapter(adapter);
                     }
-//                    binding.progressBarCategories.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(requireContext(), "error"+error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -205,11 +200,13 @@ public class Home extends Fragment {
     private void setInforCurrentUser() {
         FirebaseDatabase.getInstance().getReference("users")
                 .child(MainActivity.id).addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             try {
                                 User user = snapshot.getValue(User.class);
+                                assert user != null;
                                 Glide.with(requireContext()).load(user.getImageAvatar())
                                         .error(R.drawable.none_avatar)
                                         .into(avatar);
@@ -223,29 +220,22 @@ public class Home extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Toast.makeText(requireContext(), "fail"+error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void setSlider() {
-
         adapterBanner = new AdapterBanner(getContext(),banners);
-
         viewPage2.setAdapter(adapterBanner);
-
         viewPage2.setClipToPadding(false);
         viewPage2.setClipChildren(false);
         viewPage2.setOffscreenPageLimit(3);
         viewPage2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
         // tạo hiệu ứng khi vuốt
-        viewPage2.setPageTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                Math.abs(position);
-                page.setScaleY(0.85f + Math.abs(position)*0.15f); // thu nhỏ theo trục y tạo hiệu ứng trượt
-
-            }
+        viewPage2.setPageTransformer((page, position) -> {
+            Math.abs(position);
+            page.setScaleY(0.85f + Math.abs(position)*0.15f); // thu nhỏ theo trục y tạo hiệu ứng trượt
         });
 
         Handler handler = new Handler();
@@ -253,7 +243,7 @@ public class Home extends Fragment {
             @Override
             public void run() {
                 next();
-                handler.postDelayed(this,5000);
+                handler.postDelayed(this,3000);
             }
         };
         handler.post(runnable);
@@ -266,5 +256,4 @@ public class Home extends Fragment {
             index = -1;
         }
     }
-
 }

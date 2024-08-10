@@ -20,6 +20,7 @@ import FPT.PRO1122.Nhom3.DuAn1.Activity.ListMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 
+@SuppressLint("RecyclerView")
 public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.ViewHolder> {
     ArrayList<Catagory> items;
     Context context;
@@ -37,10 +38,13 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MenuMonAnAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.catNameTxt.setText(items.get(position).getName());
-        switch (position){
-            case 0:{
+    public void onBindViewHolder(@NonNull MenuMonAnAdapter.ViewHolder holder, int i) {
+        Catagory category = items.get(i);
+        holder.catNameTxt.setText(category.getName());
+
+        switch (i){
+            case 0:
+            case 4: {
                 holder.imgCat.setBackgroundResource(R.drawable.cat_8_background);
                 break;
             }
@@ -48,16 +52,13 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
                 holder.imgCat.setBackgroundResource(R.drawable.cat_1_background);
                 break;
             }
-            case 2:{
+            case 2:
+            case 7: {
                 holder.imgCat.setBackgroundResource(R.drawable.cat_2_background);
                 break;
             }
             case 3:{
                 holder.imgCat.setBackgroundResource(R.drawable.cat_4_background);
-                break;
-            }
-            case 4:{
-                holder.imgCat.setBackgroundResource(R.drawable.cat_8_background);
                 break;
             }
             case 5:{
@@ -68,15 +69,13 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
                 holder.imgCat.setBackgroundResource(R.drawable.cat_7_background);
                 break;
             }
-            case 7:{
-                holder.imgCat.setBackgroundResource(R.drawable.cat_2_background);
-                break;
-            }
         }
 
-        int drawableResourceId = context.getResources().getIdentifier(items.get(position)
-                        .getImagePath(), "drawable",
-                holder.itemView.getContext().getPackageName());
+        int drawableResourceId = context.getResources()
+                .getIdentifier(category.getImagePath()
+                        , "drawable"
+                        , holder.itemView.getContext().getPackageName()
+                );
 
         Glide.with(context)
                 .load(drawableResourceId)
@@ -85,7 +84,7 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Catagory catagory = items.get(position);
+                Catagory catagory = items.get(i);
                 Intent intent = new Intent(context, ListMonAn.class);
                 intent.putExtra("Category", catagory);
                 context.startActivity(intent);
@@ -99,7 +98,7 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView catNameTxt;
         ImageView imgCat;
         public ViewHolder(@NonNull View itemView) {

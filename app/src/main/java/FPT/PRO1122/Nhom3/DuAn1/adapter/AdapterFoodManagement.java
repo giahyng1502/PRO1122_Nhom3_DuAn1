@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,8 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
@@ -54,39 +58,44 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_food_admin,parent,false);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.item_food_admin, parent, false);
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         Foods food = list.get(position);
         holder.tvTitle.setText(food.getTitle());
         holder.tvDecr.setText(food.getDescription());
-        holder.tvRate.setText(food.getStar()+"");
-        holder.tvPrice.setText(food.getPrice() +"");
+        holder.tvRate.setText(food.getStar() + "");
+        double priceFormated = food.getPrice();
+        String formattedPrice = vietnameseCurrencyFormat.format(priceFormated);
+        holder.tvPrice.setText(formattedPrice);
 
         FirebaseDatabase.getInstance()
-                        .getReference("Category")
-                        .child(food.getCategoryId()+"")
-                                .addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-                                            String categoryName = snapshot.child("Name").getValue(String.class);
-                                            holder.tvCatagory.setText(categoryName);
-                                        }
-                                    }
+                .getReference("Category")
+                .child(food.getCategoryId() + "")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String categoryName = snapshot.child("Name").getValue(String.class);
+                            holder.tvCatagory.setText(categoryName);
+                        }
+                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        holder.tvCatagory.setText("");
-                                    }
-                                });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        holder.tvCatagory.setText("");
+                    }
+                });
 
         Glide.with(context).load(food.getImagePath()).into(holder.ivFoodAvatar);
-        if(MainActivity.role == 0) {
+        if (MainActivity.role == 0) {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -103,28 +112,34 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void showdialogAdd(Foods food) {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         List<Catagory> catagories = new ArrayList<>();
         dialog = new Dialog(context);
         dialogAddFoodBinding = DialogAddFoodBinding.inflate(LayoutInflater.from(context));
         dialog.setContentView(dialogAddFoodBinding.getRoot());
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setStatusBarColor(Color.BLACK);
-        dialogAddFoodBinding.ivFood.setOnClickListener(v-> openMedia());
+        dialogAddFoodBinding.ivFood.setOnClickListener(v -> openMedia());
 
         dialogAddFoodBinding.edtDescribe.setText(food.getDescription());
-        dialogAddFoodBinding.edtPrice.setText(food.getPrice()+"");
+        double priceFormated = food.getPrice();
+        String formattedPrice = vietnameseCurrencyFormat.format(priceFormated);
+        dialogAddFoodBinding.edtPrice.setText(formattedPrice);
         dialogAddFoodBinding.tvFoodName.setText(food.getTitle());
-        dialogAddFoodBinding.tvFoodID.setText(food.getId()+"");
+        dialogAddFoodBinding.tvFoodID.setText(food.getId() + "");
 
-            Glide.with(context).load(food.getImagePath()).into(dialogAddFoodBinding.ivFood);
-            
+        Glide.with(context).load(food.getImagePath()).into(dialogAddFoodBinding.ivFood);
+
         FirebaseDatabase.getInstance()
                 .getReference("Category")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
+                        if (snapshot.exists()) {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 catagories.add(dataSnapshot.getValue(Catagory.class));
                             }
@@ -137,7 +152,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                                     dialogAddFoodBinding.spnCategory.setSelection(i);
                                     break;
                                 }
-                            }  
+                            }
                         }
                     }
 
@@ -148,10 +163,8 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                 });
 
 
-
-
-        dialogAddFoodBinding.btnCancelUserManagement.setOnClickListener(v->dialog.dismiss());
-        dialogAddFoodBinding.btnSubMitUserManagement.setOnClickListener(v-> {
+        dialogAddFoodBinding.btnCancelUserManagement.setOnClickListener(v -> dialog.dismiss());
+        dialogAddFoodBinding.btnSubMitUserManagement.setOnClickListener(v -> {
             String name = dialogAddFoodBinding.tvFoodName.getText().toString();
             String price = dialogAddFoodBinding.edtPrice.getText().toString();
             String describe = dialogAddFoodBinding.edtDescribe.getText().toString();
@@ -176,32 +189,31 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     }
 
     private void putFoodAvatar(Foods foods) {
+        FirebaseStorage.getInstance().getReference("Image Food").child(foods.getId() + "")
+                .putFile(foodUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        FirebaseStorage.getInstance().getReference("Image Food")
+                                .child(foods.getId() + "")
+                                .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String imageFood = uri.toString();
+                                        foods.setImagePath(imageFood);
+                                        uploadFood(foods);
+                                    }
+                                });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
 
-            FirebaseStorage.getInstance().getReference("Image Food").child(foods.getId()+"")
-                    .putFile(foodUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            FirebaseStorage.getInstance().getReference("Image Food")
-                                    .child(foods.getId()+"")
-                                    .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String imageFood = uri.toString();
-                                            foods.setImagePath(imageFood);
-                                            uploadFood(foods);
-                                        }
-                                    });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
+                    }
+                });
     }
 
     private void uploadFood(Foods foods) {
-        FirebaseDatabase.getInstance().getReference("Foods").child(foods.getId()+"")
+        FirebaseDatabase.getInstance().getReference("Foods").child(foods.getId() + "")
                 .setValue(foods).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -211,7 +223,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Fail"+e, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Fail" + e, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -222,6 +234,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
         activityResultLauncherUpdate.launch(intent);
     }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -231,6 +244,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
         this.list = listSearch;
         notifyDataSetChanged();
     }
+
     public void setImageUri(Uri imageUri) {
         this.foodUri = imageUri;
         if (imageUri != null) {
@@ -239,8 +253,9 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle,tvPrice,tvDecr,tvRate,tvCatagory;
+        TextView tvTitle, tvPrice, tvDecr, tvRate, tvCatagory;
         ImageView ivFoodAvatar;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitleFood);

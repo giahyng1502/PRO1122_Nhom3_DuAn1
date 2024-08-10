@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
@@ -46,10 +49,16 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.ViewHo
         return new ViewHolder(inflate);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull AdapterFavorite.ViewHolder holder, int position) {
+        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
+        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
+        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         holder.tittleTxt.setText(items.get(position).getTitle());
-        holder.priceTxt.setText(items.get(position).getPrice() + "VND");
+        double priceFormated = items.get(position).getPrice();
+        String formattedPrice = vietnameseCurrencyFormat.format(priceFormated);
+        holder.priceTxt.setText(formattedPrice);
         holder.starTxt.setText("" + items.get(position).getStar());
 
         Glide.with(context).load(items.get(position).getImagePath())

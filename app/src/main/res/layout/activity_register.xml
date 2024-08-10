@@ -20,10 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/create_an_account"
             android:textColor="@color/blackBlue"
-            android:textSize="28sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <TextView
@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvWelcomeBack"
             android:layout_marginBottom="50dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_regular"
+            android:lineHeight="20dp"
             android:text="@string/header_text_signin"
             android:textColor="#B0B3BD"
             android:textSize="14sp"
@@ -54,7 +55,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="@string/enter_phonenumber"
                 android:inputType="number"
                 android:paddingVertical="10dp"
@@ -80,7 +81,7 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
                 android:paddingVertical="10dp"
@@ -106,7 +107,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="@string/enter_confirm_password"
                 android:inputType="textPassword"
                 android:paddingVertical="10dp"
@@ -117,16 +118,17 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/continueBtn"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="55dp"
             android:layout_below="@+id/tilConfirmPassword"
+            android:layout_marginHorizontal="2dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_button"
             android:elevation="12dp"
-            android:fontFamily="@font/font_inter"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/continue_"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -141,10 +143,10 @@
                 android:id="@+id/footerText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_regular"
                 android:text="@string/already_have_an_account"
                 android:textColor="@color/blackBlue"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvSignIn"
@@ -152,10 +154,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:elevation="12dp"
-                android:fontFamily="@font/font_inter"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/sign_in"
                 android:textColor="@color/yellow"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

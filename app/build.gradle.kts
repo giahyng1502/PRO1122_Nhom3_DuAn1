@@ -76,4 +76,7 @@ dependencies {
     // Google Maps and Places
     implementation(libs.android.maps.utils)
     implementation(libs.places)
+
+    // Image gif
+    implementation (libs.android.gif.drawable)
 }

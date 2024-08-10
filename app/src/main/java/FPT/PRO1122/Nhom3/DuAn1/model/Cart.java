@@ -2,12 +2,14 @@ package FPT.PRO1122.Nhom3.DuAn1.model;
 
 public class Cart {
     private String cartId;
-    private String ImagePath;
+    private String imagePath;
     private int foodID;
-    private String Title;
-    private double Price;
-    private int Quantity;
-    private double Total;
+    private String title;
+    private double price;
+    private int quantity;
+    private double total;
+
+    public Cart() {}
 
     public int getFoodID() {
         return foodID;
@@ -15,9 +17,6 @@ public class Cart {
 
     public void setFoodID(int foodID) {
         this.foodID = foodID;
-    }
-
-    public Cart() {
     }
 
     public String getCartId() {
@@ -29,48 +28,43 @@ public class Cart {
     }
 
     public String getImagePath() {
-        return ImagePath;
+        return imagePath;
     }
 
     public void setImagePath(String imagePath) {
-        ImagePath = imagePath;
+        this.imagePath = imagePath;
     }
 
-
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
-    //
+
     public void setPrice(double price) {
-        Price = price;
+        this.price = price;
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public double getTotal() {
-        return Price * Quantity;
+        return price * quantity;
     }
 
     public void setTotal(double total) {
-        Total = total;
+        this.total = total;
     }
 }
 
