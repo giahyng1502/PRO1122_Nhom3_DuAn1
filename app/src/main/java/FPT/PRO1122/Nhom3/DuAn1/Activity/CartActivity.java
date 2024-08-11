@@ -100,7 +100,7 @@ public class CartActivity extends BaseActivity {
     }
 
 
-    private void initList() {
+    private void initList() { 
         DatabaseReference myRef = database.getReference("Carts").child(MainActivity.id);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
