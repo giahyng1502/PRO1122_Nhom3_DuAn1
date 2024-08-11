@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
@@ -51,6 +52,7 @@ public class AdapterSpinner implements SpinnerAdapter {
         return 1; // We have only one type of view
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,6 @@ import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 public class HoanThanh extends Fragment {
     private OrderHistoryAdapter adapter;
     private ArrayList<Order> orderList;
-    private DatabaseReference ordersRef;
     private RecyclerView recyclerViewOrderHistory;
 
     @Override
@@ -59,8 +59,9 @@ public class HoanThanh extends Fragment {
     }
 
     private void loadOrderHistory() {
-        ordersRef = FirebaseDatabase.getInstance().getReference("Orders");
+        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("Orders");
         ordersRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 orderList.clear();
@@ -75,7 +76,6 @@ public class HoanThanh extends Fragment {
                     }
                 }
                 adapter.notifyDataSetChanged();
-                
             }
 
             @Override

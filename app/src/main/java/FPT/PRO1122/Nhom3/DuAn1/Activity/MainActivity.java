@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -23,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
-import FPT.PRO1122.Nhom3.DuAn1.Fragment.Myorder;
+import FPT.PRO1122.Nhom3.DuAn1.Fragment.MyOrder;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -130,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (R.id.favorite == item.getItemId()) {
                     fragment = new Favorite();
                 }else if (R.id.myOrder == item.getItemId()) {
-                    fragment = new Myorder();
+                    fragment = new MyOrder();
                 }else if (R.id.profile == item.getItemId()) {
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 }

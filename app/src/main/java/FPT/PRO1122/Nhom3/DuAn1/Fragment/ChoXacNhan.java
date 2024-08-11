@@ -75,7 +75,6 @@ public class ChoXacNhan extends Fragment {
                     }
                 }
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override

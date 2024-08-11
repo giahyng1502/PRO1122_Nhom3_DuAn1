@@ -23,16 +23,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class Profile extends AppCompatActivity {
-    LinearLayout payment_layout,order_layout,changepass_layout,delivery_layout,admin_layout;
-    Button btn_logout,btn_editprofile;
-    ImageView ivbackProfile,ivAvatar;
-    TextView tvName,tvMail;
+    LinearLayout payment_layout, order_layout, changepass_layout, delivery_layout, admin_layout;
+    Button btn_logout, btn_editprofile;
+    ImageView ivbackProfile, ivAvatar;
+    TextView tvName, tvMail;
     private GoogleSignInClient signInClient;
-    private FirebaseAuth auth;
+    Dialogs dialogs;
 
 
     @Override
@@ -41,9 +42,10 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getData();
         FirebaseApp.initializeApp(this);
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
 
+        dialogs = new Dialogs();
         anhxa();
 
         //payment
@@ -83,7 +85,6 @@ public class Profile extends AppCompatActivity {
             });
         }
 
-
         //changepass
         changepass_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,16 +104,15 @@ public class Profile extends AppCompatActivity {
         });
 
         //logout
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
+        btn_logout.setOnClickListener(v -> {
+            dialogs.showSignOutDialog(this);
+            dialogs.show();
         });
 
-        ivbackProfile.setOnClickListener(view -> startActivity(new Intent(Profile.this,MainActivity.class)));
+        ivbackProfile.setOnClickListener(view -> startActivity(new Intent(Profile.this, MainActivity.class)));
     }
-    private void getData(){
+
+    private void getData() {
         FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -132,13 +132,13 @@ public class Profile extends AppCompatActivity {
     }
 
     private void anhxa() {
-        payment_layout=findViewById(R.id.payment_layout);
-        order_layout=findViewById(R.id.orderhistory_layout);
-        delivery_layout=findViewById(R.id.delivery_layout);
-        changepass_layout=findViewById(R.id.changepass_layout);
-        btn_logout=findViewById(R.id.btn_logout);
-        btn_editprofile=findViewById(R.id.btn_editprofile);
-        ivbackProfile= findViewById(R.id.ivbackProfile);
+        payment_layout = findViewById(R.id.payment_layout);
+        order_layout = findViewById(R.id.orderhistory_layout);
+        delivery_layout = findViewById(R.id.delivery_layout);
+        changepass_layout = findViewById(R.id.changepass_layout);
+        btn_logout = findViewById(R.id.btn_logout);
+        btn_editprofile = findViewById(R.id.btn_editprofile);
+        ivbackProfile = findViewById(R.id.ivbackProfile);
         tvMail = findViewById(R.id.tvMailProFile);
         tvName = findViewById(R.id.tvNameProFile);
         ivAvatar = findViewById(R.id.ivProfileAvatar);

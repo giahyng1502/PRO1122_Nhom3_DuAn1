@@ -10,21 +10,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
+
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityCreateProfileBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
 public class CreateProfileActivity extends AppCompatActivity {
     private ActivityCreateProfileBinding bind;
-    private User user;
+    Dialogs dialogs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind = ActivityCreateProfileBinding.inflate(getLayoutInflater());
         setContentView(bind.getRoot());
+        dialogs.showProgressBar(this);
 
         bind.btnBack.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
 
         bind.createBtn.setOnClickListener(v -> {
+            dialogs.show();
+            // Kiểm tra xem các trường nhập liệu có trống không
             if (!validateFirstName() || !validateLastName() ||
                     !validateEmailAddress() || !validateAddress()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -94,12 +100,13 @@ public class CreateProfileActivity extends AppCompatActivity {
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
         String password = getIntent().getStringExtra("password");
         String id = phoneNumber;
-        user = new User(id,phoneNumber,password,firstName+" "+lastName, emailAddress, address);
+        User user = new User(id, phoneNumber, password, firstName + " " + lastName, emailAddress, address);
         assert phoneNumber != null;
         reference.child(phoneNumber).setValue(user);
         Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtra("phoneNumber",phoneNumber);
         startActivity(intent);
         Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
+        dialogs.dismiss();
     }
 }

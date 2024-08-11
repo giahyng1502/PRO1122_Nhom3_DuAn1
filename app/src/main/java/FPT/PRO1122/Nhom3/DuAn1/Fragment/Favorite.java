@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFavorite;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
-
+@SuppressLint("NotifyDataSetChanged")
 public class Favorite extends Fragment {
     RecyclerView recyclerView;
     AdapterFavorite adtFavorite;
@@ -35,7 +36,6 @@ public class Favorite extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -85,10 +85,8 @@ public class Favorite extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(requireContext(), "fail"+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "fail" + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
 }

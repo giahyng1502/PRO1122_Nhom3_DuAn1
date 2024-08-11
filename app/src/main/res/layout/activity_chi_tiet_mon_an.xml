@@ -39,6 +39,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F7F7F7"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +49,7 @@
                 <ImageView
                     android:id="@+id/pic"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="430dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -78,8 +79,8 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="110dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="-24dp"
                 android:background="@drawable/custom_quantity"
@@ -92,16 +93,20 @@
                     android:background="@drawable/editext_background"
                     android:gravity="center"
                     android:text="@string/minus"
+                    android:layout_marginStart="5dp"
                     android:textColor="@color/blackBlue"
                     android:textSize="22sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
                     android:id="@+id/numTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/number"
                     android:textColor="@color/blackBlue"
@@ -114,7 +119,7 @@
                     android:id="@+id/plusBtn"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/editext_background"
                     android:backgroundTint="@color/yellow"
                     android:gravity="center"
@@ -122,6 +127,8 @@
                     android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/numTxt"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -130,166 +137,176 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/titleTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/title"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue_grey"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:orientation="horizontal">
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:numStars="5"
-                    android:progressTint="#ffc106"
-                    android:rating="3.5"
-                    android:stepSize="0.1" />
-
-                <TextView
-                    android:id="@+id/rateTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center_vertical"
-                    android:text="5.0"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/dot" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/timeTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginEnd="4dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="15 phút"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/imageView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dp"
-                        app:srcCompat="@drawable/ic_delivery" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/description"
-                android:textColor="@color/blue_grey"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/descriptionTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="Bánh cuốn là một món ăn truyền thống của Việt Nam, nổi tiếng với hương vị nhẹ nhàng nhưng không kém phần hấp dẫn. Món ăn này được làm từ bột gạo, tráng thành những lớp bánh mỏng, mịn màng, rồi cuộn lại với nhân thịt băm, mộc nhĩ và hành phi. Bánh cuốn thường được ăn kèm với nước mắm chua ngọt, chả lụa, rau sống và giá đỗ, tạo nên một sự hòa quyện hoàn hảo của các vị chua, ngọt, mặn, và bùi. Với sự tinh tế trong từng chi tiết, bánh cuốn không chỉ là một món ăn ngon mà còn là một phần của văn hóa ẩm thực đậm đà bản sắc Việt Nam." />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/grey"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp">
+                android:layout_marginTop="-15dp"
+                android:background="@drawable/custom_detail_food"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titleTxt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/title"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue_grey"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:numStars="5"
+                        android:progressTint="#ffc106"
+                        android:rating="3.5"
+                        android:stepSize="0.1" />
+
+                    <TextView
+                        android:id="@+id/rateTxt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center_vertical"
+                        android:text="5.0"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/dot" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/timeTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="15 phút"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            app:srcCompat="@drawable/ic_delivery" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/description"
+                    android:textColor="@color/blue_grey"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/descriptionTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Bánh cuốn là một món ăn truyền thống của Việt Nam, nổi tiếng với hương vị nhẹ nhàng nhưng không kém phần hấp dẫn. Món ăn này được làm từ bột gạo, tráng thành những lớp bánh mỏng, mịn màng, rồi cuộn lại với nhân thịt băm, mộc nhĩ và hành phi. Bánh cuốn thường được ăn kèm với nước mắm chua ngọt, chả lụa, rau sống và giá đỗ, tạo nên một sự hòa quyện hoàn hảo của các vị chua, ngọt, mặn, và bùi. Với sự tinh tế trong từng chi tiết, bánh cuốn không chỉ là một món ăn ngon mà còn là một phần của văn hóa ẩm thực đậm đà bản sắc Việt Nam." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent">
 
                     <TextView
                         android:id="@+id/totalTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginEnd="80dp"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:maxLines="1"
                         android:text="10.000 VND"
                         android:textAlignment="center"
-                        android:textColor="@color/red"
+                        android:textColor="#E6864E"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/AddToCartBtn"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="160dp"
+                        android:layout_width="165dp"
                         android:layout_height="55dp"
-                        android:layout_gravity="center_vertical"
+                        android:paddingHorizontal="10dp"
+                        android:gravity="center"
                         android:background="@drawable/red_button_background"
-                        android:fontFamily="@font/roboto_medium"
-                        android:paddingHorizontal="15dp"
-                        android:layout_marginStart="35dp"
-                        android:drawablePadding="5dp"
-                        android:text="@string/add_to_card"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:paddingStart="20dp"
-                        app:drawableStartCompat="@drawable/ic_shopping_bag"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_shopping_bag" />
+
+                        <TextView
+                            style="@android:style/Widget.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
+                            android:backgroundTint="@color/yellow"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/add_to_card"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
         </LinearLayout>
 

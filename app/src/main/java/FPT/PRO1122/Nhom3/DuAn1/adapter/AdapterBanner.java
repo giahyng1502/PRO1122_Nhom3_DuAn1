@@ -34,7 +34,11 @@ public class AdapterBanner extends RecyclerView.Adapter<AdapterBanner.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String src = list.get(position);
-        Glide.with(context).load(src).into(holder.ivBanner);
+        Glide.with(context)
+                .load(src)
+                .thumbnail(Glide.with(holder.itemView.getContext()).load(R.drawable.loading_image))
+                .fitCenter()
+                .into(holder.ivBanner);
     }
 
     @Override
