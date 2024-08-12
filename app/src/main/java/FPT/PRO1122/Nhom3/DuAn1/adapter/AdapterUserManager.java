@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.EditProfile;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.Profile;
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.DialogUpdateUserBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
@@ -43,8 +44,7 @@ import FPT.PRO1122.Nhom3.DuAn1.model.User;
 public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.ViewHolder> {
     Context context;
     ArrayList<User> list;
-
-
+    Dialogs dialogs;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri userImageUri;
     private DialogUpdateUserBinding binding;
@@ -93,6 +93,7 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
                 .into(holder.ivAvatarUserManagement);
 
         holder.itemView.setOnLongClickListener(v -> {
+            dialog = new Dialog(context);
             updateUserManagement(user);
             return true;
         });
@@ -171,6 +172,26 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
         String pass = binding.edtPasswordUserManagement.getText().toString();
         int role = binding.rdoUser.isChecked() ? 1 : 0;
         String avatar = imageLink;
+        if (name.isEmpty()) {
+            Toast.makeText(context, "Không được để trống tên người dùng", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mail.isEmpty()) {
+            Toast.makeText(context, "Không được để trống emai người dùng", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (phone.isEmpty()) {
+            Toast.makeText(context, "Không được để trống số điện thoại người dùng", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (homtown.isEmpty()) {
+            Toast.makeText(context, "Không được để trống địa chỉ người dùng", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (pass.isEmpty()) {
+            Toast.makeText(context, "Không được để trống mật khẩu", Toast.LENGTH_SHORT).show();
+            return;
+        }
         User user1 = new User(user.getUserId(), phone, pass, name, mail, homtown);
         user1.setImageAvatar(avatar);
         user1.setRole(role);

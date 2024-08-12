@@ -119,7 +119,7 @@ public class FoodManagement extends Fragment {
             // Hoàn thành giao dịch
             fragmentTransaction.commit();
         });
-
+        initRecyclerView();
         getFoodFromFireBase();
         if(MainActivity.role == 0) {
             // Admin = 0
@@ -161,6 +161,7 @@ public class FoodManagement extends Fragment {
     private void AddFood() {
         binding.btnAdd.setOnClickListener(v -> {
             showDialogAdd();
+
         });
     }
     private void showTextViewDialog() {
@@ -261,6 +262,8 @@ public class FoodManagement extends Fragment {
 
         dialogAddFoodBinding.btnCancelUserManagement.setOnClickListener(v->dialog.dismiss());
         dialogAddFoodBinding.btnSubMitUserManagement.setOnClickListener(v-> {
+            dialogs.showProgressBar(requireContext());
+            dialogs.show();
             String name = dialogAddFoodBinding.tvFoodName.getText().toString();
             String price = dialogAddFoodBinding.edtPrice.getText().toString();
             String describe = dialogAddFoodBinding.edtDescribe.getText().toString();
@@ -269,19 +272,23 @@ public class FoodManagement extends Fragment {
             Foods foods = new Foods();
             int timestamp = (int) System.currentTimeMillis();
             if (name.isEmpty()) {
-                Toast.makeText(requireContext(), "Food Name not empty", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
+                Toast.makeText(requireContext(), "Không được để trống tên món ăn", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (price.isEmpty()) {
-                Toast.makeText(requireContext(), "Price not empty", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
+                Toast.makeText(requireContext(), "Không được để trống giá món ăn", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (describe.isEmpty()) {
-                Toast.makeText(requireContext(), "Describe not empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Không được để trống mô tả món ăn", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
                 return;
             }
             if (categoryId == -1) {
-                Toast.makeText(requireContext(), "CategoryId not empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Không được để trống loại món ăn", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
                 return;
             }
             foods.setId(timestamp);
@@ -297,7 +304,8 @@ public class FoodManagement extends Fragment {
 
     private void putFoodAvatar(Foods foods) {
         if (foodUri == null) {
-            Toast.makeText(requireContext(), "You must upload a picture of the dish.", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
+            Toast.makeText(requireContext(), "Bạn cần tải lên hình ảnh của món ăn này", Toast.LENGTH_SHORT).show();
         } else {
             FirebaseStorage.getInstance().getReference("Image Food").child(foods.getId()+"")
                     .putFile(foodUri).addOnSuccessListener(taskSnapshot ->
@@ -317,11 +325,13 @@ public class FoodManagement extends Fragment {
     private void uploadFood(Foods foods) {
         FirebaseDatabase.getInstance().getReference("Foods").child(foods.getId()+"")
                 .setValue(foods).addOnSuccessListener(unused -> {
+                    dialogs.dismiss();
                     dialog.dismiss();
-                    Toast.makeText(requireContext(), "Add food successfuly", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e -> {
                     dialog.dismiss();
-                    Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
+                    dialogs.dismiss();
+                    Toast.makeText(requireContext(), "thất bại"+e, Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -350,31 +360,33 @@ public class FoodManagement extends Fragment {
         Button btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
         TextView btnConfirm = bottomSheetView.findViewById(R.id.btnConfirm);
         TextView tvMessage = bottomSheetView.findViewById(R.id.tvMessage);
-        tvMessage.setText("This food will be permanently deleted from this application");
+        tvMessage.setText("Món ăn này sẽ bị xoá vĩnh viễn khỏi ứng dụng");
         btnCancel.setOnClickListener(v -> {
             adapterFoodManagement.notifyDataSetChanged();
             bottomSheetDialog.dismiss();
         });
 
         btnConfirm.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-
+            dialogs.showProgressBar(requireContext());
+            dialogs.show();
             Foods foods = list.get(pos);
             // Xóa user khỏi Firebase Database
             FirebaseDatabase.getInstance().getReference("Foods")
                     .child(foods.getId()+"").removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(requireContext(), "Delete Successfully", Toast.LENGTH_SHORT).show();
+                            dialogs.dismiss();
+                            bottomSheetDialog.dismiss();
+                            Toast.makeText(requireContext(), "Xoá Thành Công", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            dialogs.dismiss();
+                            bottomSheetDialog.dismiss();
                             Toast.makeText(requireContext(), "Error" + e, Toast.LENGTH_SHORT).show();
                         }
                     });
-            // Xóa user khỏi danh sách và cập nhật giao diện
-            adapterFoodManagement.notifyItemRemoved(pos);
         });
 
         bottomSheetDialog.setContentView(bottomSheetView);
@@ -383,21 +395,18 @@ public class FoodManagement extends Fragment {
     }
 
     private void getFoodFromFireBase() {
-        list = new ArrayList<>();
-        databaseReference.orderByChild("categoryId").addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         list.add(dataSnapshot.getValue(Foods.class));
-                        dialogs.dismiss();
                     }
-                    if (!list.isEmpty()) {
-                        initRecyclerView();
-                        dialogs.dismiss();
-                    }
+                    adapterFoodManagement.notifyDataSetChanged();
                 }
+
+                dialogs.dismiss();
             }
 
             @Override
@@ -408,9 +417,11 @@ public class FoodManagement extends Fragment {
     }
 
     private void initRecyclerView() {
+        list = new ArrayList<>();
         adapterFoodManagement = new AdapterFoodManagement(requireContext(),list,activityResultLauncherUpdate);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(adapterFoodManagement);
+        adapterFoodManagement.notifyDataSetChanged();
     }
 }

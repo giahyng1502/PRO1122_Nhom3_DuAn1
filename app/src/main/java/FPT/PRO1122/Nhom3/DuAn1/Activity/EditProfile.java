@@ -184,9 +184,29 @@ public class EditProfile extends AppCompatActivity {
         String phone = binding.edtPhoneNumber.getText().toString();
         String hometown = binding.edtHomeTown.getText().toString();
         String pass = user.getPassword();
-        if (name.isEmpty() || mail.isEmpty() || phone.isEmpty() || hometown.isEmpty()) {
+        if (name.isEmpty()) {
             dialogs.dismiss();
-            Toast.makeText(this, "Not empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditProfile.this, "Không được để trống tên người dùng", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mail.isEmpty()) {
+            Toast.makeText(EditProfile.this, "Không được để trống emai người dùng", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
+            return;
+        }
+        if (phone.isEmpty()) {
+            Toast.makeText(EditProfile.this, "Không được để trống số điện thoại người dùng", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
+            return;
+        }
+        if (hometown.isEmpty()) {
+            Toast.makeText(EditProfile.this, "Không được để trống địa chỉ người dùng", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
+            return;
+        }
+        if (pass.isEmpty()) {
+            Toast.makeText(EditProfile.this, "Không được để trống mật khẩu", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
             return;
         }
         User user1 = new User(MainActivity.id, phone, pass, name, mail, hometown);

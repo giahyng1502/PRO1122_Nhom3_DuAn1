@@ -50,7 +50,7 @@ public class ListMonAn extends AppCompatActivity {
         ArrayList<Foods> list = new ArrayList<>();
 
         Query query;
-            query = myRef.orderByChild("CategoryId").equalTo(catagory.getId());
+            query = myRef.orderByChild("categoryId").equalTo(catagory.getId());
 
         query.addValueEventListener(new ValueEventListener() {
             @Override

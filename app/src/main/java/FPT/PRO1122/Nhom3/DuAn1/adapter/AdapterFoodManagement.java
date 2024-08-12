@@ -36,6 +36,7 @@ import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.ChiTietMonAn;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.DialogAddFoodBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
@@ -48,6 +49,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     private DialogAddFoodBinding dialogAddFoodBinding;
     public Uri foodUri;
     ActivityResultLauncher<Intent> activityResultLauncherUpdate;
+    Dialogs dialogs;
 
     public AdapterFoodManagement(Context context, List<Foods> list, ActivityResultLauncher<Intent> activityResultLauncherUpdate) {
         this.context = context;
@@ -65,16 +67,13 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
-        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
-        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
+
         Foods food = list.get(position);
         holder.tvTitle.setText(food.getTitle());
         holder.tvDecr.setText(food.getDescription());
         holder.tvRate.setText(food.getStar() + "");
-        double priceFormated = food.getPrice();
-        String formattedPrice = vietnameseCurrencyFormat.format(priceFormated);
-        holder.tvPrice.setText(formattedPrice);
+
+        holder.tvPrice.setText(food.getPrice()+"");
 
         FirebaseDatabase.getInstance()
                 .getReference("Category")
@@ -109,6 +108,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                 }
             });
         }
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChiTietMonAn.class);
             intent.putExtra("object", list.get(position));
@@ -119,9 +119,6 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
     @SuppressLint("SetTextI18n")
     private void showdialogAdd(Foods food) {
-        NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
-        vietnameseCurrencyFormat.setMaximumFractionDigits(0);
-        vietnameseCurrencyFormat.setCurrency(Currency.getInstance("VND"));
         List<Catagory> catagories = new ArrayList<>();
         dialog = new Dialog(context);
         dialogAddFoodBinding = DialogAddFoodBinding.inflate(LayoutInflater.from(context));
@@ -132,8 +129,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
         dialogAddFoodBinding.edtDescribe.setText(food.getDescription());
         double priceFormated = food.getPrice();
-        String formattedPrice = vietnameseCurrencyFormat.format(priceFormated);
-        dialogAddFoodBinding.edtPrice.setText(formattedPrice);
+        dialogAddFoodBinding.edtPrice.setText(priceFormated+"");
         dialogAddFoodBinding.tvFoodName.setText(food.getTitle());
         dialogAddFoodBinding.tvFoodID.setText(food.getId() + "");
 
@@ -174,13 +170,30 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
 
         dialogAddFoodBinding.btnCancelUserManagement.setOnClickListener(v -> dialog.dismiss());
         dialogAddFoodBinding.btnSubMitUserManagement.setOnClickListener(v -> {
+            dialogs = new Dialogs();
+            dialogs.showProgressBar(context);
+            dialogs.show();
             String name = dialogAddFoodBinding.tvFoodName.getText().toString();
             String price = dialogAddFoodBinding.edtPrice.getText().toString();
             String describe = dialogAddFoodBinding.edtDescribe.getText().toString();
-
+            if (name.isEmpty()) {
+                dialogs.dismiss();
+                Toast.makeText(context, "Không được bỏ trống tên món ăn", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (price.isEmpty()) {
+                Toast.makeText(context, "Không được bỏ trống giá món ăn", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
+                return;
+            }
+            if (describe.isEmpty()) {
+                Toast.makeText(context, "Hãy mô tả chi tiết món ăn", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
+                return;
+            }
             int categoryId = catagories.get(dialogAddFoodBinding.spnCategory.getSelectedItemPosition()).getId();
             Foods foods = new Foods();
-
+            foods.setStar(food.getStar());
             foods.setId(food.getId());
             foods.setPrice(Double.parseDouble(price));
             foods.setCategoryId(categoryId);
@@ -227,12 +240,15 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                     @Override
                     public void onSuccess(Void unused) {
                         dialog.dismiss();
-                        Toast.makeText(context, "Update successfuly", Toast.LENGTH_SHORT).show();
+                        dialogs.dismiss();
+                        notifyDataSetChanged();
+                        Toast.makeText(context, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(context, "Fail" + e, Toast.LENGTH_SHORT).show();
+                        dialogs.dismiss();
                     }
                 });
     }

@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,15 +27,17 @@ public class CreateProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bind = ActivityCreateProfileBinding.inflate(getLayoutInflater());
         setContentView(bind.getRoot());
-        dialogs.showProgressBar(this);
 
         bind.btnBack.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
 
         bind.createBtn.setOnClickListener(v -> {
+            dialogs = new Dialogs();
+            dialogs.showProgressBar(this);
             dialogs.show();
             // Kiểm tra xem các trường nhập liệu có trống không
             if (!validateFirstName() || !validateLastName() ||
                     !validateEmailAddress() || !validateAddress()) {
+                dialogs.dismiss();
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -102,11 +107,21 @@ public class CreateProfileActivity extends AppCompatActivity {
         String id = phoneNumber;
         User user = new User(id, phoneNumber, password, firstName + " " + lastName, emailAddress, address);
         assert phoneNumber != null;
-        reference.child(phoneNumber).setValue(user);
+        reference.child(phoneNumber).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                dialogs.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dialogs.dismiss();
+            }
+        });
         Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtra("phoneNumber",phoneNumber);
         startActivity(intent);
-        Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tạo tài khoản thành công !", Toast.LENGTH_SHORT).show();
         dialogs.dismiss();
     }
 }

@@ -14,9 +14,9 @@
 
         <ImageView
             android:id="@+id/picFood"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
             android:layout_height="111dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

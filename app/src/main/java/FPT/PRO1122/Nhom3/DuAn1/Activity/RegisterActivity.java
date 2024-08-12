@@ -35,12 +35,14 @@ public class RegisterActivity extends AppCompatActivity {
             dialogs.show();
 //             Kiểm tra xem các trường nhập liệu có trống không
             if (!validatePhoneNumber() || !validatePassword()) {
+                dialogs.dismiss();
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (!validateConfirmPassword()) {
                 // Nếu mật khẩu và mật khẩu xác nhận không khớp, thông báo và focus vào mật khẩu xác nhận
                 Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
                 return;
             }
             checkIfPhoneNumberExists();
@@ -124,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                dialogs.dismiss();
                 // Xử lý trường hợp có lỗi xảy ra
                 Toast.makeText(RegisterActivity.this, "Something went wrong" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }

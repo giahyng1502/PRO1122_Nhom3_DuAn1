@@ -241,7 +241,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="85dp"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:background="@color/grey"
@@ -253,16 +253,18 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:gravity="center"
+                    android:weightSum="2"
                     app:layout_constraintBottom_toBottomOf="parent">
 
                     <TextView
                         android:id="@+id/totalTxt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="25dp"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:maxLines="1"
+                        android:layout_weight="1"
                         android:text="10.000 VND"
                         android:textAlignment="center"
                         android:textColor="@color/red"
@@ -272,18 +274,18 @@
                     <TextView
                         android:id="@+id/AddToCartBtn"
                         style="@android:style/Widget.Button"
-                        android:layout_width="160dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_marginRight="20dp"
                         android:layout_height="55dp"
+                        android:paddingHorizontal="10dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/red_button_background"
                         android:fontFamily="@font/roboto_medium"
-                        android:paddingHorizontal="15dp"
-                        android:layout_marginStart="35dp"
-                        android:drawablePadding="5dp"
                         android:text="@string/add_to_card"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        android:paddingStart="20dp"
+
                         app:drawableStartCompat="@drawable/ic_shopping_bag"
                         tools:ignore="RtlSymmetry" />
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +31,11 @@ public class ChangePassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         dialogs = new Dialogs();
-        dialogs.showProgressBar(this);
         anhXa();
         //1
         btn_back.setOnClickListener(v -> startActivity(new Intent(ChangePassword.this, Profile.class)));
         btnChangePass.setOnClickListener(e -> {
+            dialogs.showProgressBar(this);
             dialogs.show();
             changePassword();
         });
@@ -53,6 +54,7 @@ public class ChangePassword extends AppCompatActivity {
         if (userId == null || userId.isEmpty()) {
             // Handle the error when userId is null or empty
             Log.e("ProfileActivity", "User ID is null or empty");
+            dialogs.dismiss();
             return;
         }
 
@@ -72,23 +74,19 @@ public class ChangePassword extends AppCompatActivity {
                                         dialogs.dismiss();
                                         startActivity(new Intent(ChangePassword.this, Profile.class));
                                         // Notify that the password has been changed successfully
-                                        Toast.makeText(ChangePassword.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ChangePassword.this, "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                                     })
                                     .addOnFailureListener(e -> {
                                         dialogs.dismiss();
                                         // Handle error when password update fails
                                         Log.e("ProfileActivity", "Error updating password", e);
-                                        Toast.makeText(ChangePassword.this, "Failed to change password", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ChangePassword.this, "Thay đổi mật khẩu thất bại vui lòng thử lại sau", Toast.LENGTH_SHORT).show();
                                     });
-                        } else {
-                            dialogs.dismiss();
-                            // New password and confirm password do not match
-                            Toast.makeText(ChangePassword.this, "New passwords do not match", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         dialogs.dismiss();
                         // Old password is incorrect
-                        Toast.makeText(ChangePassword.this, "Old password is incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassword.this, "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     dialogs.dismiss();
@@ -109,16 +107,18 @@ public class ChangePassword extends AppCompatActivity {
     private boolean checkPass(String newPass, String reNewPass) {
         boolean isValid = true;
         if (newPass.isEmpty()) {
-            Toast.makeText(this, "NewPass Empty", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
+            Toast.makeText(this, "Mật khẩu mới không được để trống", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
         if (reNewPass.isEmpty()) {
-            Toast.makeText(this, "RePass Empty", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "Vui lòng nhập lại mật khẩu mới", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
             isValid = false;
         }
         if (!newPass.equals(reNewPass)) {
-            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mật khẩu nhập lại không khớp", Toast.LENGTH_SHORT).show();
+            dialogs.dismiss();
             isValid = false;
         }
         return isValid;

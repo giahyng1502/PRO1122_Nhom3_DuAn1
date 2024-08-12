@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.FragmentBannerManagerBinding;
 
 public class BannerManagement extends Fragment {
@@ -76,6 +77,9 @@ public class BannerManagement extends Fragment {
         getData("banner2",binding.ivbanner2);
         getData("banner3",binding.ivbanner3);
         binding.btnComfirm.setOnClickListener(v-> {
+            Dialogs dialogs = new Dialogs();
+            dialogs.showProgressBar(requireContext());
+            dialogs.show();
 
         if (uriBanner1!=null) {
             FirebaseStorage.getInstance()
@@ -93,6 +97,13 @@ public class BannerManagement extends Fragment {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             uploadBanner(uri, "banner1");
+                                            dialogs.dismiss();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            dialogs.dismiss();
                                         }
                                     });
                         }
@@ -114,6 +125,13 @@ public class BannerManagement extends Fragment {
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 uploadBanner(uri,"banner2");
+                                                dialogs.dismiss();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                dialogs.dismiss();
+
                                             }
                                         });
                             }
@@ -135,10 +153,20 @@ public class BannerManagement extends Fragment {
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 uploadBanner(uri,"banner3");
+                                                dialogs.dismiss();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                           dialogs.dismiss();
                                             }
                                         });
                             }
                         });
+            }
+            if (uriBanner1 == null && uriBanner2 == null && uriBanner3==null) {
+                Toast.makeText(requireContext(), "Bạn cần cập nhập mới ít nhất 1 banner", Toast.LENGTH_SHORT).show();
+                dialogs.dismiss();
             }
         });
     }

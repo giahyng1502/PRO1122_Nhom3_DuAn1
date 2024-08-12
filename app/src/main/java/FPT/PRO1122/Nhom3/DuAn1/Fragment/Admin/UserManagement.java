@@ -43,6 +43,7 @@ import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.AdminActivity;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterUserManager;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.DialogAddUserManagementBinding;
@@ -57,6 +58,7 @@ public class UserManagement extends Fragment {
     FragmentUserManagementBinding binding;
     AdapterUserManager adapterUserManager;
     ArrayList<User> list;
+    Dialogs dialogs ;
     SwipeToDeleteCallback swipeToDeleteCallback;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     @Override
@@ -68,6 +70,8 @@ public class UserManagement extends Fragment {
                 adapterUserManager.setImageUri(userImageUri);
             }
         });
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(requireContext());
     }
 
     @Override
@@ -121,12 +125,17 @@ public class UserManagement extends Fragment {
 
         bindingDialog.btnCancelUserManagement.setOnClickListener(v->bottomSheetDialog.dismiss());
         bindingDialog.btnSubMitUserManagement.setOnClickListener(v-> {
+            dialogs.show();
             String userid = bindingDialog.edtIDNumberUserManagement.getText().toString();
             String pass = bindingDialog.edtPassUserManagement.getText().toString();
-            if (userid.isEmpty() )
+            if (userid.isEmpty() ) {
+                dialogs.dismiss();
                 bindingDialog.edtIDNumberUserManagement.setError("User name cann't empty");
-            else if (pass.isEmpty())
+            }
+            else if (pass.isEmpty()) {
+                dialogs.dismiss();
                 bindingDialog.edtPassUserManagement.setError("User name cann't empty");
+            }
             else {
                 FirebaseDatabase.getInstance()
                         .getReference("users")
@@ -143,11 +152,13 @@ public class UserManagement extends Fragment {
                                                 @Override
                                                 public void onSuccess(Void unused) {
                                                     bottomSheetDialog.dismiss();
+                                                    dialogs.dismiss();
                                                     Toast.makeText(requireContext(), "Add User Successfuly", Toast.LENGTH_SHORT).show();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
+                                                    dialogs.dismiss();
                                                     Toast.makeText(requireContext(), "Fail" + e, Toast.LENGTH_SHORT).show();
                                                 }
                                             });
@@ -183,6 +194,8 @@ public class UserManagement extends Fragment {
         });
 
         btnConfirm.setOnClickListener(v -> {
+            dialogs.showProgressBar(requireContext());
+            dialogs.show();
             bottomSheetDialog.dismiss();
 
             User user = list.get(pos);
@@ -191,11 +204,13 @@ public class UserManagement extends Fragment {
                     .child(user.getUserId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            dialogs.dismiss();
                             Toast.makeText(requireContext(), "Delete Successfully", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            dialogs.dismiss();
                             Toast.makeText(requireContext(), "Error" + e, Toast.LENGTH_SHORT).show();
                         }
                     });
