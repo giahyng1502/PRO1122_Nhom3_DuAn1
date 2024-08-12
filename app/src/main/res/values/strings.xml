@@ -44,6 +44,7 @@
     <string name="plus">+</string>
     <string name="title">Tiêu đề</string>
     <string name="price">"giá "</string>
+    <string name="prices">"Giá món ăn"</string>
     <string name="please_wait">Vui lòng chờ...</string>
     <string name="time">15 - 20p</string>
     <string name="star">5</string>
@@ -88,6 +89,16 @@
     <string name="check">Kiểm tra</string>
     <string name="user_management">Quản lý người dùng</string>
     <string name="what_are_you_eat_today">Hôm nay bạn ăn gì?</string>
+    <string name="add_food">Thêm đồ ăn</string>
+    <string name="food_name">Tên món ăn</string>
+    <string name="category">Loại</string>
+    <string name="describe">Mô tả</string>
+    <string name="add_user">Thêm người dùng</string>
+    <string name="user_name">Tên người dùng</string>
+    <string name="password">Mật khẩu</string>
+    <string name="user_from">Thay đổi người dùng</string>
+    <string name="user">Người dùng</string>
+    <string name="admin">Quản trị viên</string>
 
     <string-array name="revenue_filter_options">
         <item>Hằng ngày</item>

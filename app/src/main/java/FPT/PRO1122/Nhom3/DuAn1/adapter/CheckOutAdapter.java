@@ -22,7 +22,7 @@ import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.model.Cart;
 
 @SuppressLint("SetTextI18n")
-public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHolder>{
+public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHolder> {
     ArrayList<Cart> list = new ArrayList<>();
 
     public CheckOutAdapter(ArrayList<Cart> list) {
@@ -50,6 +50,8 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
         Glide.with(holder.itemView.getContext())
                 .load(list.get(position).getImagePath())
                 .transform(new CenterCrop(), new RoundedCorners(30))
+                .thumbnail(Glide.with(holder.itemView.getContext()).load(R.drawable.loading_image))
+                .fitCenter()
                 .into(holder.picCheckout);
     }
 
@@ -59,8 +61,9 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTxtCheckout, totalPriceTxtInCheckout, numTxtInCheckOut ;
+        TextView titleTxtCheckout, totalPriceTxtInCheckout, numTxtInCheckOut;
         ImageView picCheckout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTxtCheckout = itemView.findViewById(R.id.titleTxtCheckout);

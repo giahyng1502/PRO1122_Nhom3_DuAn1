@@ -1,5 +1,6 @@
 package FPT.PRO1122.Nhom3.DuAn1.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,10 +27,9 @@ import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.OrderHistoryAdapter;
 import FPT.PRO1122.Nhom3.DuAn1.model.Order;
 
-
-public class Myorder extends Fragment {
+public class MyOrder extends Fragment {
     private OrderHistoryAdapter adapter;
-    private ArrayList<Order> orderList = new ArrayList<>();
+    private final ArrayList<Order> orderList = new ArrayList<>();
     private DatabaseReference ordersRef;
     private RecyclerView recyclerViewOrderHistory;
 
@@ -63,6 +63,7 @@ public class Myorder extends Fragment {
 
     private void loadOrderHistory() {
         ordersRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 orderList.clear();

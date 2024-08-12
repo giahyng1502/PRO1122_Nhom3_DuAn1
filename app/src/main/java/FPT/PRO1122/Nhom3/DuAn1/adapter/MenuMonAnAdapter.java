@@ -71,14 +71,16 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
             }
         }
 
-        int drawableResourceId = context.getResources()
-                .getIdentifier(category.getImagePath()
+        int drawableResourceId = context.getResources().getIdentifier(
+                category.getImagePath()
                         , "drawable"
                         , holder.itemView.getContext().getPackageName()
                 );
 
         Glide.with(context)
                 .load(drawableResourceId)
+                .thumbnail(Glide.with(holder.itemView.getContext()).load(R.drawable.loading_image))
+                .fitCenter()
                 .into(holder.imgCat);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +92,6 @@ public class MenuMonAnAdapter extends RecyclerView.Adapter<MenuMonAnAdapter.View
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

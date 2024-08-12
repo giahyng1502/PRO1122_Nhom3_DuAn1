@@ -94,7 +94,12 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                     }
                 });
 
-        Glide.with(context).load(food.getImagePath()).into(holder.ivFoodAvatar);
+        Glide.with(context)
+                .load(food.getImagePath())
+                .thumbnail(Glide.with(context).load(R.drawable.loading_image))
+                .fitCenter()
+                .into(holder.ivFoodAvatar);
+
         if (MainActivity.role == 0) {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -132,7 +137,11 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
         dialogAddFoodBinding.tvFoodName.setText(food.getTitle());
         dialogAddFoodBinding.tvFoodID.setText(food.getId() + "");
 
-        Glide.with(context).load(food.getImagePath()).into(dialogAddFoodBinding.ivFood);
+        Glide.with(context)
+                .load(food.getImagePath())
+                .thumbnail(Glide.with(context).load(R.drawable.loading_image))
+                .fitCenter()
+                .into(dialogAddFoodBinding.ivFood);
 
         FirebaseDatabase.getInstance()
                 .getReference("Category")
@@ -231,7 +240,6 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
     private void openMedia() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-
         activityResultLauncherUpdate.launch(intent);
     }
 
@@ -252,7 +260,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvPrice, tvDecr, tvRate, tvCatagory;
         ImageView ivFoodAvatar;
 

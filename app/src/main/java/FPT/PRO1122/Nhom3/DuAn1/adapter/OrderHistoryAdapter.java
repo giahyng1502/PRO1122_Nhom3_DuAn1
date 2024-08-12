@@ -34,11 +34,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         this.orderList = orderList;
     }
 
-
     @NonNull
     @Override
     public OrderHistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_orderhistory,parent,false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_orderhistory, parent, false);
         return new ViewHolder(inflate);
     }
 
@@ -77,12 +76,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.productListTxt.setText(productListBuilder.toString());
         if (order.getStatus() == 3) {
             holder.btnHuy.setVisibility(View.VISIBLE);
-            holder.btnHuy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    huyDonHang(order,holder);
-                }
-            });
+            holder.btnHuy.setOnClickListener(v -> huyDonHang(order));
         } else {
             holder.btnHuy.setVisibility(View.GONE);
 
@@ -91,33 +85,17 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             //admin
             if (order.getStatus() == 3) {
                 holder.btnXacNhan.setVisibility(View.VISIBLE);
-                holder.btnXacNhan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        xacNhanDonHang(order,holder);
-                    }
-                });
-
+                holder.btnXacNhan.setOnClickListener(v -> xacNhanDonHang(order, holder));
             }
+
             if (order.getStatus() == 2) {
-
                 holder.btnDangGiao.setVisibility(View.VISIBLE);
-
-                holder.btnDangGiao.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        giaoDonHang(order,holder);
-                    }
-                });
+                holder.btnDangGiao.setOnClickListener(v -> giaoDonHang(order, holder));
             }
+
             if (order.getStatus() == 1) {
                 holder.btnThanhCong.setVisibility(View.VISIBLE);
-                holder.btnThanhCong.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        hoanThanhDonHang(order,holder);
-                    }
-                });
+                holder.btnThanhCong.setOnClickListener(v -> hoanThanhDonHang(order, holder));
             }
         }
     }
@@ -127,83 +105,55 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(order.getUserID()).child(order.getOrderId())
                 .setValue(order)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        holder.btnXacNhan.setVisibility(View.GONE);
-                        holder.btnHuy.setVisibility(View.GONE);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
+                .addOnSuccessListener(unused -> {
+                    holder.btnXacNhan.setVisibility(View.GONE);
+                    holder.btnHuy.setVisibility(View.GONE);
+                }).addOnFailureListener(e -> Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
-    private void huyDonHang(Order order, ViewHolder holder) {
+
+    private void huyDonHang(Order order) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Xác Nhận");
         builder.setMessage("Bạn có chắc chắn muốn huỷ đơn hàng này không ?");
-        builder.setPositiveButton("Có",(dialog, which) -> {
+        builder.setPositiveButton("Có", (dialog, which) -> {
             FirebaseDatabase.getInstance().getReference("Orders")
                     .child(order.getUserID()).child(order.getOrderId())
                     .removeValue()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(context, "Huỷ thành công đơn hàng", Toast.LENGTH_SHORT).show();
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(context, "Huỷ thành công đơn hàng", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+                        dialog.dismiss();
+                    }).addOnFailureListener(e -> Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
-        builder.setNegativeButton("Không",(dialog, which) -> {
+        builder.setNegativeButton("Không", (dialog, which) -> {
             dialog.dismiss();
         });
         builder.show();
     }
+
     private void giaoDonHang(Order order, ViewHolder holder) {
         order.setStatus(1);
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(order.getUserID()).child(order.getOrderId())
                 .setValue(order)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        holder.btnDangGiao.setVisibility(View.GONE);
-                        holder.btnHuy.setVisibility(View.GONE);
-                        Toast.makeText(context, "Đơn hàng đang được vận chuyển", Toast.LENGTH_SHORT).show();
-                        notifyDataSetChanged();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
+                .addOnSuccessListener(unused -> {
+                    holder.btnDangGiao.setVisibility(View.GONE);
+                    holder.btnHuy.setVisibility(View.GONE);
+                    Toast.makeText(context, "Đơn hàng đang được vận chuyển", Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                }).addOnFailureListener(e -> Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
     private void hoanThanhDonHang(Order order, ViewHolder holder) {
         order.setStatus(0);
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(order.getUserID()).child(order.getOrderId())
                 .setValue(order)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        holder.btnThanhCong.setVisibility(View.GONE);
-                        notifyDataSetChanged();
-                        Toast.makeText(context, "Đơn hàng đã hoàn thành", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+                .addOnSuccessListener(unused -> {
+                    holder.btnThanhCong.setVisibility(View.GONE);
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "Đơn hàng đã hoàn thành", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -211,9 +161,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         return orderList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        Button btnXacNhan,btnHuy,btnDangGiao,btnThanhCong;
-        TextView orderIdTxt, orderDateTxt, nameTxt, phoneTxt, addressTxt, productListTxt, statusTxt, totalAmountTxt;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        Button btnXacNhan, btnHuy, btnDangGiao, btnThanhCong;
+        TextView orderDateTxt, nameTxt, phoneTxt, addressTxt, productListTxt, statusTxt, totalAmountTxt;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             totalAmountTxt = itemView.findViewById(R.id.totalAmountTxt);

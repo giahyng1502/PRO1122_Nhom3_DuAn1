@@ -16,19 +16,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding bind;
-    private DatabaseReference reference;
+    public Dialogs dialogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(bind.getRoot());
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(this);
 
         bind.continueBtn.setOnClickListener(v -> {
+            dialogs.show();
 //             Kiểm tra xem các trường nhập liệu có trống không
             if (!validatePhoneNumber() || !validatePassword()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -93,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Hàm kiểm tra xem số điện thoại đã tồn tại trong Firebase chưa
     private void checkIfPhoneNumberExists() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users");
+        DatabaseReference reference = database.getReference("users");
         String phoneNumber = Objects.requireNonNull(bind.edtPhoneNumber.getText()).toString();
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString();
 
@@ -105,10 +109,12 @@ public class RegisterActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Nếu số điện thoại đã tồn tại, thông báo và focus vào số điện thoại
                 if (snapshot.exists()) {
-                        bind.edtPhoneNumber.setError("This phone number already exists");
-                        bind.edtPhoneNumber.requestFocus();
+                    dialogs.dismiss();
+                    bind.edtPhoneNumber.setError("This phone number already exists");
+                    bind.edtPhoneNumber.requestFocus();
                 } else {
-
+                    // Nếu số điện thoại chưa tồn tại, chuyển sang màn hình tạo hồ sơ
+                    dialogs.dismiss();
                     Intent intent = new Intent(RegisterActivity.this, CreateProfileActivity.class);
                     intent.putExtra("phoneNumber", phoneNumber);
                     intent.putExtra("password", password);

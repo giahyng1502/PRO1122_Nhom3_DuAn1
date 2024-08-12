@@ -67,18 +67,21 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="9"
+                android:layout_marginHorizontal="2dp"
                 android:elevation="2dp"
-                app:cardCornerRadius="16dp"
+                android:backgroundTint="#FAFAFA"
+                app:cardCornerRadius="30dp"
                 app:cardMaxElevation="8dp">
 
                 <SearchView
-
                     android:id="@+id/search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#E4E2E2"
                     android:drawablePadding="10dp"
-                    android:hint="What are you eat today?"
+                    android:searchIcon="@drawable/ic_search"
+                    android:queryHint="Tìm kiếm người dùng của bạn"
+                    android:iconifiedByDefault="false"
+                    android:queryBackground="@android:color/transparent"
                     android:singleLine="true" />
 
             </androidx.cardview.widget.CardView>

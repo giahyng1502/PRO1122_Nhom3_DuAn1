@@ -2,7 +2,6 @@ package FPT.PRO1122.Nhom3.DuAn1.Activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -11,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,40 +60,27 @@ public class ChiTietMonAn extends AppCompatActivity {
                 .getReference("Favorite").child(MainActivity.id).child(object.getId()+"");
 
         // Thiết lập OnClickListener cho nút yêu thích
-        binding.favBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isFavorite) {
-                    // Nếu món ăn là món yêu thích -> bỏ yêu thích
-                    setFavorite(false);
-                    databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            // Đặt lại hình trái tim màu đỏ
-                            binding.favBtn.setImageResource(R.drawable.favorite);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Xử lý lỗi nếu cần
-                        }
-                    });
-                } else {
-                    // Nếu món ăn chưa được yêu thích -> yêu thích
-                    setFavorite(true);
-                    databaseReference.setValue(object).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            // Đặt lại hình trái tim màu trắng đầy
-                            binding.favBtn.setImageResource(R.drawable.favorite_select);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Xử lý lỗi nếu cần
-                        }
-                    });
-                }
+        binding.favBtn.setOnClickListener(v -> {
+            if (isFavorite) {
+                // Nếu món ăn là món yêu thích -> bỏ yêu thích
+                setFavorite(false);
+                databaseReference.removeValue().addOnSuccessListener(unused -> {
+                    // Đặt lại hình trái tim màu đỏ
+                    binding.favBtn.setImageResource(R.drawable.favorite);
+                    Toast.makeText(ChiTietMonAn.this, "Đã bỏ yêu thích " + object.getTitle() + " khỏi danh sách", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    // Xử lý lỗi nếu cần
+                });
+            } else {
+                // Nếu món ăn chưa được yêu thích -> yêu thích
+                setFavorite(true);
+                databaseReference.setValue(object).addOnSuccessListener(unused -> {
+                    // Đặt lại hình trái tim màu trắng đầy
+                    binding.favBtn.setImageResource(R.drawable.favorite_select);
+                    Toast.makeText(ChiTietMonAn.this, "Đã thêm " + object.getTitle() + " vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    // Xử lý lỗi nếu cần
+                });
             }
         });
     }
@@ -167,19 +151,16 @@ public class ChiTietMonAn extends AppCompatActivity {
 
         // Khởi tạo DatabaseReference
 
-        binding.AddToCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cart cartItem = new Cart();
-                cartItem.setTitle(object.getTitle());
-                cartItem.setCartId(object.getId()+"");
-                cartItem.setPrice(object.getPrice());
-                cartItem.setTotal(total);
-                cartItem.setImagePath(object.getImagePath());
-                cartItem.setQuantity(num);
-                cartItem.setFoodID(object.getId());
-                addToCart(cartItem);
-            }
+        binding.AddToCartBtn.setOnClickListener(v -> {
+            Cart cartItem = new Cart();
+            cartItem.setTitle(object.getTitle());
+            cartItem.setCartId(object.getId()+"");
+            cartItem.setPrice(object.getPrice());
+            cartItem.setTotal(total);
+            cartItem.setImagePath(object.getImagePath());
+            cartItem.setQuantity(num);
+            cartItem.setFoodID(object.getId());
+            addToCart(cartItem);
         });
     }
 

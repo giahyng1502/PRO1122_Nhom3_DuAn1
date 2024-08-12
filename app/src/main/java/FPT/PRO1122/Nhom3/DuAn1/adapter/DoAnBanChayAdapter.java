@@ -63,6 +63,8 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
 
         Glide.with(context).load(items.get(position).getImagePath())
                 .transform(new CenterCrop(), new RoundedCorners(30))
+                .thumbnail(Glide.with(holder.itemView.getContext()).load(R.drawable.loading_image))
+                .fitCenter()
                 .into(holder.foodsImage);
 
         holder.itemView.setOnClickListener(v -> {
@@ -70,11 +72,12 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
             intent.putExtra("object", items.get(position));
             context.startActivity(intent);
         });
+
         holder.btnAddCart.setOnClickListener(v -> {
             Foods object = items.get(position);
             Cart cartItem = new Cart();
             cartItem.setTitle(object.getTitle());
-            cartItem.setCartId(object.getId()+"");
+            cartItem.setCartId(object.getId() + "");
             cartItem.setPrice(object.getPrice());
             cartItem.setTotal(object.getPrice());
             cartItem.setImagePath(object.getImagePath());
@@ -83,6 +86,7 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
             addToCart(cartItem);
         });
     }
+
     private void addToCart(Cart cart) {
         // Khởi tạo FirebaseDatabase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -143,7 +147,7 @@ public class DoAnBanChayAdapter extends RecyclerView.Adapter<DoAnBanChayAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tittleTxt, priceTxt, starTxt, timeTxt,btnAddCart;
+        TextView tittleTxt, priceTxt, starTxt, timeTxt, btnAddCart;
         ImageView foodsImage;
 
         public ViewHolder(@NonNull View itemView) {

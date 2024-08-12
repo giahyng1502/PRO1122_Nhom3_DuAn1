@@ -88,7 +88,10 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
 
         Glide.with(context).load(user.getImageAvatar())
                 .error(R.drawable.none_avatar)
+                .thumbnail(Glide.with(holder.itemView.getContext()).load(R.drawable.loading_image))
+                .fitCenter()
                 .into(holder.ivAvatarUserManagement);
+
         holder.itemView.setOnLongClickListener(v -> {
             updateUserManagement(user);
             return true;
@@ -110,7 +113,11 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
         } else {
             binding.rdoAdmin.setChecked(true);
         }
-            Glide.with(context).load(user.getImageAvatar()).into(binding.ivUser);
+            Glide.with(context)
+                    .load(user.getImageAvatar())
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_image))
+                    .fitCenter()
+                    .into(binding.ivUser);
 
 
         binding.ivCameraIcon.setOnClickListener(v -> {
@@ -191,7 +198,7 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvUserManagementName, tvUserManagementEmail,
                 tvUserManagementPhone, tvUserManagementPassWord, tvUserManagementAddress,tvAcount;
         ImageView ivAvatarUserManagement;

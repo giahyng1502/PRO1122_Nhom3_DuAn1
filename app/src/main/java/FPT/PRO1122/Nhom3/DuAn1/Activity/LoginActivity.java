@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
+    Dialogs dialogs;
 
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Dialogs.showProgressBar(this);
+                        dialogs.showProgressBar(this);
                         Intent intent = new Intent(this, MainActivity.class);
                         // user exit to homephone
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -67,9 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                         updateUI(user);
                         assert user != null;
                         saveDataToPreferences(user.getUid());
-                        Dialogs.dismiss();
+                        dialogs.dismiss();
                     } else {
-                        Dialogs.dismiss();
+                        dialogs.dismiss();
                         Log.w("GoogleSignIn", "signInWithCredential:failure", task.getException());
                         updateUI(null);
                     }
@@ -97,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -122,17 +123,18 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, gso);
-        Dialogs.showProgressBar(this);
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(this);
 
         bind.googleBtn.setOnClickListener(v -> {
             // Đăng nhập bằng Google
-            Dialogs.show();
+            dialogs.show();
             Intent intent = googleSignInClient.getSignInIntent();
             activityResultLauncher.launch(intent);
         });
 
         bind.signInBtn.setOnClickListener(v -> {
-            Dialogs.show();
+            dialogs.show();
             // Kiểm tra xem các trường nhập liệu có trống không
             if (!validatePhoneNumber() || !validatePassword()) {
                 Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -174,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //  Hàm này dùng để kiểm tra xem người dùng có tồn tại trong Firebase hay không
     private void checkUser() {
-        Dialogs.showProgressBar(this);
+        dialogs.showProgressBar(this);
         String phoneNumber = Objects.requireNonNull(bind.edtPhoneNumber.getText()).toString().trim();
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString().trim();
 
@@ -200,25 +202,25 @@ public class LoginActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
-                        Dialogs.dismiss();
+                        dialogs.dismiss();
                     } else {
                         // Nếu mật khẩu không chính xác, thông báo và focus vào mật khẩu
                         bind.edtPassword.setError("Invalid Credentials");
                         bind.edtPassword.requestFocus();
-                        Dialogs.dismiss();
+                        dialogs.dismiss();
                     }
                 } else {
                     // Nếu người dùng không tồn tại, thông báo và focus vào người dùng
                     bind.edtPhoneNumber.setError("User does not exist");
                     bind.edtPhoneNumber.requestFocus();
-                    Dialogs.dismiss();
+                    dialogs.dismiss();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Xử lý trường hợp có lỗi xảy ra
-                Dialogs.dismiss();
+                dialogs.dismiss();
                 Toast.makeText(LoginActivity.this, "Something went wrong" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
