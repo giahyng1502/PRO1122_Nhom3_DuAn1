@@ -35,17 +35,16 @@ public class Profile extends AppCompatActivity {
     private GoogleSignInClient signInClient;
     Dialogs dialogs;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getData();
         FirebaseApp.initializeApp(this);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
-
         dialogs = new Dialogs();
+        dialogs.showProgressBar(this);
+        getData();
         anhxa();
 
         //payment
@@ -113,19 +112,24 @@ public class Profile extends AppCompatActivity {
     }
 
     private void getData() {
+        // lấy thông tin người dùng
+        dialogs.show();
         FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
+                    assert user != null;
                     tvMail.setText(user.getEmail());
                     tvName.setText(user.getName());
                     Glide.with(Profile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(ivAvatar);
+                    dialogs.dismiss();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                dialogs.dismiss();
                 Toast.makeText(Profile.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

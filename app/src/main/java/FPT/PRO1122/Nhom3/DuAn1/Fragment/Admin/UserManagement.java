@@ -2,6 +2,7 @@ package FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -38,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.AdminActivity;
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
@@ -50,7 +52,7 @@ import FPT.PRO1122.Nhom3.DuAn1.implement.MyButtonClickListener;
 import FPT.PRO1122.Nhom3.DuAn1.implement.SwipeToDeleteCallback;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
 
-
+@SuppressLint("NotifyDataSetChanged")
 public class UserManagement extends Fragment {
     FragmentUserManagementBinding binding;
     AdapterUserManager adapterUserManager;
@@ -66,11 +68,10 @@ public class UserManagement extends Fragment {
                 adapterUserManager.setImageUri(userImageUri);
             }
         });
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // create binding
         binding = FragmentUserManagementBinding.inflate(inflater,container,false);
@@ -162,15 +163,16 @@ public class UserManagement extends Fragment {
             }
 
         });
-        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         bottomSheetDialog.show();
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void showBottomSheetDialog(int pos) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
-        View bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_layout, null);
+        @SuppressLint("InflateParams") View bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_layout, null);
 
         Button btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
         TextView btnConfirm = bottomSheetView.findViewById(R.id.btnConfirm);
@@ -201,7 +203,7 @@ public class UserManagement extends Fragment {
             adapterUserManager.notifyItemRemoved(pos);
         });
         bottomSheetDialog.setContentView(bottomSheetView);
-        bottomSheetDialog.getWindow().setStatusBarColor(Color.BLACK);
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setStatusBarColor(Color.BLACK);
         bottomSheetDialog.show();
     }
 
@@ -244,6 +246,7 @@ public class UserManagement extends Fragment {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         User user;
                         user = data.getValue(User.class);
+                        assert user != null;
                         if (!user.getUserId().equals(MainActivity.id)) {
                             list.add(user);
                         }
@@ -266,7 +269,6 @@ public class UserManagement extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(adapterUserManager);
-
     }
 
     @Override
@@ -274,5 +276,4 @@ public class UserManagement extends Fragment {
         super.onDestroy();
         binding = null;
     }
-
 }

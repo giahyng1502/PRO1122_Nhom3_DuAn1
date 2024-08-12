@@ -2,6 +2,7 @@ package FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -41,8 +42,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterFoodManagement;
@@ -53,7 +56,6 @@ import FPT.PRO1122.Nhom3.DuAn1.implement.SwipeToDeleteCallback;
 import FPT.PRO1122.Nhom3.DuAn1.model.Catagory;
 import FPT.PRO1122.Nhom3.DuAn1.model.Foods;
 
-
 public class FoodManagement extends Fragment {
     FragmentFoodManagerBinding binding;
     List<Foods> list;
@@ -62,6 +64,7 @@ public class FoodManagement extends Fragment {
     DialogAddFoodBinding dialogAddFoodBinding;
     Uri foodUri;
     Dialog dialog;
+    Dialogs dialogs;
 
     ActivityResultLauncher<Intent>activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -73,20 +76,16 @@ public class FoodManagement extends Fragment {
         if (result.getResultCode() == RESULT_OK && result.getData() != null) {
             Uri uriFoodUpdate = result.getData().getData();
             adapterFoodManagement.setImageUri(uriFoodUpdate);
-
         }
     });
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentFoodManagerBinding.inflate(inflater,container,false);
         return binding.getRoot();
@@ -95,29 +94,32 @@ public class FoodManagement extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(requireContext());
+        dialogs.show();
         databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+
         if (MainActivity.role == 0) {
             binding.backtoHome.setVisibility(View.GONE);
         }
-        binding.backtoHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Home targetFragment = new Home();
 
-                // Sử dụng FragmentManager và FragmentTransaction để chuyển đổi
-                FragmentManager fragmentManager = getParentFragmentManager(); // Hoặc getActivity().getSupportFragmentManager() nếu dùng trong Activity
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        binding.backtoHome.setOnClickListener(v -> {
+            Home targetFragment = new Home();
 
-                // Thay thế Fragment hiện tại bằng Fragment đích
-                fragmentTransaction.replace(R.id.frameLayout, targetFragment);
+            // Sử dụng FragmentManager và FragmentTransaction để chuyển đổi
+            FragmentManager fragmentManager = getParentFragmentManager(); // Hoặc getActivity().getSupportFragmentManager() nếu dùng trong Activity
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                // Thêm vào back stack để có thể quay lại Fragment trước đó
-                fragmentTransaction.addToBackStack(null);
+            // Thay thế Fragment hiện tại bằng Fragment đích
+            fragmentTransaction.replace(R.id.frameLayout, targetFragment);
 
-                // Hoàn thành giao dịch
-                fragmentTransaction.commit();
-            }
+            // Thêm vào back stack để có thể quay lại Fragment trước đó
+            fragmentTransaction.addToBackStack(null);
+
+            // Hoàn thành giao dịch
+            fragmentTransaction.commit();
         });
+
         getFoodFromFireBase();
         if(MainActivity.role == 0) {
             // Admin = 0
@@ -133,7 +135,6 @@ public class FoodManagement extends Fragment {
 
     private void searchView() {
         binding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
             @Override
             public boolean onQueryTextSubmit(String query) {
                 SearchData(query);
@@ -159,7 +160,7 @@ public class FoodManagement extends Fragment {
     }
     private void AddFood() {
         binding.btnAdd.setOnClickListener(v -> {
-            showdialogAdd();
+            showDialogAdd();
         });
     }
     private void showTextViewDialog() {
@@ -196,7 +197,7 @@ public class FoodManagement extends Fragment {
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Foods monAn = snapshot.getValue(Foods.class);
@@ -220,19 +221,19 @@ public class FoodManagement extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Xử lý khi có lỗi
                 Toast.makeText(requireContext(), "Lỗi khi truy vấn dữ liệu.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void showdialogAdd() {
+    private void showDialogAdd() {
         List<Catagory> catagories = new ArrayList<>();
         dialog = new Dialog(requireContext());
         dialogAddFoodBinding = DialogAddFoodBinding.inflate(LayoutInflater.from(requireContext()));
         dialog.setContentView(dialogAddFoodBinding.getRoot());
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setStatusBarColor(Color.BLACK);
         dialogAddFoodBinding.ivFood.setOnClickListener(v-> openMedia());
 
@@ -254,7 +255,7 @@ public class FoodManagement extends Fragment {
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
-
+                                        Toast.makeText(requireContext(), "Fail"+error, Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -291,7 +292,6 @@ public class FoodManagement extends Fragment {
             
             putFoodAvatar(foods);
         });
-
         dialog.show();
     }
 
@@ -300,49 +300,34 @@ public class FoodManagement extends Fragment {
             Toast.makeText(requireContext(), "You must upload a picture of the dish.", Toast.LENGTH_SHORT).show();
         } else {
             FirebaseStorage.getInstance().getReference("Image Food").child(foods.getId()+"")
-                    .putFile(foodUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    .putFile(foodUri).addOnSuccessListener(taskSnapshot ->
                             FirebaseStorage.getInstance().getReference("Image Food")
-                                    .child(foods.getId()+"")
-                                    .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String imageFood = uri.toString();
-                                            foods.setImagePath(imageFood);
-                                            uploadFood(foods);
-                                        }
-                                    });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
+                            .child(foods.getId()+"")
+                            .getDownloadUrl().addOnSuccessListener(uri -> {
+                                String imageFood = uri.toString();
+                                foods.setImagePath(imageFood);
+                                uploadFood(foods);
+                            })).addOnFailureListener(e -> {
+                        dialog.dismiss();
+                        Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
                     });
         }
     }
 
     private void uploadFood(Foods foods) {
         FirebaseDatabase.getInstance().getReference("Foods").child(foods.getId()+"")
-                .setValue(foods).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        dialog.dismiss();
-                        Toast.makeText(requireContext(), "Add food successfuly", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
-                    }
+                .setValue(foods).addOnSuccessListener(unused -> {
+                    dialog.dismiss();
+                    Toast.makeText(requireContext(), "Add food successfuly", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    dialog.dismiss();
+                    Toast.makeText(requireContext(), "Fail"+e, Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void openMedia() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-
         activityResultLauncher.launch(intent);
     }
 
@@ -357,6 +342,7 @@ public class FoodManagement extends Fragment {
         };
     }
 
+    @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     private void showBottomSheetDialog(int pos) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
         View bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_layout, null);
@@ -392,7 +378,7 @@ public class FoodManagement extends Fragment {
         });
 
         bottomSheetDialog.setContentView(bottomSheetView);
-        bottomSheetDialog.getWindow().setStatusBarColor(Color.BLACK);
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setStatusBarColor(Color.BLACK);
         bottomSheetDialog.show();
     }
 
@@ -405,9 +391,11 @@ public class FoodManagement extends Fragment {
                     list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         list.add(dataSnapshot.getValue(Foods.class));
+                        dialogs.dismiss();
                     }
                     if (!list.isEmpty()) {
-                        initReclerView();
+                        initRecyclerView();
+                        dialogs.dismiss();
                     }
                 }
             }
@@ -419,12 +407,10 @@ public class FoodManagement extends Fragment {
         });
     }
 
-    private void initReclerView() {
+    private void initRecyclerView() {
         adapterFoodManagement = new AdapterFoodManagement(requireContext(),list,activityResultLauncherUpdate);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(adapterFoodManagement);
     }
-
-
 }

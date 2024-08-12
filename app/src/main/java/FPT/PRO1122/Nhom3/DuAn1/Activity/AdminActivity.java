@@ -42,7 +42,6 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getHeaderAdmin();
 
-
         // Thiết lập Fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.nav_host_fragment, new OrderManagement())

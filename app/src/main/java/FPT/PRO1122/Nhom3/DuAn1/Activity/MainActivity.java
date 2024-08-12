@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,13 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Favorite;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Home;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.MyOrder;
@@ -31,16 +30,10 @@ public class MainActivity extends AppCompatActivity {
     public static String id;
     public static int idFrament = R.id.home;
     public static int role = 1;
-
     private boolean doubleBackToExitPressedOnce = false;
-    private Handler handler = new Handler();
-    private Runnable resetDoubleBackFlag = new Runnable() {
-        @Override
-        public void run() {
-            doubleBackToExitPressedOnce = false;
-        }
-    };
-
+    private final Handler handler = new Handler();
+    private final Runnable resetDoubleBackFlag = () -> doubleBackToExitPressedOnce = false;
+    Dialogs dialogs;
 
     @Override
     public void onBackPressed() {
@@ -66,14 +59,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        id = getIDCurrentAccout();
+        id = getIDCurrentAccount();
         getUserCurrent();
         anhXa();
-        setBottonNavition();
+        setBottomNavigation();
         //
         bottomNavigationItemView.setBackground(null);
-        //
-//        bottomNavigationItemView.getMenu().getItem(2).isEnabled();
         //
         if (idFrament == R.id.home) {
             bottomNavigationItemView.setSelectedItemId(idFrament);
@@ -81,9 +72,11 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationItemView.setSelectedItemId(idFrament);
             idFrament = R.id.home;
         }
-
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(this);
+        dialogs.show();
     }
-    public String getIDCurrentAccout() {
+    public String getIDCurrentAccount() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserID", MODE_PRIVATE);
         return sharedPreferences.getString("id", "");
     }
@@ -95,11 +88,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             getRole(snapshot.child("role").getValue(Integer.class));
+                            dialogs.dismiss();
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        dialogs.dismiss();
                         Toast.makeText(MainActivity.this, "get role fail "+error, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -108,38 +103,28 @@ public class MainActivity extends AppCompatActivity {
         this.role = role;
     }
 
-    private void setBottonNavition() {
+    private void setBottomNavigation() {
         // chuyen đến fragment giỏ hàng
         btnCart.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, CartActivity.class)));
 
-
-        // vào fragment home ngay khi đăng nhập
-//            getSupportFragmentManager().beginTransaction().
-//                    replace(R.id.frameLayout,new Home()).
-//                    commit();
-
         // khi click sẽ mở fragment tương ứng
-        bottomNavigationItemView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (R.id.home == item.getItemId()) {
-                    fragment = new Home();
-                } else if (R.id.favorite == item.getItemId()) {
-                    fragment = new Favorite();
-                }else if (R.id.myOrder == item.getItemId()) {
-                    fragment = new MyOrder();
-                }else if (R.id.profile == item.getItemId()) {
-                    startActivity(new Intent(MainActivity.this, Profile.class));
-                }
-                if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().
-                            replace(R.id.frameLayout,fragment).
-                            commit();
-
-                }
-                return true;
+        bottomNavigationItemView.setOnItemSelectedListener(item -> {
+            if (R.id.home == item.getItemId()) {
+                fragment = new Home();
+            } else if (R.id.favorite == item.getItemId()) {
+                fragment = new Favorite();
+            }else if (R.id.myOrder == item.getItemId()) {
+                fragment = new MyOrder();
+            }else if (R.id.profile == item.getItemId()) {
+                startActivity(new Intent(MainActivity.this, Profile.class));
             }
+            if (fragment != null) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.frameLayout,fragment).
+                        commit();
+            }
+            return true;
         });
     }
 
