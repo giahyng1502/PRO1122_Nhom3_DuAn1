@@ -125,16 +125,17 @@ public class UserManagement extends Fragment {
 
         bindingDialog.btnCancelUserManagement.setOnClickListener(v->bottomSheetDialog.dismiss());
         bindingDialog.btnSubMitUserManagement.setOnClickListener(v-> {
+            dialogs.showProgressBar(requireContext());
             dialogs.show();
             String userid = bindingDialog.edtIDNumberUserManagement.getText().toString();
             String pass = bindingDialog.edtPassUserManagement.getText().toString();
             if (userid.isEmpty() ) {
                 dialogs.dismiss();
-                bindingDialog.edtIDNumberUserManagement.setError("User name cann't empty");
+                Toast.makeText(requireContext(), "Vui lòng nhập tên đăng nhập", Toast.LENGTH_SHORT).show();
             }
             else if (pass.isEmpty()) {
                 dialogs.dismiss();
-                bindingDialog.edtPassUserManagement.setError("User name cann't empty");
+                Toast.makeText(requireContext(), "Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
             }
             else {
                 FirebaseDatabase.getInstance()
@@ -153,21 +154,24 @@ public class UserManagement extends Fragment {
                                                 public void onSuccess(Void unused) {
                                                     bottomSheetDialog.dismiss();
                                                     dialogs.dismiss();
-                                                    Toast.makeText(requireContext(), "Add User Successfuly", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(requireContext(), "Tài khoản này đã được thêm vào hệ thống thành công", Toast.LENGTH_SHORT).show();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
                                                     dialogs.dismiss();
-                                                    Toast.makeText(requireContext(), "Fail" + e, Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(requireContext(), "Thất bại" + e, Toast.LENGTH_SHORT).show();
                                                 }
                                             });
-                                } else
-                                    Toast.makeText(requireContext(), "Account already exists", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(requireContext(), "Tài khoản này đã tồn tại", Toast.LENGTH_SHORT).show();
+                                    dialogs.dismiss();
+                                }
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
+                                dialogs.dismiss();
                                 Toast.makeText(requireContext(), "Error" + error, Toast.LENGTH_SHORT).show();
                             }
                         });

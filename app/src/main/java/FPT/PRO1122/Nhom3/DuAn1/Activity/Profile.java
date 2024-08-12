@@ -153,7 +153,7 @@ public class Profile extends AppCompatActivity {
         FirebaseAuth.getInstance().addAuthStateListener(firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() == null) {
                 signInClient.signOut().addOnSuccessListener(unused -> {
-                    Toast.makeText(this, "Log out successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this, LoginActivity.class));
                 });
             }

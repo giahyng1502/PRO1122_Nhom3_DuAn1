@@ -101,6 +101,8 @@ public class FoodManagement extends Fragment {
 
         if (MainActivity.role == 0) {
             binding.backtoHome.setVisibility(View.GONE);
+        } else {
+            binding.tvTitleFoodManagement.setText("Tìm Kiếm");
         }
 
         binding.backtoHome.setOnClickListener(v -> {

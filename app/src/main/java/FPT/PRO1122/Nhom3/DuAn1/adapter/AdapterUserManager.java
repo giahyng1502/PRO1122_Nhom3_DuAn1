@@ -129,10 +129,10 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
 
         binding.btnCancelUserManagement.setOnClickListener(v -> dialog.dismiss());
         binding.btnSubMitUserManagement.setOnClickListener(v -> {
-            if (binding.edtPasswordUserManagement.getText().toString().isEmpty())
-                binding.edtPasswordUserManagement.setError("Not be empty");
-            else
-                putAvatarUser(userImageUri, user);
+            dialogs = new Dialogs();
+            dialogs.showProgressBar(context);
+            dialogs.show();
+            putAvatarUser(userImageUri, user);
         });
         dialog.show();
         // set Size according to phone
@@ -173,22 +173,27 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
         int role = binding.rdoUser.isChecked() ? 1 : 0;
         String avatar = imageLink;
         if (name.isEmpty()) {
+            dialogs.dismiss();
             Toast.makeText(context, "Không được để trống tên người dùng", Toast.LENGTH_SHORT).show();
             return;
         }
         if (mail.isEmpty()) {
+            dialogs.dismiss();
             Toast.makeText(context, "Không được để trống emai người dùng", Toast.LENGTH_SHORT).show();
             return;
         }
         if (phone.isEmpty()) {
+            dialogs.dismiss();
             Toast.makeText(context, "Không được để trống số điện thoại người dùng", Toast.LENGTH_SHORT).show();
             return;
         }
         if (homtown.isEmpty()) {
+            dialogs.dismiss();
             Toast.makeText(context, "Không được để trống địa chỉ người dùng", Toast.LENGTH_SHORT).show();
             return;
         }
         if (pass.isEmpty()) {
+            dialogs.dismiss();
             Toast.makeText(context, "Không được để trống mật khẩu", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -201,9 +206,14 @@ public class AdapterUserManager extends RecyclerView.Adapter<AdapterUserManager.
                 .child(user1.getUserId())
                 .setValue(user1)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(context, "Update successfully", Toast.LENGTH_SHORT).show();
+                    dialogs.dismiss();
+                    Toast.makeText(context, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                }).addOnFailureListener(e -> Toast.makeText(context, "Update Fail", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e ->{
+                    dialogs.dismiss();
+                    dialog.dismiss();
+                    Toast.makeText(context, "thất bại"+e, Toast.LENGTH_SHORT).show();
+                });
 
     }
 

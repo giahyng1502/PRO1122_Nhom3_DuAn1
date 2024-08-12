@@ -217,7 +217,7 @@ public class EditProfile extends AppCompatActivity {
                 .child(MainActivity.id)
                 .setValue(user1)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(EditProfile.this, "Update successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfile.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(EditProfile.this, Profile.class));
                     dialogs.dismiss();
                 }).addOnFailureListener(e -> {

@@ -128,15 +128,6 @@
             android:textColor="@color/blue_grey"
             android:textColorHint="@color/gray" />
 
-        <CheckBox
-            android:id="@+id/chkSetuserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/black_1"
-            android:text="Áp dụng cho tất cả các đơn hàng khác"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/black_1" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

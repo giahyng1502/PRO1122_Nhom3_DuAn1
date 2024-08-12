@@ -219,7 +219,6 @@ public class CartActivity extends BaseActivity {
         RecyclerView rcThanhToan;
         Button datHangBtn;
         RecyclerView.Adapter adapter;
-        CheckBox chkSetuser;
         
         tongTientxt = bottomSheetDialog.findViewById(R.id.tongTientxt);
         tvThue = bottomSheetDialog.findViewById(R.id.tvTax);
@@ -229,7 +228,6 @@ public class CartActivity extends BaseActivity {
         diaChi = bottomSheetDialog.findViewById(R.id.diaChiGiaoHang);
         rcThanhToan = bottomSheetDialog.findViewById(R.id.rcThanhToan);
         datHangBtn = bottomSheetDialog.findViewById(R.id.datHangBtn);
-        chkSetuser = bottomSheetDialog.findViewById(R.id.chkSetuserName);
 
         NumberFormat vietnameseCurrencyFormat = NumberFormat.getCurrencyInstance();
         vietnameseCurrencyFormat.setMaximumFractionDigits(0);
@@ -285,46 +283,17 @@ public class CartActivity extends BaseActivity {
             assert diaChi != null;
             String address = diaChi.getText().toString().trim();
             if (name.isEmpty()) {
-                ten.setError("Name not empty");
+                ten.setError("Không được để trống tên khách hàng");
                 return;
             }
             if (phone.isEmpty()) {
-                sdt.setError("Phone not empty");
+                sdt.setError("Số điện thoại không được để trống");
                 return;
             }
             if (address.isEmpty()) {
-                ten.setError("Address not empty");
+                ten.setError("địa chỉ giao hàng không được bỏ trống");
                 return;
             }
-            else {
-                assert chkSetuser != null;
-                if (chkSetuser.isChecked()) {
-                    DatabaseReference refUser = FirebaseDatabase.getInstance().getReference("users").child(MainActivity.id);
-
-                    refUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                User user = snapshot.getValue(User.class);
-                                if (user != null) {
-                                    // You can modify user details as needed
-                                    user.setName(name);
-                                    user.setPhoneNumber(phone);
-                                    user.setAddress(address);
-                                    refUser.setValue(user);
-                                    }
-                            } else {
-                                Toast.makeText(CartActivity.this, "User not found", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(CartActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                
                 order.setUser(name);
                 order.setPhone(phone);
                 order.setAddress(address);
@@ -364,7 +333,6 @@ public class CartActivity extends BaseActivity {
                                 Toast.makeText(CartActivity.this, "Đã xảy ra lỗi khi đặt hàng", Toast.LENGTH_SHORT).show();
                             }
                         });
-            }
         });
         Objects.requireNonNull(bottomSheetDialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         bottomSheetDialog.show();

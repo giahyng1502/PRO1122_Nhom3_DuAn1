@@ -75,7 +75,7 @@
                 android:background="@drawable/custom_input"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
-                android:hint="Từ Ngày"
+                android:hint="Đến Ngày"
                 android:focusable="false"
                 android:inputType="none"
                 android:paddingVertical="10dp"
