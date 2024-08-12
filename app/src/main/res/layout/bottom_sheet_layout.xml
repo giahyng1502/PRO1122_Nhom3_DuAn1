@@ -63,6 +63,7 @@
         android:background="@drawable/bottom_sheet_background"
         android:backgroundTint="@android:color/white"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:paddingTop="5dp"
         android:text="@string/cancel"
         android:textColor="#DD0326D7"

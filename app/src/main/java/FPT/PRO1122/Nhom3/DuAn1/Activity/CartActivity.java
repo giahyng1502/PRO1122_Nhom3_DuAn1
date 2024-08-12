@@ -47,7 +47,7 @@ public class CartActivity extends BaseActivity {
     private  double tax;
 
 
-    private final ArrayList<Cart> cartList = new ArrayList<>();
+    private ArrayList<Cart> cartList;
     private double deliveryFee = 10000;
     private double totalAmount;
 
@@ -58,6 +58,7 @@ public class CartActivity extends BaseActivity {
         setContentView(binding.getRoot());
 
         setVariable();
+        setRecyclerView();
         initList();
         tinhTongGioHang();
         datHang();
@@ -77,6 +78,14 @@ public class CartActivity extends BaseActivity {
                 Toast.makeText(this, "Mã giảm giá không tồn tại", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setRecyclerView() {
+        cartList = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL, false);
+        binding.cartRec.setLayoutManager(linearLayoutManager);
+        adapter = new GioHangAdapter(cartList);
+        binding.cartRec.setAdapter(adapter);
     }
 
     private void datHang() {
@@ -109,15 +118,10 @@ public class CartActivity extends BaseActivity {
                     cartList.clear();
                     for (DataSnapshot issue : snapshot.getChildren()) {
                         Cart cart = issue.getValue(Cart.class);
-                        cartList.add(cart);
-                    }
-                    if (!cartList.isEmpty()) {
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL, false);
-                        binding.cartRec.setLayoutManager(linearLayoutManager);
-                        adapter = new GioHangAdapter(cartList);
-                        binding.cartRec.setAdapter(adapter);
+                        if (cart != null) cartList.add(cart);
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

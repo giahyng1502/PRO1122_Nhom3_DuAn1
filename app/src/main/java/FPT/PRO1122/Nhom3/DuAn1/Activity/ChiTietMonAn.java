@@ -135,6 +135,7 @@ public class ChiTietMonAn extends AppCompatActivity {
         Glide.with(ChiTietMonAn.this).load(object.getImagePath()).into(binding.pic);
         long price = (long) object.getPrice();
         binding.titleTxt.setText(object.getTitle());
+        binding.ratingBar.setRating((float) object.getStar());
         binding.rateTxt.setText("" + object.getStar());
         String formattedPrice = vietnameseCurrencyFormat.format(price);
         binding.descriptionTxt.setText(object.getDescription());

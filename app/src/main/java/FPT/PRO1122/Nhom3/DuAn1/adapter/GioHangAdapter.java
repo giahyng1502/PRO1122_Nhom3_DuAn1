@@ -61,14 +61,14 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                 item.setQuantity(num);
                 holder.numTxtInCart.setText(String.valueOf(num));
                 String itemId = String.valueOf(item.getCartId());
-                int newQuantity = num;
                 double price = item.getPrice();
-                double newTotal = newQuantity * price;
+                double newTotal = num * price;
 
-                Map<String, Object> updates = new HashMap<>();
-                updates.put("quantity", newQuantity);
-                updates.put("total", newTotal);
-                databaseReference.child(MainActivity.id).child(itemId).updateChildren(updates)
+//                Map<String, Object> updates = new HashMap<>();
+//                updates.put("quantity", newQuantity);
+//                updates.put("total", newTotal);
+                item.setTotal(newTotal);
+                databaseReference.child(MainActivity.id).child(itemId).setValue(item)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 // Cập nhật thành công
@@ -79,21 +79,18 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                             }
                             notifyDataSetChanged();
                         });
-            } else  {
-                // Nếu số lượng là 1, xóa sản phẩm khỏi giỏ hàng
+            } else {
+                list.remove(position);
+                // Nếu số lượng là 0, xóa sản phẩm khỏi giỏ hàng
                 String itemId = String.valueOf(item.getCartId());
                 databaseReference.child(MainActivity.id).child(itemId).removeValue()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                if (list.size() == 1) {
-                                    list.clear();
-                                }
                                 notifyDataSetChanged();
                                 Log.d("Delete", "Item removed successfully");
                                 // Gọi phương thức để làm mới RecyclerView
                             } else {
                                 Log.e("Delete", "Failed to remove item", task.getException());
-
                             }
                         });
             }
@@ -104,16 +101,16 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             num++;
             item.setQuantity(num);
             holder.numTxtInCart.setText(String.valueOf(num));
-
             String itemId = String.valueOf(item.getCartId());
-            int newQuantity = num;
             double price = item.getPrice();
-            double newTotal = newQuantity * price;
+            double newTotal = num * price;
 
-            Map<String, Object> updates = new HashMap<>();
-            updates.put("quantity", newQuantity);
-            updates.put("total", newTotal);
-            databaseReference.child(MainActivity.id).child(itemId).updateChildren(updates)
+            item.setTotal(newTotal);
+
+//            Map<String, Object> updates = new HashMap<>();
+//            updates.put("quantity", newQuantity);
+//            updates.put("total", newTotal);
+            databaseReference.child(MainActivity.id).child(itemId).setValue(item)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Cập nhật thành công

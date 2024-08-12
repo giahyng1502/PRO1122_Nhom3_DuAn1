@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="10dp"
     tools:context=".Activity.MyOrderHistory">
 
     <!-- Hàng chứa Nút Back và Tiêu đề -->
@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:orientation="horizontal">
         <!-- Tiêu đề -->
         <TextView
             android:id="@+id/textView"
