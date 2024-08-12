@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import FPT.PRO1122.Nhom3.DuAn1.Activity.MainActivity;
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.Fragment.Admin.FoodManagement;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.AdapterBanner;
 import FPT.PRO1122.Nhom3.DuAn1.adapter.DoAnBanChayAdapter;
@@ -51,6 +52,7 @@ public class Home extends Fragment {
     AdapterBanner adapterBanner;
     int index = -1;
     DatabaseReference mFood;
+    Dialogs dialogs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,9 @@ public class Home extends Fragment {
         // Khởi tạo các view
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(requireContext());
+        dialogs.show();
 
         mFood = FirebaseDatabase.getInstance().getReference("foods");
         binding.searchView.setOnClickListener(e -> goToTargetFragment());
@@ -98,6 +103,7 @@ public class Home extends Fragment {
     }
 
     private void getBanner() {
+        // lấy banner
         banners = new ArrayList<>();
         database.getReference("Banner").addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,15 +112,19 @@ public class Home extends Fragment {
                     banners.clear();
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         banners.add(snapshot1.getValue(String.class));
+                        dialogs.dismiss();
                     }
                     if (!banners.isEmpty()) {
                         setSlider();
+                        dialogs.dismiss();
                     }
                 }
+                dialogs.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                dialogs.dismiss();
                 Toast.makeText(requireContext(), "error" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -130,17 +140,21 @@ public class Home extends Fragment {
                     for (DataSnapshot issue : snapshot.getChildren()) {
                         Catagory catagory = issue.getValue(Catagory.class);
                         list.add(catagory);
+                        dialogs.dismiss();
                     }
                     if (!list.isEmpty()) {
                         binding.recMenuMonAn.setLayoutManager(new GridLayoutManager(getContext(), 4));
                         RecyclerView.Adapter<MenuMonAnAdapter.ViewHolder> adapter = new MenuMonAnAdapter(list);
                         binding.recMenuMonAn.setAdapter(adapter);
+                        dialogs.dismiss();
                     }
                 }
+                dialogs.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                dialogs.dismiss();
                 Toast.makeText(requireContext(), "error" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -156,6 +170,7 @@ public class Home extends Fragment {
                     list.clear();
                     for (DataSnapshot issue : snapshot.getChildren()) {
                         list.add(issue.getValue(Foods.class));
+                        dialogs.dismiss();
                     }
                     if (!list.isEmpty()) {
                         //sap xep
@@ -166,12 +181,15 @@ public class Home extends Fragment {
                         List<Foods> top5Items = list.subList(0, Math.min(5, list.size()));
                         RecyclerView.Adapter<DoAnBanChayAdapter.ViewHolder> adapter = new DoAnBanChayAdapter(top5Items);
                         binding.recyclerFood.setAdapter(adapter);
+                        dialogs.dismiss();
                     }
                 }
+                dialogs.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                dialogs.dismiss();
                 Toast.makeText(requireContext(), "error" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -192,16 +210,20 @@ public class Home extends Fragment {
                                         .fitCenter()
                                         .error(R.drawable.none_avatar)
                                         .into(binding.ivAvatarUserHome);
-
                                 binding.tvNameUserHome.setText(user.getName() + " \uD83C\uDF3F");
+                                dialogs.dismiss();
                             } catch (Exception e) {
+                                dialogs.dismiss();
+                                Toast.makeText(requireContext(), "fail" + e, Toast.LENGTH_SHORT).show();
                                 Log.d("home 168", e + "");
                             }
                         }
+                        dialogs.dismiss();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        dialogs.dismiss();
                         Toast.makeText(requireContext(), "fail" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

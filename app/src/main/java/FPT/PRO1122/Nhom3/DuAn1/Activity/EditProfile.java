@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import FPT.PRO1122.Nhom3.DuAn1.Dialogs.Dialogs;
 import FPT.PRO1122.Nhom3.DuAn1.R;
 import FPT.PRO1122.Nhom3.DuAn1.databinding.ActivityEditProfileBinding;
 import FPT.PRO1122.Nhom3.DuAn1.model.User;
@@ -36,6 +37,7 @@ public class EditProfile extends AppCompatActivity {
     User user;
     StorageReference storageReference;
     Uri userImageUri;
+    Dialogs dialogs;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
 
@@ -56,6 +58,8 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        dialogs = new Dialogs();
+        dialogs.showProgressBar(this);
 
         // Nút quay lại màn hình hồ sơ
         binding.btnBackEditprofile.setOnClickListener(v -> startActivity(new Intent(EditProfile.this, Profile.class)));
@@ -71,7 +75,10 @@ public class EditProfile extends AppCompatActivity {
         binding.ivCurrentUsr.setOnClickListener(v -> checkPermissionAndOpenImagePicker());
 
         // Khi nhấn vào nút xác nhận, tải hình ảnh lên Firebase
-        binding.btnComfirm.setOnClickListener(v -> upLoadImageToFireBase());
+        binding.btnComfirm.setOnClickListener(v -> {
+            dialogs.show();
+            upLoadImageToFireBase();
+        });
     }
 
     // Kiểm tra quyền và mở trình chọn ảnh
@@ -131,6 +138,7 @@ public class EditProfile extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_STORAGE_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openImage();
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
@@ -147,16 +155,25 @@ public class EditProfile extends AppCompatActivity {
 
     // Tải hình ảnh lên Firebase Storage
     private void upLoadImageToFireBase() {
-        String imageId = user.getName()+user.getUserId();
+        String imageId = user.getName() + user.getUserId();
         if (userImageUri == null) {
             // Nếu không có hình ảnh mới, sử dụng hình ảnh cũ
+            dialogs.dismiss();
             updateProfile(user.getImageAvatar());
         } else {
             // Tải lên hình ảnh mới và cập nhật đường dẫn hình ảnh trên Firebase
             storageReference.child(imageId).putFile(userImageUri).addOnSuccessListener(taskSnapshot -> storageReference.child(imageId).getDownloadUrl().addOnSuccessListener(uri -> {
-                String imageLink = uri.toString();
-                updateProfile(imageLink);
-            }).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Failed to get download URL", Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Failed to upload image", Toast.LENGTH_SHORT).show());
+                        String imageLink = uri.toString();
+                        updateProfile(imageLink);
+                        dialogs.dismiss();
+                    }).addOnFailureListener(e -> {
+                        dialogs.dismiss();
+                        Toast.makeText(EditProfile.this, "Failed to get download URL", Toast.LENGTH_SHORT).show();
+                    }))
+                    .addOnFailureListener(e -> {
+                        dialogs.dismiss();
+                        Toast.makeText(EditProfile.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+                    });
         }
     }
 
@@ -165,15 +182,15 @@ public class EditProfile extends AppCompatActivity {
         String name = binding.edtFullName.getText().toString();
         String mail = binding.edtMail.getText().toString();
         String phone = binding.edtPhoneNumber.getText().toString();
-        String homtown = binding.edtHomeTown.getText().toString();
+        String hometown = binding.edtHomeTown.getText().toString();
         String pass = user.getPassword();
-        if (name.isEmpty() || mail.isEmpty()||phone.isEmpty()||homtown.isEmpty()) {
+        if (name.isEmpty() || mail.isEmpty() || phone.isEmpty() || hometown.isEmpty()) {
+            dialogs.dismiss();
             Toast.makeText(this, "Not empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        String avatar = imageLink;
-        User user1 = new User(MainActivity.id, phone, pass, name, mail, homtown);
-        user1.setImageAvatar(avatar);
+        User user1 = new User(MainActivity.id, phone, pass, name, mail, hometown);
+        user1.setImageAvatar(imageLink);
         user1.setRole(user.getRole());
         // Lưu thông tin cập nhật vào Firebase Realtime Database
         FirebaseDatabase.getInstance().getReference("users")
@@ -182,11 +199,16 @@ public class EditProfile extends AppCompatActivity {
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(EditProfile.this, "Update successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(EditProfile.this, Profile.class));
-                }).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Update Fail", Toast.LENGTH_SHORT).show());
+                    dialogs.dismiss();
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(EditProfile.this, "Update Fail", Toast.LENGTH_SHORT).show();
+                    dialogs.dismiss();
+                });
     }
 
     // Lấy dữ liệu người dùng từ Firebase Realtime Database
     private void getData() {
+        dialogs.show();
         FirebaseDatabase.getInstance().getReference("users")
                 .child(MainActivity.id)
                 .addValueEventListener(new ValueEventListener() {
@@ -195,16 +217,19 @@ public class EditProfile extends AppCompatActivity {
                         if (snapshot.exists()) {
                             user = snapshot.getValue(User.class);
                             // Hiển thị dữ liệu người dùng trên giao diện
+                            assert user != null;
                             binding.edtFullName.setText(user.getName());
                             binding.edtMail.setText(user.getEmail());
-                                Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivCurrentUsr);
+                            Glide.with(EditProfile.this).load(user.getImageAvatar()).error(R.drawable.none_avatar).into(binding.ivCurrentUsr);
                             binding.edtPhoneNumber.setText(user.getPhoneNumber());
                             binding.edtHomeTown.setText(user.getAddress());
+                            dialogs.dismiss();
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        dialogs.dismiss();
                         Toast.makeText(EditProfile.this, "Failed to load user data", Toast.LENGTH_SHORT).show();
                     }
                 });

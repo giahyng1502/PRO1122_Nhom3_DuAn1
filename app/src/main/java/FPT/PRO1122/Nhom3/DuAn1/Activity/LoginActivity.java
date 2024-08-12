@@ -137,6 +137,8 @@ public class LoginActivity extends AppCompatActivity {
             dialogs.show();
             // Kiểm tra xem các trường nhập liệu có trống không
             if (!validatePhoneNumber() || !validatePassword()) {
+                // Nếu có trường nào trống, thông báo và dừng hàm
+                dialogs.dismiss();
                 Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
                 // Nếu các trường nhập liệu không trống, kiểm tra người dùng có tồn tại trong Firebase hay không
@@ -176,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //  Hàm này dùng để kiểm tra xem người dùng có tồn tại trong Firebase hay không
     private void checkUser() {
-        dialogs.showProgressBar(this);
         String phoneNumber = Objects.requireNonNull(bind.edtPhoneNumber.getText()).toString().trim();
         String password = Objects.requireNonNull(bind.edtPassword.getText()).toString().trim();
 
@@ -195,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                     assert passwordDB != null;
                     // Nếu mật khẩu chính xác, chuyển sang màn hình chính
                     if (passwordDB.equals(password)) {
+                        dialogs.dismiss();
                         bind.edtPhoneNumber.setError(null);
                         saveDataToPreferences(phoneNumber);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -202,18 +204,17 @@ public class LoginActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
-                        dialogs.dismiss();
                     } else {
                         // Nếu mật khẩu không chính xác, thông báo và focus vào mật khẩu
+                        dialogs.dismiss();
                         bind.edtPassword.setError("Invalid Credentials");
                         bind.edtPassword.requestFocus();
-                        dialogs.dismiss();
                     }
                 } else {
                     // Nếu người dùng không tồn tại, thông báo và focus vào người dùng
+                    dialogs.dismiss();
                     bind.edtPhoneNumber.setError("User does not exist");
                     bind.edtPhoneNumber.requestFocus();
-                    dialogs.dismiss();
                 }
             }
 
