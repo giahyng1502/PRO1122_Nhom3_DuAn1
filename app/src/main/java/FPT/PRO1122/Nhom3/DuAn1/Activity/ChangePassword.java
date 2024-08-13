@@ -24,19 +24,15 @@ public class ChangePassword extends AppCompatActivity {
     ImageView btn_back;
     Button btnChangePass;
     EditText edtNewPass, edtReNewPass, edtOldPass;
-    Dialogs dialogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        dialogs = new Dialogs();
         anhXa();
         //1
         btn_back.setOnClickListener(v -> startActivity(new Intent(ChangePassword.this, Profile.class)));
         btnChangePass.setOnClickListener(e -> {
-            dialogs.showProgressBar(this);
-            dialogs.show();
             changePassword();
         });
     }
@@ -54,7 +50,6 @@ public class ChangePassword extends AppCompatActivity {
         if (userId == null || userId.isEmpty()) {
             // Handle the error when userId is null or empty
             Log.e("ProfileActivity", "User ID is null or empty");
-            dialogs.dismiss();
             return;
         }
 
@@ -71,25 +66,21 @@ public class ChangePassword extends AppCompatActivity {
                             userRef.child("password").setValue(newPass)
                                     .addOnSuccessListener(aVoid -> {
                                         // Password update successful
-                                        dialogs.dismiss();
-                                        startActivity(new Intent(ChangePassword.this, Profile.class));
+                                        startActivity(new Intent(ChangePassword.this, LoginActivity.class));
                                         // Notify that the password has been changed successfully
                                         Toast.makeText(ChangePassword.this, "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                                     })
                                     .addOnFailureListener(e -> {
-                                        dialogs.dismiss();
                                         // Handle error when password update fails
                                         Log.e("ProfileActivity", "Error updating password", e);
                                         Toast.makeText(ChangePassword.this, "Thay đổi mật khẩu thất bại vui lòng thử lại sau", Toast.LENGTH_SHORT).show();
                                     });
                         }
                     } else {
-                        dialogs.dismiss();
                         // Old password is incorrect
                         Toast.makeText(ChangePassword.this, "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    dialogs.dismiss();
                     // User does not exist
                     Toast.makeText(ChangePassword.this, "User does not exist", Toast.LENGTH_SHORT).show();
                 }
@@ -97,7 +88,6 @@ public class ChangePassword extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                dialogs.dismiss();
                 // Handle error when Firebase query is cancelled
                 Log.e("ProfileActivity", "Error querying user", error.toException());
             }
@@ -107,18 +97,15 @@ public class ChangePassword extends AppCompatActivity {
     private boolean checkPass(String newPass, String reNewPass) {
         boolean isValid = true;
         if (newPass.isEmpty()) {
-            dialogs.dismiss();
             Toast.makeText(this, "Mật khẩu mới không được để trống", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
         if (reNewPass.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập lại mật khẩu mới", Toast.LENGTH_SHORT).show();
-            dialogs.dismiss();
             isValid = false;
         }
         if (!newPass.equals(reNewPass)) {
             Toast.makeText(this, "Mật khẩu nhập lại không khớp", Toast.LENGTH_SHORT).show();
-            dialogs.dismiss();
             isValid = false;
         }
         return isValid;

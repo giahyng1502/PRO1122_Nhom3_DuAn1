@@ -248,6 +248,7 @@ public class AdapterFoodManagement extends RecyclerView.Adapter<AdapterFoodManag
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(context, "Fail" + e, Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
                         dialogs.dismiss();
                     }
                 });

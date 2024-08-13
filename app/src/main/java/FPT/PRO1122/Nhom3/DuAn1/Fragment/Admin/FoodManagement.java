@@ -329,10 +329,12 @@ public class FoodManagement extends Fragment {
                 .setValue(foods).addOnSuccessListener(unused -> {
                     dialogs.dismiss();
                     dialog.dismiss();
+                    adapterFoodManagement.notifyDataSetChanged();
                     Toast.makeText(requireContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e -> {
                     dialog.dismiss();
                     dialogs.dismiss();
+                    adapterFoodManagement.notifyDataSetChanged();
                     Toast.makeText(requireContext(), "thất bại"+e, Toast.LENGTH_SHORT).show();
                 });
     }
@@ -379,6 +381,7 @@ public class FoodManagement extends Fragment {
                         public void onSuccess(Void unused) {
                             dialogs.dismiss();
                             bottomSheetDialog.dismiss();
+                            adapterFoodManagement.notifyDataSetChanged();
                             Toast.makeText(requireContext(), "Xoá Thành Công", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -386,6 +389,7 @@ public class FoodManagement extends Fragment {
                         public void onFailure(@NonNull Exception e) {
                             dialogs.dismiss();
                             bottomSheetDialog.dismiss();
+                            adapterFoodManagement.notifyDataSetChanged();
                             Toast.makeText(requireContext(), "Error" + e, Toast.LENGTH_SHORT).show();
                         }
                     });

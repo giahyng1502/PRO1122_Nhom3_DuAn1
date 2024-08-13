@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 handleSignInResult(GoogleSignIn.getSignedInAccountFromIntent(data).getResult());
             }
+            else dialogs.dismiss();
         }
     });
 

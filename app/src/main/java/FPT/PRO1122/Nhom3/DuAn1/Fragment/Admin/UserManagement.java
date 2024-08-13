@@ -209,7 +209,7 @@ public class UserManagement extends Fragment {
                         @Override
                         public void onSuccess(Void unused) {
                             dialogs.dismiss();
-                            Toast.makeText(requireContext(), "Delete Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Xoá thành công", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
